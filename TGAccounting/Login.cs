@@ -1,0 +1,55 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using TGAccounting.Model;
+using TGAccounting.SQLite;
+
+namespace TGAccounting
+{
+    public partial class Login : Form
+    {
+        public Login()
+        {
+            InitializeComponent();
+            createSqlliteDB();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            HomeForm frm = new HomeForm();
+            frm.Show();
+            this.Hide();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        private void createSqlliteDB()
+        {
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Sale()));
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Items()));           
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Category()));
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Department()));
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Labor()));
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Taxes()));
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Supplies()));
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Rem()));
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Equipment()));
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Inventory()));
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Expense()));
+
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
