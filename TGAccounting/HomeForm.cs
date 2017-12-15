@@ -178,6 +178,7 @@ namespace TGAccounting
             this.reportViewerEquipment.RefreshReport();
             this.reportViewerInventory.RefreshReport();
             this.reportViewerExpense.RefreshReport();
+            this.reportViewer4.RefreshReport();
         }
 
         private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
@@ -396,6 +397,87 @@ namespace TGAccounting
 
                 }
             }
+        }
+        List<Report> reports;
+        private void button15_Click(object sender, EventArgs e)
+        {
+            Report r = new Report();
+             int week = Convert.ToInt32(weekTxt.Text);
+            string year = yearTxt.Text;
+            reports = new List<Report>();
+            string ending="";
+            double totalPayRoll = 0;
+            foreach (Taxes l in Taxes.List("SELECT * FROM taxes  WHERE week ='" + week + "' "))
+            {
+                double sums = Taxes.List("SELECT * FROM taxes  WHERE week ='" + week + "' ").Sum(t => t.Amount);
+                double p1 = Math.Round((l.Amount / sums) * 100, 1);
+                double ytd = Taxes.List("SELECT * FROM taxes  WHERE CAST(week AS INTEGER) <='" + week + "' AND name='" + l.Name + "' ").Sum(t => t.Amount);
+
+                double p2 = Math.Round((l.Amount / sums) * 100, 1);
+                r = new Report(l.Date, l.Week, l.Ending, "Employee Benefits", l.Name, l.Amount, p1, ytd, p2, "PAYROLL","EXPENSE");
+                reports.Add(r);
+                ending = l.Week;
+                totalPayRoll = totalPayRoll + sums;
+            }          
+
+            foreach (Labor l in Labor.List("SELECT * FROM labor  WHERE week ='" + week + "' "))
+            {
+                double sums = Sale.List("SELECT * FROM labor  WHERE week ='" + week + "' ").Sum(t => t.Amount);
+                double p1 = Math.Round((l.Amount / sums) * 100,1);
+                double ytd = Sale.List("SELECT * FROM labor  WHERE CAST(week AS INTEGER) <='" + week + "' AND item='" + l.Item + "' ").Sum(t => t.Amount);
+
+                double p2 = Math.Round((l.Amount / sums) * 100,1);
+                r = new Report(l.Date, l.Week, l.Ending, "Salaries & Wages", l.Item, l.Amount, p1, ytd, p2, "PAYROLL", "EXPENSE");
+                reports.Add(r);
+            }
+
+            //r = new Report("", week, ending, "TOTAL PAYROLL", "TOTAL PAYROLL",totalPayRoll, p1, ytd, p2);
+            // reports.Add(r);
+
+            foreach (Sale s in Sale.List("SELECT * FROM sale  WHERE week ='" + week + "' "))
+            {
+                double sums = Sale.List("SELECT * FROM sale  WHERE week ='" + week + "' ").Sum(t => t.Amount);
+                double p1 = Math.Round((s.Amount / sums) * 100, 1);
+                double ytd = Sale.List("SELECT * FROM sale  WHERE CAST(week AS INTEGER) <='" + week + "'  AND item='"+s.Item+"' ").Sum(t => t.Amount);
+
+                double p2 = Math.Round((s.Amount / sums) * 100, 1);
+                r = new Report(s.Date, s.Week, s.Ending, "SALES", s.Item, s.Amount, p1, ytd, p2, "SALES", "INCOME");
+                reports.Add(r);
+            }
+            foreach (Supplies s in Supplies.List("SELECT * FROM supplies  WHERE week ='" + week + "' "))
+            {
+                double sums = Supplies.List("SELECT * FROM supplies  WHERE week ='" + week + "' ").Sum(t => t.Amount);
+                double p1 = Math.Round((s.Amount / sums) * 100, 1);
+                double ytd = Supplies.List("SELECT * FROM supplies  WHERE CAST(week AS INTEGER) <='" + week + "'  AND supplier='" + s.Supplier + "' ").Sum(t => t.Amount);
+
+                double p2 = Math.Round((s.Amount / sums) * 100, 1);
+                r = new Report(s.Date, s.Week, s.Ending, "Supplies", s.Supplier, s.Amount, p1, ytd, p2, "Other Controllable Expenses", "EXPENSE");
+                reports.Add(r);
+            }
+            foreach (Expense s in Expense.List("SELECT * FROM expense  WHERE week ='" + week + "' "))
+            {
+                double sums = Expense.List("SELECT * FROM expense  WHERE week ='" + week + "' ").Sum(t => t.Amount);
+                double p1 = Math.Round((s.Amount / sums) * 100, 1);
+                double ytd = Expense.List("SELECT * FROM expense  WHERE CAST(week AS INTEGER) <='" + week + "'  AND name='" + s.Name + "' ").Sum(t => t.Amount);
+
+                double p2 = Math.Round((s.Amount / sums) * 100, 1);
+                r = new Report(s.Date, s.Week, s.Ending, s.Category, s.Name, s.Amount, p1, ytd, p2, "Other Controllable Expenses", "EXPENSE");
+                reports.Add(r);
+            }
+            foreach (Equipment s in Equipment.List("SELECT * FROM equipment  WHERE week ='" + week + "' "))
+            {
+                double sums = Equipment.List("SELECT * FROM equipment  WHERE week ='" + week + "' ").Sum(t => t.Amount);
+                double p1 = Math.Round((s.Amount / sums) * 100, 1);
+                double ytd = Equipment.List("SELECT * FROM equipment  WHERE CAST(week AS INTEGER) <='" + week + "'  AND name='" + s.Name + "' ").Sum(t => t.Amount);
+
+                double p2 = Math.Round((s.Amount / sums) * 100, 1);
+                r = new Report(s.Date, s.Week, s.Ending, "Equipment", s.Name, s.Amount, p1, ytd, p2,"Equipment", "EXPENSE");
+                reports.Add(r);
+            }
+           
+
+            this.ReportBindingSource.DataSource = reports;
+            reportViewer4.RefreshReport();
         }
 
         private void button5_Click(object sender, EventArgs e)

@@ -24,6 +24,8 @@ C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.AddCategory.resources
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.AddDepartment.resources
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.AddEquipment.resources
+C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.AddExpense.resources
+C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.AddInventory.resources
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.AddItem.resources
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.AddLabor.resources
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.AddRm.resources
@@ -42,6 +44,3 @@ C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\RdlCompile.compiled
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.exe
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.pdb
-C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.AddInventory.resources
-C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.AddExpense.resources
-C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.csprojResolveAssemblyReference.cache

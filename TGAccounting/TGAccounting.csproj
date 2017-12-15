@@ -177,10 +177,11 @@
     </Compile>
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\Department.cs" />
+    <Compile Include="Model\Rep.cs" />
     <Compile Include="Model\Expense.cs" />
     <Compile Include="Model\Items.cs" />
     <Compile Include="Model\Equipment.cs" />
-    <Compile Include="Model\Rem.cs" />
+    <Compile Include="Model\Report.cs" />
     <Compile Include="Model\Supplies.cs" />
     <Compile Include="Model\Inventory.cs" />
     <Compile Include="Model\Taxes.cs" />
@@ -255,13 +256,18 @@
     <EmbeddedResource Include="ReportEquipment.rdlc" />
     <EmbeddedResource Include="ReportExpense.rdlc" />
     <EmbeddedResource Include="ReportInventory.rdlc" />
+    <EmbeddedResource Include="ReportPL.rdlc" />
     <EmbeddedResource Include="ReportSupply.rdlc" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\TGAccounting.Model.Equipment.datasource" />
     <None Include="Properties\DataSources\TGAccounting.Model.Expense.datasource" />
     <None Include="Properties\DataSources\TGAccounting.Model.Inventory.datasource" />
     <None Include="Properties\DataSources\TGAccounting.Model.Labor.datasource" />
+    <None Include="Properties\DataSources\TGAccounting.Model.Maintenance.datasource" />
     <None Include="Properties\DataSources\TGAccounting.Model.Rem.datasource" />
+    <None Include="Properties\DataSources\TGAccounting.Model.Rep.datasource" />
+    <None Include="Properties\DataSources\TGAccounting.Model.Repair.datasource" />
+    <None Include="Properties\DataSources\TGAccounting.Model.Report.datasource" />
     <None Include="Properties\DataSources\TGAccounting.Model.Rm.datasource" />
     <None Include="Properties\DataSources\TGAccounting.Model.Sale.datasource" />
     <None Include="Properties\DataSources\TGAccounting.Model.Supplies.datasource" />

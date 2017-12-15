@@ -34,16 +34,20 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.dateTxt = new System.Windows.Forms.DateTimePicker();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.weekLbl = new System.Windows.Forms.Label();
-            this.startLbl = new System.Windows.Forms.Label();
-            this.endLbl = new System.Windows.Forms.Label();
-            this.amountTxt = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.amountTxt = new System.Windows.Forms.TextBox();
+            this.endLbl = new System.Windows.Forms.Label();
+            this.startLbl = new System.Windows.Forms.Label();
+            this.weekLbl = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.dateTxt = new System.Windows.Forms.DateTimePicker();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -104,6 +108,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.LightGray;
+            this.panel1.Controls.Add(this.textBox2);
+            this.panel1.Controls.Add(this.label8);
+            this.panel1.Controls.Add(this.label7);
+            this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.amountTxt);
             this.panel1.Controls.Add(this.endLbl);
@@ -122,44 +130,51 @@
             this.panel1.Size = new System.Drawing.Size(385, 298);
             this.panel1.TabIndex = 10;
             // 
-            // label4
+            // label10
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(23, 23);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(48, 22);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Date ";
+            this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.Color.LightGray;
+            this.label10.Location = new System.Drawing.Point(23, 261);
+            this.label10.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(121, 22);
+            this.label10.TabIndex = 20;
+            this.label10.Text = "Amount of sales";
             // 
-            // dateTxt
+            // amountTxt
             // 
-            this.dateTxt.Location = new System.Drawing.Point(148, 19);
-            this.dateTxt.Name = "dateTxt";
-            this.dateTxt.Size = new System.Drawing.Size(213, 26);
-            this.dateTxt.TabIndex = 11;
-            this.dateTxt.ValueChanged += new System.EventHandler(this.dateTxt_ValueChanged);
+            this.amountTxt.Location = new System.Drawing.Point(148, 261);
+            this.amountTxt.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.amountTxt.Name = "amountTxt";
+            this.amountTxt.Size = new System.Drawing.Size(213, 26);
+            this.amountTxt.TabIndex = 19;
             // 
-            // label2
+            // endLbl
             // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.LightGray;
-            this.label2.Location = new System.Drawing.Point(23, 56);
-            this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(50, 22);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "Week";
+            this.endLbl.AutoSize = true;
+            this.endLbl.Location = new System.Drawing.Point(148, 126);
+            this.endLbl.Name = "endLbl";
+            this.endLbl.Size = new System.Drawing.Size(18, 22);
+            this.endLbl.TabIndex = 18;
+            this.endLbl.Text = "#";
             // 
-            // label5
+            // startLbl
             // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.LightGray;
-            this.label5.Location = new System.Drawing.Point(23, 87);
-            this.label5.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(65, 22);
-            this.label5.TabIndex = 14;
-            this.label5.Text = "Starting";
+            this.startLbl.AutoSize = true;
+            this.startLbl.Location = new System.Drawing.Point(148, 87);
+            this.startLbl.Name = "startLbl";
+            this.startLbl.Size = new System.Drawing.Size(18, 22);
+            this.startLbl.TabIndex = 17;
+            this.startLbl.Text = "#";
+            // 
+            // weekLbl
+            // 
+            this.weekLbl.AutoSize = true;
+            this.weekLbl.Location = new System.Drawing.Point(148, 52);
+            this.weekLbl.Name = "weekLbl";
+            this.weekLbl.Size = new System.Drawing.Size(18, 22);
+            this.weekLbl.TabIndex = 16;
+            this.weekLbl.Text = "#";
             // 
             // label6
             // 
@@ -172,51 +187,82 @@
             this.label6.TabIndex = 15;
             this.label6.Text = "Ending";
             // 
-            // weekLbl
+            // label5
             // 
-            this.weekLbl.AutoSize = true;
-            this.weekLbl.Location = new System.Drawing.Point(148, 52);
-            this.weekLbl.Name = "weekLbl";
-            this.weekLbl.Size = new System.Drawing.Size(18, 22);
-            this.weekLbl.TabIndex = 16;
-            this.weekLbl.Text = "#";
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.LightGray;
+            this.label5.Location = new System.Drawing.Point(23, 87);
+            this.label5.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(65, 22);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "Starting";
             // 
-            // startLbl
+            // label2
             // 
-            this.startLbl.AutoSize = true;
-            this.startLbl.Location = new System.Drawing.Point(148, 87);
-            this.startLbl.Name = "startLbl";
-            this.startLbl.Size = new System.Drawing.Size(18, 22);
-            this.startLbl.TabIndex = 17;
-            this.startLbl.Text = "#";
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.LightGray;
+            this.label2.Location = new System.Drawing.Point(23, 56);
+            this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(50, 22);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "Week";
             // 
-            // endLbl
+            // dateTxt
             // 
-            this.endLbl.AutoSize = true;
-            this.endLbl.Location = new System.Drawing.Point(148, 126);
-            this.endLbl.Name = "endLbl";
-            this.endLbl.Size = new System.Drawing.Size(18, 22);
-            this.endLbl.TabIndex = 18;
-            this.endLbl.Text = "#";
+            this.dateTxt.Location = new System.Drawing.Point(148, 19);
+            this.dateTxt.Name = "dateTxt";
+            this.dateTxt.Size = new System.Drawing.Size(213, 26);
+            this.dateTxt.TabIndex = 11;
+            this.dateTxt.ValueChanged += new System.EventHandler(this.dateTxt_ValueChanged);
             // 
-            // amountTxt
+            // label4
             // 
-            this.amountTxt.Location = new System.Drawing.Point(148, 193);
-            this.amountTxt.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.amountTxt.Name = "amountTxt";
-            this.amountTxt.Size = new System.Drawing.Size(213, 26);
-            this.amountTxt.TabIndex = 19;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(23, 23);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(48, 22);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Date ";
             // 
-            // label10
+            // textBox1
             // 
-            this.label10.AutoSize = true;
-            this.label10.BackColor = System.Drawing.Color.LightGray;
-            this.label10.Location = new System.Drawing.Point(23, 193);
-            this.label10.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(121, 22);
-            this.label10.TabIndex = 20;
-            this.label10.Text = "Amount of sales";
+            this.textBox1.Location = new System.Drawing.Point(148, 190);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(213, 26);
+            this.textBox1.TabIndex = 21;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.LightGray;
+            this.label7.Location = new System.Drawing.Point(33, 194);
+            this.label7.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(74, 22);
+            this.label7.TabIndex = 22;
+            this.label7.Text = "Category";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.LightGray;
+            this.label8.Location = new System.Drawing.Point(23, 231);
+            this.label8.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(101, 22);
+            this.label8.TabIndex = 23;
+            this.label8.Text = "% on  Budget";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(148, 227);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(213, 26);
+            this.textBox2.TabIndex = 24;
             // 
             // AddSale
             // 
@@ -258,5 +304,9 @@
         private System.Windows.Forms.Label weekLbl;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox amountTxt;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

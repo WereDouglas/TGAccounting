@@ -35,7 +35,7 @@ namespace TGAccounting
         private void autocomplete()
         {
             AutoCompleteStringCollection AutoItem = new AutoCompleteStringCollection();
-            foreach (Rem r in Rem.List("SELECT * from rm").GroupBy(x => x.Name, (key, group) => group.First()))
+            foreach (Rep r in Rep.List("SELECT * from rep").GroupBy(x => x.Name, (key, group) => group.First()))
             {
                 AutoItem.Add(r.Name);
             }
@@ -65,7 +65,7 @@ namespace TGAccounting
             }
 
             string ID = Guid.NewGuid().ToString();
-            Rem i = new Rem(ID, dateTxt.Text, weekLbl.Text, startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text));
+            Rep i = new Rep(ID, dateTxt.Text, weekLbl.Text, startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text));
             DBConnect.Insert(i);
             MessageBox.Show("Information Saved ");
             itemTxt.Text = "";

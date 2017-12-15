@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TGAccounting.Model
 {
-   public class Rem
+   public class Rep
     {
         private string id;
         private string date;
@@ -16,7 +16,23 @@ namespace TGAccounting.Model
         private string ending;
         private string name;
         private double amount;
-       private static List<Rem> s ;
+
+
+        private static List<Rep> s ;
+
+        public string Id
+        {
+            get
+            {
+                return id;
+            }
+
+            set
+            {
+                id = value;
+            }
+        }
+
         public string Date
         {
             get
@@ -94,22 +110,8 @@ namespace TGAccounting.Model
                 amount = value;
             }
         }
-
-        public string Id
-        {
-            get
-            {
-                return id;
-            }
-
-            set
-            {
-                id = value;
-            }
-        }
-
-        public Rem() { }
-        public Rem(string id,string date, string week, string starting, string ending, string name, double amount)
+        public Rep() { }
+        public Rep(string id, string date, string week, string starting, string ending, string name, double amount)
         {
             this.Id = id;
             this.Date = date;
@@ -119,14 +121,15 @@ namespace TGAccounting.Model
             this.Name = name;
             this.Amount = amount;
         }
-        public static List<Rem> List(string query)
+
+        public static List<Rep> List(string query)
         {           
-             s = new List<Rem>();
+             s = new List<Rep>();
 
             SQLiteDataReader Reader = DBConnect.ReadingLite(query);
             while (Reader.Read())
             {
-                Rem p = new Rem(Reader["id"].ToString(),Reader["date"].ToString(), Reader["week"].ToString(), Reader["starting"].ToString(), Reader["ending"].ToString(), Reader["name"].ToString(),Convert.ToDouble(Reader["amount"]));
+                Rep p = new Rep(Reader["id"].ToString(), Reader["date"].ToString(), Reader["week"].ToString(), Reader["starting"].ToString(), Reader["ending"].ToString(), Reader["name"].ToString(), Convert.ToDouble(Reader["amount"]));
                 s.Add(p);
             }
             Reader.Close();

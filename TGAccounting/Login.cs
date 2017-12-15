@@ -40,7 +40,7 @@ namespace TGAccounting
             Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Labor()));
             Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Taxes()));
             Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Supplies()));
-            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Rem()));
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Rep()));
             Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Equipment()));
             Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Inventory()));
             Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Expense()));
