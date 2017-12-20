@@ -79,9 +79,9 @@ namespace TGAccounting
                 itemTxt.BackColor = Color.Red;
                 return;
             }
-
+           
             string ID = Guid.NewGuid().ToString();
-            Inventory i = new Inventory(ID, dateTxt.Text, weekLbl.Text, startLbl.Text, endLbl.Text, itemTxt.Text,categoryTxt.Text, Convert.ToDouble(amountTxt.Text));
+            Inventory i = new Inventory(ID, dateTxt.Text, weekLbl.Text, startLbl.Text, endLbl.Text, itemTxt.Text,categoryTxt.Text, Convert.ToDouble(amountTxt.Text),0,0,0);
             DBConnect.Insert(i);
             MessageBox.Show("Information Saved ");
             itemTxt.Text = "";

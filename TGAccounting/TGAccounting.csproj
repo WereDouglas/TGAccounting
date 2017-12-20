@@ -9,13 +9,14 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TGAccounting</RootNamespace>
     <AssemblyName>TGAccounting</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -47,17 +48,9 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.SQLite, Version=1.0.106.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.SQLite.Core.1.0.106.0\lib\net45\System.Data.SQLite.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Data.SQLite.EF6, Version=1.0.106.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.106.0\lib\net45\System.Data.SQLite.EF6.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Data.SQLite.Linq, Version=1.0.106.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.106.0\lib\net45\System.Data.SQLite.Linq.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="System.Data.SQLite, Version=1.0.105.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\System.Data.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
@@ -69,6 +62,9 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsFormsCalendar">
+      <HintPath>..\..\VHMIS\VHMIS\bin\Debug\WindowsFormsCalendar.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddCategory.cs">
@@ -76,6 +72,12 @@
     </Compile>
     <Compile Include="AddCategory.Designer.cs">
       <DependentUpon>AddCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddCogs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddCogs.Designer.cs">
+      <DependentUpon>AddCogs.cs</DependentUpon>
     </Compile>
     <Compile Include="AddDepartment.cs">
       <SubType>Form</SubType>
@@ -125,6 +127,12 @@
     <Compile Include="AddSale.Designer.cs">
       <DependentUpon>AddSale.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddStaff.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddStaff.Designer.cs">
+      <DependentUpon>AddStaff.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddSupply.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,11 +145,29 @@
     <Compile Include="AddTax.Designer.cs">
       <DependentUpon>AddTax.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddUser.Designer.cs">
+      <DependentUpon>AddUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="CategoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CategoryForm.Designer.cs">
       <DependentUpon>CategoryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CompanyProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CompanyProfile.Designer.cs">
+      <DependentUpon>CompanyProfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataForm.Designer.cs">
+      <DependentUpon>DataForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DBConnect.cs" />
     <Compile Include="DepartmentForm.cs">
@@ -150,12 +176,19 @@
     <Compile Include="DepartmentForm.Designer.cs">
       <DependentUpon>DepartmentForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="EventDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EventDialog.Designer.cs">
+      <DependentUpon>EventDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Global.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="HomeForm.cs">
       <SubType>Form</SubType>
@@ -163,6 +196,7 @@
     <Compile Include="HomeForm.Designer.cs">
       <DependentUpon>HomeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ItemInfo.cs" />
     <Compile Include="LaborGrid.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -175,13 +209,19 @@
     <Compile Include="Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\Salary.cs" />
+    <Compile Include="Model\Staff.cs" />
+    <Compile Include="Model\User.cs" />
     <Compile Include="Model\Category.cs" />
+    <Compile Include="Model\Company.cs" />
     <Compile Include="Model\Department.cs" />
-    <Compile Include="Model\Rep.cs" />
+    <Compile Include="Model\Events.cs" />
     <Compile Include="Model\Expense.cs" />
     <Compile Include="Model\Items.cs" />
     <Compile Include="Model\Equipment.cs" />
+    <Compile Include="Model\Repair.cs" />
     <Compile Include="Model\Report.cs" />
+    <Compile Include="Model\Cogs.cs" />
     <Compile Include="Model\Supplies.cs" />
     <Compile Include="Model\Inventory.cs" />
     <Compile Include="Model\Taxes.cs" />
@@ -190,8 +230,17 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLite\Connection.cs" />
+    <Compile Include="StaffPayments.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StaffPayments.Designer.cs">
+      <DependentUpon>StaffPayments.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AddCategory.resx">
       <DependentUpon>AddCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddCogs.resx">
+      <DependentUpon>AddCogs.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddDepartment.resx">
       <DependentUpon>AddDepartment.cs</DependentUpon>
@@ -217,17 +266,32 @@
     <EmbeddedResource Include="AddSale.resx">
       <DependentUpon>AddSale.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AddStaff.resx">
+      <DependentUpon>AddStaff.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddSupply.resx">
       <DependentUpon>AddSupply.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddTax.resx">
       <DependentUpon>AddTax.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AddUser.resx">
+      <DependentUpon>AddUser.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CategoryForm.resx">
       <DependentUpon>CategoryForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CompanyProfile.resx">
+      <DependentUpon>CompanyProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataForm.resx">
+      <DependentUpon>DataForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DepartmentForm.resx">
       <DependentUpon>DepartmentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EventDialog.resx">
+      <DependentUpon>EventDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -241,6 +305,7 @@
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\DataSources\ReportRepair.rdlc" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -249,26 +314,29 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Report1.rdlc" />
     <EmbeddedResource Include="Report2.rdlc" />
     <EmbeddedResource Include="Report3.rdlc" />
+    <EmbeddedResource Include="ReportCogs.rdlc" />
     <EmbeddedResource Include="ReportEquipment.rdlc" />
     <EmbeddedResource Include="ReportExpense.rdlc" />
     <EmbeddedResource Include="ReportInventory.rdlc" />
     <EmbeddedResource Include="ReportPL.rdlc" />
     <EmbeddedResource Include="ReportSupply.rdlc" />
+    <EmbeddedResource Include="StaffPayments.resx">
+      <DependentUpon>StaffPayments.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\TGAccounting.Model.Cogs.datasource" />
     <None Include="Properties\DataSources\TGAccounting.Model.Equipment.datasource" />
     <None Include="Properties\DataSources\TGAccounting.Model.Expense.datasource" />
     <None Include="Properties\DataSources\TGAccounting.Model.Inventory.datasource" />
+    <None Include="Properties\DataSources\TGAccounting.Model.Items.datasource" />
     <None Include="Properties\DataSources\TGAccounting.Model.Labor.datasource" />
-    <None Include="Properties\DataSources\TGAccounting.Model.Maintenance.datasource" />
-    <None Include="Properties\DataSources\TGAccounting.Model.Rem.datasource" />
-    <None Include="Properties\DataSources\TGAccounting.Model.Rep.datasource" />
-    <None Include="Properties\DataSources\TGAccounting.Model.Repair.datasource" />
+    <None Include="Properties\DataSources\TGAccounting.Model.Repair1.datasource" />
     <None Include="Properties\DataSources\TGAccounting.Model.Report.datasource" />
-    <None Include="Properties\DataSources\TGAccounting.Model.Rm.datasource" />
     <None Include="Properties\DataSources\TGAccounting.Model.Sale.datasource" />
     <None Include="Properties\DataSources\TGAccounting.Model.Supplies.datasource" />
     <None Include="Properties\DataSources\TGAccounting.Model.Taxes.datasource" />
@@ -287,6 +355,35 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Reports\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SQLite.Interop.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="System.Data.SQLite.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x64\liblept172.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x64\libtesseract304.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x64\SQLite.Interop.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x86\liblept172.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x86\libtesseract304.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x86\SQLite.Interop.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.106.0\build\net45\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.106.0\build\net45\System.Data.SQLite.Core.targets')" />

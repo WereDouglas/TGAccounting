@@ -9,8 +9,9 @@ using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TGAccounting;
 using TGAccounting.Model;
-
+using WindowsFormsCalendar;
 
 namespace TGAccounting
 {
@@ -18,11 +19,17 @@ namespace TGAccounting
     {
         DataTable idt, sdt;
         DateTime pStart, pEnd;
-
+        private List<CalendarItem> _items = new List<CalendarItem>();
+       
+        Events _event;
 
         public HomeForm()
         {
+            Global.LoadData();
             InitializeComponent();
+            
+            LoadingCalendarLite();
+          
 
             var culture = new CultureInfo("en-US");
             CultureInfo.DefaultThreadCurrentCulture = culture;
@@ -51,6 +58,58 @@ namespace TGAccounting
             itemGrid.Columns["id"].Visible = false;
             //itemGrid.Columns["Delete"].DefaultCellStyle.BackColor = Color.Red;
         }
+        public static List<Events> events;
+        private void LoadingCalendarLite()
+        {
+            Global.LoadData();
+            _items.Clear();
+            List<ItemInfo> lst = new List<ItemInfo>();
+            string state = "";
+
+            List<Events> events = new List<Events>(Global.events);
+
+            foreach (Events e in events)
+            {
+                try
+                {
+                    CalendarItem cal = new CalendarItem(calendar1, Convert.ToDateTime(e.Starts), Convert.ToDateTime(e.Ends), e.Users + " " + e.Users + " " + e.Contact + ""  + e.Details);
+
+                    if (e.Priority == " ")
+                    {
+                        state = "none";
+                    }
+                    else
+                    {
+                        state = e.Priority;
+                    }
+                    if (state == "Medium") { cal.ApplyColor(Color.LightGreen); }
+                    if (state == "Low") { cal.ApplyColor(Color.CornflowerBlue); }
+                    if (state == "High") { cal.ApplyColor(Color.Salmon); }
+                    if (state == "none") { cal.ApplyColor(Color.LightSeaGreen); }
+                    
+                        _items.Add(cal);
+                    
+                    // t.Rows.Add(new object[] { Reader.GetString(0), Helper.ImageFolder + Reader.GetString(8), b, Reader.GetString(2), Reader.GetString(3), Reader.GetString(7), Reader.GetString(5), Reader.GetString(9), Reader.GetString(14) + "", Reader.GetString(6), "" + Reader.GetString(13) + "" });
+                }
+                catch { }
+            }
+            PlaceItems();
+
+        }
+        private void PlaceItems()
+        {
+            calendar1.Items.Clear();
+            foreach (CalendarItem item in _items)
+            {
+                if (calendar1.ViewIntersects(item))
+                {
+                    if (!calendar1.Items.Contains(item))
+                    {
+                        calendar1.Items.Add(item);
+                    }
+                }
+            }
+        }
         private void button2_Click(object sender, EventArgs e)
         {
 
@@ -76,11 +135,12 @@ namespace TGAccounting
             sdt.Columns.Add("Starting");
             sdt.Columns.Add("Ending");
             sdt.Columns.Add("Date");
+            sdt.Columns.Add("Category");
             sdt.Columns.Add("Delete");
             string query = "SELECT * FROM sale";
             foreach (Sale w in Sale.List(query))
             {
-                sdt.Rows.Add(new object[] { w.Id, w.Item, w.Amount, w.Week, w.Starting, w.Ending, w.Date, "Delete" });
+                sdt.Rows.Add(new object[] { w.Id, w.Item, w.Amount, w.Week, w.Starting, w.Ending, w.Date,w.Category, "Delete" });
             }
             saleGrid.DataSource = sdt;
             saleGrid.Columns["id"].Visible = false;
@@ -127,7 +187,7 @@ namespace TGAccounting
                 return;
 
             }
-            Sale _c = new Sale(saleGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), saleGrid.Rows[e.RowIndex].Cells["date"].Value.ToString(), saleGrid.Rows[e.RowIndex].Cells["week"].Value.ToString(), saleGrid.Rows[e.RowIndex].Cells["starting"].Value.ToString(), saleGrid.Rows[e.RowIndex].Cells["ending"].Value.ToString(), saleGrid.Rows[e.RowIndex].Cells["item"].Value.ToString(), Convert.ToDouble(saleGrid.Rows[e.RowIndex].Cells["amount"].Value));
+            Sale _c = new Sale(saleGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), saleGrid.Rows[e.RowIndex].Cells["date"].Value.ToString(), saleGrid.Rows[e.RowIndex].Cells["week"].Value.ToString(), saleGrid.Rows[e.RowIndex].Cells["starting"].Value.ToString(), saleGrid.Rows[e.RowIndex].Cells["ending"].Value.ToString(), saleGrid.Rows[e.RowIndex].Cells["item"].Value.ToString(), Convert.ToDouble(saleGrid.Rows[e.RowIndex].Cells["amount"].Value), saleGrid.Rows[e.RowIndex].Cells["category"].Value.ToString());
             DBConnect.Update(_c, saleGrid.Rows[e.RowIndex].Cells["id"].Value.ToString());
             //Global.payments.RemoveAll(x => x.Id == dtGrid.Rows[e.RowIndex].Cells["id"].Value.ToString());
             //Global.payments.Add(_c);
@@ -220,6 +280,7 @@ namespace TGAccounting
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
+
             TabPage current = (sender as TabControl).SelectedTab;
             string tab = current.Name.ToString();
             switch (tab)
@@ -251,15 +312,15 @@ namespace TGAccounting
                     reportViewerEquipment.RefreshReport();
                     break;
                 case "tabRm":
-                    string query6 = "SELECT * FROM rem";
-                    this.EquipmentBindingSource.DataSource = Equipment.List(query6);
-                    reportViewerEquipment.RefreshReport();
+                    string query6 = "SELECT * FROM repair";
+                    this.SuppliesBindingSource.DataSource = Repair.List(query6);
+                    reportViewerRm.RefreshReport();
                     break;
                 case "tabInventory":
                     autocompleteCategory();
-                    string query7 = "SELECT * FROM inventory";
-                    this.InventoryBindingSource.DataSource = Inventory.List(query7);
-                    reportViewerInventory.RefreshReport();
+                    //string query7 = "SELECT * FROM inventory WHERE ";
+                    // this.InventoryBindingSource.DataSource = Inventory.List(query7);
+                    // reportViewerInventory.RefreshReport();
                     break;
                 case "tabExpense":
                     //autocompleteCateg();
@@ -267,8 +328,17 @@ namespace TGAccounting
                     this.ExpenseBindingSource.DataSource = Expense.List(query8);
                     reportViewerExpense.RefreshReport();
                     break;
+                case "tabCogs":
+                    //autocompleteCateg();
+                    string query9 = "SELECT * FROM cogs";
+                    this.CogsBindingSource.DataSource = Cogs.List(query9);
+                    reportViewer5.RefreshReport();
+                    break;
+                case "tabCalendar":
+                    //autocompleteCateg();
+                    LoadingCalendarLite();
+                    break;
             }
-
         }
 
         private void splitContainer2_Panel1_Paint(object sender, PaintEventArgs e)
@@ -312,10 +382,10 @@ namespace TGAccounting
                 DialogResult dr = form.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
-                    tabControl1.SelectedTab = tabSupply;
-                    string query4 = "SELECT * FROM supplies";
-                    this.SuppliesBindingSource.DataSource = Supplies.List(query4);
-                    reportViewerSupply.RefreshReport();
+                    tabControl1.SelectedTab = tabRm;                   
+                    string query6 = "SELECT * FROM repair";
+                    this.SuppliesBindingSource.DataSource = Repair.List(query6);
+                    reportViewerRm.RefreshReport();
 
                 }
             }
@@ -403,10 +473,23 @@ namespace TGAccounting
         {
             Report r = new Report();
              int week = Convert.ToInt32(weekTxt.Text);
-            string year = yearTxt.Text;
+            string year = yearTxt.Text; string date = "";
             reports = new List<Report>();
-            string ending="";
+            string ending = "";
+                
             double totalPayRoll = 0;
+            double totalPayRollYTD = 0;
+            double totalCogs = 0;
+            double totalCogsYTD = 0;
+            double totalSales = 0;
+            double totalSalesYTD = 0;
+            double totalTaxes = 0;
+            double totalTaxesYTD = 0;
+            double totalExpenses = 0;
+            double totalExpensesYTD = 0;
+
+            double totalEquip = 0;
+            double totalEquipYTD = 0;
             foreach (Taxes l in Taxes.List("SELECT * FROM taxes  WHERE week ='" + week + "' "))
             {
                 double sums = Taxes.List("SELECT * FROM taxes  WHERE week ='" + week + "' ").Sum(t => t.Amount);
@@ -416,19 +499,27 @@ namespace TGAccounting
                 double p2 = Math.Round((l.Amount / sums) * 100, 1);
                 r = new Report(l.Date, l.Week, l.Ending, "Employee Benefits", l.Name, l.Amount, p1, ytd, p2, "PAYROLL","EXPENSE");
                 reports.Add(r);
-                ending = l.Week;
+                ending = l.Ending;
+                date = l.Date;
+                totalTaxes = totalTaxes + sums;
+                totalTaxesYTD = totalTaxesYTD + ytd;
+
                 totalPayRoll = totalPayRoll + sums;
+                totalPayRollYTD = totalPayRollYTD + ytd;
             }          
 
             foreach (Labor l in Labor.List("SELECT * FROM labor  WHERE week ='" + week + "' "))
             {
-                double sums = Sale.List("SELECT * FROM labor  WHERE week ='" + week + "' ").Sum(t => t.Amount);
+                double sums = Labor.List("SELECT * FROM labor  WHERE week ='" + week + "' ").Sum(t => t.Amount);
                 double p1 = Math.Round((l.Amount / sums) * 100,1);
-                double ytd = Sale.List("SELECT * FROM labor  WHERE CAST(week AS INTEGER) <='" + week + "' AND item='" + l.Item + "' ").Sum(t => t.Amount);
-
+                double ytd = Labor.List("SELECT * FROM labor  WHERE CAST(week AS INTEGER) <='" + week + "' AND item='" + l.Item + "' ").Sum(t => t.Amount);
+                date = l.Date;
                 double p2 = Math.Round((l.Amount / sums) * 100,1);
                 r = new Report(l.Date, l.Week, l.Ending, "Salaries & Wages", l.Item, l.Amount, p1, ytd, p2, "PAYROLL", "EXPENSE");
                 reports.Add(r);
+
+                totalPayRoll = totalPayRoll + sums;
+                totalPayRollYTD = totalPayRollYTD + ytd;
             }
 
             //r = new Report("", week, ending, "TOTAL PAYROLL", "TOTAL PAYROLL",totalPayRoll, p1, ytd, p2);
@@ -443,6 +534,21 @@ namespace TGAccounting
                 double p2 = Math.Round((s.Amount / sums) * 100, 1);
                 r = new Report(s.Date, s.Week, s.Ending, "SALES", s.Item, s.Amount, p1, ytd, p2, "SALES", "INCOME");
                 reports.Add(r);
+                totalSales = totalSales + sums;
+                totalSalesYTD = totalSalesYTD + ytd;
+            }
+
+            foreach (Cogs s in Cogs.List("SELECT * FROM cogs  WHERE week ='" + week + "' "))
+            {
+                double sums = Cogs.List("SELECT * FROM cogs  WHERE week ='" + week + "' ").Sum(t => t.Cost);
+                double p1 = Math.Round((s.Cost / sums) * 100, 1);
+                double ytd = Cogs.List("SELECT * FROM cogs  WHERE CAST(week AS INTEGER) <='" + week + "'  AND category='" + s.Category + "' ").Sum(t => t.Cost);
+
+                double p2 = Math.Round((s.Cost / sums) * 100, 1);
+                r = new Report(s.Date, s.Week, s.Ending, "COST OF GOODS SOLD", s.Category, s.Cost, p1, ytd, p2, "COST OF GOODS SOLD", "COST OF GOODS SOLD");
+                reports.Add(r);
+                totalCogs = totalCogs + sums;
+                totalCogsYTD = totalCogsYTD + ytd;
             }
             foreach (Supplies s in Supplies.List("SELECT * FROM supplies  WHERE week ='" + week + "' "))
             {
@@ -453,6 +559,8 @@ namespace TGAccounting
                 double p2 = Math.Round((s.Amount / sums) * 100, 1);
                 r = new Report(s.Date, s.Week, s.Ending, "Supplies", s.Supplier, s.Amount, p1, ytd, p2, "Other Controllable Expenses", "EXPENSE");
                 reports.Add(r);
+                totalExpenses = totalExpenses + sums;
+                totalExpensesYTD = totalExpensesYTD + ytd;
             }
             foreach (Expense s in Expense.List("SELECT * FROM expense  WHERE week ='" + week + "' "))
             {
@@ -463,6 +571,20 @@ namespace TGAccounting
                 double p2 = Math.Round((s.Amount / sums) * 100, 1);
                 r = new Report(s.Date, s.Week, s.Ending, s.Category, s.Name, s.Amount, p1, ytd, p2, "Other Controllable Expenses", "EXPENSE");
                 reports.Add(r);
+                totalExpenses = totalExpenses + sums;
+                totalExpensesYTD = totalExpensesYTD + ytd;
+            }
+            foreach (Repair s in Repair.List("SELECT * FROM repair  WHERE week ='" + week + "' "))
+            {
+                double sums = Repair.List("SELECT * FROM repair  WHERE week ='" + week + "' ").Sum(t => t.Amount);
+                double p1 = Math.Round((s.Amount / sums) * 100, 1);
+                double ytd = Repair.List("SELECT * FROM repair  WHERE CAST(week AS INTEGER) <='" + week + "'  AND supplier='" + s.Supplier + "' ").Sum(t => t.Amount);
+
+                double p2 = Math.Round((s.Amount / sums) * 100, 1);
+                r = new Report(s.Date, s.Week, s.Ending, "Repair and maintenance", s.Supplier, s.Amount, p1, ytd, p2, "Other Controllable Expenses", "EXPENSE");
+                reports.Add(r);
+                totalExpenses = totalExpenses + sums;
+                totalExpensesYTD = totalExpensesYTD + ytd;
             }
             foreach (Equipment s in Equipment.List("SELECT * FROM equipment  WHERE week ='" + week + "' "))
             {
@@ -473,16 +595,200 @@ namespace TGAccounting
                 double p2 = Math.Round((s.Amount / sums) * 100, 1);
                 r = new Report(s.Date, s.Week, s.Ending, "Equipment", s.Name, s.Amount, p1, ytd, p2,"Equipment", "EXPENSE");
                 reports.Add(r);
+                totalEquip = totalEquip + sums;
+                totalEquipYTD = totalEquipYTD + ytd;
+
             }
+            /**Computing the prime costs*/
+             totalCogsYTD = Cogs.List("SELECT * FROM cogs  WHERE CAST(week AS INTEGER) <='" + week + "'").Sum(t => t.Cost);
+             totalCogs = Cogs.List("SELECT * FROM cogs  WHERE CAST(week AS INTEGER) ='" + week + "'").Sum(t => t.Cost);
+
+            double prime = totalCogs + totalPayRoll;
+            double p1Prime = Math.Round((prime / totalSales) * 100, 1);
+            double p2Prime = Math.Round((totalCogsYTD / totalSalesYTD) * 100, 1);
+
+            r = new Report(date, weekTxt.Text, ending, "PRIME COST", "PRIME COST", prime , p1Prime, totalSalesYTD, p2Prime, "PRIME COST", "PRIME COST");
+            reports.Add(r);
+            /**end of prime costs***/
+
+            /**Computing the Gross profit*/
+                      
+            double Gross = totalSales - totalCogs;
+            double GrossYTD = totalSalesYTD - totalCogsYTD;
+
+            double p1Gross = Math.Round((Gross / totalSales) * 100, 1);
+            double p2Gross = Math.Round((GrossYTD / totalSalesYTD) * 100, 1);
+
+            r = new Report(date, weekTxt.Text, ending, "Gross Profits", "Gross Profit", Gross, p1Gross, GrossYTD, p2Gross, "Gross Profit", "Profit");
+            reports.Add(r);
+
+            /**End of Gross ***/
+
+            /**Computing Controllable Expenses*/
            
+            double ctrl = totalPayRoll + totalExpenses;
+            double ctrlYTD = totalPayRollYTD + totalExpenses;
+
+            double p1Ctrl = Math.Round((prime / totalSales) * 100, 1);
+            double p2Ctrl = Math.Round((totalCogsYTD / totalSalesYTD) * 100, 1);
+
+            r = new Report(date, weekTxt.Text, ending, "Controllable Expenses", "Controllable Expense", ctrl, p1Ctrl, ctrlYTD, p2Ctrl, "Controllable Expenses", "Controllable");
+            reports.Add(r);
+            /**end of  Controllable Expenses***/
+
+            /**Controllable profit*/
+            double ctrlProfit = Gross - ctrl;
+            double ctrlProfitYTD = GrossYTD - ctrlYTD;
+            double p1CtrlProfit = Math.Round((ctrlProfit / totalSales) * 100, 1);
+            double p2CtrlProfit = Math.Round((ctrlProfitYTD / totalSalesYTD) * 100, 1);
+
+            r = new Report(date, weekTxt.Text, ending, "Controllable Profits", "Controllable Profits", ctrlProfit, p1CtrlProfit, ctrlProfitYTD, p2CtrlProfit, "Controllable Profit", "Controllable");
+            reports.Add(r);
+
+            /*end of controllable profit*/
+
+            /** restaurant profit**/
+            double occupancyExpense = Expense.List("SELECT * FROM expense  WHERE week ='" + week + "' AND category='Occupancy Expenses' ").Sum(t => t.Amount);
+            double occupancyExpenseYTD = Expense.List("SELECT * FROM expense WHERE CAST(week AS INTEGER) ='" + week + "' AND category='Occupancy Expenses' ").Sum(t => t.Amount);
+
+            double restProfit = ctrlProfit - occupancyExpense - totalEquip;
+            double restProfitYTD = ctrlProfit - occupancyExpenseYTD - totalEquipYTD;
+
+            double p1RestProfit = Math.Round((restProfit / totalSales) * 100, 1);
+            double p2RestProfit = Math.Round((restProfitYTD / totalSalesYTD) * 100, 1);
+
+            r = new Report(date, weekTxt.Text, ending, "Restaurant Profit", "Restaurant Profit", restProfit, p1RestProfit, restProfitYTD, p2RestProfit, "Restaurant Profits", "Restaurant");
+            reports.Add(r);
+            /** end restaurant profit**/
 
             this.ReportBindingSource.DataSource = reports;
             reportViewer4.RefreshReport();
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void button16_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedTab = tabCogs;
+            using (AddCogs form = new AddCogs())
+            {
+                DialogResult dr = form.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    string query9 = "SELECT * FROM cogs";
+                    this.CogsBindingSource.DataSource = Cogs.List(query9);
+                    reportViewer5.RefreshReport();
+
+                }
+            }
+        }
+
+        private void monthView1_SelectionChanged(object sender, EventArgs e)
+        {
+            this.calendar1.SetViewRange(this.monthView1.SelectionStart.Date, this.monthView1.SelectionEnd.Date);
+        }
+
+        private void calendar1_ItemCreated(object sender, CalendarItemCancelEventArgs e)
+        {
+           
+        }
+
+        private void calendar1_LoadItems(object sender, CalendarLoadEventArgs e)
+        {
+           // PlaceItems();
+        }
+
+        private void calendar1_ItemSelected(object sender, CalendarItemEventArgs e)
+        {
+           
+        }
+
+        private void calendar1_DoubleClick(object sender, EventArgs e)
         {
 
+        }
+
+        private void calendar1_ItemCreating(object sender, CalendarItemCancelEventArgs e)
+        {
+            var start = Convert.ToDateTime(e.Item.Date).ToString("yyyy-MM-dd") + "T" + Convert.ToDateTime(e.Item.Date).ToString("HH:mm:ss");
+            var end = Convert.ToDateTime(e.Item.EndDate).ToString("yyyy-MM-dd") + "T" + Convert.ToDateTime(e.Item.EndDate).ToString("HH:mm:ss");
+
+            using (EventDialog form = new EventDialog(start, end, e.Item.Date.ToString()))
+            {
+                // DentalDialog form1 = new DentalDialog(item.Text, TransactorID);
+                DialogResult dr = form.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    LoadingCalendarLite();
+                }
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            using (StaffPayments form = new StaffPayments())
+            {
+                DialogResult dr = form.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                   
+
+                }
+            }
+        }
+
+        private void button6_Click_1(object sender, EventArgs e)
+        {
+            using (AddStaff form = new AddStaff(null))
+            {
+                DialogResult dr = form.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+
+
+                }
+            }
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            DataForm frm = new DataForm();
+            frm.Show();
+          
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            using (CompanyProfile form = new CompanyProfile(Helper.CompanyID))
+            {
+                DialogResult dr = form.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+
+
+                }
+            }
+        }
+
+        private void tabControl1_TabIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            using (AddUser form = new AddUser(null))
+            {
+                DialogResult dr = form.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+
+
+                }
+            }
         }
 
         private void endTxt_ValueChanged(object sender, EventArgs e)

@@ -16,7 +16,8 @@ namespace TGAccounting.Model
         private string ending;
         private string item;
         private double amount;
-       private static List<Sale> s ;
+        private string category;
+        private static List<Sale> s ;
         public string Date
         {
             get
@@ -108,8 +109,21 @@ namespace TGAccounting.Model
             }
         }
 
+        public string Category
+        {
+            get
+            {
+                return category;
+            }
+
+            set
+            {
+                category = value;
+            }
+        }
+
         public Sale() { }
-        public Sale(string id,string date, string week, string starting, string ending, string item, double amount)
+        public Sale(string id,string date, string week, string starting, string ending, string item, double amount,string category)
         {
             this.Id = id;
             this.Date = date;
@@ -118,6 +132,7 @@ namespace TGAccounting.Model
             this.Ending = ending;
             this.Item = item;
             this.Amount = amount;
+            this.Category = category;
         }
         public static List<Sale> List(string query)
         {           
@@ -126,7 +141,7 @@ namespace TGAccounting.Model
             SQLiteDataReader Reader = DBConnect.ReadingLite(query);
             while (Reader.Read())
             {
-                Sale p = new Sale(Reader["id"].ToString(), Reader["date"].ToString(), Reader["week"].ToString(), Reader["starting"].ToString(), Reader["ending"].ToString(), Reader["item"].ToString(),Convert.ToDouble(Reader["amount"]));
+                Sale p = new Sale(Reader["id"].ToString(), Reader["date"].ToString(), Reader["week"].ToString(), Reader["starting"].ToString(), Reader["ending"].ToString(), Reader["item"].ToString(),Convert.ToDouble(Reader["amount"]), Reader["category"].ToString());
                 s.Add(p);
             }
             Reader.Close();

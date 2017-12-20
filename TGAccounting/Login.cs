@@ -40,14 +40,26 @@ namespace TGAccounting
             Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Labor()));
             Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Taxes()));
             Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Supplies()));
-            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Rep()));
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Repair()));
             Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Equipment()));
             Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Inventory()));
             Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Expense()));
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Cogs()));
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Events()));
+
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Company()));
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new User()));
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Staff()));
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Salary()));
 
         }
 
         private void Login_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
 
         }

@@ -17,7 +17,10 @@ namespace TGAccounting.Model
         private string name;
         private string category;       
         private double amount;
-      
+        private double begining;
+        private double finishing;
+        private double cog;
+
 
         private static List<Inventory> s ;
 
@@ -127,10 +130,48 @@ namespace TGAccounting.Model
             }
         }
 
-       
+        public double Begining
+        {
+            get
+            {
+                return begining;
+            }
+
+            set
+            {
+                begining = value;
+            }
+        }
+
+        public double Finishing
+        {
+            get
+            {
+                return finishing;
+            }
+
+            set
+            {
+                finishing = value;
+            }
+        }
+
+        public double Cog
+        {
+            get
+            {
+                return cog;
+            }
+
+            set
+            {
+                cog = value;
+            }
+        }
+
         public Inventory() { }
 
-        public Inventory(string id, string date, string week, string starting, string ending, string name, string category,double amount)
+        public Inventory(string id, string date, string week, string starting, string ending, string name, string category,double amount,double begining,double finishing,double cog)
         {
             this.id = id;
             this.date = date;
@@ -138,10 +179,12 @@ namespace TGAccounting.Model
             this.starting = starting;
             this.ending = ending;
             this.name = name;
-            this.category = category;
-           
+            this.category = category;            
             this.amount = amount;
-           
+            this.begining = begining;
+            this.finishing = finishing;
+            this.cog = cog;
+
         }
 
         public static List<Inventory> List(string query)
@@ -151,7 +194,11 @@ namespace TGAccounting.Model
             SQLiteDataReader Reader = DBConnect.ReadingLite(query);
             while (Reader.Read())
             {
-                Inventory p = new Inventory(Reader["id"].ToString(),Reader["date"].ToString(), Reader["week"].ToString(), Reader["starting"].ToString(), Reader["ending"].ToString(), Reader["name"].ToString(), Reader["category"].ToString(),Convert.ToDouble(Reader["amount"]));
+                double begining = Cogs.List("SELECT * from cogs WHERE category= '" + Reader["category"].ToString() + "' AND week = '" + Reader["week"].ToString() + "'").Sum(t => t.BeginningInventory);
+                double ending = Cogs.List("SELECT * from cogs WHERE category= '" + Reader["category"].ToString() + "' AND week = '" + Reader["week"].ToString() + "'").Sum(t => t.EndingInventory);
+                double cg = Cogs.List("SELECT * from cogs WHERE category= '" + Reader["category"].ToString() + "' AND week = '" + Reader["week"].ToString() + "'").Sum(t => t.Cost);
+
+                Inventory p = new Inventory(Reader["id"].ToString(),Reader["date"].ToString(), Reader["week"].ToString(), Reader["starting"].ToString(), Reader["ending"].ToString(), Reader["name"].ToString(), Reader["category"].ToString(),Convert.ToDouble(Reader["amount"]),begining,ending,cg);
                 s.Add(p);
             }
             Reader.Close();

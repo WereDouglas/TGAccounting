@@ -35,9 +35,9 @@ namespace TGAccounting
         private void autocomplete()
         {
             AutoCompleteStringCollection AutoItem = new AutoCompleteStringCollection();
-            foreach (Rep r in Rep.List("SELECT * from rep").GroupBy(x => x.Name, (key, group) => group.First()))
+            foreach (Repair r in Repair.List("SELECT * from repair").GroupBy(x => x.Supplier, (key, group) => group.First()))
             {
-                AutoItem.Add(r.Name);
+                AutoItem.Add(r.Supplier);
             }
             itemTxt.AutoCompleteMode = AutoCompleteMode.Suggest;
             itemTxt.AutoCompleteSource = AutoCompleteSource.CustomSource;
@@ -65,7 +65,7 @@ namespace TGAccounting
             }
 
             string ID = Guid.NewGuid().ToString();
-            Rep i = new Rep(ID, dateTxt.Text, weekLbl.Text, startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text));
+            Repair i = new Repair(ID, dateTxt.Text, weekLbl.Text, startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text));
             DBConnect.Insert(i);
             MessageBox.Show("Information Saved ");
             itemTxt.Text = "";

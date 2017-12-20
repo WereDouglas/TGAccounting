@@ -96,9 +96,9 @@
             this.label3.Location = new System.Drawing.Point(191, 25);
             this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(43, 16);
+            this.label3.Size = new System.Drawing.Size(149, 16);
             this.label3.TabIndex = 19;
-            this.label3.Text = "Add Rm";
+            this.label3.Text = "Add Repair and mantainance";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // panel1

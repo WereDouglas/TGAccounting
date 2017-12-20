@@ -18,6 +18,7 @@ namespace TGAccounting
         {
             InitializeComponent();
             autocomplete();
+            autocompleteCategory();
             fillUp(Convert.ToDateTime(DateTime.Now.Date));
         }
         private void fillUp(DateTime d)
@@ -44,7 +45,22 @@ namespace TGAccounting
             itemTxt.AutoCompleteCustomSource = AutoItem;
 
         }
-       
+        private void autocompleteCategory()
+        {
+            categoryTxt.Items.Clear();
+            AutoCompleteStringCollection AutoItem = new AutoCompleteStringCollection();
+            foreach (Sale r in Sale.List("SELECT * from sale").GroupBy(x => x.Category, (key, group) => group.First()))
+            {
+                AutoItem.Add(r.Category);
+                categoryTxt.Items.Add(r.Category);
+            }
+            categoryTxt.AutoCompleteMode = AutoCompleteMode.Suggest;
+            categoryTxt.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            categoryTxt.AutoCompleteCustomSource = AutoItem;
+
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(amountTxt.Text)) {
@@ -58,7 +74,7 @@ namespace TGAccounting
             }
 
             string ID = Guid.NewGuid().ToString();
-            Sale i = new Sale(ID, dateTxt.Text,weekLbl.Text,startLbl.Text,endLbl.Text,itemTxt.Text,Convert.ToDouble(amountTxt.Text));
+            Sale i = new Sale(ID, dateTxt.Text,weekLbl.Text,startLbl.Text,endLbl.Text,itemTxt.Text,Convert.ToDouble(amountTxt.Text),categoryTxt.Text);
             DBConnect.Insert(i);
             MessageBox.Show("Information Saved ");
             itemTxt.Text = "";

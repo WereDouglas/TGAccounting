@@ -34,6 +34,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.amountTxt = new System.Windows.Forms.TextBox();
             this.endLbl = new System.Windows.Forms.Label();
@@ -44,10 +47,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.dateTxt = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.categoryTxt = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -108,10 +108,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.LightGray;
+            this.panel1.Controls.Add(this.categoryTxt);
             this.panel1.Controls.Add(this.textBox2);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label7);
-            this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.amountTxt);
             this.panel1.Controls.Add(this.endLbl);
@@ -130,11 +130,41 @@
             this.panel1.Size = new System.Drawing.Size(385, 298);
             this.panel1.TabIndex = 10;
             // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(148, 227);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(213, 26);
+            this.textBox2.TabIndex = 24;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.LightGray;
+            this.label8.Location = new System.Drawing.Point(23, 231);
+            this.label8.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(101, 22);
+            this.label8.TabIndex = 23;
+            this.label8.Text = "% on  Budget";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.LightGray;
+            this.label7.Location = new System.Drawing.Point(23, 194);
+            this.label7.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(74, 22);
+            this.label7.TabIndex = 22;
+            this.label7.Text = "Category";
+            // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.BackColor = System.Drawing.Color.LightGray;
-            this.label10.Location = new System.Drawing.Point(23, 261);
+            this.label10.Location = new System.Drawing.Point(23, 263);
             this.label10.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(121, 22);
@@ -226,43 +256,13 @@
             this.label4.TabIndex = 10;
             this.label4.Text = "Date ";
             // 
-            // textBox1
+            // categoryTxt
             // 
-            this.textBox1.Location = new System.Drawing.Point(148, 190);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(213, 26);
-            this.textBox1.TabIndex = 21;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.BackColor = System.Drawing.Color.LightGray;
-            this.label7.Location = new System.Drawing.Point(33, 194);
-            this.label7.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(74, 22);
-            this.label7.TabIndex = 22;
-            this.label7.Text = "Category";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.BackColor = System.Drawing.Color.LightGray;
-            this.label8.Location = new System.Drawing.Point(23, 231);
-            this.label8.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(101, 22);
-            this.label8.TabIndex = 23;
-            this.label8.Text = "% on  Budget";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(148, 227);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(213, 26);
-            this.textBox2.TabIndex = 24;
+            this.categoryTxt.FormattingEnabled = true;
+            this.categoryTxt.Location = new System.Drawing.Point(148, 188);
+            this.categoryTxt.Name = "categoryTxt";
+            this.categoryTxt.Size = new System.Drawing.Size(211, 30);
+            this.categoryTxt.TabIndex = 29;
             // 
             // AddSale
             // 
@@ -307,6 +307,6 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ComboBox categoryTxt;
     }
 }
