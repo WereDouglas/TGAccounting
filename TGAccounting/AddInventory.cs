@@ -54,7 +54,7 @@ namespace TGAccounting
         private void autocompleteCategory()
         {
             categoryTxt.Items.Clear();
-               AutoCompleteStringCollection AutoItem = new AutoCompleteStringCollection();
+            AutoCompleteStringCollection AutoItem = new AutoCompleteStringCollection();
             foreach (Inventory r in Inventory.List("SELECT * from inventory").GroupBy(x => x.Category, (key, group) => group.First()))
             {
                 AutoItem.Add(r.Category);
@@ -66,7 +66,7 @@ namespace TGAccounting
 
 
         }
-
+        string existingID;
         private void button1_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(amountTxt.Text))
@@ -79,9 +79,20 @@ namespace TGAccounting
                 itemTxt.BackColor = Color.Red;
                 return;
             }
-           
+            if (!string.IsNullOrEmpty(existingID))
+            {
+
+                if (MessageBox.Show("YES or No?", "Are you sure you want to update the current existing information  ? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+                    Inventory j = new Inventory(existingID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), weekLbl.Text, startLbl.Text, endLbl.Text, itemTxt.Text, categoryTxt.Text, Convert.ToDouble(amountTxt.Text), 0, 0, 0);
+
+                    DBConnect.Update(j, existingID);
+                }
+                return;
+            }
+
             string ID = Guid.NewGuid().ToString();
-            Inventory i = new Inventory(ID, dateTxt.Text, weekLbl.Text, startLbl.Text, endLbl.Text, itemTxt.Text,categoryTxt.Text, Convert.ToDouble(amountTxt.Text),0,0,0);
+            Inventory i = new Inventory(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), weekLbl.Text, startLbl.Text, endLbl.Text, itemTxt.Text, categoryTxt.Text, Convert.ToDouble(amountTxt.Text), 0, 0, 0);
             DBConnect.Insert(i);
             MessageBox.Show("Information Saved ");
             itemTxt.Text = "";
@@ -95,20 +106,51 @@ namespace TGAccounting
         private void dateTxt_ValueChanged(object sender, EventArgs e)
         {
             fillUp(Convert.ToDateTime(dateTxt.Text));
-            itemTxt_Leave(null,null);
+            itemTxt_Leave(null, null);
         }
 
         private void itemTxt_Leave(object sender, EventArgs e)
         {
             int prevWeek = Convert.ToInt32(weekLbl.Text) - 1;
-            try {
-               // begQty.Text = Inventory.List("SELECT * from inventory").Where(k=>k.Week.Contains(prevWeek.ToString())).First().EndingQty.ToString();
-
-            } catch {
-
-              //  begQty.Text = "0";
+            try { categoryTxt.Text = Inventory.List("SELECT * from inventory WHERE name='" + itemTxt.Text + "'").First().Category; }
+            catch (Exception y)
+            {
+                Helper.Exceptions(y.Message, "on adding inventory auto fill the category list selected item");
             }
 
+            try
+            {
+
+                amountTxt.Text = Inventory.List("SELECT * from inventory WHERE name='" + itemTxt.Text + "' AND week = '" + weekLbl.Text + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Amount.ToString();
+            }
+            catch (Exception y)
+            {
+                // Helper.Exceptions(y.Message, "on adding inventory auto fill the category list selected item");
+            }
+            try
+            {
+                existingID = Inventory.List("SELECT * from inventory WHERE name='" + itemTxt.Text + "' AND week = '" + weekLbl.Text + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Id.ToString();
+            }
+            catch { }
+
+        }
+
+        private void amountTxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+            if (!char.IsControl(e.KeyChar)
+               && !char.IsDigit(e.KeyChar)
+               && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+
+            // only allow two decimal point
+            if (e.KeyChar == '.'
+                && (sender as TextBox).Text.IndexOf('.') > -1)
+            {
+                e.Handled = true;
+            }
         }
     }
 }

@@ -49,33 +49,40 @@
             // 
             // button2
             // 
+            this.button2.BackColor = System.Drawing.Color.DarkOrange;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Location = new System.Drawing.Point(27, 376);
-            this.button2.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.button2.Margin = new System.Windows.Forms.Padding(5);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(125, 52);
-            this.button2.TabIndex = 13;
+            this.button2.TabIndex = 1;
             this.button2.Text = "Cancel";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(272, 376);
-            this.button1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.button1.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(406, 376);
+            this.button1.Margin = new System.Windows.Forms.Padding(5);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(125, 52);
-            this.button1.TabIndex = 12;
+            this.button1.TabIndex = 0;
             this.button1.Text = "Save";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // itemTxt
             // 
             this.itemTxt.Location = new System.Drawing.Point(148, 191);
-            this.itemTxt.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.itemTxt.Margin = new System.Windows.Forms.Padding(5);
             this.itemTxt.Name = "itemTxt";
-            this.itemTxt.Size = new System.Drawing.Size(213, 20);
-            this.itemTxt.TabIndex = 4;
+            this.itemTxt.Size = new System.Drawing.Size(274, 20);
+            this.itemTxt.TabIndex = 1;
+            this.itemTxt.Leave += new System.EventHandler(this.itemTxt_Leave);
             // 
             // label1
             // 
@@ -84,9 +91,9 @@
             this.label1.Location = new System.Drawing.Point(23, 196);
             this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(25, 16);
+            this.label1.Size = new System.Drawing.Size(73, 16);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Tax";
+            this.label1.Text = "Tax/Payment";
             // 
             // label3
             // 
@@ -116,10 +123,10 @@
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.itemTxt);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(4, 46);
-            this.panel1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.panel1.Location = new System.Drawing.Point(16, 46);
+            this.panel1.Margin = new System.Windows.Forms.Padding(5);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(450, 320);
+            this.panel1.Size = new System.Drawing.Size(515, 320);
             this.panel1.TabIndex = 14;
             // 
             // label10
@@ -136,10 +143,11 @@
             // amountTxt
             // 
             this.amountTxt.Location = new System.Drawing.Point(148, 238);
-            this.amountTxt.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.amountTxt.Margin = new System.Windows.Forms.Padding(5);
             this.amountTxt.Name = "amountTxt";
-            this.amountTxt.Size = new System.Drawing.Size(213, 20);
-            this.amountTxt.TabIndex = 19;
+            this.amountTxt.Size = new System.Drawing.Size(274, 20);
+            this.amountTxt.TabIndex = 2;
+            this.amountTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.amountTxt_KeyPress);
             // 
             // endLbl
             // 
@@ -206,8 +214,8 @@
             this.dateTxt.Location = new System.Drawing.Point(148, 23);
             this.dateTxt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dateTxt.Name = "dateTxt";
-            this.dateTxt.Size = new System.Drawing.Size(213, 20);
-            this.dateTxt.TabIndex = 11;
+            this.dateTxt.Size = new System.Drawing.Size(274, 20);
+            this.dateTxt.TabIndex = 0;
             this.dateTxt.CloseUp += new System.EventHandler(this.dateTxt_CloseUp);
             // 
             // label4
@@ -223,7 +231,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(463, 447);
+            this.ClientSize = new System.Drawing.Size(545, 447);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);

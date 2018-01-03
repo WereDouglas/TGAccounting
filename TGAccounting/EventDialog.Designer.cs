@@ -61,7 +61,7 @@
             this.costTxt.Location = new System.Drawing.Point(116, 256);
             this.costTxt.Name = "costTxt";
             this.costTxt.Size = new System.Drawing.Size(181, 20);
-            this.costTxt.TabIndex = 215;
+            this.costTxt.TabIndex = 7;
             this.costTxt.Text = "0";
             // 
             // button1
@@ -74,7 +74,7 @@
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(71, 29);
-            this.button1.TabIndex = 207;
+            this.button1.TabIndex = 9;
             this.button1.Text = "Cancel";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -98,7 +98,7 @@
             this.button5.Margin = new System.Windows.Forms.Padding(2);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(71, 29);
-            this.button5.TabIndex = 204;
+            this.button5.TabIndex = 8;
             this.button5.Text = "Add";
             this.button5.UseVisualStyleBackColor = false;
             this.button5.Click += new System.EventHandler(this.button5_Click);
@@ -125,7 +125,7 @@
             this.priorityCbx.Margin = new System.Windows.Forms.Padding(4);
             this.priorityCbx.Name = "priorityCbx";
             this.priorityCbx.Size = new System.Drawing.Size(181, 24);
-            this.priorityCbx.TabIndex = 206;
+            this.priorityCbx.TabIndex = 5;
             // 
             // endMinTxt
             // 
@@ -135,7 +135,7 @@
             this.endMinTxt.Location = new System.Drawing.Point(218, 105);
             this.endMinTxt.Name = "endMinTxt";
             this.endMinTxt.Size = new System.Drawing.Size(43, 20);
-            this.endMinTxt.TabIndex = 201;
+            this.endMinTxt.TabIndex = 4;
             // 
             // startMinTxt
             // 
@@ -145,7 +145,7 @@
             this.startMinTxt.Location = new System.Drawing.Point(218, 75);
             this.startMinTxt.Name = "startMinTxt";
             this.startMinTxt.Size = new System.Drawing.Size(43, 20);
-            this.startMinTxt.TabIndex = 200;
+            this.startMinTxt.TabIndex = 2;
             // 
             // detailsTxt
             // 
@@ -155,7 +155,7 @@
             this.detailsTxt.Multiline = true;
             this.detailsTxt.Name = "detailsTxt";
             this.detailsTxt.Size = new System.Drawing.Size(188, 58);
-            this.detailsTxt.TabIndex = 203;
+            this.detailsTxt.TabIndex = 6;
             // 
             // label4
             // 
@@ -198,7 +198,7 @@
             this.endHrTxt.Location = new System.Drawing.Point(114, 101);
             this.endHrTxt.Name = "endHrTxt";
             this.endHrTxt.Size = new System.Drawing.Size(82, 24);
-            this.endHrTxt.TabIndex = 199;
+            this.endHrTxt.TabIndex = 3;
             // 
             // startHrTxt
             // 
@@ -227,14 +227,14 @@
             this.startHrTxt.Location = new System.Drawing.Point(114, 72);
             this.startHrTxt.Name = "startHrTxt";
             this.startHrTxt.Size = new System.Drawing.Size(82, 24);
-            this.startHrTxt.TabIndex = 198;
+            this.startHrTxt.TabIndex = 1;
             // 
             // openedDate
             // 
             this.openedDate.Location = new System.Drawing.Point(115, 31);
             this.openedDate.Name = "openedDate";
             this.openedDate.Size = new System.Drawing.Size(177, 20);
-            this.openedDate.TabIndex = 194;
+            this.openedDate.TabIndex = 0;
             // 
             // label7
             // 

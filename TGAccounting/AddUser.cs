@@ -73,7 +73,12 @@ namespace TGAccounting
                 nameTxt.BackColor = Color.Red;
                 return;
             }
-           
+            if (contactTxt.Text == "")
+            {
+                contactTxt.BackColor = Color.Red;
+                return;
+            }
+
             if (pass2Txt.Text != passTxt.Text)
             {
                 MessageBox.Show("Passwords do not match");

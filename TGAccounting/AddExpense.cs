@@ -23,13 +23,21 @@ namespace TGAccounting
         }
         private void fillUp(DateTime d)
         {
+
             int week = Helper.GetIso8601WeekOfYear(d);
             weekLbl.Text = week.ToString();
-            string mylast = startLbl.Text = Helper.FirstDateOfWeek(d.Year, Convert.ToInt32(week), CultureInfo.CurrentCulture).Date.ToString("yyyy-MM-dd");
-            string myStart = Convert.ToDateTime(startLbl.Text).AddDays(7).Date.ToString("yyyy-MM-dd");
+            startLbl.Text = Helper.GetFirstDayOfWeek(d, CultureInfo.CurrentCulture).Date.ToString("dd-MM-yyyy");
 
-            endLbl.Text = mylast;
-            startLbl.Text = Convert.ToDateTime(mylast).AddDays(-7).Date.ToString("yyyy-MM-dd");
+            string mylast = startLbl.Text;
+            string myStart = Convert.ToDateTime(startLbl.Text).AddDays(-7).Date.ToString("dd-MM-yyyy");
+
+            startLbl.Text = Convert.ToDateTime(startLbl.Text).AddDays(-7).Date.ToString("dd-MM-yyyy");
+
+
+            endLbl.Text = Helper.GetFirstDayOfWeek(d, CultureInfo.CurrentCulture).Date.ToString("dd-MM-yyyy");
+            // startLbl.Text = Convert.ToDateTime(mylast).AddDays(-7).Date.ToString("dd-MM-yyyy");
+
+
 
         }
         private void autocomplete()
@@ -73,9 +81,22 @@ namespace TGAccounting
                 itemTxt.BackColor = Color.Red;
                 return;
             }
+            if (!string.IsNullOrEmpty(existingID))
+            {
+
+                if (MessageBox.Show("YES or No?", "Are you sure you want to update the current existing information  ? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+                    Expense j = new Expense(existingID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), weekLbl.Text, startLbl.Text, endLbl.Text, itemTxt.Text, categoryTxt.Text, Convert.ToDouble(amountTxt.Text));
+                    DBConnect.Update(j, existingID);
+                    existingID = "";
+                    return;
+                }
+
+            }
+            existingID = "";
 
             string ID = Guid.NewGuid().ToString();
-            Expense i = new Expense(ID, dateTxt.Text, weekLbl.Text, startLbl.Text, endLbl.Text, itemTxt.Text, categoryTxt.Text, Convert.ToDouble(amountTxt.Text));
+            Expense i = new Expense(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), weekLbl.Text, startLbl.Text, endLbl.Text, itemTxt.Text, categoryTxt.Text, Convert.ToDouble(amountTxt.Text));
             DBConnect.Insert(i);
             MessageBox.Show("Information Saved ");
             itemTxt.Text = "";
@@ -93,6 +114,49 @@ namespace TGAccounting
         private void dateTxt_ValueChanged(object sender, EventArgs e)
         {
             fillUp(Convert.ToDateTime(dateTxt.Text));
+        }
+
+        private void amountTxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+            if (!char.IsControl(e.KeyChar)
+               && !char.IsDigit(e.KeyChar)
+               && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+
+            // only allow two decimal point
+            if (e.KeyChar == '.'
+                && (sender as TextBox).Text.IndexOf('.') > -1)
+            {
+                e.Handled = true;
+            }
+        }
+        string existingID = "";
+        private void itemTxt_Leave(object sender, EventArgs e)
+        {
+            try { categoryTxt.Text = Expense.List("SELECT * from expense WHERE name='" + itemTxt.Text + "'").First().Category; }
+            catch (Exception y)
+            {
+                Helper.Exceptions(y.Message, "on adding expense auto fill the category list selected item");
+            }
+            try
+            {
+                amountTxt.Text = Expense.List("SELECT * from expense WHERE name='" + itemTxt.Text + "' AND week = '" + weekLbl.Text + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Amount.ToString();
+            }
+            catch (Exception y)
+            {
+                // Helper.Exceptions(y.Message, "on adding inventory auto fill the category list selected item");
+            }
+            try
+            {
+                existingID = Expense.List("SELECT * from expense WHERE name='" + itemTxt.Text + "' AND week = '" + weekLbl.Text + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Id.ToString();
+            }
+            catch (Exception y)
+            {
+                // Helper.Exceptions(y.Message, "on adding inventory auto fill the category list selected item");
+            }
         }
     }
 }

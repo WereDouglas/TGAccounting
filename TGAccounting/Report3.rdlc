@@ -78,7 +78,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.70833in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1in</Width>
@@ -101,7 +101,9 @@
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox22</rd:DefaultName>
@@ -130,7 +132,9 @@
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox3</rd:DefaultName>
@@ -167,7 +171,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Left</TextAlign>
+                            <TextAlign>Center</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -200,7 +204,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Left</TextAlign>
+                            <TextAlign>Center</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -235,7 +239,9 @@
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox20</rd:DefaultName>
@@ -264,7 +270,9 @@
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox9</rd:DefaultName>
@@ -296,12 +304,13 @@
                             <TextRun>
                               <Value>=Sum(Fields!Amount.Value)</Value>
                               <Style>
+                                <FontWeight>Bold</FontWeight>
                                 <Format>C</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Left</TextAlign>
+                            <TextAlign>Center</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -336,7 +345,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Left</TextAlign>
+                            <TextAlign>Center</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -387,7 +396,9 @@
                             </Style>
                           </TextRun>
                         </TextRuns>
-                        <Style />
+                        <Style>
+                          <TextAlign>Center</TextAlign>
+                        </Style>
                       </Paragraph>
                     </Paragraphs>
                     <rd:DefaultName>Week</rd:DefaultName>
@@ -430,7 +441,9 @@
                                 <Style />
                               </TextRun>
                             </TextRuns>
-                            <Style />
+                            <Style>
+                              <TextAlign>Center</TextAlign>
+                            </Style>
                           </Paragraph>
                         </Paragraphs>
                         <rd:DefaultName>Ending</rd:DefaultName>
@@ -479,7 +492,9 @@
                             </Style>
                           </TextRun>
                         </TextRuns>
-                        <Style />
+                        <Style>
+                          <TextAlign>Center</TextAlign>
+                        </Style>
                       </Paragraph>
                     </Paragraphs>
                     <rd:DefaultName>Textbox1</rd:DefaultName>
@@ -514,7 +529,9 @@
                                 </Style>
                               </TextRun>
                             </TextRuns>
-                            <Style />
+                            <Style>
+                              <TextAlign>Center</TextAlign>
+                            </Style>
                           </Paragraph>
                         </Paragraphs>
                         <rd:DefaultName>Textbox12</rd:DefaultName>
@@ -549,7 +566,7 @@
           <TablixMembers>
             <TablixMember>
               <TablixHeader>
-                <Size>1.57292in</Size>
+                <Size>2.01042in</Size>
                 <CellContents>
                   <Textbox Name="Textbox21">
                     <CanGrow>true</CanGrow>
@@ -592,7 +609,7 @@
                 </SortExpression>
               </SortExpressions>
               <TablixHeader>
-                <Size>1.57292in</Size>
+                <Size>2.01042in</Size>
                 <CellContents>
                   <Textbox Name="Name">
                     <CanGrow>true</CanGrow>
@@ -627,7 +644,7 @@
             </TablixMember>
             <TablixMember>
               <TablixHeader>
-                <Size>1.57292in</Size>
+                <Size>2.01042in</Size>
                 <CellContents>
                   <Textbox Name="Textbox19">
                     <CanGrow>true</CanGrow>
@@ -660,7 +677,7 @@
             </TablixMember>
             <TablixMember>
               <TablixHeader>
-                <Size>1.57292in</Size>
+                <Size>2.01042in</Size>
                 <CellContents>
                   <Textbox Name="Textbox7">
                     <CanGrow>true</CanGrow>
@@ -698,7 +715,7 @@
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
         <Height>1.5in</Height>
-        <Width>3.57292in</Width>
+        <Width>4.71875in</Width>
         <Style>
           <Border>
             <Style>None</Style>

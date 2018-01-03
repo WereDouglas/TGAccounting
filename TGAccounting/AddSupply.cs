@@ -22,13 +22,16 @@ namespace TGAccounting
         }
         private void fillUp(DateTime d)
         {
+
             int week = Helper.GetIso8601WeekOfYear(d);
             weekLbl.Text = week.ToString();
-            string mylast = startLbl.Text = Helper.FirstDateOfWeek(d.Year, Convert.ToInt32(week), CultureInfo.CurrentCulture).Date.ToString("yyyy-MM-dd");
-            string myStart = Convert.ToDateTime(startLbl.Text).AddDays(7).Date.ToString("yyyy-MM-dd");
+            startLbl.Text = Helper.GetFirstDayOfWeek(d, CultureInfo.CurrentCulture).Date.ToString("dd-MM-yyyy");
 
-            endLbl.Text = mylast;
-            startLbl.Text = Convert.ToDateTime(mylast).AddDays(-7).Date.ToString("yyyy-MM-dd");
+            string mylast = startLbl.Text;
+            string myStart = Convert.ToDateTime(startLbl.Text).AddDays(-7).Date.ToString("dd-MM-yyyy");
+            startLbl.Text = Convert.ToDateTime(startLbl.Text).AddDays(-7).Date.ToString("dd-MM-yyyy");
+            endLbl.Text = Helper.GetFirstDayOfWeek(d, CultureInfo.CurrentCulture).Date.ToString("dd-MM-yyyy");
+            // startLbl.Text = Convert.ToDateTime(mylast).AddDays(-7).Date.ToString("dd-MM-yyyy");
 
         }
         private void autocomplete()
@@ -42,7 +45,6 @@ namespace TGAccounting
             itemTxt.AutoCompleteSource = AutoCompleteSource.CustomSource;
             itemTxt.AutoCompleteCustomSource = AutoItem;
 
-
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -54,10 +56,22 @@ namespace TGAccounting
             if (string.IsNullOrEmpty(itemTxt.Text))
             {
                 itemTxt.BackColor = Color.Red;
-                return;            }
+                return;
+            }
+            if (!string.IsNullOrEmpty(existingID))
+            {
+                if (MessageBox.Show("YES or No?", "Are you sure you want to update the current existing information  ? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+                    Supplies j = new Supplies(existingID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), weekLbl.Text, startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text));
+                    DBConnect.Update(j, existingID);
+                    existingID = "";
+                    return;
+                }
+            }
+            existingID = "";
 
             string ID = Guid.NewGuid().ToString();
-            Supplies i = new Supplies(ID, dateTxt.Text, weekLbl.Text, startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text));
+            Supplies i = new Supplies(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), weekLbl.Text, startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text));
             DBConnect.Insert(i);
             MessageBox.Show("Information Saved ");
             itemTxt.Text = "";
@@ -72,6 +86,34 @@ namespace TGAccounting
         private void dateTxt_CloseUp(object sender, EventArgs e)
         {
             fillUp(Convert.ToDateTime(dateTxt.Text));
+        }
+
+        private void amountTxt_KeyUp(object sender, KeyEventArgs e)
+        {
+
+
+        }
+        string existingID = "";
+        private void itemTxt_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+
+                amountTxt.Text = Supplies.List("SELECT * from supplies WHERE supplier='" + itemTxt.Text + "' AND week = '" + weekLbl.Text + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Amount.ToString();
+            }
+            catch (Exception y)
+            {
+                // Helper.Exceptions(y.Message, "on adding inventory auto fill the category list selected item");
+            }
+            try
+            {
+
+                existingID = Supplies.List("SELECT * from supplies WHERE supplier='" + itemTxt.Text + "' AND week = '" + weekLbl.Text + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Id.ToString();
+            }
+            catch (Exception y)
+            {
+                // Helper.Exceptions(y.Message, "on adding inventory auto fill the category list selected item");
+            }
         }
     }
 }

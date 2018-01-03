@@ -34,6 +34,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.categoryTxt = new System.Windows.Forms.ComboBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -47,30 +48,35 @@
             this.label2 = new System.Windows.Forms.Label();
             this.dateTxt = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
-            this.categoryTxt = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(14, 346);
+            this.button2.BackColor = System.Drawing.Color.Orange;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Location = new System.Drawing.Point(14, 368);
             this.button2.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(125, 42);
-            this.button2.TabIndex = 9;
+            this.button2.TabIndex = 1;
             this.button2.Text = "Cancel";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(274, 346);
+            this.button1.BackColor = System.Drawing.Color.SeaGreen;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(410, 368);
             this.button1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(125, 42);
-            this.button1.TabIndex = 8;
+            this.button1.TabIndex = 0;
             this.button1.Text = "Save";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // itemTxt
@@ -78,8 +84,9 @@
             this.itemTxt.Location = new System.Drawing.Point(148, 155);
             this.itemTxt.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.itemTxt.Name = "itemTxt";
-            this.itemTxt.Size = new System.Drawing.Size(213, 26);
-            this.itemTxt.TabIndex = 4;
+            this.itemTxt.Size = new System.Drawing.Size(312, 26);
+            this.itemTxt.TabIndex = 1;
+            this.itemTxt.Leave += new System.EventHandler(this.itemTxt_Leave);
             // 
             // label1
             // 
@@ -127,22 +134,31 @@
             this.panel1.Location = new System.Drawing.Point(14, 35);
             this.panel1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(385, 298);
+            this.panel1.Size = new System.Drawing.Size(521, 325);
             this.panel1.TabIndex = 10;
+            // 
+            // categoryTxt
+            // 
+            this.categoryTxt.FormattingEnabled = true;
+            this.categoryTxt.Location = new System.Drawing.Point(148, 188);
+            this.categoryTxt.Name = "categoryTxt";
+            this.categoryTxt.Size = new System.Drawing.Size(310, 30);
+            this.categoryTxt.TabIndex = 2;
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(148, 227);
+            this.textBox2.Location = new System.Drawing.Point(146, 265);
             this.textBox2.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(213, 26);
-            this.textBox2.TabIndex = 24;
+            this.textBox2.Size = new System.Drawing.Size(312, 26);
+            this.textBox2.TabIndex = 4;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.Color.LightGray;
-            this.label8.Location = new System.Drawing.Point(23, 231);
+            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label8.Location = new System.Drawing.Point(23, 260);
             this.label8.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(101, 22);
@@ -164,7 +180,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.BackColor = System.Drawing.Color.LightGray;
-            this.label10.Location = new System.Drawing.Point(23, 263);
+            this.label10.Location = new System.Drawing.Point(17, 231);
             this.label10.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(121, 22);
@@ -173,11 +189,13 @@
             // 
             // amountTxt
             // 
-            this.amountTxt.Location = new System.Drawing.Point(148, 261);
+            this.amountTxt.Location = new System.Drawing.Point(146, 228);
             this.amountTxt.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.amountTxt.Name = "amountTxt";
-            this.amountTxt.Size = new System.Drawing.Size(213, 26);
-            this.amountTxt.TabIndex = 19;
+            this.amountTxt.Size = new System.Drawing.Size(312, 26);
+            this.amountTxt.TabIndex = 3;
+            this.amountTxt.TextChanged += new System.EventHandler(this.amountTxt_TextChanged);
+            this.amountTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.amountTxt_KeyPress);
             // 
             // endLbl
             // 
@@ -243,8 +261,8 @@
             // 
             this.dateTxt.Location = new System.Drawing.Point(148, 19);
             this.dateTxt.Name = "dateTxt";
-            this.dateTxt.Size = new System.Drawing.Size(213, 26);
-            this.dateTxt.TabIndex = 11;
+            this.dateTxt.Size = new System.Drawing.Size(312, 26);
+            this.dateTxt.TabIndex = 0;
             this.dateTxt.ValueChanged += new System.EventHandler(this.dateTxt_ValueChanged);
             // 
             // label4
@@ -256,19 +274,11 @@
             this.label4.TabIndex = 10;
             this.label4.Text = "Date ";
             // 
-            // categoryTxt
-            // 
-            this.categoryTxt.FormattingEnabled = true;
-            this.categoryTxt.Location = new System.Drawing.Point(148, 188);
-            this.categoryTxt.Name = "categoryTxt";
-            this.categoryTxt.Size = new System.Drawing.Size(211, 30);
-            this.categoryTxt.TabIndex = 29;
-            // 
             // AddSale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(418, 396);
+            this.ClientSize = new System.Drawing.Size(554, 423);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);

@@ -49,24 +49,30 @@
             // 
             // button2
             // 
+            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Location = new System.Drawing.Point(50, 371);
             this.button2.Margin = new System.Windows.Forms.Padding(5);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(125, 52);
-            this.button2.TabIndex = 17;
+            this.button2.TabIndex = 1;
             this.button2.Text = "Cancel";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Location = new System.Drawing.Point(298, 371);
             this.button1.Margin = new System.Windows.Forms.Padding(5);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(125, 52);
-            this.button1.TabIndex = 16;
+            this.button1.TabIndex = 0;
             this.button1.Text = "Save";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // itemTxt
@@ -74,8 +80,9 @@
             this.itemTxt.Location = new System.Drawing.Point(148, 191);
             this.itemTxt.Margin = new System.Windows.Forms.Padding(5);
             this.itemTxt.Name = "itemTxt";
-            this.itemTxt.Size = new System.Drawing.Size(213, 20);
-            this.itemTxt.TabIndex = 4;
+            this.itemTxt.Size = new System.Drawing.Size(282, 20);
+            this.itemTxt.TabIndex = 1;
+            this.itemTxt.Leave += new System.EventHandler(this.itemTxt_Leave);
             // 
             // label1
             // 
@@ -91,7 +98,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(166, 9);
+            this.label3.Location = new System.Drawing.Point(190, 9);
             this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(81, 16);
@@ -138,8 +145,9 @@
             this.amountTxt.Location = new System.Drawing.Point(148, 238);
             this.amountTxt.Margin = new System.Windows.Forms.Padding(5);
             this.amountTxt.Name = "amountTxt";
-            this.amountTxt.Size = new System.Drawing.Size(213, 20);
-            this.amountTxt.TabIndex = 19;
+            this.amountTxt.Size = new System.Drawing.Size(282, 20);
+            this.amountTxt.TabIndex = 2;
+            this.amountTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.amountTxt_KeyPress);
             // 
             // endLbl
             // 
@@ -206,8 +214,8 @@
             this.dateTxt.Location = new System.Drawing.Point(148, 23);
             this.dateTxt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dateTxt.Name = "dateTxt";
-            this.dateTxt.Size = new System.Drawing.Size(213, 20);
-            this.dateTxt.TabIndex = 11;
+            this.dateTxt.Size = new System.Drawing.Size(282, 20);
+            this.dateTxt.TabIndex = 0;
             this.dateTxt.CloseUp += new System.EventHandler(this.dateTxt_CloseUp);
             // 
             // label4

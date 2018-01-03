@@ -63,7 +63,7 @@
             this.panel1.Location = new System.Drawing.Point(14, 46);
             this.panel1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(282, 180);
+            this.panel1.Size = new System.Drawing.Size(294, 180);
             this.panel1.TabIndex = 22;
             // 
             // descriptionRTxt
@@ -130,7 +130,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(310, 312);
+            this.ClientSize = new System.Drawing.Size(322, 312);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button1);

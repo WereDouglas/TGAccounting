@@ -75,7 +75,7 @@ namespace TGAccounting.Model
         }
         public static List<Company> List()
         {
-            string SQL = "SELECT * FROM company";
+            string SQL = "SELECT * FROM company LIMIT 1";
             List<Company> cats = new List<Company>();
 
             SQLiteDataReader Reader = DBConnect.ReadingLite(SQL);

@@ -14,6 +14,9 @@ namespace TGAccounting
     {
         public static string UserID;
         public static string CompanyID;
+        public static string UserName;
+        public static string UserImage;
+        public static string CurrentYear;
         public static DateTime FirstDateOfWeek(int year, int weekOfYear, System.Globalization.CultureInfo ci)
         {
             DateTime jan1 = new DateTime(year, 1, 1);
@@ -25,16 +28,46 @@ namespace TGAccounting
                 weekOfYear -= 1;
             }
             return firstWeekDay.AddDays(weekOfYear * 7);
+
+
+           // var firstDayWeek = ci.Calendar.GetWeekOfYear( d, CalendarWeekRule.FirstDay,   DayOfWeek.Monday);
         }
+        public static DateTime GetFirstDayOfWeek(DateTime dayInWeek, CultureInfo cultureInfo)
+        {
+            DayOfWeek firstDay = cultureInfo.DateTimeFormat.FirstDayOfWeek;
+            DateTime firstDayInWeek = dayInWeek.Date;
+            while (firstDayInWeek.DayOfWeek != firstDay)
+                firstDayInWeek = firstDayInWeek.AddDays(-1);
+
+            return firstDayInWeek;
+        }
+
         public static int GetIso8601WeekOfYear(DateTime time)
         {
-            DayOfWeek day = CultureInfo.InvariantCulture.Calendar.GetDayOfWeek(time);
-            if (day >= DayOfWeek.Monday && day <= DayOfWeek.Wednesday)
+            DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+            Calendar cal = dfi.Calendar;
+
+            return cal.GetWeekOfYear(time, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
+
+          /***  DayOfWeek day = CultureInfo.InvariantCulture.Calendar.GetDayOfWeek(time);
+           if (day >= DayOfWeek.Monday && day <= DayOfWeek.Wednesday)
             {
                 time = time.AddDays(3);
             }
 
-            return CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(time, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+            return CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(time, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday); **/
+        }
+        public static void Exceptions(string message, string process)
+        {
+            string id = Guid.NewGuid().ToString();
+            string Query = "INSERT INTO exceptions(id,message, page,created) VALUES ('" + id + "','" + message + "','" + process + "','" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss tt") + "');";
+            DBConnect.save(Query);
+        }
+        public static void Log( string userName, string actions)
+        {
+            string id = Guid.NewGuid().ToString();
+            string Query = "INSERT INTO logs(id,name,actions,created) VALUES ('" + id + "','" + userName + "','" + actions + "','" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss tt") + "');";
+            DBConnect.save(Query);
         }
         public static string CleanString(string str)
         {
@@ -81,7 +114,38 @@ namespace TGAccounting
             image.Save(ms, format);
             return ms;
         }
-      
+        public static bool validateDouble(string t) {
+
+            double n;
+            if (!double.TryParse(t, out n))
+            {               
+                return false;
+            }
+            else { return  true; }
+           
+        }
+        public static bool validateInt(string t)
+        {
+
+            int p;
+            if (!int.TryParse(t, out p))
+            {
+                return false;
+            }
+            else { return true; }
+
+        }
+        public static bool ifEmpty(string t)
+        {
+
+            if (String.IsNullOrEmpty(t))
+            {
+                return false;
+            }
+            else { return true; }
+
+        }
+
         public static string ImageToBase64(MemoryStream images)
         {
 

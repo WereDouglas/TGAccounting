@@ -46,8 +46,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.cogsTxt = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,8 +56,8 @@
             this.categoryTxt.FormattingEnabled = true;
             this.categoryTxt.Location = new System.Drawing.Point(148, 158);
             this.categoryTxt.Name = "categoryTxt";
-            this.categoryTxt.Size = new System.Drawing.Size(211, 24);
-            this.categoryTxt.TabIndex = 29;
+            this.categoryTxt.Size = new System.Drawing.Size(254, 24);
+            this.categoryTxt.TabIndex = 1;
             this.categoryTxt.SelectedIndexChanged += new System.EventHandler(this.categoryTxt_SelectedIndexChanged);
             // 
             // begTxt
@@ -65,8 +65,9 @@
             this.begTxt.Location = new System.Drawing.Point(146, 189);
             this.begTxt.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.begTxt.Name = "begTxt";
-            this.begTxt.Size = new System.Drawing.Size(213, 20);
-            this.begTxt.TabIndex = 24;
+            this.begTxt.Size = new System.Drawing.Size(256, 20);
+            this.begTxt.TabIndex = 2;
+            this.begTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.begTxt_KeyPress);
             // 
             // label8
             // 
@@ -106,9 +107,10 @@
             this.endTxt.Location = new System.Drawing.Point(146, 217);
             this.endTxt.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.endTxt.Name = "endTxt";
-            this.endTxt.Size = new System.Drawing.Size(213, 20);
-            this.endTxt.TabIndex = 19;
+            this.endTxt.Size = new System.Drawing.Size(256, 20);
+            this.endTxt.TabIndex = 3;
             this.endTxt.TextChanged += new System.EventHandler(this.endTxt_TextChanged);
+            this.endTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.begTxt_KeyPress);
             // 
             // endLbl
             // 
@@ -174,8 +176,8 @@
             // 
             this.dateTxt.Location = new System.Drawing.Point(148, 19);
             this.dateTxt.Name = "dateTxt";
-            this.dateTxt.Size = new System.Drawing.Size(213, 20);
-            this.dateTxt.TabIndex = 11;
+            this.dateTxt.Size = new System.Drawing.Size(256, 20);
+            this.dateTxt.TabIndex = 0;
             this.dateTxt.ValueChanged += new System.EventHandler(this.dateTxt_ValueChanged);
             // 
             // label4
@@ -199,24 +201,30 @@
             // 
             // button2
             // 
+            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Location = new System.Drawing.Point(11, 346);
             this.button2.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(125, 42);
-            this.button2.TabIndex = 13;
+            this.button2.TabIndex = 1;
             this.button2.Text = "Cancel";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(271, 346);
+            this.button1.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(319, 346);
             this.button1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(125, 42);
-            this.button1.TabIndex = 12;
+            this.button1.TabIndex = 0;
             this.button1.Text = "Save";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel1
@@ -243,8 +251,17 @@
             this.panel1.Location = new System.Drawing.Point(11, 35);
             this.panel1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(385, 298);
+            this.panel1.Size = new System.Drawing.Size(433, 298);
             this.panel1.TabIndex = 14;
+            // 
+            // cogsTxt
+            // 
+            this.cogsTxt.Location = new System.Drawing.Point(146, 254);
+            this.cogsTxt.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.cogsTxt.Name = "cogsTxt";
+            this.cogsTxt.Size = new System.Drawing.Size(256, 20);
+            this.cogsTxt.TabIndex = 4;
+            this.cogsTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.begTxt_KeyPress);
             // 
             // label1
             // 
@@ -257,19 +274,11 @@
             this.label1.TabIndex = 30;
             this.label1.Text = "Cost of goods";
             // 
-            // cogsTxt
-            // 
-            this.cogsTxt.Location = new System.Drawing.Point(146, 254);
-            this.cogsTxt.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.cogsTxt.Name = "cogsTxt";
-            this.cogsTxt.Size = new System.Drawing.Size(213, 20);
-            this.cogsTxt.TabIndex = 31;
-            // 
             // AddCogs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(421, 415);
+            this.ClientSize = new System.Drawing.Size(469, 415);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);

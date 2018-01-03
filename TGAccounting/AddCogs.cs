@@ -25,11 +25,18 @@ namespace TGAccounting
 
             int week = Helper.GetIso8601WeekOfYear(d);
             weekLbl.Text = week.ToString();
-            string mylast = startLbl.Text = Helper.FirstDateOfWeek(d.Year, Convert.ToInt32(week), CultureInfo.CurrentCulture).Date.ToString("yyyy-MM-dd");
-            string myStart = Convert.ToDateTime(startLbl.Text).AddDays(7).Date.ToString("yyyy-MM-dd");
+            startLbl.Text = Helper.GetFirstDayOfWeek(d, CultureInfo.CurrentCulture).Date.ToString("dd-MM-yyyy");
 
-            endLbl.Text = mylast;
-            startLbl.Text = Convert.ToDateTime(mylast).AddDays(-7).Date.ToString("yyyy-MM-dd");
+            string mylast = startLbl.Text;
+            string myStart = Convert.ToDateTime(startLbl.Text).AddDays(-7).Date.ToString("dd-MM-yyyy");
+
+            startLbl.Text = Convert.ToDateTime(startLbl.Text).AddDays(-7).Date.ToString("dd-MM-yyyy");
+
+
+            endLbl.Text = Helper.GetFirstDayOfWeek(d, CultureInfo.CurrentCulture).Date.ToString("dd-MM-yyyy");
+            // startLbl.Text = Convert.ToDateTime(mylast).AddDays(-7).Date.ToString("dd-MM-yyyy");
+
+
 
         }
         private void autocompleteCategory()
@@ -73,33 +80,73 @@ namespace TGAccounting
                 categoryTxt.BackColor = Color.Red;
                 return;
             }
+            if (!string.IsNullOrEmpty(existingID))
+            {
 
+                if (MessageBox.Show("YES or No?", "Are you sure you want to update the current existing information  ? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+                    Cogs j = new Cogs(existingID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), weekLbl.Text, startLbl.Text, endLbl.Text, categoryTxt.Text, Convert.ToDouble(begTxt.Text), Convert.ToDouble(endTxt.Text), Convert.ToDouble(cogsTxt.Text));
+                    DBConnect.Update(j, existingID);
+                    existingID = "";
+                    return;
+                }
+            }
+            existingID = "";
             string ID = Guid.NewGuid().ToString();
-            Cogs i = new Cogs(ID, dateTxt.Text, weekLbl.Text, startLbl.Text, endLbl.Text,categoryTxt.Text, Convert.ToDouble(begTxt.Text), Convert.ToDouble(endTxt.Text), Convert.ToDouble(cogsTxt.Text));
+            Cogs i = new Cogs(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), weekLbl.Text, startLbl.Text, endLbl.Text,categoryTxt.Text, Convert.ToDouble(begTxt.Text), Convert.ToDouble(endTxt.Text), Convert.ToDouble(cogsTxt.Text));
             DBConnect.Insert(i);
             MessageBox.Show("Information Saved ");
             categoryTxt.Text = "";
             endTxt.Text = "";
         }
-
+       string  existingID = "";
         private void categoryTxt_SelectedIndexChanged(object sender, EventArgs e)
         {
             int prevWeek = Convert.ToInt32(weekLbl.Text) - 1;
             try
             {
-                 begTxt.Text = Cogs.List("SELECT * from cogs").Where(k=>k.Week.Contains(prevWeek.ToString())).First().EndingInventory.ToString();
+                 begTxt.Text = Cogs.List("SELECT * from cogs WHERE category = '"+categoryTxt.Text+"'").Where(k=>k.Week.Contains(prevWeek.ToString())).First().EndingInventory.ToString();
             }
             catch
             {
                   begTxt.Text = "0";
+            }
+            try
+            {
+
+                endTxt.Text = Cogs.List("SELECT * from cogs WHERE category='" + categoryTxt.Text + "' AND week = '" + weekLbl.Text + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().EndingInventory.ToString();
+            }
+            catch (Exception y)
+            {
+                // Helper.Exceptions(y.Message, "on adding inventory auto fill the category list selected item");
+            }
+            try
+            {
+
+                cogsTxt.Text = Cogs.List("SELECT * from cogs WHERE category='" + categoryTxt.Text + "' AND week = '" + weekLbl.Text + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Cost.ToString();
+            }
+            catch (Exception y)
+            {
+                // Helper.Exceptions(y.Message, "on adding inventory auto fill the category list selected item");
+            }
+            try
+            {
+
+                existingID = Cogs.List("SELECT * from cogs WHERE category='" + categoryTxt.Text + "' AND week = '" + weekLbl.Text + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Id.ToString();
+            }
+            catch (Exception y)
+            {
+                // Helper.Exceptions(y.Message, "on adding inventory auto fill the category list selected item");
             }
         }
 
         private void endTxt_TextChanged(object sender, EventArgs e)
         {
             double purchase = 0;
-            try { 
-             purchase = Inventory.List("SELECT * from inventory WHERE category= '" + categoryTxt.Text + "' AND week = '" + weekLbl.Text + "'").Sum(t => t.Amount);
+            try {
+                 
+             purchase = Inventory.List("SELECT * from inventory WHERE category= '" + categoryTxt.Text + "' AND week = '" + weekLbl.Text + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString()  + "'").Sum(t => t.Amount);
+
             }
             catch
             {
@@ -110,11 +157,30 @@ namespace TGAccounting
             try {
                
 
-                cogsTxt.Text = ((Convert.ToDouble(begTxt.Text) + purchase) -  Convert.ToDouble(endTxt.Text)).ToString("N0");
+                cogsTxt.Text = (Math.Round((Convert.ToDouble(begTxt.Text) + Math.Round(purchase,2)) -  Convert.ToDouble(endTxt.Text),2)).ToString();
 
             } catch {
 
+                MessageBox.Show("Please input the purchases for " + categoryTxt.Text);
+                return;
+            }
+        }
 
+        private void begTxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+            if (!char.IsControl(e.KeyChar)
+               && !char.IsDigit(e.KeyChar)
+               && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+
+            // only allow two decimal point
+            if (e.KeyChar == '.'
+                && (sender as TextBox).Text.IndexOf('.') > -1)
+            {
+                e.Handled = true;
             }
         }
     }

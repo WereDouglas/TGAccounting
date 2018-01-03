@@ -14,6 +14,7 @@ namespace TGAccounting.Model
         private string contact;
         private string department;
         private string image;
+        private string email;
 
         public string Id
         {
@@ -80,15 +81,29 @@ namespace TGAccounting.Model
             }
         }
 
+        public string Email
+        {
+            get
+            {
+                return email;
+            }
+
+            set
+            {
+                email = value;
+            }
+        }
+
         public Staff() { }
 
-        public Staff(string id, string name, string contact, string department, string image)
+        public Staff(string id, string name, string contact, string department, string image,string email)
         {
             this.Id = id;
             this.Name = name;
             this.Contact = contact;
             this.Department = department;
             this.Image = image;
+            this.Email = email;
         }
 
         public static List<Staff> List()
@@ -99,7 +114,7 @@ namespace TGAccounting.Model
                 SQLiteDataReader Reader = DBConnect.ReadingLite(SQL);
                 while (Reader.Read())
                 {
-                    Staff p = new Staff(Reader["id"].ToString(), Reader["name"].ToString(), Reader["contact"].ToString(), Reader["department"].ToString(), Reader["image"].ToString());
+                    Staff p = new Staff(Reader["id"].ToString(), Reader["name"].ToString(), Reader["contact"].ToString(), Reader["department"].ToString(), Reader["image"].ToString(), Reader["email"].ToString());
                     cats.Add(p);
                 }
                 Reader.Close();

@@ -40,9 +40,13 @@ C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\bin\Debug\x86\libtesseract304.dll
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\bin\Debug\x86\SQLite.Interop.dll
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\bin\Debug\SQLite.Interop.dll
-C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.csprojResolveAssemblyReference.cache
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.AddStaff.resources
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.AddUser.resources
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.DataForm.resources
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.StaffPayments.resources
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.CompanyProfile.resources
+C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.AddSalary.resources
+C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.csprojResolveAssemblyReference.cache
+C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.AddBudget.resources
+C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.AddComp.resources
+C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.ChartForm.resources

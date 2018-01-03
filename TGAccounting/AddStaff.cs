@@ -18,14 +18,14 @@ namespace TGAccounting
         string StaffID = "";
         public AddStaff(string staffID)
         {
-            
+
             InitializeComponent();
             autocomplete();
             if (!String.IsNullOrEmpty(staffID))
             {
                 StaffID = staffID;
                 Profile(StaffID);
-              
+
             }
         }
         private void Profile(string ID)
@@ -34,7 +34,7 @@ namespace TGAccounting
             nameTxt.Text = Staff.List().First(k => k.Id.Contains(ID)).Name;
             contactTxt.Text = Staff.List().First(k => k.Id.Contains(ID)).Contact;
 
-            
+
             Image img = Base64ToImage(Staff.List().First(k => k.Id.Contains(ID)).Image);
             System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(img);
             //Bitmap bps = new Bitmap(bmp, 50, 50);
@@ -84,13 +84,28 @@ namespace TGAccounting
                 nameTxt.BackColor = Color.Red;
                 return;
             }
-
            
-
             MemoryStream stream = ImageToStream(imgCapture.Image, System.Drawing.Imaging.ImageFormat.Jpeg);
             string fullimage = ImageToBase64(stream);
+
+            if (!string.IsNullOrEmpty(existingID))
+            {
+
+                if (MessageBox.Show("YES or No?", "Are you sure you want to update the current existing information  ? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+                    Staff j = new Staff(existingID, nameTxt.Text, contactTxt.Text, departmentCbx.Text, fullimage, emailTxt.Text);
+                    DBConnect.Update(j, existingID);
+                    existingID = "";
+                    return;
+                }
+
+            }
+            existingID = "";
+
+
+
             string id = Guid.NewGuid().ToString();
-            Staff _user = new Staff(id, nameTxt.Text, contactTxt.Text, departmentCbx.Text, fullimage);
+            Staff _user = new Staff(id, nameTxt.Text, contactTxt.Text, departmentCbx.Text, fullimage,emailTxt.Text);
             if (DBConnect.Insert(_user) != "")
             {
                 MessageBox.Show("Information Saved");
@@ -113,7 +128,7 @@ namespace TGAccounting
             if (!String.IsNullOrEmpty(StaffID))
             {
 
-                Staff _user = new Staff(StaffID, nameTxt.Text, contactTxt.Text, departmentCbx.Text, fullimage);
+                Staff _user = new Staff(StaffID, nameTxt.Text, contactTxt.Text, departmentCbx.Text, fullimage,emailTxt.Text);
                 DBConnect.Update(_user, StaffID);
 
                 MessageBox.Show("Information Updated");
@@ -147,6 +162,43 @@ namespace TGAccounting
         {
             this.DialogResult = DialogResult.OK;
             this.Dispose();
+        }
+        string existingID = "";
+        private void contactTxt_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+               nameTxt.Text = Staff.List().First(r=>r.Contact.Contains(contactTxt.Text)).Name;
+            }
+            catch (Exception y)
+            {
+                Helper.Exceptions(y.Message, "on adding name auto fill the category list selected item");
+            }
+            try
+            {
+                emailTxt.Text = Staff.List().First(r => r.Contact.Contains(contactTxt.Text)).Email;
+            }
+            catch (Exception y)
+            {
+                // Helper.Exceptions(y.Message, "on adding inventory auto fill the category list selected item");
+            }
+            try
+            {
+                departmentCbx.Text = Staff.List().First(r => r.Contact.Contains(contactTxt.Text)).Department;
+            }
+            catch (Exception y)
+            {
+                // Helper.Exceptions(y.Message, "on adding inventory auto fill the category list selected item");
+            }
+            try
+            {
+
+                existingID = Staff.List().First(r => r.Contact.Contains(contactTxt.Text)).Id;
+            }
+            catch (Exception y)
+            {
+                // Helper.Exceptions(y.Message, "on adding inventory auto fill the category list selected item");
+            }
         }
     }
 }

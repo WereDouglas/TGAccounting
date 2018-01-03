@@ -194,11 +194,11 @@ namespace TGAccounting.Model
             SQLiteDataReader Reader = DBConnect.ReadingLite(query);
             while (Reader.Read())
             {
-                double begining = Cogs.List("SELECT * from cogs WHERE category= '" + Reader["category"].ToString() + "' AND week = '" + Reader["week"].ToString() + "'").Sum(t => t.BeginningInventory);
-                double ending = Cogs.List("SELECT * from cogs WHERE category= '" + Reader["category"].ToString() + "' AND week = '" + Reader["week"].ToString() + "'").Sum(t => t.EndingInventory);
-                double cg = Cogs.List("SELECT * from cogs WHERE category= '" + Reader["category"].ToString() + "' AND week = '" + Reader["week"].ToString() + "'").Sum(t => t.Cost);
+                double begining = Cogs.List("SELECT * from cogs WHERE category= '" + Reader["category"].ToString() + "' AND week = '" + Reader["week"].ToString() + "' AND date ='"+Helper.CurrentYear+"'").Sum(t => t.BeginningInventory);
+                double ending = Cogs.List("SELECT * from cogs WHERE category= '" + Reader["category"].ToString() + "' AND week = '" + Reader["week"].ToString() + "' AND date ='" + Helper.CurrentYear + "'").Sum(t => t.EndingInventory);
+                double cg = Cogs.List("SELECT * from cogs WHERE category= '" + Reader["category"].ToString() + "' AND week = '" + Reader["week"].ToString() + "' AND date ='" + Helper.CurrentYear + "'").Sum(t => t.Cost);
 
-                Inventory p = new Inventory(Reader["id"].ToString(),Reader["date"].ToString(), Reader["week"].ToString(), Reader["starting"].ToString(), Reader["ending"].ToString(), Reader["name"].ToString(), Reader["category"].ToString(),Convert.ToDouble(Reader["amount"]),begining,ending,cg);
+                Inventory p = new Inventory(Reader["id"].ToString(),Reader["date"].ToString(), Reader["week"].ToString(), Reader["starting"].ToString(),Convert.ToDateTime( Reader["ending"]).ToString("dd-MMM-yy"), Reader["name"].ToString(), Reader["category"].ToString(),Convert.ToDouble(Reader["amount"]),begining,ending,cg);
                 s.Add(p);
             }
             Reader.Close();
