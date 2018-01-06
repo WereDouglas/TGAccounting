@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.OleDb;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,9 +23,11 @@ namespace TGAccounting
             autocompleteCategory();
             fillUp(Convert.ToDateTime(DateTime.Now.Date));
         }
+        string month;
         private void fillUp(DateTime d)
         {
-
+            month = d.ToString("MMMM");
+            monthLbl.Text = month;
             int week = Helper.GetIso8601WeekOfYear(d);
             weekLbl.Text = week.ToString();
             startLbl.Text = Helper.GetFirstDayOfWeek(d, CultureInfo.CurrentCulture).Date.ToString("dd-MM-yyyy");
@@ -85,7 +89,7 @@ namespace TGAccounting
 
                 if (MessageBox.Show("YES or No?", "Are you sure you want to update the current existing information  ? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
-                    Sale j = new Sale(existingID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), weekLbl.Text, startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text), categoryTxt.Text);
+                    Sale j = new Sale(existingID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), weekLbl.Text, startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text), categoryTxt.Text, month);
 
                     DBConnect.Update(j, existingID);
                     existingID = "";
@@ -95,7 +99,7 @@ namespace TGAccounting
             }
             existingID = "";
             string ID = Guid.NewGuid().ToString();
-            Sale i = new Sale(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), weekLbl.Text, startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text), categoryTxt.Text);
+            Sale i = new Sale(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), weekLbl.Text, startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text), categoryTxt.Text, month);
             DBConnect.Insert(i);
             MessageBox.Show("Information Saved ");
             itemTxt.Text = "";
@@ -139,7 +143,8 @@ namespace TGAccounting
         string existingID = "";
         private void itemTxt_Leave(object sender, EventArgs e)
         {
-            try {
+            try
+            {
                 categoryTxt.Text = Sale.List("SELECT * from sale WHERE item='" + itemTxt.Text + "'").First().Category;
             }
             catch (Exception y)
@@ -148,8 +153,15 @@ namespace TGAccounting
             }
             try
             {
-
                 amountTxt.Text = Sale.List("SELECT * from sale WHERE item='" + itemTxt.Text + "' AND week = '" + weekLbl.Text + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Amount.ToString();
+            }
+            catch (Exception y)
+            {
+                // Helper.Exceptions(y.Message, "on adding inventory auto fill the category list selected item");
+            }
+            try
+            {
+                month = Sale.List("SELECT * from sale WHERE item='" + itemTxt.Text + "' AND week = '" + weekLbl.Text + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Month.ToString();
             }
             catch (Exception y)
             {

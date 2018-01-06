@@ -20,9 +20,10 @@ namespace TGAccounting
             autocomplete();
             fillUp(Convert.ToDateTime(DateTime.Now.Date));
         }
+        string month;
         private void fillUp(DateTime d)
         {
-
+            month = d.ToString("MMMM");
             int week = Helper.GetIso8601WeekOfYear(d);
             weekLbl.Text = week.ToString();
             startLbl.Text = Helper.GetFirstDayOfWeek(d, CultureInfo.CurrentCulture).Date.ToString("dd-MM-yyyy");
@@ -73,7 +74,7 @@ namespace TGAccounting
 
                 if (MessageBox.Show("YES or No?", "Are you sure you want to update the current existing information  ? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
-                    Equipment j = new Equipment(existingID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), weekLbl.Text, startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text));
+                    Equipment j = new Equipment(existingID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), weekLbl.Text, startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text),month);
                     DBConnect.Update(j, existingID);
                     existingID = "";
                     return;
@@ -83,7 +84,7 @@ namespace TGAccounting
             existingID = "";
 
             string ID = Guid.NewGuid().ToString();
-            Equipment i = new Equipment(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), weekLbl.Text, startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text));
+            Equipment i = new Equipment(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), weekLbl.Text, startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text),month);
             DBConnect.Insert(i);
             MessageBox.Show("Information Saved ");
             itemTxt.Text = "";
@@ -121,6 +122,15 @@ namespace TGAccounting
             {
 
                 amountTxt.Text = Equipment.List("SELECT * from equipment WHERE name='" + itemTxt.Text + "' AND week = '" + weekLbl.Text + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Amount.ToString();
+            }
+            catch (Exception y)
+            {
+                // Helper.Exceptions(y.Message, "on adding inventory auto fill the category list selected item");
+            }
+            try
+            {
+
+                month = Equipment.List("SELECT * from equipment WHERE name='" + itemTxt.Text + "' AND week = '" + weekLbl.Text + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Month.ToString();
             }
             catch (Exception y)
             {

@@ -21,16 +21,18 @@ namespace TGAccounting
         DataTable idt, sdt;
         DateTime pStart, pEnd;
         private List<CalendarItem> _items = new List<CalendarItem>();
-       
+
         Events _event;
         string current;
 
         public HomeForm()
         {
+            LoadingWindow.ShowSplashScreen();
             Global.LoadData();
-            InitializeComponent();            
+            LoadingWindow.CloseForm();
+            InitializeComponent();
             LoadingCalendarLite();
-          
+
 
             var culture = new CultureInfo("en-US");
             CultureInfo.DefaultThreadCurrentCulture = culture;
@@ -38,9 +40,20 @@ namespace TGAccounting
 
             pStart = DateTime.Now;
             pEnd = DateTime.Now;
-            current = DateTime.Now.Year.ToString();
-            Helper.CurrentYear = current;
-            globalYrTxt.Text = current;
+            try { Helper.CurrentYear = Company.List().First().Current; } catch { }
+            if (string.IsNullOrEmpty(Helper.CurrentYear))
+            {
+
+                current = DateTime.Now.Year.ToString();
+                Helper.CurrentYear = current;
+                globalYrTxt.Text = current;
+
+            }
+            else {
+
+                globalYrTxt.Text = Helper.CurrentYear;
+            }
+
 
             /**image**/
             try
@@ -51,10 +64,11 @@ namespace TGAccounting
                 pictureBox2.Image = bmp;
                 pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             }
-            catch (Exception p ) {
+            catch (Exception p)
+            {
 
 
-                Helper.Exceptions(p.Message,"Loading the Company Logo !");
+                Helper.Exceptions(p.Message, "Loading the Company Logo !");
             }
             LoadProfile();
             /**Loading the first tab*/
@@ -62,7 +76,8 @@ namespace TGAccounting
             this.SaleBindingSource.DataSource = Sale.List(query2);
             reportViewer1.RefreshReport();
         }
-        private void LoadProfile() {
+        private void LoadProfile()
+        {
 
 
             usernameTxt.Text = Helper.UserName;
@@ -85,11 +100,11 @@ namespace TGAccounting
 
         }
         /**sales list of items*/
-       
+
         public static List<Events> events;
         private void LoadingCalendarLite()
         {
-            Global.LoadData();
+            
             _items.Clear();
             List<ItemInfo> lst = new List<ItemInfo>();
             string state = "";
@@ -100,7 +115,7 @@ namespace TGAccounting
             {
                 try
                 {
-                    CalendarItem cal = new CalendarItem(calendar1, Convert.ToDateTime(e.Starts), Convert.ToDateTime(e.Ends), e.Users + " " + e.Users + " " + e.Contact + ""  + e.Details);
+                    CalendarItem cal = new CalendarItem(calendar1, Convert.ToDateTime(e.Starts), Convert.ToDateTime(e.Ends), e.Users + " " + e.Users + " " + e.Contact + "" + e.Details);
 
                     if (e.Priority == " ")
                     {
@@ -114,9 +129,9 @@ namespace TGAccounting
                     if (state == "Low") { cal.ApplyColor(Color.CornflowerBlue); }
                     if (state == "High") { cal.ApplyColor(Color.Salmon); }
                     if (state == "none") { cal.ApplyColor(Color.LightSeaGreen); }
-                    
-                        _items.Add(cal);
-                    
+
+                    _items.Add(cal);
+
                     // t.Rows.Add(new object[] { Reader.GetString(0), Helper.ImageFolder + Reader.GetString(8), b, Reader.GetString(2), Reader.GetString(3), Reader.GetString(7), Reader.GetString(5), Reader.GetString(9), Reader.GetString(14) + "", Reader.GetString(6), "" + Reader.GetString(13) + "" });
                 }
                 catch { }
@@ -141,23 +156,15 @@ namespace TGAccounting
         private void button2_Click(object sender, EventArgs e)
         {
 
-            using (AddItem form = new AddItem())
-            {
-                DialogResult dr = form.ShowDialog();
-                if (dr == DialogResult.OK)
-                {
-                    //tabControl1.SelectedTab = itemTab;
-                  
-                }
-            }
+           
         }
         /**End of item section*/
         /***Sales section***/
-      
+
 
         private void button1_Click(object sender, EventArgs e)
         {
-           
+
             using (AddSale form = new AddSale())
             {
                 DialogResult dr = form.ShowDialog();
@@ -188,19 +195,6 @@ namespace TGAccounting
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            using (DepartmentForm form = new DepartmentForm())
-            {
-                DialogResult dr = form.ShowDialog();
-                if (dr == DialogResult.OK)
-                {
-
-
-                }
-            }
-        }
-
         private void saleGrid_Click(object sender, EventArgs e)
         {
 
@@ -209,7 +203,7 @@ namespace TGAccounting
         private void HomeForm_Load(object sender, EventArgs e)
         {
 
-            string query2 = "SELECT * FROM sale WHERE date= '"+Helper.CurrentYear+"'";
+            string query2 = "SELECT * FROM sale WHERE date= '" + Helper.CurrentYear + "'";
             this.SaleBindingSource.DataSource = Sale.List(query2);
             reportViewer1.RefreshReport();
 
@@ -242,27 +236,20 @@ namespace TGAccounting
                 if (dr == DialogResult.OK)
                 {
                     tabControl1.SelectedTab = laborTab;
-                   
+
                 }
             }
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            using (LaborGrid form = new LaborGrid())
-            {
-                DialogResult dr = form.ShowDialog();
-                if (dr == DialogResult.OK)
-                {
-
-                }
-            }
+          
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-           
+
         }
 
         private void splitContainer2_Panel1_Paint(object sender, PaintEventArgs e)
@@ -278,7 +265,7 @@ namespace TGAccounting
                 if (dr == DialogResult.OK)
                 {
                     tabControl1.SelectedTab = tabTax;
-                    
+
                 }
             }
         }
@@ -306,7 +293,7 @@ namespace TGAccounting
                 DialogResult dr = form.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
-                    tabControl1.SelectedTab = tabRm;                   
+                    tabControl1.SelectedTab = tabRm;
                     string query6 = "SELECT * FROM repair WHERE date = '" + Helper.CurrentYear + "'";
                     this.SuppliesBindingSource.DataSource = Repair.List(query6);
                     reportViewerRm.RefreshReport();
@@ -339,10 +326,12 @@ namespace TGAccounting
                 DialogResult dr = form.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
-                    tabControl1.SelectedTab = tabInventory;
-                    string query4 = "SELECT * FROM inventory WHERE date = '"+Helper.CurrentYear+"'";
-                    this.InventoryBindingSource.DataSource = Inventory.List(query4);
-                    reportViewerInventory.RefreshReport();
+                    if (!string.IsNullOrEmpty(categoryCbx.Text)) {
+                        tabControl1.SelectedTab = tabInventory;
+                        string query4 = "SELECT * FROM inventory  WHERE date = '" + Helper.CurrentYear + "' AND category = '" + categoryCbx.Text + "'";
+                        this.InventoryBindingSource.DataSource = Inventory.List(query4);
+                        reportViewerInventory.RefreshReport();
+                    }
 
                 }
             }
@@ -351,10 +340,10 @@ namespace TGAccounting
         {
             categoryCbx.Items.Clear();
             AutoCompleteStringCollection AutoItem = new AutoCompleteStringCollection();
-            foreach (Inventory r in Inventory.List("SELECT * from inventory").GroupBy(x => x.Category, (key, group) => group.First()))
+            foreach (var r in Global.categories)
             {
-                AutoItem.Add(r.Category);
-                categoryCbx.Items.Add(r.Category);
+                AutoItem.Add(r);
+                categoryCbx.Items.Add(r);
             }
             categoryCbx.AutoCompleteMode = AutoCompleteMode.Suggest;
             categoryCbx.AutoCompleteSource = AutoCompleteSource.CustomSource;
@@ -365,10 +354,8 @@ namespace TGAccounting
 
         private void categoryCbx_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string query7 = "SELECT * FROM inventory WHERE category='"+categoryCbx.Text+ "' AND date= '" + Helper.CurrentYear + "'";
-            this.InventoryBindingSource.DataSource = Inventory.List(query7);
-            reportViewerInventory.RefreshReport();
-           
+
+
         }
 
         private void categoryCbx_SelectionChangeCommitted(object sender, EventArgs e)
@@ -395,7 +382,7 @@ namespace TGAccounting
         List<Report> reports;
         private void button15_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -421,17 +408,17 @@ namespace TGAccounting
 
         private void calendar1_ItemCreated(object sender, CalendarItemCancelEventArgs e)
         {
-           
+
         }
 
         private void calendar1_LoadItems(object sender, CalendarLoadEventArgs e)
         {
-           // PlaceItems();
+            // PlaceItems();
         }
 
         private void calendar1_ItemSelected(object sender, CalendarItemEventArgs e)
         {
-           
+
         }
 
         private void calendar1_DoubleClick(object sender, EventArgs e)
@@ -441,7 +428,7 @@ namespace TGAccounting
 
         private void calendar1_ItemCreating(object sender, CalendarItemCancelEventArgs e)
         {
-           
+
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -456,7 +443,7 @@ namespace TGAccounting
                 DialogResult dr = form.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
-                   
+
 
                 }
             }
@@ -479,7 +466,7 @@ namespace TGAccounting
         {
             DataForm frm = new DataForm();
             frm.Show();
-          
+
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -497,7 +484,7 @@ namespace TGAccounting
 
         private void tabControl1_TabIndexChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void globalYrTxt_TextChanged(object sender, EventArgs e)
@@ -591,7 +578,14 @@ namespace TGAccounting
 
         private void categoryCbx_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-
+            if (!string.IsNullOrEmpty(categoryCbx.Text))
+            {
+                LoadingWindow.ShowSplashScreen();
+                string query7 = "SELECT * FROM inventory WHERE category='" + categoryCbx.Text + "' AND date= '" + Helper.CurrentYear + "' ORDER BY week ASC";
+                this.InventoryBindingSource.DataSource = Inventory.List(query7);
+                reportViewerInventory.RefreshReport();
+                LoadingWindow.CloseForm();
+            }
         }
 
         private void label6_Click(object sender, EventArgs e)
@@ -871,6 +865,18 @@ namespace TGAccounting
             frm.Show();
         }
 
+        private void button8_Click_1(object sender, EventArgs e)
+        {
+            using (ImportDialog form = new ImportDialog())
+            {
+                DialogResult dr = form.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+
+                }
+            }
+        }
+
         private void button21_Click(object sender, EventArgs e)
         {
             using (AddSalary form = new AddSalary())
@@ -896,6 +902,6 @@ namespace TGAccounting
             }
         }
 
-       
+
     }
 }

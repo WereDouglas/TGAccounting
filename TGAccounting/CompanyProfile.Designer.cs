@@ -40,6 +40,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.fileUrlTxtBx = new System.Windows.Forms.TextBox();
+            this.currentTxt = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.imgCapture)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -51,7 +53,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.Snow;
-            this.button1.Location = new System.Drawing.Point(47, 338);
+            this.button1.Location = new System.Drawing.Point(46, 379);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(81, 27);
@@ -67,7 +69,7 @@
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button5.ForeColor = System.Drawing.Color.Snow;
-            this.button5.Location = new System.Drawing.Point(151, 338);
+            this.button5.Location = new System.Drawing.Point(149, 379);
             this.button5.Margin = new System.Windows.Forms.Padding(2);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(81, 27);
@@ -83,7 +85,7 @@
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.Snow;
-            this.button2.Location = new System.Drawing.Point(245, 338);
+            this.button2.Location = new System.Drawing.Point(245, 379);
             this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(94, 27);
@@ -164,6 +166,8 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.currentTxt);
             this.groupBox2.Controls.Add(this.fileUrlTxtBx);
             this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.button5);
@@ -178,7 +182,7 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox2.Size = new System.Drawing.Size(366, 407);
+            this.groupBox2.Size = new System.Drawing.Size(366, 434);
             this.groupBox2.TabIndex = 125;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Company details";
@@ -188,17 +192,38 @@
             this.fileUrlTxtBx.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.fileUrlTxtBx.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.fileUrlTxtBx.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fileUrlTxtBx.Location = new System.Drawing.Point(0, 371);
+            this.fileUrlTxtBx.Location = new System.Drawing.Point(0, 412);
             this.fileUrlTxtBx.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.fileUrlTxtBx.Name = "fileUrlTxtBx";
             this.fileUrlTxtBx.Size = new System.Drawing.Size(366, 14);
             this.fileUrlTxtBx.TabIndex = 187;
             // 
+            // currentTxt
+            // 
+            this.currentTxt.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.currentTxt.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.currentTxt.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.currentTxt.Location = new System.Drawing.Point(121, 346);
+            this.currentTxt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.currentTxt.Name = "currentTxt";
+            this.currentTxt.Size = new System.Drawing.Size(218, 19);
+            this.currentTxt.TabIndex = 188;
+            this.currentTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.currentTxt_KeyPress);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 326);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(139, 16);
+            this.label1.TabIndex = 189;
+            this.label1.Text = "Current year of operation";
+            // 
             // CompanyProfile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(410, 444);
+            this.ClientSize = new System.Drawing.Size(410, 470);
             this.Controls.Add(this.groupBox2);
             this.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -227,5 +252,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox fileUrlTxtBx;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox currentTxt;
     }
 }

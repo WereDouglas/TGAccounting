@@ -13,7 +13,7 @@ namespace TGAccounting.Model
         private string name;
         private string address;
         private string logo;
-
+        private string current;
         public string Id
         {
             get
@@ -65,13 +65,28 @@ namespace TGAccounting.Model
                 logo = value;
             }
         }
+
+        public string Current
+        {
+            get
+            {
+                return current;
+            }
+
+            set
+            {
+                current = value;
+            }
+        }
+
         public Company() { }
-        public Company(string id, string name, string address, string logo)
+        public Company(string id, string name, string address, string logo,string current)
         {
             this.Id = id;
             this.Name = name;
             this.Address = address;
             this.Logo = logo;
+            this.Current = current;
         }
         public static List<Company> List()
         {
@@ -81,7 +96,7 @@ namespace TGAccounting.Model
             SQLiteDataReader Reader = DBConnect.ReadingLite(SQL);
             while (Reader.Read())
             {
-                Company p = new Company(Reader["id"].ToString(), Reader["name"].ToString(), Reader["address"].ToString(), Reader["logo"].ToString());
+                Company p = new Company(Reader["id"].ToString(), Reader["name"].ToString(), Reader["address"].ToString(), Reader["logo"].ToString(), Reader["current"].ToString());
                 cats.Add(p);
             }
             Reader.Close();

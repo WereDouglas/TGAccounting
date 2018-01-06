@@ -208,7 +208,7 @@ namespace TGAccounting
            
             try
             {
-                Sale _c = new Sale(saleGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), saleGrid.Rows[e.RowIndex].Cells["date"].Value.ToString(), saleGrid.Rows[e.RowIndex].Cells["week"].Value.ToString(), saleGrid.Rows[e.RowIndex].Cells["starting"].Value.ToString(), saleGrid.Rows[e.RowIndex].Cells["ending"].Value.ToString(), saleGrid.Rows[e.RowIndex].Cells["item"].Value.ToString(), Convert.ToDouble(saleGrid.Rows[e.RowIndex].Cells["amount"].Value), saleGrid.Rows[e.RowIndex].Cells["category"].Value.ToString());
+                Sale _c = new Sale(saleGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), saleGrid.Rows[e.RowIndex].Cells["date"].Value.ToString(), saleGrid.Rows[e.RowIndex].Cells["week"].Value.ToString(), saleGrid.Rows[e.RowIndex].Cells["starting"].Value.ToString(), saleGrid.Rows[e.RowIndex].Cells["ending"].Value.ToString(), saleGrid.Rows[e.RowIndex].Cells["item"].Value.ToString(), Convert.ToDouble(saleGrid.Rows[e.RowIndex].Cells["amount"].Value), saleGrid.Rows[e.RowIndex].Cells["category"].Value.ToString(), saleGrid.Rows[e.RowIndex].Cells["month"].Value.ToString());
                 DBConnect.Update(_c, saleGrid.Rows[e.RowIndex].Cells["id"].Value.ToString());
             }
             catch (Exception c)
@@ -234,7 +234,7 @@ namespace TGAccounting
           
             try
             {
-                Labor _c = new Labor(laborGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), laborGrid.Rows[e.RowIndex].Cells["date"].Value.ToString(), laborGrid.Rows[e.RowIndex].Cells["week"].Value.ToString(), laborGrid.Rows[e.RowIndex].Cells["starting"].Value.ToString(), laborGrid.Rows[e.RowIndex].Cells["ending"].Value.ToString(), laborGrid.Rows[e.RowIndex].Cells["department"].Value.ToString(), Convert.ToDouble(laborGrid.Rows[e.RowIndex].Cells["amount"].Value));
+                Labor _c = new Labor(laborGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), laborGrid.Rows[e.RowIndex].Cells["date"].Value.ToString(), laborGrid.Rows[e.RowIndex].Cells["week"].Value.ToString(), laborGrid.Rows[e.RowIndex].Cells["starting"].Value.ToString(), laborGrid.Rows[e.RowIndex].Cells["ending"].Value.ToString(), laborGrid.Rows[e.RowIndex].Cells["department"].Value.ToString(), Convert.ToDouble(laborGrid.Rows[e.RowIndex].Cells["amount"].Value), laborGrid.Rows[e.RowIndex].Cells["month"].Value.ToString());
                 DBConnect.Update(_c, laborGrid.Rows[e.RowIndex].Cells["id"].Value.ToString());
             }
             catch (Exception c)
@@ -261,7 +261,7 @@ namespace TGAccounting
            
             try
             {
-                Taxes _c = new Taxes(taxGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), taxGrid.Rows[e.RowIndex].Cells["date"].Value.ToString(), taxGrid.Rows[e.RowIndex].Cells["week"].Value.ToString(), taxGrid.Rows[e.RowIndex].Cells["starting"].Value.ToString(), taxGrid.Rows[e.RowIndex].Cells["ending"].Value.ToString(), taxGrid.Rows[e.RowIndex].Cells["department"].Value.ToString(), Convert.ToDouble(taxGrid.Rows[e.RowIndex].Cells["amount"].Value));
+                Taxes _c = new Taxes(taxGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), taxGrid.Rows[e.RowIndex].Cells["date"].Value.ToString(), taxGrid.Rows[e.RowIndex].Cells["week"].Value.ToString(), taxGrid.Rows[e.RowIndex].Cells["starting"].Value.ToString(), taxGrid.Rows[e.RowIndex].Cells["ending"].Value.ToString(), taxGrid.Rows[e.RowIndex].Cells["department"].Value.ToString(), Convert.ToDouble(taxGrid.Rows[e.RowIndex].Cells["amount"].Value), taxGrid.Rows[e.RowIndex].Cells["month"].Value.ToString());
                 DBConnect.Update(_c, taxGrid.Rows[e.RowIndex].Cells["id"].Value.ToString());
             }
             catch (Exception c)
@@ -275,16 +275,12 @@ namespace TGAccounting
 
         private void salGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            if (!Helper.validateDouble(salGrid.Rows[e.RowIndex].Cells["amount"].Value.ToString()))
+            if (!Helper.validateDouble(salGrid.Rows[e.RowIndex].Cells["annual"].Value.ToString()))
             {
                 MessageBox.Show("Invalid amount");
             }
 
-            if (!Helper.validateDouble(salGrid.Rows[e.RowIndex].Cells["week"].Value.ToString()))
-            {
-                MessageBox.Show("The week must be an integer");
-            }
-
+           
            
             try
             {
@@ -314,7 +310,7 @@ namespace TGAccounting
            
             try
             {
-                Supplies _c = new Supplies(supData.Rows[e.RowIndex].Cells["id"].Value.ToString(), supData.Rows[e.RowIndex].Cells["date"].Value.ToString(), supData.Rows[e.RowIndex].Cells["week"].Value.ToString(), supData.Rows[e.RowIndex].Cells["starting"].Value.ToString(), supData.Rows[e.RowIndex].Cells["ending"].Value.ToString(), supData.Rows[e.RowIndex].Cells["supplier"].Value.ToString(), Convert.ToDouble(supData.Rows[e.RowIndex].Cells["amount"].Value));
+                Supplies _c = new Supplies(supData.Rows[e.RowIndex].Cells["id"].Value.ToString(), supData.Rows[e.RowIndex].Cells["date"].Value.ToString(), supData.Rows[e.RowIndex].Cells["week"].Value.ToString(), supData.Rows[e.RowIndex].Cells["starting"].Value.ToString(), supData.Rows[e.RowIndex].Cells["ending"].Value.ToString(), supData.Rows[e.RowIndex].Cells["supplier"].Value.ToString(), Convert.ToDouble(supData.Rows[e.RowIndex].Cells["amount"].Value), supData.Rows[e.RowIndex].Cells["month"].Value.ToString());
                 DBConnect.Update(_c, supData.Rows[e.RowIndex].Cells["id"].Value.ToString());
             }
             catch (Exception c)
@@ -339,7 +335,7 @@ namespace TGAccounting
 
             try
             {
-                Repair _c = new Repair(repGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), repGrid.Rows[e.RowIndex].Cells["date"].Value.ToString(), repGrid.Rows[e.RowIndex].Cells["week"].Value.ToString(), repGrid.Rows[e.RowIndex].Cells["starting"].Value.ToString(), repGrid.Rows[e.RowIndex].Cells["ending"].Value.ToString(), repGrid.Rows[e.RowIndex].Cells["supplier"].Value.ToString(), Convert.ToDouble(repGrid.Rows[e.RowIndex].Cells["amount"].Value.ToString()));
+                Repair _c = new Repair(repGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), repGrid.Rows[e.RowIndex].Cells["date"].Value.ToString(), repGrid.Rows[e.RowIndex].Cells["week"].Value.ToString(), repGrid.Rows[e.RowIndex].Cells["starting"].Value.ToString(), repGrid.Rows[e.RowIndex].Cells["ending"].Value.ToString(), repGrid.Rows[e.RowIndex].Cells["supplier"].Value.ToString(), Convert.ToDouble(repGrid.Rows[e.RowIndex].Cells["amount"].Value.ToString()), repGrid.Rows[e.RowIndex].Cells["month"].Value.ToString());
                 DBConnect.Update(_c, repGrid.Rows[e.RowIndex].Cells["id"].Value.ToString());
             }
             catch (Exception c)
@@ -363,7 +359,7 @@ namespace TGAccounting
 
             try
             {
-                Equipment _c = new Equipment(equipGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), equipGrid.Rows[e.RowIndex].Cells["date"].Value.ToString(), equipGrid.Rows[e.RowIndex].Cells["week"].Value.ToString(), equipGrid.Rows[e.RowIndex].Cells["starting"].Value.ToString(), equipGrid.Rows[e.RowIndex].Cells["ending"].Value.ToString(), equipGrid.Rows[e.RowIndex].Cells["supplier"].Value.ToString(), Convert.ToDouble(equipGrid.Rows[e.RowIndex].Cells["amount"].Value.ToString()));
+                Equipment _c = new Equipment(equipGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), equipGrid.Rows[e.RowIndex].Cells["date"].Value.ToString(), equipGrid.Rows[e.RowIndex].Cells["week"].Value.ToString(), equipGrid.Rows[e.RowIndex].Cells["starting"].Value.ToString(), equipGrid.Rows[e.RowIndex].Cells["ending"].Value.ToString(), equipGrid.Rows[e.RowIndex].Cells["supplier"].Value.ToString(), Convert.ToDouble(equipGrid.Rows[e.RowIndex].Cells["amount"].Value.ToString()), equipGrid.Rows[e.RowIndex].Cells["month"].Value.ToString());
                 DBConnect.Update(_c, equipGrid.Rows[e.RowIndex].Cells["id"].Value.ToString());
             }
             catch (Exception c)
@@ -388,7 +384,7 @@ namespace TGAccounting
           
             try
             {
-                Inventory _c = new Inventory(InventoryGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), InventoryGrid.Rows[e.RowIndex].Cells["date"].Value.ToString(), InventoryGrid.Rows[e.RowIndex].Cells["week"].Value.ToString(), InventoryGrid.Rows[e.RowIndex].Cells["starting"].Value.ToString(), InventoryGrid.Rows[e.RowIndex].Cells["ending"].Value.ToString(), InventoryGrid.Rows[e.RowIndex].Cells["name"].Value.ToString(), InventoryGrid.Rows[e.RowIndex].Cells["category"].Value.ToString(), Convert.ToDouble(InventoryGrid.Rows[e.RowIndex].Cells["amount"].Value.ToString()),0,0,0);
+                Inventory _c = new Inventory(InventoryGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), InventoryGrid.Rows[e.RowIndex].Cells["date"].Value.ToString(), InventoryGrid.Rows[e.RowIndex].Cells["week"].Value.ToString(), InventoryGrid.Rows[e.RowIndex].Cells["starting"].Value.ToString(), InventoryGrid.Rows[e.RowIndex].Cells["ending"].Value.ToString(), InventoryGrid.Rows[e.RowIndex].Cells["name"].Value.ToString(), InventoryGrid.Rows[e.RowIndex].Cells["category"].Value.ToString(), Convert.ToDouble(InventoryGrid.Rows[e.RowIndex].Cells["amount"].Value.ToString()),0,0,0, InventoryGrid.Rows[e.RowIndex].Cells["month"].Value.ToString());
                 DBConnect.Update(_c, InventoryGrid.Rows[e.RowIndex].Cells["id"].Value.ToString());
             }
             catch (Exception c)
@@ -418,7 +414,7 @@ namespace TGAccounting
             }
             try
             {
-                Expense _c = new Expense(expenseGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), expenseGrid.Rows[e.RowIndex].Cells["date"].Value.ToString(), expenseGrid.Rows[e.RowIndex].Cells["week"].Value.ToString(), expenseGrid.Rows[e.RowIndex].Cells["starting"].Value.ToString(), expenseGrid.Rows[e.RowIndex].Cells["ending"].Value.ToString(), expenseGrid.Rows[e.RowIndex].Cells["name"].Value.ToString(), expenseGrid.Rows[e.RowIndex].Cells["category"].Value.ToString(), Convert.ToDouble(expenseGrid.Rows[e.RowIndex].Cells["amount"].Value.ToString()));
+                Expense _c = new Expense(expenseGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), expenseGrid.Rows[e.RowIndex].Cells["date"].Value.ToString(), expenseGrid.Rows[e.RowIndex].Cells["week"].Value.ToString(), expenseGrid.Rows[e.RowIndex].Cells["starting"].Value.ToString(), expenseGrid.Rows[e.RowIndex].Cells["ending"].Value.ToString(), expenseGrid.Rows[e.RowIndex].Cells["name"].Value.ToString(), expenseGrid.Rows[e.RowIndex].Cells["category"].Value.ToString(), Convert.ToDouble(expenseGrid.Rows[e.RowIndex].Cells["amount"].Value.ToString()), expenseGrid.Rows[e.RowIndex].Cells["month"].Value.ToString());
                 DBConnect.Update(_c, expenseGrid.Rows[e.RowIndex].Cells["id"].Value.ToString());
             }
             catch (Exception c)
@@ -448,17 +444,13 @@ namespace TGAccounting
 
             if (!Helper.validateDouble(costGrid.Rows[e.RowIndex].Cells["week"].Value.ToString()))
             {
-                MessageBox.Show("The week must be an integer");
+                MessageBox.Show("Invalid value");
             }
 
-            if (!Helper.ifEmpty(costGrid.Rows[e.RowIndex].Cells["id"].Value.ToString()))
-            {
-                MessageBox.Show("Invalid entry");
-                return;
-            }
+          
             try
             {
-                Cogs _c = new Cogs(costGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), costGrid.Rows[e.RowIndex].Cells["date"].Value.ToString(), costGrid.Rows[e.RowIndex].Cells["week"].Value.ToString(),costGrid.Rows[e.RowIndex].Cells["starting"].Value.ToString(), costGrid.Rows[e.RowIndex].Cells["ending"].Value.ToString(), costGrid.Rows[e.RowIndex].Cells["category"].Value.ToString(),0,0, Convert.ToDouble(costGrid.Rows[e.RowIndex].Cells["amount"].Value.ToString()));
+                Cogs _c = new Cogs(costGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), costGrid.Rows[e.RowIndex].Cells["date"].Value.ToString(), costGrid.Rows[e.RowIndex].Cells["week"].Value.ToString(),costGrid.Rows[e.RowIndex].Cells["starting"].Value.ToString(), costGrid.Rows[e.RowIndex].Cells["ending"].Value.ToString(), costGrid.Rows[e.RowIndex].Cells["category"].Value.ToString(),0,0, Convert.ToDouble(costGrid.Rows[e.RowIndex].Cells["amount"].Value.ToString()), costGrid.Rows[e.RowIndex].Cells["month"].Value.ToString());
                 DBConnect.Update(_c, costGrid.Rows[e.RowIndex].Cells["id"].Value.ToString());
             }
             catch (Exception c)
@@ -764,11 +756,12 @@ namespace TGAccounting
             sdt.Columns.Add("Ending");
             sdt.Columns.Add("Date");
             sdt.Columns.Add("Category");
+            sdt.Columns.Add("Month");
             sdt.Columns.Add("Delete");
             string query = "SELECT * FROM sale WHERE date = '" + Helper.CurrentYear + "'";
             foreach (Sale w in Sale.List(query))
             {
-                sdt.Rows.Add(new object[] { w.Id, w.Item, w.Amount, w.Week, w.Starting, w.Ending, w.Date, w.Category, "Delete" });
+                sdt.Rows.Add(new object[] { w.Id, w.Item, w.Amount, w.Week, w.Starting, w.Ending, w.Date, w.Category,w.Month, "Delete" });
             }
             saleGrid.DataSource = sdt;
             saleGrid.Columns["id"].Visible = false;
@@ -800,12 +793,12 @@ namespace TGAccounting
             ldt.Columns.Add("Starting");
             ldt.Columns.Add("Ending");
             ldt.Columns.Add("Date");
-
+            ldt.Columns.Add("Month");
             ldt.Columns.Add("Delete");
             string query = "SELECT * FROM labor WHERE date = '" + Helper.CurrentYear + "'";
             foreach (Labor w in Labor.List(query))
             {
-                ldt.Rows.Add(new object[] { w.Id, w.Item, w.Amount, w.Week, w.Starting, w.Ending, w.Date, "Delete" });
+                ldt.Rows.Add(new object[] { w.Id, w.Item, w.Amount, w.Week, w.Starting, w.Ending, w.Date,w.Month, "Delete" });
             }
             laborGrid.DataSource = ldt;
             laborGrid.Columns["id"].Visible = false;
@@ -822,12 +815,12 @@ namespace TGAccounting
             tdt.Columns.Add("Starting");
             tdt.Columns.Add("Ending");
             tdt.Columns.Add("Date");
-
+            tdt.Columns.Add("Month");
             tdt.Columns.Add("Delete");
             string query = "SELECT * FROM taxes WHERE date = '" + Helper.CurrentYear + "'";
             foreach (Taxes w in Taxes.List(query))
             {
-                tdt.Rows.Add(new object[] { w.Id, w.Name, w.Amount, w.Week, w.Starting, w.Ending, w.Date, "Delete" });
+                tdt.Rows.Add(new object[] { w.Id, w.Name, w.Amount, w.Week, w.Starting, w.Ending, w.Date,w.Month, "Delete" });
             }
             taxGrid.DataSource = tdt;
             taxGrid.Columns["id"].Visible = false;
@@ -845,7 +838,7 @@ namespace TGAccounting
             saldt.Columns.Add("weekly");
             saldt.Columns.Add("Biweekly");           
             saldt.Columns.Add("Our pay");
-
+           
             saldt.Columns.Add("Delete");
             string query = "SELECT * FROM salary WHERE date = '" + Helper.CurrentYear + "'";
             foreach (Salary w in Salary.List())
@@ -867,12 +860,12 @@ namespace TGAccounting
             supdt.Columns.Add("Starting");
             supdt.Columns.Add("Ending");
             supdt.Columns.Add("Date");
-
+            supdt.Columns.Add("Month");
             supdt.Columns.Add("Delete");
             string query = "SELECT * FROM taxes WHERE date = '"+Helper.CurrentYear+"'";
             foreach (Taxes w in Taxes.List(query))
             {
-                supdt.Rows.Add(new object[] { w.Id, w.Name, w.Amount, w.Week, w.Starting, w.Ending, w.Date, "Delete" });
+                supdt.Rows.Add(new object[] { w.Id, w.Name, w.Amount, w.Week, w.Starting, w.Ending, w.Date,w.Month, "Delete" });
             }
             supData.DataSource = supdt;
             supData.Columns["id"].Visible = false;
@@ -889,12 +882,12 @@ namespace TGAccounting
             rmdt.Columns.Add("Starting");
             rmdt.Columns.Add("Ending");
             rmdt.Columns.Add("Date");
-
+            rmdt.Columns.Add("Month");
             rmdt.Columns.Add("Delete");
             string query = "SELECT * FROM repair WHERE date = '" + Helper.CurrentYear + "'";
             foreach (Repair w in Repair.List(query))
             {
-                rmdt.Rows.Add(new object[] { w.Id, w.Supplier, w.Amount, w.Week, w.Starting, w.Ending, w.Date, "Delete" });
+                rmdt.Rows.Add(new object[] { w.Id, w.Supplier, w.Amount, w.Week, w.Starting, w.Ending, w.Date,w.Month, "Delete" });
             }
             repGrid.DataSource = rmdt;
             repGrid.Columns["id"].Visible = false;
@@ -911,12 +904,12 @@ namespace TGAccounting
             eqdt.Columns.Add("Starting");
             eqdt.Columns.Add("Ending");
             eqdt.Columns.Add("Date");
-
+            eqdt.Columns.Add("Month");
             eqdt.Columns.Add("Delete");
             string query = "SELECT * FROM equipment WHERE date = '" + Helper.CurrentYear + "'";
             foreach (Equipment w in Equipment.List(query))
             {
-                eqdt.Rows.Add(new object[] { w.Id, w.Name, w.Amount, w.Week, w.Starting, w.Ending, w.Date, "Delete" });
+                eqdt.Rows.Add(new object[] { w.Id, w.Name, w.Amount, w.Week, w.Starting, w.Ending, w.Date,w.Month, "Delete" });
             }
             equipGrid.DataSource = eqdt;
             equipGrid.Columns["id"].Visible = false;
@@ -934,12 +927,12 @@ namespace TGAccounting
             invdt.Columns.Add("Starting");
             invdt.Columns.Add("Ending");
             invdt.Columns.Add("Date");
-
+            invdt.Columns.Add("Month");
             invdt.Columns.Add("Delete");
             string query = "SELECT * FROM inventory WHERE date = '" + Helper.CurrentYear + "'";
             foreach (Inventory w in Inventory.List(query))
             {
-                invdt.Rows.Add(new object[] { w.Id, w.Name, w.Category,w.Amount, w.Week, w.Starting, w.Ending, w.Date, "Delete" });
+                invdt.Rows.Add(new object[] { w.Id, w.Name, w.Category,w.Amount, w.Week, w.Starting, w.Ending, w.Date,w.Month, "Delete" });
             }
             InventoryGrid.DataSource = invdt;
             InventoryGrid.Columns["id"].Visible = false;
@@ -956,12 +949,12 @@ namespace TGAccounting
             expdt.Columns.Add("Starting");
             expdt.Columns.Add("Ending");
             expdt.Columns.Add("Date");
-
+            expdt.Columns.Add("Month");
             expdt.Columns.Add("Delete");
             string query = "SELECT * FROM expense WHERE date = '" + Helper.CurrentYear + "'";
             foreach (Expense w in Expense.List(query))
             {
-                expdt.Rows.Add(new object[] { w.Id, w.Name, w.Amount, w.Week, w.Starting, w.Ending, w.Date, "Delete" });
+                expdt.Rows.Add(new object[] { w.Id, w.Name, w.Amount, w.Week, w.Starting, w.Ending, w.Date,w.Month, "Delete" });
             }
             expenseGrid.DataSource = expdt;
             expenseGrid.Columns["id"].Visible = false;
@@ -972,18 +965,18 @@ namespace TGAccounting
         {
             costdt = new DataTable();
             costdt.Columns.Add("id", typeof(string));
-            costdt.Columns.Add("Name", typeof(string));
+            costdt.Columns.Add("Category", typeof(string));
             costdt.Columns.Add("Amount", typeof(string));
             costdt.Columns.Add("Week");
             costdt.Columns.Add("Starting");
             costdt.Columns.Add("Ending");
             costdt.Columns.Add("Date");
-
+            costdt.Columns.Add("Month");
             costdt.Columns.Add("Delete");
             string query = "SELECT * FROM cogs WHERE date = '" + Helper.CurrentYear + "'";
             foreach (Cogs w in Cogs.List(query))
             {
-                costdt.Rows.Add(new object[] { w.Id, w.Category, w.Cost, w.Week, w.Starting, w.Ending, w.Date, "Delete" });
+                costdt.Rows.Add(new object[] { w.Id, w.Category, w.Cost, w.Week, w.Starting, w.Ending, w.Date,w.Month, "Delete" });
             }
             costGrid.DataSource = costdt;
             costGrid.Columns["id"].Visible = false;
@@ -1037,11 +1030,12 @@ namespace TGAccounting
             cp.Columns.Add("Ending");
             cp.Columns.Add("Date");
             cp.Columns.Add("Category");
+            cp.Columns.Add("Month");
             cp.Columns.Add("Delete");
             string query = "SELECT * FROM comp WHERE date = '" + Helper.CurrentYear + "'";
             foreach (Comp w in Comp.List(query))
             {
-                cp.Rows.Add(new object[] { w.Id, w.Item, w.Amount, w.Week, w.Starting, w.Ending, w.Date, w.Category, "Delete" });
+                cp.Rows.Add(new object[] { w.Id, w.Item, w.Amount, w.Week, w.Starting, w.Ending, w.Date, w.Category,w.Month, "Delete" });
             }
             comGrid.DataSource = cp;
             comGrid.Columns["id"].Visible = false;

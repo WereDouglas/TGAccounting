@@ -18,6 +18,7 @@ namespace TGAccounting.Model
         private double beginningInventory;
         private double endingInventory;
         private double cost;
+        private string month;
 
         private static List<Cogs> s ;
 
@@ -138,9 +139,22 @@ namespace TGAccounting.Model
             }
         }
 
+        public string Month
+        {
+            get
+            {
+                return month;
+            }
+
+            set
+            {
+                month = value;
+            }
+        }
+
         public Cogs() { }
 
-        public Cogs(string id, string date, string week, string starting, string ending, string category, double beginningInventory, double endingInventory,double cost)
+        public Cogs(string id, string date, string week, string starting, string ending, string category, double beginningInventory, double endingInventory,double cost,string month)
         {
             this.id = id;
             this.date = date;
@@ -151,6 +165,7 @@ namespace TGAccounting.Model
             this.beginningInventory = beginningInventory;
             this.endingInventory = endingInventory;
             this.cost = cost;
+            this.month = month;
         }
 
         public static List<Cogs> List(string query)
@@ -160,7 +175,7 @@ namespace TGAccounting.Model
             SQLiteDataReader Reader = DBConnect.ReadingLite(query);
             while (Reader.Read())
             {
-                Cogs p = new Cogs(Reader["id"].ToString(), Reader["date"].ToString(), Reader["week"].ToString(), Reader["starting"].ToString(), Reader["ending"].ToString(), Reader["category"].ToString(),Convert.ToDouble(Reader["beginningInventory"]), Convert.ToDouble(Reader["endingInventory"].ToString()), Convert.ToDouble(Reader["cost"].ToString()));
+                Cogs p = new Cogs(Reader["id"].ToString(), Reader["date"].ToString(), Reader["week"].ToString(), Reader["starting"].ToString(), Reader["ending"].ToString(), Reader["category"].ToString(),Convert.ToDouble(Reader["beginningInventory"]), Convert.ToDouble(Reader["endingInventory"].ToString()), Convert.ToDouble(Reader["cost"].ToString()), Reader["month"].ToString());
                 s.Add(p);
             }
             Reader.Close();

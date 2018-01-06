@@ -128,7 +128,7 @@
             this.supGrid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.supGrid.Name = "supGrid";
             this.supGrid.SelectedIndex = 0;
-            this.supGrid.Size = new System.Drawing.Size(1115, 627);
+            this.supGrid.Size = new System.Drawing.Size(1244, 627);
             this.supGrid.TabIndex = 1;
             this.supGrid.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             this.supGrid.TabIndexChanged += new System.EventHandler(this.tabControl1_TabIndexChanged);
@@ -140,7 +140,7 @@
             this.saleTab.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.saleTab.Name = "saleTab";
             this.saleTab.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.saleTab.Size = new System.Drawing.Size(1107, 598);
+            this.saleTab.Size = new System.Drawing.Size(1236, 598);
             this.saleTab.TabIndex = 0;
             this.saleTab.Text = "Sales";
             this.saleTab.UseVisualStyleBackColor = true;
@@ -154,7 +154,7 @@
             this.saleGrid.Location = new System.Drawing.Point(3, 4);
             this.saleGrid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.saleGrid.Name = "saleGrid";
-            this.saleGrid.Size = new System.Drawing.Size(1101, 590);
+            this.saleGrid.Size = new System.Drawing.Size(1230, 590);
             this.saleGrid.TabIndex = 5;
             this.saleGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.saleGrid_CellClick);
             this.saleGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.saleGrid_CellEndEdit);
@@ -539,7 +539,7 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.supGrid);
-            this.splitContainer2.Size = new System.Drawing.Size(1115, 665);
+            this.splitContainer2.Size = new System.Drawing.Size(1244, 665);
             this.splitContainer2.SplitterDistance = 34;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -565,7 +565,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1115, 665);
+            this.ClientSize = new System.Drawing.Size(1244, 665);
             this.Controls.Add(this.splitContainer2);
             this.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

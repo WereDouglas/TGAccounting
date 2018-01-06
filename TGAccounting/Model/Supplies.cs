@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TGAccounting.Model
 {
-   public class Supplies
+    public class Supplies
     {
         private string id;
         private string date;
@@ -16,7 +16,8 @@ namespace TGAccounting.Model
         private string ending;
         private string supplier;
         private double amount;
-       private static List<Supplies> s ;
+        private string month;
+        private static List<Supplies> s;
         public string Date
         {
             get
@@ -108,8 +109,21 @@ namespace TGAccounting.Model
             }
         }
 
+        public string Month
+        {
+            get
+            {
+                return month;
+            }
+
+            set
+            {
+                month = value;
+            }
+        }
+
         public Supplies() { }
-        public Supplies(string id,string date, string week, string starting, string ending, string supplier, double amount)
+        public Supplies(string id, string date, string week, string starting, string ending, string supplier, double amount,string month)
         {
             this.Id = id;
             this.Date = date;
@@ -118,15 +132,16 @@ namespace TGAccounting.Model
             this.Ending = ending;
             this.Supplier = supplier;
             this.Amount = amount;
+            this.Month = month;
         }
         public static List<Supplies> List(string query)
-        {           
-             s = new List<Supplies>();
+        {
+            s = new List<Supplies>();
 
             SQLiteDataReader Reader = DBConnect.ReadingLite(query);
             while (Reader.Read())
             {
-                Supplies p = new Supplies(Reader["id"].ToString(),Reader["date"].ToString(), Reader["week"].ToString(), Reader["starting"].ToString(), Reader["ending"].ToString(), Reader["supplier"].ToString(),Convert.ToDouble(Reader["amount"]));
+                Supplies p = new Supplies(Reader["id"].ToString(), Reader["date"].ToString(), Reader["week"].ToString(), Reader["starting"].ToString(), Reader["ending"].ToString(), Reader["supplier"].ToString(), Convert.ToDouble(Reader["amount"]),Reader["month"].ToString());
                 s.Add(p);
             }
             Reader.Close();

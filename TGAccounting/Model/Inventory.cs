@@ -20,6 +20,7 @@ namespace TGAccounting.Model
         private double begining;
         private double finishing;
         private double cog;
+        private string month;
 
 
         private static List<Inventory> s ;
@@ -169,9 +170,22 @@ namespace TGAccounting.Model
             }
         }
 
+        public string Month
+        {
+            get
+            {
+                return month;
+            }
+
+            set
+            {
+                month = value;
+            }
+        }
+
         public Inventory() { }
 
-        public Inventory(string id, string date, string week, string starting, string ending, string name, string category,double amount,double begining,double finishing,double cog)
+        public Inventory(string id, string date, string week, string starting, string ending, string name, string category,double amount,double begining,double finishing,double cog,string month)
         {
             this.id = id;
             this.date = date;
@@ -184,6 +198,8 @@ namespace TGAccounting.Model
             this.begining = begining;
             this.finishing = finishing;
             this.cog = cog;
+            this.month = month;
+      
 
         }
 
@@ -198,7 +214,7 @@ namespace TGAccounting.Model
                 double ending = Cogs.List("SELECT * from cogs WHERE category= '" + Reader["category"].ToString() + "' AND week = '" + Reader["week"].ToString() + "' AND date ='" + Helper.CurrentYear + "'").Sum(t => t.EndingInventory);
                 double cg = Cogs.List("SELECT * from cogs WHERE category= '" + Reader["category"].ToString() + "' AND week = '" + Reader["week"].ToString() + "' AND date ='" + Helper.CurrentYear + "'").Sum(t => t.Cost);
 
-                Inventory p = new Inventory(Reader["id"].ToString(),Reader["date"].ToString(), Reader["week"].ToString(), Reader["starting"].ToString(),Convert.ToDateTime( Reader["ending"]).ToString("dd-MMM-yy"), Reader["name"].ToString(), Reader["category"].ToString(),Convert.ToDouble(Reader["amount"]),begining,ending,cg);
+                Inventory p = new Inventory(Reader["id"].ToString(),Reader["date"].ToString(), Reader["week"].ToString(), Reader["starting"].ToString(),Convert.ToDateTime( Reader["ending"]).ToString("dd-MMM-yy"), Reader["name"].ToString(), Reader["category"].ToString(),Convert.ToDouble(Reader["amount"]),begining,ending,cg,Reader["month"].ToString());
                 s.Add(p);
             }
             Reader.Close();

@@ -16,6 +16,7 @@ namespace TGAccounting.Model
         private string ending;
         private string name;
         private double amount;
+        private string month;
        private static List<Taxes> s ;
         public string Date
         {
@@ -108,8 +109,21 @@ namespace TGAccounting.Model
             }
         }
 
+        public string Month
+        {
+            get
+            {
+                return month;
+            }
+
+            set
+            {
+                month = value;
+            }
+        }
+
         public Taxes() { }
-        public Taxes(string id,string date, string week, string starting, string ending, string name, double amount)
+        public Taxes(string id,string date, string week, string starting, string ending, string name, double amount,string month)
         {
             this.Id = id;
             this.Date = date;
@@ -118,6 +132,7 @@ namespace TGAccounting.Model
             this.Ending = ending;
             this.Name = name;
             this.Amount = amount;
+            this.Month = month;
         }
         public static List<Taxes> List(string query)
         {           
@@ -126,7 +141,7 @@ namespace TGAccounting.Model
             SQLiteDataReader Reader = DBConnect.ReadingLite(query);
             while (Reader.Read())
             {
-                Taxes p = new Taxes(Reader["id"].ToString(),Reader["date"].ToString(), Reader["week"].ToString(), Reader["starting"].ToString(), Reader["ending"].ToString(), Reader["name"].ToString(),Convert.ToDouble(Reader["amount"]));
+                Taxes p = new Taxes(Reader["id"].ToString(),Reader["date"].ToString(), Reader["week"].ToString(), Reader["starting"].ToString(), Reader["ending"].ToString(), Reader["name"].ToString(),Convert.ToDouble(Reader["amount"]),Reader["month"].ToString());
                 s.Add(p);
             }
             Reader.Close();

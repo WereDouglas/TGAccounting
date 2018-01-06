@@ -16,6 +16,7 @@ namespace TGAccounting.Model
         private string ending;
         private string supplier;
         private double amount;
+        private  string month;
         private static List<Repair> s;
         public string Date
         {
@@ -108,8 +109,21 @@ namespace TGAccounting.Model
             }
         }
 
+        public string Month
+        {
+            get
+            {
+                return month;
+            }
+
+            set
+            {
+                month = value;
+            }
+        }
+
         public Repair() { }
-        public Repair(string id, string date, string week, string starting, string ending, string supplier, double amount)
+        public Repair(string id, string date, string week, string starting, string ending, string supplier, double amount,string month)
         {
             this.Id = id;
             this.Date = date;
@@ -118,6 +132,7 @@ namespace TGAccounting.Model
             this.Ending = ending;
             this.Supplier = supplier;
             this.Amount = amount;
+            this.Month = month;
         }
         public static List<Repair> List(string query)
         {
@@ -126,7 +141,7 @@ namespace TGAccounting.Model
             SQLiteDataReader Reader = DBConnect.ReadingLite(query);
             while (Reader.Read())
             {
-                Repair p = new Repair(Reader["id"].ToString(), Reader["date"].ToString(), Reader["week"].ToString(), Reader["starting"].ToString(), Reader["ending"].ToString(), Reader["supplier"].ToString(), Convert.ToDouble(Reader["amount"]));
+                Repair p = new Repair(Reader["id"].ToString(), Reader["date"].ToString(), Reader["week"].ToString(), Reader["starting"].ToString(), Reader["ending"].ToString(), Reader["supplier"].ToString(), Convert.ToDouble(Reader["amount"]),Reader["month"].ToString());
                 s.Add(p);
             }
             Reader.Close();

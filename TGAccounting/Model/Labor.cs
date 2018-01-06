@@ -16,7 +16,8 @@ namespace TGAccounting.Model
         private string ending;
         private string department;
         private double amount;
-       private static List<Labor> s ;
+        private string month;
+        private static List<Labor> s ;
         public string Date
         {
             get
@@ -108,8 +109,21 @@ namespace TGAccounting.Model
             }
         }
 
+        public string Month
+        {
+            get
+            {
+                return month;
+            }
+
+            set
+            {
+                month = value;
+            }
+        }
+
         public Labor() { }
-        public Labor(string id,string date, string week, string starting, string ending, string department, double amount)
+        public Labor(string id,string date, string week, string starting, string ending, string department, double amount,string month)
         {
             this.Id = id;
             this.Date = date;
@@ -118,7 +132,8 @@ namespace TGAccounting.Model
             this.Ending = ending;
             this.Item = department;
             this.Amount = amount;
-        }
+            this.Month = month;
+         }
         public static List<Labor> List(string query)
         {           
              s = new List<Labor>();
@@ -126,7 +141,7 @@ namespace TGAccounting.Model
             SQLiteDataReader Reader = DBConnect.ReadingLite(query);
             while (Reader.Read())
             {
-                Labor p = new Labor(Reader["id"].ToString(),Reader["date"].ToString(), Reader["week"].ToString(), Reader["starting"].ToString(), Convert.ToDateTime(Reader["ending"]).ToString("dd-MMM-yy"), Reader["item"].ToString(),Convert.ToDouble(Reader["amount"]));
+                Labor p = new Labor(Reader["id"].ToString(),Reader["date"].ToString(), Reader["week"].ToString(), Reader["starting"].ToString(), Convert.ToDateTime(Reader["ending"]).ToString("dd-MMM-yy"), Reader["item"].ToString(),Convert.ToDouble(Reader["amount"]),Reader["month"].ToString());
                 s.Add(p);
             }
             Reader.Close();

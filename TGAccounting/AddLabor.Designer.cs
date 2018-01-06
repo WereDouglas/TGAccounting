@@ -139,7 +139,7 @@
             // 
             // amountTxt
             // 
-            this.amountTxt.Location = new System.Drawing.Point(148, 193);
+            this.amountTxt.Location = new System.Drawing.Point(148, 189);
             this.amountTxt.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.amountTxt.Name = "amountTxt";
             this.amountTxt.Size = new System.Drawing.Size(275, 20);

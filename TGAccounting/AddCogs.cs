@@ -20,19 +20,17 @@ namespace TGAccounting
             autocompleteCategory();
             fillUp(Convert.ToDateTime(DateTime.Now.Date));
         }
+        string month;
         private void fillUp(DateTime d)
         {
-
+            month = d.ToString("MMMM");
             int week = Helper.GetIso8601WeekOfYear(d);
             weekLbl.Text = week.ToString();
             startLbl.Text = Helper.GetFirstDayOfWeek(d, CultureInfo.CurrentCulture).Date.ToString("dd-MM-yyyy");
 
             string mylast = startLbl.Text;
             string myStart = Convert.ToDateTime(startLbl.Text).AddDays(-7).Date.ToString("dd-MM-yyyy");
-
             startLbl.Text = Convert.ToDateTime(startLbl.Text).AddDays(-7).Date.ToString("dd-MM-yyyy");
-
-
             endLbl.Text = Helper.GetFirstDayOfWeek(d, CultureInfo.CurrentCulture).Date.ToString("dd-MM-yyyy");
             // startLbl.Text = Convert.ToDateTime(mylast).AddDays(-7).Date.ToString("dd-MM-yyyy");
 
@@ -85,7 +83,7 @@ namespace TGAccounting
 
                 if (MessageBox.Show("YES or No?", "Are you sure you want to update the current existing information  ? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
-                    Cogs j = new Cogs(existingID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), weekLbl.Text, startLbl.Text, endLbl.Text, categoryTxt.Text, Convert.ToDouble(begTxt.Text), Convert.ToDouble(endTxt.Text), Convert.ToDouble(cogsTxt.Text));
+                    Cogs j = new Cogs(existingID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), weekLbl.Text, startLbl.Text, endLbl.Text, categoryTxt.Text, Convert.ToDouble(begTxt.Text), Convert.ToDouble(endTxt.Text), Convert.ToDouble(cogsTxt.Text),month);
                     DBConnect.Update(j, existingID);
                     existingID = "";
                     return;
@@ -93,7 +91,7 @@ namespace TGAccounting
             }
             existingID = "";
             string ID = Guid.NewGuid().ToString();
-            Cogs i = new Cogs(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), weekLbl.Text, startLbl.Text, endLbl.Text,categoryTxt.Text, Convert.ToDouble(begTxt.Text), Convert.ToDouble(endTxt.Text), Convert.ToDouble(cogsTxt.Text));
+            Cogs i = new Cogs(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), weekLbl.Text, startLbl.Text, endLbl.Text,categoryTxt.Text, Convert.ToDouble(begTxt.Text), Convert.ToDouble(endTxt.Text), Convert.ToDouble(cogsTxt.Text),month);
             DBConnect.Insert(i);
             MessageBox.Show("Information Saved ");
             categoryTxt.Text = "";
@@ -132,6 +130,15 @@ namespace TGAccounting
             try
             {
 
+                month = Cogs.List("SELECT * from cogs WHERE category='" + categoryTxt.Text + "' AND week = '" + weekLbl.Text + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Month.ToString();
+            }
+            catch (Exception y)
+            {
+                // Helper.Exceptions(y.Message, "on adding inventory auto fill the category list selected item");
+            }
+            try
+            {
+
                 existingID = Cogs.List("SELECT * from cogs WHERE category='" + categoryTxt.Text + "' AND week = '" + weekLbl.Text + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Id.ToString();
             }
             catch (Exception y)
@@ -161,7 +168,8 @@ namespace TGAccounting
 
             } catch {
 
-                MessageBox.Show("Please input the purchases for " + categoryTxt.Text);
+                //  MessageBox.Show("Please input the purchases for " + categoryTxt.Text);
+                cogsTxt.BackColor = Color.Red;
                 return;
             }
         }

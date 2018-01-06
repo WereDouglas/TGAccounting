@@ -43,6 +43,11 @@
       <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MICROSOFT.OFFICE.INTEROP.EXCEL, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\..\..\..\..\..\Windows\Installer\$PatchCache$\Managed\00005109110000000100000000F01FEC\15.0.4420\MICROSOFT.OFFICE.INTEROP.EXCEL.DLL</HintPath>
+    </Reference>
     <Reference Include="Microsoft.ReportViewer.Common, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="System" />
@@ -74,12 +79,6 @@
     <Compile Include="AddBudget.Designer.cs">
       <DependentUpon>AddBudget.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddCategory.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddCategory.Designer.cs">
-      <DependentUpon>AddCategory.cs</DependentUpon>
-    </Compile>
     <Compile Include="AddCogs.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,12 +90,6 @@
     </Compile>
     <Compile Include="AddComp.Designer.cs">
       <DependentUpon>AddComp.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AddDepartment.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddDepartment.Designer.cs">
-      <DependentUpon>AddDepartment.cs</DependentUpon>
     </Compile>
     <Compile Include="AddEquipment.cs">
       <SubType>Form</SubType>
@@ -115,12 +108,6 @@
     </Compile>
     <Compile Include="AddInventory.Designer.cs">
       <DependentUpon>AddInventory.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AddItem.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddItem.Designer.cs">
-      <DependentUpon>AddItem.cs</DependentUpon>
     </Compile>
     <Compile Include="AddLabor.cs">
       <SubType>Form</SubType>
@@ -195,12 +182,6 @@
       <DependentUpon>DataForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DBConnect.cs" />
-    <Compile Include="DepartmentForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DepartmentForm.Designer.cs">
-      <DependentUpon>DepartmentForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="EventDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -221,12 +202,18 @@
     <Compile Include="HomeForm.Designer.cs">
       <DependentUpon>HomeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ItemInfo.cs" />
-    <Compile Include="LaborGrid.cs">
+    <Compile Include="ImportDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LaborGrid.Designer.cs">
-      <DependentUpon>LaborGrid.cs</DependentUpon>
+    <Compile Include="ImportDialog.Designer.cs">
+      <DependentUpon>ImportDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ItemInfo.cs" />
+    <Compile Include="LoadingWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoadingWindow.Designer.cs">
+      <DependentUpon>LoadingWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
@@ -269,17 +256,11 @@
     <EmbeddedResource Include="AddBudget.resx">
       <DependentUpon>AddBudget.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddCategory.resx">
-      <DependentUpon>AddCategory.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="AddCogs.resx">
       <DependentUpon>AddCogs.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddComp.resx">
       <DependentUpon>AddComp.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AddDepartment.resx">
-      <DependentUpon>AddDepartment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddEquipment.resx">
       <DependentUpon>AddEquipment.cs</DependentUpon>
@@ -289,9 +270,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddInventory.resx">
       <DependentUpon>AddInventory.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AddItem.resx">
-      <DependentUpon>AddItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddLabor.resx">
       <DependentUpon>AddLabor.cs</DependentUpon>
@@ -329,9 +307,6 @@
     <EmbeddedResource Include="DataForm.resx">
       <DependentUpon>DataForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DepartmentForm.resx">
-      <DependentUpon>DepartmentForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="EventDialog.resx">
       <DependentUpon>EventDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -341,8 +316,11 @@
     <EmbeddedResource Include="HomeForm.resx">
       <DependentUpon>HomeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LaborGrid.resx">
-      <DependentUpon>LaborGrid.cs</DependentUpon>
+    <EmbeddedResource Include="ImportDialog.resx">
+      <DependentUpon>ImportDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoadingWindow.resx">
+      <DependentUpon>LoadingWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
@@ -408,6 +386,10 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Microsoft-Excel-2013-01-24.png" />
+    <None Include="Resources\Microsoft-Excel-2013-01-24 %281%29.png" />
+    <None Include="Resources\loadings.gif" />
+    <None Include="Resources\loading %281%29.gif" />
     <Content Include="SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

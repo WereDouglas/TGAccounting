@@ -41,15 +41,7 @@ namespace TGAccounting
         }
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            using (AddCategory form = new AddCategory())
-            {
-                DialogResult dr = form.ShowDialog();
-                if (dr == DialogResult.OK)
-                {                   
-                    LoadData();
-
-                }
-            }
+           
         }
 
         private void dtGrid_CellClick(object sender, DataGridViewCellEventArgs e)

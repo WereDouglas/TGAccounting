@@ -20,9 +20,10 @@ namespace TGAccounting
             autocomplete();
             fillUp(Convert.ToDateTime(DateTime.Now.Date));
         }
+        string month;
         private void fillUp(DateTime d)
         {
-
+            month = d.ToString("MMMM");
             int week = Helper.GetIso8601WeekOfYear(d);
             weekLbl.Text = week.ToString();
             startLbl.Text = Helper.GetFirstDayOfWeek(d, CultureInfo.CurrentCulture).Date.ToString("dd-MM-yyyy");
@@ -42,9 +43,10 @@ namespace TGAccounting
         private void autocomplete()
         {
             AutoCompleteStringCollection AutoItem = new AutoCompleteStringCollection();
-            foreach (Department r in Department.List())
+            foreach (Labor r in Labor.List("SELECT * from labor").GroupBy(x => x.Item, (key, group) => group.First()))
             {
-                AutoItem.Add(r.Name);
+                AutoItem.Add(r.Item);
+               // itemTxt.Items.Add(r.Item);
             }
             itemTxt.AutoCompleteMode = AutoCompleteMode.Suggest;
             itemTxt.AutoCompleteSource = AutoCompleteSource.CustomSource;
@@ -79,7 +81,7 @@ namespace TGAccounting
             {
                 if (MessageBox.Show("YES or No?", "Are you sure you want to update the current existing information  ? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
-                    Labor j = new Labor(existingID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), weekLbl.Text, startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text));
+                    Labor j = new Labor(existingID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), weekLbl.Text, startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text),month);
                     DBConnect.Update(j, existingID);
                     existingID = "";
                     return;
@@ -88,7 +90,7 @@ namespace TGAccounting
             existingID = "";
 
             string ID = Guid.NewGuid().ToString();
-            Labor i = new Labor(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), weekLbl.Text, startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text));
+            Labor i = new Labor(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), weekLbl.Text, startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text),month);
             DBConnect.Insert(i);
             MessageBox.Show("Information Saved ");
             itemTxt.Text = "";
@@ -131,6 +133,15 @@ namespace TGAccounting
             {
 
                 amountTxt.Text = Labor.List("SELECT * from labor WHERE department='" + itemTxt.Text + "' AND week = '" + weekLbl.Text + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Amount.ToString();
+            }
+            catch (Exception y)
+            {
+                // Helper.Exceptions(y.Message, "on adding inventory auto fill the category list selected item");
+            }
+            try
+            {
+
+               month = Labor.List("SELECT * from labor WHERE department='" + itemTxt.Text + "' AND week = '" + weekLbl.Text + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Month.ToString();
             }
             catch (Exception y)
             {

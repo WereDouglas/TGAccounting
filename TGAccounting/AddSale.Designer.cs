@@ -34,9 +34,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.categoryTxt = new System.Windows.Forms.ComboBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.monthLbl = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.categoryTxt = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.amountTxt = new System.Windows.Forms.TextBox();
@@ -115,9 +115,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.LightGray;
-            this.panel1.Controls.Add(this.categoryTxt);
-            this.panel1.Controls.Add(this.textBox2);
+            this.panel1.Controls.Add(this.monthLbl);
             this.panel1.Controls.Add(this.label8);
+            this.panel1.Controls.Add(this.categoryTxt);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.amountTxt);
@@ -137,6 +137,28 @@
             this.panel1.Size = new System.Drawing.Size(521, 325);
             this.panel1.TabIndex = 10;
             // 
+            // monthLbl
+            // 
+            this.monthLbl.AutoSize = true;
+            this.monthLbl.BackColor = System.Drawing.Color.LightGray;
+            this.monthLbl.Location = new System.Drawing.Point(154, 275);
+            this.monthLbl.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.monthLbl.Name = "monthLbl";
+            this.monthLbl.Size = new System.Drawing.Size(18, 22);
+            this.monthLbl.TabIndex = 24;
+            this.monthLbl.Text = "#";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.LightGray;
+            this.label8.Location = new System.Drawing.Point(23, 275);
+            this.label8.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(53, 22);
+            this.label8.TabIndex = 23;
+            this.label8.Text = "Month";
+            // 
             // categoryTxt
             // 
             this.categoryTxt.FormattingEnabled = true;
@@ -144,26 +166,6 @@
             this.categoryTxt.Name = "categoryTxt";
             this.categoryTxt.Size = new System.Drawing.Size(310, 30);
             this.categoryTxt.TabIndex = 2;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(146, 265);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(312, 26);
-            this.textBox2.TabIndex = 4;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.BackColor = System.Drawing.Color.LightGray;
-            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label8.Location = new System.Drawing.Point(23, 260);
-            this.label8.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(101, 22);
-            this.label8.TabIndex = 23;
-            this.label8.Text = "% on  Budget";
             // 
             // label7
             // 
@@ -189,7 +191,7 @@
             // 
             // amountTxt
             // 
-            this.amountTxt.Location = new System.Drawing.Point(146, 228);
+            this.amountTxt.Location = new System.Drawing.Point(148, 231);
             this.amountTxt.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.amountTxt.Name = "amountTxt";
             this.amountTxt.Size = new System.Drawing.Size(312, 26);
@@ -314,9 +316,9 @@
         private System.Windows.Forms.Label weekLbl;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox amountTxt;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox categoryTxt;
+        private System.Windows.Forms.Label monthLbl;
+        private System.Windows.Forms.Label label8;
     }
 }

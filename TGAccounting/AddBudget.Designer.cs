@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddBudget));
-            this.pctTxt = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -45,29 +43,10 @@
             this.yearTxt = new System.Windows.Forms.TextBox();
             this.itemCbx = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.pctTxt = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // pctTxt
-            // 
-            this.pctTxt.Location = new System.Drawing.Point(149, 148);
-            this.pctTxt.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.pctTxt.Name = "pctTxt";
-            this.pctTxt.Size = new System.Drawing.Size(312, 20);
-            this.pctTxt.TabIndex = 4;
-            this.pctTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.pctTxt_KeyPress);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.BackColor = System.Drawing.Color.LightGray;
-            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label8.Location = new System.Drawing.Point(28, 152);
-            this.label8.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(71, 16);
-            this.label8.TabIndex = 23;
-            this.label8.Text = "% on  Budget";
             // 
             // label1
             // 
@@ -228,6 +207,27 @@
             this.label2.TabIndex = 30;
             this.label2.Text = "Grouping";
             // 
+            // pctTxt
+            // 
+            this.pctTxt.Location = new System.Drawing.Point(149, 148);
+            this.pctTxt.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.pctTxt.Name = "pctTxt";
+            this.pctTxt.Size = new System.Drawing.Size(312, 20);
+            this.pctTxt.TabIndex = 4;
+            this.pctTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.pctTxt_KeyPress);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.LightGray;
+            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label8.Location = new System.Drawing.Point(28, 152);
+            this.label8.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(71, 16);
+            this.label8.TabIndex = 23;
+            this.label8.Text = "% on  Budget";
+            // 
             // AddBudget
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 16F);
@@ -252,8 +252,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.TextBox pctTxt;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
@@ -268,5 +266,7 @@
         private System.Windows.Forms.TextBox groupTxt;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox catTxt;
+        private System.Windows.Forms.TextBox pctTxt;
+        private System.Windows.Forms.Label label8;
     }
 }

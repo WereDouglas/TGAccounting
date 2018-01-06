@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TGAccounting.Model
 {
-   public class Expense
+    public class Expense
     {
         private string id;
         private string date;
@@ -15,11 +15,11 @@ namespace TGAccounting.Model
         private string starting;
         private string ending;
         private string name;
-        private string category;       
+        private string category;
         private double amount;
-      
+        private string month;
 
-        private static List<Expense> s ;
+        private static List<Expense> s;
 
         public string Id
         {
@@ -112,7 +112,7 @@ namespace TGAccounting.Model
             }
         }
 
-        
+
 
         public double Amount
         {
@@ -127,10 +127,22 @@ namespace TGAccounting.Model
             }
         }
 
-       
+        public string Month
+        {
+            get
+            {
+                return month;
+            }
+
+            set
+            {
+                month = value;
+            }
+        }
+
         public Expense() { }
 
-        public Expense(string id, string date, string week, string starting, string ending, string name, string category,double amount)
+        public Expense(string id, string date, string week, string starting, string ending, string name, string category, double amount, string month)
         {
             this.id = id;
             this.date = date;
@@ -139,19 +151,19 @@ namespace TGAccounting.Model
             this.ending = ending;
             this.name = name;
             this.category = category;
-           
+            this.month = month;
             this.amount = amount;
-           
+
         }
 
         public static List<Expense> List(string query)
-        {           
-             s = new List<Expense>();
+        {
+            s = new List<Expense>();
 
             SQLiteDataReader Reader = DBConnect.ReadingLite(query);
             while (Reader.Read())
             {
-                Expense p = new Expense(Reader["id"].ToString(),Reader["date"].ToString(), Reader["week"].ToString(), Reader["starting"].ToString(), Convert.ToDateTime(Reader["ending"]).ToString("dd-MMMM-yy"), Reader["name"].ToString(), Reader["category"].ToString(),Convert.ToDouble(Reader["amount"]));
+                Expense p = new Expense(Reader["id"].ToString(), Reader["date"].ToString(), Reader["week"].ToString(), Reader["starting"].ToString(), Convert.ToDateTime(Reader["ending"]).ToString("dd-MMMM-yy"), Reader["name"].ToString(), Reader["category"].ToString(), Convert.ToDouble(Reader["amount"]), Reader["month"].ToString());
                 s.Add(p);
             }
             Reader.Close();

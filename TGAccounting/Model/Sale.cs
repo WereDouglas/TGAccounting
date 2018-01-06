@@ -17,6 +17,7 @@ namespace TGAccounting.Model
         private string item;
         private double amount;
         private string category;
+        private string month;
         private static List<Sale> s ;
         public string Date
         {
@@ -122,8 +123,21 @@ namespace TGAccounting.Model
             }
         }
 
+        public string Month
+        {
+            get
+            {
+                return month;
+            }
+
+            set
+            {
+                month = value;
+            }
+        }
+
         public Sale() { }
-        public Sale(string id,string date, string week, string starting, string ending, string item, double amount,string category)
+        public Sale(string id,string date, string week, string starting, string ending, string item, double amount,string category,string month)
         {
             this.Id = id;
             this.Date = date;
@@ -133,6 +147,7 @@ namespace TGAccounting.Model
             this.Item = item;
             this.Amount = amount;
             this.Category = category;
+            this.Month = month;
         }
         public static List<Sale> List(string query)
         {           
@@ -141,7 +156,7 @@ namespace TGAccounting.Model
             SQLiteDataReader Reader = DBConnect.ReadingLite(query);
             while (Reader.Read())
             {
-                Sale p = new Sale(Reader["id"].ToString(), Reader["date"].ToString(), Reader["week"].ToString(), Reader["starting"].ToString(),Convert.ToDateTime( Reader["ending"]).ToString("dd-MMM-yy"), Reader["item"].ToString(),Convert.ToDouble(Reader["amount"]), Reader["category"].ToString());
+                Sale p = new Sale(Reader["id"].ToString(), Reader["date"].ToString(), Reader["week"].ToString(), Reader["starting"].ToString(),Convert.ToDateTime( Reader["ending"]).ToString("dd-MMM-yy"), Reader["item"].ToString(),Convert.ToDouble(Reader["amount"]), Reader["category"].ToString(),Reader["month"].ToString());
                 s.Add(p);
             }
             Reader.Close();
