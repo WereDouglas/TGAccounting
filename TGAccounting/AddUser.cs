@@ -68,40 +68,7 @@ namespace TGAccounting
         private void button2_Click(object sender, EventArgs e)
         {
            
-            if (nameTxt.Text == "")
-            {
-                nameTxt.BackColor = Color.Red;
-                return;
-            }
-            if (contactTxt.Text == "")
-            {
-                contactTxt.BackColor = Color.Red;
-                return;
-            }
-
-            if (pass2Txt.Text != passTxt.Text)
-            {
-                MessageBox.Show("Passwords do not match");
-                passTxt.BackColor = Color.Red;
-                return;
-
-            }
-            if (String.IsNullOrEmpty(passTxt.Text))
-            {
-                passTxt.BackColor = Color.Red;
-                return;
-            }
-
-            MemoryStream stream = Helper.ImageToStream(imgCapture.Image, System.Drawing.Imaging.ImageFormat.Jpeg);
-            string fullimage = Helper.ImageToBase64(stream);
-            string id = Guid.NewGuid().ToString();
-            User _user = new User(id,  nameTxt.Text, contactTxt.Text, Helper.MD5Hash(pass2Txt.Text),  fullimage);
-            if (DBConnect.Insert(_user) != "")
-            {                
-                MessageBox.Show("Information Saved");
-                this.DialogResult = DialogResult.OK;
-                this.Dispose();
-            }
+           
         }
         
        
@@ -162,6 +129,49 @@ namespace TGAccounting
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (nameTxt.Text == "")
+            {
+                nameTxt.BackColor = Color.Red;
+                return;
+            }
+            if (contactTxt.Text == "")
+            {
+                contactTxt.BackColor = Color.Red;
+                return;
+            }
+
+            if (pass2Txt.Text != passTxt.Text)
+            {
+                MessageBox.Show("Passwords do not match");
+                passTxt.BackColor = Color.Red;
+                return;
+
+            }
+            if (String.IsNullOrEmpty(passTxt.Text))
+            {
+                passTxt.BackColor = Color.Red;
+                return;
+            }
+
+            MemoryStream stream = Helper.ImageToStream(imgCapture.Image, System.Drawing.Imaging.ImageFormat.Jpeg);
+            string fullimage = Helper.ImageToBase64(stream);
+            string id = Guid.NewGuid().ToString();
+            User _user = new User(id, nameTxt.Text, contactTxt.Text, Helper.MD5Hash(pass2Txt.Text), fullimage);
+            if (DBConnect.Insert(_user) != "")
+            {
+                MessageBox.Show("Information Saved");
+                this.DialogResult = DialogResult.OK;
+                this.Dispose();
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
             this.Dispose();

@@ -10,7 +10,7 @@ namespace TGAccounting.Model
    public class Report
     {
         private string date;
-        private string week;
+        private int week;
         private string ending;
         private string category;/**sales COGS, labor/payroll***/
         private string sub;
@@ -34,7 +34,7 @@ namespace TGAccounting.Model
             }
         }
 
-        public string Week
+        public int Week
         {
             get
             {
@@ -166,7 +166,7 @@ namespace TGAccounting.Model
 
         public Report() { }
 
-        public Report(string date, string week, string ending, string category, string item, double amount, double p1, double ytd, double p2,string sub,string main)
+        public Report(string date, int week, string ending, string category, string item, double amount, double p1, double ytd, double p2,string sub,string main)
         {
             this.Date = date;
             this.Week = week;

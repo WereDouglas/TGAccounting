@@ -11,7 +11,7 @@ namespace TGAccounting.Model
     {
         private string id;
         private string date;
-        private string week;
+        private int week;
         private string starting;
         private string ending;
         private string name;
@@ -51,7 +51,7 @@ namespace TGAccounting.Model
             }
         }
 
-        public string Week
+        public int Week
         {
             get
             {
@@ -185,7 +185,7 @@ namespace TGAccounting.Model
 
         public Inventory() { }
 
-        public Inventory(string id, string date, string week, string starting, string ending, string name, string category,double amount,double begining,double finishing,double cog,string month)
+        public Inventory(string id, string date, int week, string starting, string ending, string name, string category,double amount,double begining,double finishing,double cog,string month)
         {
             this.id = id;
             this.date = date;
@@ -210,17 +210,40 @@ namespace TGAccounting.Model
             SQLiteDataReader Reader = DBConnect.ReadingLite(query);
             while (Reader.Read())
             {
-                double begining = Cogs.List("SELECT * from cogs WHERE category= '" + Reader["category"].ToString() + "' AND week = '" + Reader["week"].ToString() + "' AND date ='"+Helper.CurrentYear+"'").Sum(t => t.BeginningInventory);
-                double ending = Cogs.List("SELECT * from cogs WHERE category= '" + Reader["category"].ToString() + "' AND week = '" + Reader["week"].ToString() + "' AND date ='" + Helper.CurrentYear + "'").Sum(t => t.EndingInventory);
-                double cg = Cogs.List("SELECT * from cogs WHERE category= '" + Reader["category"].ToString() + "' AND week = '" + Reader["week"].ToString() + "' AND date ='" + Helper.CurrentYear + "'").Sum(t => t.Cost);
+                double begining = Cogs.List("SELECT * from cogs WHERE category= '" + Reader["category"].ToString() + "' AND week = '" + Convert.ToInt32(Reader["week"]) + "' AND date ='"+Helper.CurrentYear+"'").Sum(t => t.BeginningInventory);
+                double ending = Cogs.List("SELECT * from cogs WHERE category= '" + Reader["category"].ToString() + "' AND week = '" + Convert.ToInt32(Reader["week"]) + "' AND date ='" + Helper.CurrentYear + "'").Sum(t => t.EndingInventory);
+                double cg = Cogs.List("SELECT * from cogs WHERE category= '" + Reader["category"].ToString() + "' AND week = '" + Convert.ToInt32(Reader["week"]) + "' AND date ='" + Helper.CurrentYear + "'").Sum(t => t.Cost);
 
-                Inventory p = new Inventory(Reader["id"].ToString(),Reader["date"].ToString(), Reader["week"].ToString(), Reader["starting"].ToString(),Convert.ToDateTime( Reader["ending"]).ToString("dd-MMM-yy"), Reader["name"].ToString(), Reader["category"].ToString(),Convert.ToDouble(Reader["amount"]),begining,ending,cg,Reader["month"].ToString());
+                Inventory p = new Inventory(Reader["id"].ToString(),Reader["date"].ToString(), Convert.ToInt32(Reader["week"]), Reader["starting"].ToString(),Convert.ToDateTime( Reader["ending"]).ToString("dd-MMM-yy"), Reader["name"].ToString(), Reader["category"].ToString(),Convert.ToDouble(Reader["amount"]),begining,ending,cg,Reader["month"].ToString());
                 s.Add(p);
             }
             Reader.Close();
 
             return s;
 
+        }
+        public static List<String> ListCategory(string query)
+        {
+           List<string> s = new List<String>();
+            SQLiteDataReader Reader = DBConnect.ReadingLite(query);
+            while (Reader.Read())
+            {
+                   s.Add(Reader["category"].ToString());
+            }
+            Reader.Close();
+            return s;
+
+        }
+        public static List<string> ListName(string query)
+        {
+            List<string> s = new List<String>();
+            SQLiteDataReader Reader = DBConnect.ReadingLite(query);
+            while (Reader.Read())
+            {
+                s.Add(Reader["name"].ToString());
+            }
+            Reader.Close();
+            return s;
         }
     }
 }

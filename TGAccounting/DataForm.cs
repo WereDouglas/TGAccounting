@@ -208,7 +208,7 @@ namespace TGAccounting
            
             try
             {
-                Sale _c = new Sale(saleGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), saleGrid.Rows[e.RowIndex].Cells["date"].Value.ToString(), saleGrid.Rows[e.RowIndex].Cells["week"].Value.ToString(), saleGrid.Rows[e.RowIndex].Cells["starting"].Value.ToString(), saleGrid.Rows[e.RowIndex].Cells["ending"].Value.ToString(), saleGrid.Rows[e.RowIndex].Cells["item"].Value.ToString(), Convert.ToDouble(saleGrid.Rows[e.RowIndex].Cells["amount"].Value), saleGrid.Rows[e.RowIndex].Cells["category"].Value.ToString(), saleGrid.Rows[e.RowIndex].Cells["month"].Value.ToString());
+                Sale _c = new Sale(saleGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), saleGrid.Rows[e.RowIndex].Cells["date"].Value.ToString(), Convert.ToInt32(saleGrid.Rows[e.RowIndex].Cells["week"].Value), saleGrid.Rows[e.RowIndex].Cells["starting"].Value.ToString(), saleGrid.Rows[e.RowIndex].Cells["ending"].Value.ToString(), saleGrid.Rows[e.RowIndex].Cells["item"].Value.ToString(), Convert.ToDouble(saleGrid.Rows[e.RowIndex].Cells["amount"].Value), saleGrid.Rows[e.RowIndex].Cells["category"].Value.ToString(), saleGrid.Rows[e.RowIndex].Cells["month"].Value.ToString());
                 DBConnect.Update(_c, saleGrid.Rows[e.RowIndex].Cells["id"].Value.ToString());
             }
             catch (Exception c)
@@ -234,7 +234,7 @@ namespace TGAccounting
           
             try
             {
-                Labor _c = new Labor(laborGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), laborGrid.Rows[e.RowIndex].Cells["date"].Value.ToString(), laborGrid.Rows[e.RowIndex].Cells["week"].Value.ToString(), laborGrid.Rows[e.RowIndex].Cells["starting"].Value.ToString(), laborGrid.Rows[e.RowIndex].Cells["ending"].Value.ToString(), laborGrid.Rows[e.RowIndex].Cells["department"].Value.ToString(), Convert.ToDouble(laborGrid.Rows[e.RowIndex].Cells["amount"].Value), laborGrid.Rows[e.RowIndex].Cells["month"].Value.ToString());
+                Labor _c = new Labor(laborGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), laborGrid.Rows[e.RowIndex].Cells["date"].Value.ToString(),Convert.ToInt32( laborGrid.Rows[e.RowIndex].Cells["week"].Value), laborGrid.Rows[e.RowIndex].Cells["starting"].Value.ToString(), laborGrid.Rows[e.RowIndex].Cells["ending"].Value.ToString(), laborGrid.Rows[e.RowIndex].Cells["department"].Value.ToString(), Convert.ToDouble(laborGrid.Rows[e.RowIndex].Cells["amount"].Value), laborGrid.Rows[e.RowIndex].Cells["month"].Value.ToString());
                 DBConnect.Update(_c, laborGrid.Rows[e.RowIndex].Cells["id"].Value.ToString());
             }
             catch (Exception c)
@@ -261,7 +261,7 @@ namespace TGAccounting
            
             try
             {
-                Taxes _c = new Taxes(taxGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), taxGrid.Rows[e.RowIndex].Cells["date"].Value.ToString(), taxGrid.Rows[e.RowIndex].Cells["week"].Value.ToString(), taxGrid.Rows[e.RowIndex].Cells["starting"].Value.ToString(), taxGrid.Rows[e.RowIndex].Cells["ending"].Value.ToString(), taxGrid.Rows[e.RowIndex].Cells["department"].Value.ToString(), Convert.ToDouble(taxGrid.Rows[e.RowIndex].Cells["amount"].Value), taxGrid.Rows[e.RowIndex].Cells["month"].Value.ToString());
+                Taxes _c = new Taxes(taxGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), taxGrid.Rows[e.RowIndex].Cells["date"].Value.ToString(),Convert.ToInt32(taxGrid.Rows[e.RowIndex].Cells["week"].Value), taxGrid.Rows[e.RowIndex].Cells["starting"].Value.ToString(), taxGrid.Rows[e.RowIndex].Cells["ending"].Value.ToString(), taxGrid.Rows[e.RowIndex].Cells["department"].Value.ToString(), Convert.ToDouble(taxGrid.Rows[e.RowIndex].Cells["amount"].Value), taxGrid.Rows[e.RowIndex].Cells["month"].Value.ToString());
                 DBConnect.Update(_c, taxGrid.Rows[e.RowIndex].Cells["id"].Value.ToString());
             }
             catch (Exception c)
@@ -310,7 +310,7 @@ namespace TGAccounting
            
             try
             {
-                Supplies _c = new Supplies(supData.Rows[e.RowIndex].Cells["id"].Value.ToString(), supData.Rows[e.RowIndex].Cells["date"].Value.ToString(), supData.Rows[e.RowIndex].Cells["week"].Value.ToString(), supData.Rows[e.RowIndex].Cells["starting"].Value.ToString(), supData.Rows[e.RowIndex].Cells["ending"].Value.ToString(), supData.Rows[e.RowIndex].Cells["supplier"].Value.ToString(), Convert.ToDouble(supData.Rows[e.RowIndex].Cells["amount"].Value), supData.Rows[e.RowIndex].Cells["month"].Value.ToString());
+                Supplies _c = new Supplies(supData.Rows[e.RowIndex].Cells["id"].Value.ToString(), supData.Rows[e.RowIndex].Cells["date"].Value.ToString(),Convert.ToInt32(supData.Rows[e.RowIndex].Cells["week"].Value), supData.Rows[e.RowIndex].Cells["starting"].Value.ToString(), supData.Rows[e.RowIndex].Cells["ending"].Value.ToString(), supData.Rows[e.RowIndex].Cells["supplier"].Value.ToString(), Convert.ToDouble(supData.Rows[e.RowIndex].Cells["amount"].Value), supData.Rows[e.RowIndex].Cells["month"].Value.ToString());
                 DBConnect.Update(_c, supData.Rows[e.RowIndex].Cells["id"].Value.ToString());
             }
             catch (Exception c)
@@ -335,7 +335,7 @@ namespace TGAccounting
 
             try
             {
-                Repair _c = new Repair(repGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), repGrid.Rows[e.RowIndex].Cells["date"].Value.ToString(), repGrid.Rows[e.RowIndex].Cells["week"].Value.ToString(), repGrid.Rows[e.RowIndex].Cells["starting"].Value.ToString(), repGrid.Rows[e.RowIndex].Cells["ending"].Value.ToString(), repGrid.Rows[e.RowIndex].Cells["supplier"].Value.ToString(), Convert.ToDouble(repGrid.Rows[e.RowIndex].Cells["amount"].Value.ToString()), repGrid.Rows[e.RowIndex].Cells["month"].Value.ToString());
+                Repair _c = new Repair(repGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), repGrid.Rows[e.RowIndex].Cells["date"].Value.ToString(), Convert.ToInt32(repGrid.Rows[e.RowIndex].Cells["week"].Value), repGrid.Rows[e.RowIndex].Cells["starting"].Value.ToString(), repGrid.Rows[e.RowIndex].Cells["ending"].Value.ToString(), repGrid.Rows[e.RowIndex].Cells["supplier"].Value.ToString(), Convert.ToDouble(repGrid.Rows[e.RowIndex].Cells["amount"].Value.ToString()), repGrid.Rows[e.RowIndex].Cells["month"].Value.ToString());
                 DBConnect.Update(_c, repGrid.Rows[e.RowIndex].Cells["id"].Value.ToString());
             }
             catch (Exception c)
@@ -359,7 +359,7 @@ namespace TGAccounting
 
             try
             {
-                Equipment _c = new Equipment(equipGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), equipGrid.Rows[e.RowIndex].Cells["date"].Value.ToString(), equipGrid.Rows[e.RowIndex].Cells["week"].Value.ToString(), equipGrid.Rows[e.RowIndex].Cells["starting"].Value.ToString(), equipGrid.Rows[e.RowIndex].Cells["ending"].Value.ToString(), equipGrid.Rows[e.RowIndex].Cells["supplier"].Value.ToString(), Convert.ToDouble(equipGrid.Rows[e.RowIndex].Cells["amount"].Value.ToString()), equipGrid.Rows[e.RowIndex].Cells["month"].Value.ToString());
+                Equipment _c = new Equipment(equipGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), equipGrid.Rows[e.RowIndex].Cells["date"].Value.ToString(),Convert.ToInt32(equipGrid.Rows[e.RowIndex].Cells["week"].Value), equipGrid.Rows[e.RowIndex].Cells["starting"].Value.ToString(), equipGrid.Rows[e.RowIndex].Cells["ending"].Value.ToString(), equipGrid.Rows[e.RowIndex].Cells["supplier"].Value.ToString(), Convert.ToDouble(equipGrid.Rows[e.RowIndex].Cells["amount"].Value.ToString()), equipGrid.Rows[e.RowIndex].Cells["month"].Value.ToString());
                 DBConnect.Update(_c, equipGrid.Rows[e.RowIndex].Cells["id"].Value.ToString());
             }
             catch (Exception c)
@@ -384,7 +384,7 @@ namespace TGAccounting
           
             try
             {
-                Inventory _c = new Inventory(InventoryGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), InventoryGrid.Rows[e.RowIndex].Cells["date"].Value.ToString(), InventoryGrid.Rows[e.RowIndex].Cells["week"].Value.ToString(), InventoryGrid.Rows[e.RowIndex].Cells["starting"].Value.ToString(), InventoryGrid.Rows[e.RowIndex].Cells["ending"].Value.ToString(), InventoryGrid.Rows[e.RowIndex].Cells["name"].Value.ToString(), InventoryGrid.Rows[e.RowIndex].Cells["category"].Value.ToString(), Convert.ToDouble(InventoryGrid.Rows[e.RowIndex].Cells["amount"].Value.ToString()),0,0,0, InventoryGrid.Rows[e.RowIndex].Cells["month"].Value.ToString());
+                Inventory _c = new Inventory(InventoryGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), InventoryGrid.Rows[e.RowIndex].Cells["date"].Value.ToString(),Convert.ToInt32(InventoryGrid.Rows[e.RowIndex].Cells["week"].Value), InventoryGrid.Rows[e.RowIndex].Cells["starting"].Value.ToString(), InventoryGrid.Rows[e.RowIndex].Cells["ending"].Value.ToString(), InventoryGrid.Rows[e.RowIndex].Cells["name"].Value.ToString(), InventoryGrid.Rows[e.RowIndex].Cells["category"].Value.ToString(), Convert.ToDouble(InventoryGrid.Rows[e.RowIndex].Cells["amount"].Value.ToString()),0,0,0, InventoryGrid.Rows[e.RowIndex].Cells["month"].Value.ToString());
                 DBConnect.Update(_c, InventoryGrid.Rows[e.RowIndex].Cells["id"].Value.ToString());
             }
             catch (Exception c)
@@ -414,7 +414,7 @@ namespace TGAccounting
             }
             try
             {
-                Expense _c = new Expense(expenseGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), expenseGrid.Rows[e.RowIndex].Cells["date"].Value.ToString(), expenseGrid.Rows[e.RowIndex].Cells["week"].Value.ToString(), expenseGrid.Rows[e.RowIndex].Cells["starting"].Value.ToString(), expenseGrid.Rows[e.RowIndex].Cells["ending"].Value.ToString(), expenseGrid.Rows[e.RowIndex].Cells["name"].Value.ToString(), expenseGrid.Rows[e.RowIndex].Cells["category"].Value.ToString(), Convert.ToDouble(expenseGrid.Rows[e.RowIndex].Cells["amount"].Value.ToString()), expenseGrid.Rows[e.RowIndex].Cells["month"].Value.ToString());
+                Expense _c = new Expense(expenseGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), expenseGrid.Rows[e.RowIndex].Cells["date"].Value.ToString(),Convert.ToInt32(expenseGrid.Rows[e.RowIndex].Cells["week"].Value), expenseGrid.Rows[e.RowIndex].Cells["starting"].Value.ToString(), expenseGrid.Rows[e.RowIndex].Cells["ending"].Value.ToString(), expenseGrid.Rows[e.RowIndex].Cells["name"].Value.ToString(), expenseGrid.Rows[e.RowIndex].Cells["category"].Value.ToString(), Convert.ToDouble(expenseGrid.Rows[e.RowIndex].Cells["amount"].Value.ToString()), expenseGrid.Rows[e.RowIndex].Cells["month"].Value.ToString());
                 DBConnect.Update(_c, expenseGrid.Rows[e.RowIndex].Cells["id"].Value.ToString());
             }
             catch (Exception c)
@@ -450,7 +450,7 @@ namespace TGAccounting
           
             try
             {
-                Cogs _c = new Cogs(costGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), costGrid.Rows[e.RowIndex].Cells["date"].Value.ToString(), costGrid.Rows[e.RowIndex].Cells["week"].Value.ToString(),costGrid.Rows[e.RowIndex].Cells["starting"].Value.ToString(), costGrid.Rows[e.RowIndex].Cells["ending"].Value.ToString(), costGrid.Rows[e.RowIndex].Cells["category"].Value.ToString(),0,0, Convert.ToDouble(costGrid.Rows[e.RowIndex].Cells["amount"].Value.ToString()), costGrid.Rows[e.RowIndex].Cells["month"].Value.ToString());
+                Cogs _c = new Cogs(costGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), costGrid.Rows[e.RowIndex].Cells["date"].Value.ToString(),Convert.ToInt32(costGrid.Rows[e.RowIndex].Cells["week"].Value),costGrid.Rows[e.RowIndex].Cells["starting"].Value.ToString(), costGrid.Rows[e.RowIndex].Cells["ending"].Value.ToString(), costGrid.Rows[e.RowIndex].Cells["category"].Value.ToString(),0,0, Convert.ToDouble(costGrid.Rows[e.RowIndex].Cells["amount"].Value.ToString()), costGrid.Rows[e.RowIndex].Cells["month"].Value.ToString());
                 DBConnect.Update(_c, costGrid.Rows[e.RowIndex].Cells["id"].Value.ToString());
             }
             catch (Exception c)

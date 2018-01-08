@@ -157,12 +157,6 @@
     <Compile Include="AddUser.Designer.cs">
       <DependentUpon>AddUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="CategoryForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CategoryForm.Designer.cs">
-      <DependentUpon>CategoryForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="ChartForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -229,12 +223,10 @@
     <Compile Include="Model\Graphs.cs" />
     <Compile Include="Model\Staff.cs" />
     <Compile Include="Model\User.cs" />
-    <Compile Include="Model\Category.cs" />
     <Compile Include="Model\Company.cs" />
     <Compile Include="Model\Department.cs" />
     <Compile Include="Model\Events.cs" />
     <Compile Include="Model\Expense.cs" />
-    <Compile Include="Model\Items.cs" />
     <Compile Include="Model\Equipment.cs" />
     <Compile Include="Model\Repair.cs" />
     <Compile Include="Model\Report.cs" />
@@ -294,9 +286,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddUser.resx">
       <DependentUpon>AddUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CategoryForm.resx">
-      <DependentUpon>CategoryForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChartForm.resx">
       <DependentUpon>ChartForm.cs</DependentUpon>
@@ -390,6 +379,35 @@
     <None Include="Resources\Microsoft-Excel-2013-01-24 %281%29.png" />
     <None Include="Resources\loadings.gif" />
     <None Include="Resources\loading %281%29.gif" />
+    <None Include="Resources\Document-Delete-01-24.png" />
+    <None Include="Resources\Sale-24.png" />
+    <None Include="Resources\Load-Man-24.png" />
+    <None Include="Resources\Dollar-24.png" />
+    <None Include="Resources\Van-24.png" />
+    <None Include="Resources\Cheque-16.png" />
+    <None Include="Resources\Cheque-24.png" />
+    <None Include="Resources\Payments-16.png" />
+    <None Include="Resources\Chef-16.png" />
+    <None Include="Resources\Mini-Truck-01-16.png" />
+    <None Include="Resources\Counting-Machine-16.png" />
+    <None Include="Resources\Tools-02-16.png" />
+    <None Include="Resources\Box -16.png" />
+    <None Include="Resources\Shopping-Cart-01-16.png" />
+    <None Include="Resources\Shopping-Cart-01-161.png" />
+    <None Include="Resources\Bill-16 %281%29.png" />
+    <None Include="Resources\Bill-16.png" />
+    <None Include="Resources\Payments-161.png" />
+    <None Include="Resources\Payment-01-16.png" />
+    <None Include="Resources\Note-Memo-16.png" />
+    <None Include="Resources\Chart-Axes-16.png" />
+    <None Include="Resources\Data-Edit-16.png" />
+    <None Include="Resources\Teacher-16.png" />
+    <None Include="Resources\Key-Access-16.png" />
+    <None Include="Resources\Clipboard-16.png" />
+    <None Include="Resources\Microsoft-Excel-2013-01-16.png" />
+    <None Include="Resources\Button-16.png" />
+    <None Include="Resources\Close-16.png" />
+    <None Include="Resources\Save-16 %282%29.png" />
     <Content Include="SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

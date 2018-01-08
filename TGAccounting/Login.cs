@@ -152,8 +152,7 @@ namespace TGAccounting
         private void createSqlliteDB()
         {
             Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Sale()));
-            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Items()));
-            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Category()));
+                     
             Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Department()));
             Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Labor()));
             Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Taxes()));

@@ -47,7 +47,7 @@ namespace TGAccounting
             AutoCompleteStringCollection AutoItem = new AutoCompleteStringCollection();
             foreach (var r in Global.inventoryItems)
             {
-                AutoItem.Add(r);               
+                AutoItem.Add(r);
             }
             itemTxt.AutoCompleteMode = AutoCompleteMode.Suggest;
             itemTxt.AutoCompleteSource = AutoCompleteSource.CustomSource;
@@ -88,7 +88,7 @@ namespace TGAccounting
 
                 if (MessageBox.Show("YES or No?", "Are you sure you want to update the current existing information  ? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
-                    Inventory j = new Inventory(existingID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), weekLbl.Text, startLbl.Text, endLbl.Text, itemTxt.Text, categoryTxt.Text, Convert.ToDouble(amountTxt.Text), 0, 0, 0, month);
+                    Inventory j = new Inventory(existingID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), Convert.ToInt32(weekLbl.Text), startLbl.Text, endLbl.Text, itemTxt.Text, categoryTxt.Text, Convert.ToDouble(amountTxt.Text), 0, 0, 0, month);
 
                     DBConnect.Update(j, existingID);
                 }
@@ -96,7 +96,7 @@ namespace TGAccounting
             }
 
             string ID = Guid.NewGuid().ToString();
-            Inventory i = new Inventory(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), weekLbl.Text, startLbl.Text, endLbl.Text, itemTxt.Text, categoryTxt.Text, Convert.ToDouble(amountTxt.Text), 0, 0, 0, month);
+            Inventory i = new Inventory(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), Convert.ToInt32(weekLbl.Text), startLbl.Text, endLbl.Text, itemTxt.Text, categoryTxt.Text, Convert.ToDouble(amountTxt.Text), 0, 0, 0, month);
             DBConnect.Insert(i);
             MessageBox.Show("Information Saved ");
             itemTxt.Text = "";
@@ -135,7 +135,7 @@ namespace TGAccounting
             try
             {
 
-                month = Inventory.List("SELECT * from inventory WHERE name='" + itemTxt.Text + "' AND week = '" + weekLbl.Text + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Month.ToString();
+                month = Inventory.List("SELECT * from inventory WHERE name='" + itemTxt.Text + "' AND week = '" + weekLbl.Text + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Month;
             }
             catch (Exception y)
             {
@@ -188,10 +188,10 @@ namespace TGAccounting
                         return;
                     }
 
-                    if (MessageBox.Show("YES or No?", "Confirm the year of operation  it being " + Convert.ToDateTime(dateTxt.Text).Year.ToString(), MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                    if (MessageBox.Show("YES or No?", "Confirm " + categoryTxt.Text + " year " + Convert.ToDateTime(dateTxt.Text).Year.ToString(), MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                     {
                         LoadingWindow.ShowSplashScreen();
-                         ReadExcel(filePath, fileExt); //read excel file  
+                        ReadExcel(filePath, fileExt); //read excel file  
                         LoadingWindow.CloseForm();
                     }
                     //  dataGridView1.Visible = true;
@@ -228,85 +228,66 @@ namespace TGAccounting
                 //for (int u = 1; u < dtexcel.Columns.Count; u++)
                 for (int u = 1; u < 60; u++)
                 {
-
                     Console.WriteLine("NEW WEEK :" + h);
                     DateTime startWeek = Helper.FirstDateOfWeek(Convert.ToInt32(Helper.CurrentYear), h - 1, CultureInfo.CurrentCulture);
                     foreach (DataRow row in dtexcel.Rows)
                     {
-                        //MessageBox.Show();
-                        if (!string.IsNullOrEmpty(row[0].ToString()) && !string.IsNullOrEmpty(row[u].ToString()))
+                        try
                         {
-                            // Console.WriteLine(row[0].ToString() + " " + row[u].ToString() + " Week:" + h  + " Week starting " + startWeek.ToString("dd-MM-yyyy") + " Week ending " + startWeek.AddDays(7).ToString("dd-MM-yyyy"));
-                            if (!row[0].ToString().Contains("Inventory") && !row[0].ToString().Contains("Total") && !row[0].ToString().Contains("Week"))
+                            //MessageBox.Show();
+                            if (!string.IsNullOrEmpty(row[0].ToString()) && !string.IsNullOrEmpty(row[u].ToString()))
                             {
-                                existingID = "";
-                                try
-                                {
-                                    existingID = Inventory.List("SELECT * from inventory WHERE name='" + row[0].ToString().Replace("\"", string.Empty).Replace("'", string.Empty) + "' AND week = '" + h + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Id.ToString();
-                                    string Query = "DELETE from inventory WHERE id ='" + existingID + "'";
-                                    DBConnect.save(Query);
-                                    Console.WriteLine("DELETE: " + row[0].ToString() + " " + row[u].ToString() + " Week:" + h + " Week starting " + startWeek.ToString("dd-MM-yyyy") + " Week ending " + startWeek.AddDays(7).ToString("dd-MM-yyyy"));
-
-                                }
-                                catch
+                                // Console.WriteLine(row[0].ToString() + " " + row[u].ToString() + " Week:" + h  + " Week starting " + startWeek.ToString("dd-MM-yyyy") + " Week ending " + startWeek.AddDays(7).ToString("dd-MM-yyyy"));
+                                if (!row[0].ToString().Contains("Inventory") && !row[0].ToString().Contains("Total") && !row[0].ToString().Contains("Week"))
                                 {
                                     existingID = "";
-                                }
-
-                                string ID = Guid.NewGuid().ToString();
-                                Inventory i = new Inventory(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), h.ToString(), startWeek.ToString("dd-MM-yyyy"), startWeek.AddDays(7).ToString("dd-MM-yyyy"), row[0].ToString().Replace("\"", string.Empty).Replace("'", string.Empty), categoryTxt.Text, Convert.ToDouble(row[u].ToString()), 0, 0, 0, startWeek.AddDays(7).ToString("MMMM"));
-                                DBConnect.Insert(i);
-                                Console.WriteLine("INSERT: " + row[0].ToString() + " " + row[u].ToString().Replace("'", @"\'") + " Week:" + h + " Week starting " + startWeek.ToString("dd-MM-yyyy") + " Week ending " + startWeek.AddDays(7).ToString("dd-MM-yyyy"));
-
-                            }
-                            else
-                            {
-                                string begs = "0";
-                                string ends = "0";
-                                string cogs = "0";
-                                if (!row[0].ToString().Contains("Inventory"))
-                                {
-                                    if (!row[0].ToString().Contains("Beginning"))
+                                    try
                                     {
-                                        begs = row[u].ToString();
-                                    }
-                                    if (!row[0].ToString().Contains("Ending"))
-                                    {
-                                        ends = row[u].ToString();
-                                    }
-                                }
-                                if (!row[0].ToString().Contains("Total") && !row[0].ToString().Contains("Cost"))
-                                {
-                                    cogs = row[u].ToString();
-                                }
-                                try
-                                {
-                                    existingID = Cogs.List("SELECT * from cogs WHERE category='" + categoryTxt.Text + "' AND week = '" + h + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Id.ToString();
-                                    string Query = "DELETE from cogs WHERE id ='" + existingID + "'";
-                                    DBConnect.save(Query);
-                                    Console.WriteLine("DELETE: " + row[0].ToString() + " " + row[u].ToString() + " Week:" + h + " Week starting " + startWeek.ToString("dd-MM-yyyy") + " Week ending " + startWeek.AddDays(7).ToString("dd-MM-yyyy"));
+                                        existingID = Inventory.List("SELECT * from inventory WHERE name='" + row[0].ToString().Replace("\"", string.Empty).Replace("'", string.Empty) + "' AND week = '" + h + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Id.ToString();
+                                        string Query = "DELETE from inventory WHERE id ='" + existingID + "'";
+                                        DBConnect.save(Query);
+                                        Console.WriteLine("DELETE: " + row[0].ToString() + " " + row[u].ToString() + " Week:" + h + " Week starting " + startWeek.ToString("dd-MM-yyyy") + " Week ending " + startWeek.AddDays(7).ToString("dd-MM-yyyy"));
 
-                                }
-                                catch
-                                {
-                                    existingID = "";
-                                }
-                                if (!string.IsNullOrEmpty(cogs) && cogs!="0") {
+                                    }
+                                    catch
+                                    {
+                                        existingID = "";
+                                    }
+
                                     string ID = Guid.NewGuid().ToString();
-                                    Cogs i = new Cogs(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), h.ToString(), startWeek.ToString("dd-MM-yyyy"), startWeek.AddDays(7).ToString("dd-MM-yyyy"), categoryTxt.Text, Convert.ToDouble(begs), Convert.ToDouble(ends), Convert.ToDouble(cogs), startWeek.AddDays(7).ToString("MMMM"));
+                                    Inventory i = new Inventory(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), h, startWeek.ToString("dd-MM-yyyy"), startWeek.AddDays(7).ToString("dd-MM-yyyy"), row[0].ToString().Replace("\"", string.Empty).Replace("'", string.Empty), categoryTxt.Text, Convert.ToDouble(row[u].ToString()), 0, 0, 0, startWeek.AddDays(7).ToString("MMMM"));
                                     DBConnect.Insert(i);
+                                    Console.WriteLine("INSERT: " + row[0].ToString() + " " + row[u].ToString().Replace("'", @"\'") + " Week:" + h + " Week starting " + startWeek.ToString("dd-MM-yyyy") + " Week ending " + startWeek.AddDays(7).ToString("dd-MM-yyyy"));
+
                                 }
 
                             }
-
                         }
+                        catch { }
                     }
                     h++;
                 }
                 //}
                 //catch { }
             }
-            
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(categoryTxt.Text))
+            {
+                MessageBox.Show("Please select the category ");
+                categoryTxt.BackColor = Color.Red;
+                return;
+            }
+            if (MessageBox.Show("YES or No?", "Confirm the year  " + Convert.ToDateTime(dateTxt.Text).Year.ToString(), MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            {
+                string Query = "DELETE from inventory WHERE date ='" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "' AND category = '" + categoryTxt.Text + "'";
+                DBConnect.save(Query);
+
+
+            }
         }
     }
 }

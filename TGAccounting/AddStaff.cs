@@ -79,39 +79,6 @@ namespace TGAccounting
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (nameTxt.Text == "")
-            {
-                nameTxt.BackColor = Color.Red;
-                return;
-            }
-           
-            MemoryStream stream = ImageToStream(imgCapture.Image, System.Drawing.Imaging.ImageFormat.Jpeg);
-            string fullimage = ImageToBase64(stream);
-
-            if (!string.IsNullOrEmpty(existingID))
-            {
-
-                if (MessageBox.Show("YES or No?", "Are you sure you want to update the current existing information  ? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
-                {
-                    Staff j = new Staff(existingID, nameTxt.Text, contactTxt.Text, departmentCbx.Text, fullimage, emailTxt.Text);
-                    DBConnect.Update(j, existingID);
-                    existingID = "";
-                    return;
-                }
-
-            }
-            existingID = "";
-
-
-
-            string id = Guid.NewGuid().ToString();
-            Staff _user = new Staff(id, nameTxt.Text, contactTxt.Text, departmentCbx.Text, fullimage,emailTxt.Text);
-            if (DBConnect.Insert(_user) != "")
-            {
-                MessageBox.Show("Information Saved");
-                this.DialogResult = DialogResult.OK;
-                this.Dispose();
-            }
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -160,8 +127,7 @@ namespace TGAccounting
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
-            this.Dispose();
+            
         }
         string existingID = "";
         private void contactTxt_Leave(object sender, EventArgs e)
@@ -199,6 +165,50 @@ namespace TGAccounting
             {
                 // Helper.Exceptions(y.Message, "on adding inventory auto fill the category list selected item");
             }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+            if (nameTxt.Text == "")
+            {
+                nameTxt.BackColor = Color.Red;
+                return;
+            }
+
+            MemoryStream stream = ImageToStream(imgCapture.Image, System.Drawing.Imaging.ImageFormat.Jpeg);
+            string fullimage = ImageToBase64(stream);
+
+            if (!string.IsNullOrEmpty(existingID))
+            {
+
+                if (MessageBox.Show("YES or No?", "Are you sure you want to update the current existing information  ? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+                    Staff j = new Staff(existingID, nameTxt.Text, contactTxt.Text, departmentCbx.Text, fullimage, emailTxt.Text);
+                    DBConnect.Update(j, existingID);
+                    existingID = "";
+                    return;
+                }
+
+            }
+            existingID = "";
+
+
+
+            string id = Guid.NewGuid().ToString();
+            Staff _user = new Staff(id, nameTxt.Text, contactTxt.Text, departmentCbx.Text, fullimage, emailTxt.Text);
+            if (DBConnect.Insert(_user) != "")
+            {
+                MessageBox.Show("Information Saved");
+                this.DialogResult = DialogResult.OK;
+                this.Dispose();
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+            this.Dispose();
         }
     }
 }

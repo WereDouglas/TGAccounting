@@ -27,12 +27,13 @@ namespace TGAccounting
 
         public HomeForm()
         {
+           
+            InitializeComponent();
+
             LoadingWindow.ShowSplashScreen();
             Global.LoadData();
             LoadingWindow.CloseForm();
-            InitializeComponent();
             LoadingCalendarLite();
-
 
             var culture = new CultureInfo("en-US");
             CultureInfo.DefaultThreadCurrentCulture = culture;
@@ -182,18 +183,7 @@ namespace TGAccounting
 
 
         /***End the Sales section***/
-        private void button4_Click(object sender, EventArgs e)
-        {
-            using (CategoryForm form = new CategoryForm())
-            {
-                DialogResult dr = form.ShowDialog();
-                if (dr == DialogResult.OK)
-                {
-
-
-                }
-            }
-        }
+       
 
         private void saleGrid_Click(object sender, EventArgs e)
         {
@@ -648,7 +638,7 @@ namespace TGAccounting
         private void button15_Click_1(object sender, EventArgs e)
         {
             Report r = new Report();
-            int week = Convert.ToInt32(weekTxt.Text);
+            int week = Convert.ToInt32(Convert.ToInt32(weekTxt.Text));
             string year = Helper.CurrentYear;
             string date = "";
             reports = new List<Report>();
@@ -784,7 +774,7 @@ namespace TGAccounting
             double p1Prime = Math.Round((prime / totalSales) * 100, 1);
             double p2Prime = Math.Round((totalCogsYTD / totalSalesYTD) * 100, 1);
 
-            r = new Report(date, weekTxt.Text, ending, "PRIME COST", "PRIME COST", prime, p1Prime, totalSalesYTD, p2Prime, "PRIME COST", "PRIME COST");
+            r = new Report(date, Convert.ToInt32(Convert.ToInt32(weekTxt.Text)), ending, "PRIME COST", "PRIME COST", prime, p1Prime, totalSalesYTD, p2Prime, "PRIME COST", "PRIME COST");
             reports.Add(r);
             /**end of prime costs***/
 
@@ -796,7 +786,7 @@ namespace TGAccounting
             double p1Gross = Math.Round((Gross / totalSales) * 100, 1);
             double p2Gross = Math.Round((GrossYTD / totalSalesYTD) * 100, 1);
 
-            r = new Report(date, weekTxt.Text, ending, "Gross Profits", "Gross Profit", Gross, p1Gross, GrossYTD, p2Gross, "Gross Profit", "Profit");
+            r = new Report(date, Convert.ToInt32(weekTxt.Text), ending, "Gross Profits", "Gross Profit", Gross, p1Gross, GrossYTD, p2Gross, "Gross Profit", "Profit");
             reports.Add(r);
 
             /**End of Gross ***/
@@ -809,7 +799,7 @@ namespace TGAccounting
             double p1Ctrl = Math.Round((prime / totalSales) * 100, 1);
             double p2Ctrl = Math.Round((totalCogsYTD / totalSalesYTD) * 100, 1);
 
-            r = new Report(date, weekTxt.Text, ending, "Controllable Expenses", "Controllable Expense", ctrl, p1Ctrl, ctrlYTD, p2Ctrl, "Controllable Expenses", "Controllable");
+            r = new Report(date, Convert.ToInt32(weekTxt.Text), ending, "Controllable Expenses", "Controllable Expense", ctrl, p1Ctrl, ctrlYTD, p2Ctrl, "Controllable Expenses", "Controllable");
             reports.Add(r);
             /**end of  Controllable Expenses***/
 
@@ -819,7 +809,7 @@ namespace TGAccounting
             double p1CtrlProfit = Math.Round((ctrlProfit / totalSales) * 100, 1);
             double p2CtrlProfit = Math.Round((ctrlProfitYTD / totalSalesYTD) * 100, 1);
 
-            r = new Report(date, weekTxt.Text, ending, "Controllable Profits", "Controllable Profits", ctrlProfit, p1CtrlProfit, ctrlProfitYTD, p2CtrlProfit, "Controllable Profit", "Controllable");
+            r = new Report(date, Convert.ToInt32(weekTxt.Text), ending, "Controllable Profits", "Controllable Profits", ctrlProfit, p1CtrlProfit, ctrlProfitYTD, p2CtrlProfit, "Controllable Profit", "Controllable");
             reports.Add(r);
 
             /*end of controllable profit*/
@@ -834,7 +824,7 @@ namespace TGAccounting
             double p1RestProfit = Math.Round((restProfit / totalSales) * 100, 1);
             double p2RestProfit = Math.Round((restProfitYTD / totalSalesYTD) * 100, 1);
 
-            r = new Report(date, weekTxt.Text, ending, "Restaurant Profit", "Restaurant Profit", restProfit, p1RestProfit, restProfitYTD, p2RestProfit, "Restaurant Profits", "Restaurant");
+            r = new Report(date, Convert.ToInt32(weekTxt.Text), ending, "Restaurant Profit", "Restaurant Profit", restProfit, p1RestProfit, restProfitYTD, p2RestProfit, "Restaurant Profits", "Restaurant");
             reports.Add(r);
             /** end restaurant profit**/
 
@@ -875,6 +865,16 @@ namespace TGAccounting
 
                 }
             }
+        }
+
+        private void categoryCbx_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button18_Click_1(object sender, EventArgs e)
+        {
+            categoryCbx_SelectedIndexChanged_1(null, null);
         }
 
         private void button21_Click(object sender, EventArgs e)

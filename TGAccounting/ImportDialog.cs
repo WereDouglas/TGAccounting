@@ -19,12 +19,12 @@ namespace TGAccounting
         public ImportDialog()
         {
             InitializeComponent();
+
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
-            this.Dispose();
+           
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -47,9 +47,35 @@ namespace TGAccounting
                         categoryTxt.BackColor = Color.Red;
                         return;
                     }
-
-                    if (MessageBox.Show("YES or No?", "Confirm the year of operation  it being " + Convert.ToDateTime(dateTxt.Text).Year.ToString(), MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                    if (MessageBox.Show("YES or No?", "Confirm the year  " + Convert.ToDateTime(dateTxt.Text).Year.ToString(), MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                     {
+                        if (categoryTxt.Text.Contains("COGS"))
+                        {
+                            if (string.IsNullOrEmpty(subcategory.Text))
+                            {
+                                subcategory.BackColor = Color.Pink;
+                                MessageBox.Show("Please select the cost of goods category");
+                                return;
+                            }
+                        }
+                        if (categoryTxt.Text.Contains("Purchases"))
+                        {
+                            if (string.IsNullOrEmpty(subcategory.Text))
+                            {
+                                subcategory.BackColor = Color.Pink;
+                                MessageBox.Show("Please select the Purchase category");
+                                return;
+                            }
+                        }
+                        if (categoryTxt.Text.Contains("Expenses"))
+                        {
+                            if (string.IsNullOrEmpty(subcategory.Text))
+                            {
+                                subcategory.BackColor = Color.Pink;
+                                MessageBox.Show("Please select the category");
+                                return;
+                            }
+                        }
                         LoadingWindow.ShowSplashScreen();
                         ReadExcel(filePath, fileExt); //read excel file  
                         LoadingWindow.CloseForm();
@@ -68,7 +94,40 @@ namespace TGAccounting
                 }
             }
         }
+        private void autocomplete()
+        {
+            subcategory.Items.Clear();
+            AutoCompleteStringCollection AutoItem = new AutoCompleteStringCollection();
+            foreach (var r in Global.categories)
+            {
+                AutoItem.Add(r);
+                subcategory.Items.Add(r);
+            }
+            subcategory.AutoCompleteMode = AutoCompleteMode.Suggest;
+            subcategory.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            subcategory.AutoCompleteCustomSource = AutoItem;
+
+
+        }
+        private void autocompleteExpense()
+        {
+            subcategory.Items.Clear();
+            AutoCompleteStringCollection AutoItem = new AutoCompleteStringCollection();
+            foreach (var r in Global.expenseCategory)
+            {
+                AutoItem.Add(r);
+                subcategory.Items.Add(r);
+            }
+            subcategory.AutoCompleteMode = AutoCompleteMode.Suggest;
+            subcategory.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            subcategory.AutoCompleteCustomSource = AutoItem;
+
+
+        }
         string existingID;
+        string begs = "0";
+        string ends = "0";
+        string cogs = "0";
         public void ReadExcel(string fileName, string fileExt)
         {
             string conn = string.Empty;
@@ -95,23 +154,77 @@ namespace TGAccounting
                         //MessageBox.Show();
                         if (!string.IsNullOrEmpty(row[0].ToString()) && !string.IsNullOrEmpty(row[u].ToString()))
                         {
-                            // Console.WriteLine(row[0].ToString() + " " + row[u].ToString() + " Week:" + h  + " Week starting " + startWeek.ToString("dd-MM-yyyy") + " Week ending " + startWeek.AddDays(7).ToString("dd-MM-yyyy"));
-                            if ( !row[0].ToString().Contains("Total") && !row[0].ToString().Contains("Week"))
+                            if (categoryTxt.Text.Contains("COGS"))
                             {
-                                if (categoryTxt.Text.Contains("Sales")) {
+                                if (row[0].ToString().Contains("Beginning"))
+                                {
+                                    begs = row[u].ToString();
+                                }
+                                if (row[0].ToString().Contains("Ending"))
+                                {
+                                    ends = row[u].ToString();
+                                }
+                                if (row[0].ToString().Contains("Cost") || row[0].ToString().Contains("Total"))
+                                {
+                                    cogs = row[u].ToString();
+                                }
+                                Console.WriteLine("this is the line " + row[0].ToString() + " Value" + row[u].ToString());
+
+                                try
+                                {
+                                    existingID = Cogs.List("SELECT * from cogs WHERE category='" + subcategory.Text + "' AND week = '" + h + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Id.ToString();
+                                    string Query = "DELETE from cogs WHERE id ='" + existingID + "'";
+                                    DBConnect.save(Query);
+                                    Console.WriteLine("DELETE: " + row[0].ToString() + " " + row[u].ToString() + " Week:" + h + " Week starting " + startWeek.ToString("dd-MM-yyyy") + " Week ending " + startWeek.AddDays(7).ToString("dd-MM-yyyy"));
+
+                                }
+                                catch
+                                {
+                                    existingID = "";
+                                }
+                                if (!string.IsNullOrEmpty(cogs) && cogs != "0")
+                                {
+                                    string ID = Guid.NewGuid().ToString();
+                                    Cogs i = new Cogs(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), h, startWeek.ToString("dd-MM-yyyy"), startWeek.AddDays(7).ToString("dd-MM-yyyy"), subcategory.Text, Convert.ToDouble(begs), Convert.ToDouble(ends), Convert.ToDouble(cogs), startWeek.AddDays(7).ToString("MMMM"));
+                                    DBConnect.Insert(i);
+
+                                }
+                            }
+                            // Console.WriteLine(row[0].ToString() + " " + row[u].ToString() + " Week:" + h  + " Week starting " + startWeek.ToString("dd-MM-yyyy") + " Week ending " + startWeek.AddDays(7).ToString("dd-MM-yyyy"));
+                            if (!row[0].ToString().Contains("Total") && !row[0].ToString().Contains("Week") && !row[0].ToString().Contains("Week:"))
+                            {
+                                if (categoryTxt.Text.Contains("Purchases"))
+                                {
+                                    existingID = "";
+                                    try
+                                    {
+                                        existingID = Inventory.List("SELECT * from inventory WHERE item='" + row[0].ToString().Replace("\"", string.Empty).Replace("'", string.Empty) + "' AND week = '" + h + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Id.ToString();
+                                        string Query = "DELETE from inventory WHERE id ='" + existingID + "'";
+                                        DBConnect.save(Query);
+                                    }
+                                    catch
+                                    {
+                                        existingID = "";
+                                    }
+                                    string ID = Guid.NewGuid().ToString();
+                                    Inventory i = new Inventory(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), h, startWeek.ToString("dd-MM-yyyy"), startWeek.AddDays(7).ToString("dd-MM-yyyy"), row[0].ToString().Replace("\"", string.Empty).Replace("'", string.Empty), subcategory.Text, Convert.ToDouble(row[u].ToString()), 0, 0, 0, startWeek.AddDays(7).ToString("MMMM"));
+                                    DBConnect.Insert(i);
+                                }
+                                if (categoryTxt.Text.Contains("Sales"))
+                                {
                                     existingID = "";
                                     try
                                     {
                                         existingID = Sale.List("SELECT * from sale WHERE item='" + row[0].ToString().Replace("\"", string.Empty).Replace("'", string.Empty) + "' AND week = '" + h + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Id.ToString();
                                         string Query = "DELETE from sale WHERE id ='" + existingID + "'";
-                                        DBConnect.save(Query);                                       
+                                        DBConnect.save(Query);
                                     }
                                     catch
                                     {
                                         existingID = "";
-                                    }                                    
+                                    }
                                     string ID = Guid.NewGuid().ToString();
-                                    Sale i = new Sale(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), h.ToString(), startWeek.ToString("dd-MM-yyyy"), startWeek.AddDays(7).ToString("dd-MM-yyyy"), row[0].ToString().Replace("\"", string.Empty).Replace("'", string.Empty), Convert.ToDouble(row[u].ToString()), row[0].ToString().Replace("\"", string.Empty).Replace("'", string.Empty), startWeek.AddDays(7).ToString("MMMM"));
+                                    Sale i = new Sale(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), h, startWeek.ToString("dd-MM-yyyy"), startWeek.AddDays(7).ToString("dd-MM-yyyy"), row[0].ToString().Replace("\"", string.Empty).Replace("'", string.Empty), Convert.ToDouble(row[u].ToString()), row[0].ToString().Replace("\"", string.Empty).Replace("'", string.Empty), startWeek.AddDays(7).ToString("MMMM"));
                                     DBConnect.Insert(i);
                                 }
                                 if (categoryTxt.Text.Contains("Labor"))
@@ -128,7 +241,7 @@ namespace TGAccounting
                                         existingID = "";
                                     }
                                     string ID = Guid.NewGuid().ToString();
-                                    Labor i = new Labor(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), h.ToString(), startWeek.ToString("dd-MM-yyyy"), startWeek.AddDays(7).ToString("dd-MM-yyyy"), row[0].ToString().Replace("\"", string.Empty).Replace("'", string.Empty), Convert.ToDouble(row[u].ToString()), startWeek.AddDays(7).ToString("MMMM"));
+                                    Labor i = new Labor(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), h, startWeek.ToString("dd-MM-yyyy"), startWeek.AddDays(7).ToString("dd-MM-yyyy"), row[0].ToString().Replace("\"", string.Empty).Replace("'", string.Empty), Convert.ToDouble(row[u].ToString()), startWeek.AddDays(7).ToString("MMMM"));
                                     DBConnect.Insert(i);
                                 }
                                 if (categoryTxt.Text.Contains("Payroll"))
@@ -145,7 +258,7 @@ namespace TGAccounting
                                         existingID = "";
                                     }
                                     string ID = Guid.NewGuid().ToString();
-                                    Taxes i = new Taxes(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), h.ToString(), startWeek.ToString("dd-MM-yyyy"), startWeek.AddDays(7).ToString("dd-MM-yyyy"), row[0].ToString().Replace("\"", string.Empty).Replace("'", string.Empty), Convert.ToDouble(row[u].ToString()), startWeek.AddDays(7).ToString("MMMM"));
+                                    Taxes i = new Taxes(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), h, startWeek.ToString("dd-MM-yyyy"), startWeek.AddDays(7).ToString("dd-MM-yyyy"), row[0].ToString().Replace("\"", string.Empty).Replace("'", string.Empty), Convert.ToDouble(row[u].ToString()), startWeek.AddDays(7).ToString("MMMM"));
                                     DBConnect.Insert(i);
                                 }
                                 if (categoryTxt.Text.Contains("Supplies"))
@@ -162,7 +275,7 @@ namespace TGAccounting
                                         existingID = "";
                                     }
                                     string ID = Guid.NewGuid().ToString();
-                                    Supplies i = new Supplies(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), h.ToString(), startWeek.ToString("dd-MM-yyyy"), startWeek.AddDays(7).ToString("dd-MM-yyyy"), row[0].ToString().Replace("\"", string.Empty).Replace("'", string.Empty), Convert.ToDouble(row[u].ToString()), startWeek.AddDays(7).ToString("MMMM"));
+                                    Supplies i = new Supplies(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), h, startWeek.ToString("dd-MM-yyyy"), startWeek.AddDays(7).ToString("dd-MM-yyyy"), row[0].ToString().Replace("\"", string.Empty).Replace("'", string.Empty), Convert.ToDouble(row[u].ToString()), startWeek.AddDays(7).ToString("MMMM"));
                                     DBConnect.Insert(i);
                                 }
                                 if (categoryTxt.Text.Contains("Repairs"))
@@ -179,7 +292,7 @@ namespace TGAccounting
                                         existingID = "";
                                     }
                                     string ID = Guid.NewGuid().ToString();
-                                    Repair i = new Repair(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), h.ToString(), startWeek.ToString("dd-MM-yyyy"), startWeek.AddDays(7).ToString("dd-MM-yyyy"), row[0].ToString().Replace("\"", string.Empty).Replace("'", string.Empty), Convert.ToDouble(row[u].ToString()), startWeek.AddDays(7).ToString("MMMM"));
+                                    Repair i = new Repair(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), h, startWeek.ToString("dd-MM-yyyy"), startWeek.AddDays(7).ToString("dd-MM-yyyy"), row[0].ToString().Replace("\"", string.Empty).Replace("'", string.Empty), Convert.ToDouble(row[u].ToString()), startWeek.AddDays(7).ToString("MMMM"));
                                     DBConnect.Insert(i);
                                 }
                                 if (categoryTxt.Text.Contains("Equipment"))
@@ -195,13 +308,48 @@ namespace TGAccounting
                                     {
                                         existingID = "";
                                     }
-                                    string ID = Guid.NewGuid().ToString();
-                                    Equipment i = new Equipment(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), h.ToString(), startWeek.ToString("dd-MM-yyyy"), startWeek.AddDays(7).ToString("dd-MM-yyyy"), row[0].ToString().Replace("\"", string.Empty).Replace("'", string.Empty), Convert.ToDouble(row[u].ToString()), startWeek.AddDays(7).ToString("MMMM"));
-                                    DBConnect.Insert(i);
+                                    if (!string.IsNullOrEmpty(row[0].ToString()) && !string.IsNullOrEmpty(row[u].ToString()))
+                                    {
+                                        Console.WriteLine(row[0].ToString() + " " + row[u].ToString() + " Week:" + h + " Week starting " + startWeek.ToString("dd-MM-yyyy") + " Week ending " + startWeek.AddDays(7).ToString("dd-MM-yyyy"));
+
+                                        string ID = Guid.NewGuid().ToString();
+                                        try
+                                        {
+                                            Equipment i = new Equipment(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), h, startWeek.ToString("dd-MM-yyyy"), startWeek.AddDays(7).ToString("dd-MM-yyyy"), row[0].ToString().Replace("\"", string.Empty).Replace("'", string.Empty), Convert.ToDouble(row[u].ToString()), startWeek.AddDays(7).ToString("MMMM"));
+                                            DBConnect.Insert(i);
+                                        }
+                                        catch { }
+
+                                    }
                                 }
+                                if (categoryTxt.Text.Contains("Expenses"))
+                                {
+                                    existingID = "";
+                                    try
+                                    {
+                                        existingID = Expense.List("SELECT * from expense WHERE name='" + row[0].ToString().Replace("\"", string.Empty).Replace("'", string.Empty) + "' AND week = '" + h + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Id.ToString();
+                                        string Query = "DELETE from expense WHERE id ='" + existingID + "'";
+                                        DBConnect.save(Query);
+                                    }
+                                    catch
+                                    {
+                                        existingID = "";
+                                    }
+                                    if (!string.IsNullOrEmpty(row[0].ToString()) && !string.IsNullOrEmpty(row[u].ToString()))
+                                    {
+                                        Console.WriteLine(row[0].ToString() + " " + row[u].ToString() + " Week:" + h + " Week starting " + startWeek.ToString("dd-MM-yyyy") + " Week ending " + startWeek.AddDays(7).ToString("dd-MM-yyyy"));
 
-                            }                          
+                                        string ID = Guid.NewGuid().ToString();
+                                        try
+                                        {
+                                            Expense i = new Expense(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), h, startWeek.ToString("dd-MM-yyyy"), startWeek.AddDays(7).ToString("dd-MM-yyyy"), row[0].ToString().Replace("\"", string.Empty).Replace("'", string.Empty), subcategory.Text, Convert.ToDouble(row[u].ToString()), startWeek.AddDays(7).ToString("MMMM"));
+                                            DBConnect.Insert(i);
+                                        }
+                                        catch { }
 
+                                    }
+                                }
+                            }
                         }
                     }
                     h++;
@@ -212,5 +360,83 @@ namespace TGAccounting
 
         }
 
+        private void categoryTxt_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (categoryTxt.Text.Contains("COGS"))
+            {
+                autocomplete();
+
+            }
+            if (categoryTxt.Text.Contains("Purchases"))
+            {
+                autocomplete();
+
+            }
+            if (categoryTxt.Text.Contains("Expenses"))
+            {
+                autocompleteExpense();
+
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("YES or No?", "Confirm the year  " + Convert.ToDateTime(dateTxt.Text).Year.ToString(), MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            {
+                if (categoryTxt.Text.Contains("Expenses"))
+                {
+                    string Query = "DELETE from expense WHERE date ='" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'";
+                    DBConnect.save(Query);
+
+                }
+                if (categoryTxt.Text.Contains("Equipment"))
+                {
+                    string Query = "DELETE from equipment WHERE date ='" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'";
+                    DBConnect.save(Query);
+                }
+                if (categoryTxt.Text.Contains("Labor"))
+                {
+                    string Query = "DELETE from Labor WHERE date ='" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'";
+                    DBConnect.save(Query);
+                }
+                if (categoryTxt.Text.Contains("Payroll"))
+                {
+                    string Query = "DELETE from Salary WHERE date ='" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'";
+                    DBConnect.save(Query);
+                }
+                if (categoryTxt.Text.Contains("Sales"))
+                {
+                    string Query = "DELETE from Sale WHERE date ='" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'";
+                    DBConnect.save(Query);
+                }
+                if (categoryTxt.Text.Contains("Supplies"))
+                {
+                    string Query = "DELETE from Supplies WHERE date ='" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'";
+                    DBConnect.save(Query);
+                }
+                if (categoryTxt.Text.Contains("Repairs"))
+                {
+                    string Query = "DELETE from Repair WHERE date ='" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'";
+                    DBConnect.save(Query);
+                }
+                if (categoryTxt.Text.Contains("COGS"))
+                {
+                    string Query = "DELETE from cogs WHERE date ='" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'";
+                    DBConnect.save(Query);
+                }
+                if (categoryTxt.Text.Contains("Purchases"))
+                {
+                    string Query = "DELETE from inventory WHERE date ='" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "' AND category = '" + subcategory.Text + "'";
+                    DBConnect.save(Query);
+                }
+
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+            this.Dispose();
+        }
     }
 }

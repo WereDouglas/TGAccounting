@@ -41,10 +41,10 @@ namespace TGAccounting
         {
             categoryTxt.Items.Clear();
             AutoCompleteStringCollection AutoItem = new AutoCompleteStringCollection();
-            foreach (Inventory r in Inventory.List("SELECT * from inventory").GroupBy(x => x.Category, (key, group) => group.First()))
+            foreach (var r in Global.categories)
             {
-                AutoItem.Add(r.Category);
-                categoryTxt.Items.Add(r.Category);
+                AutoItem.Add(r);
+                categoryTxt.Items.Add(r);
             }
             categoryTxt.AutoCompleteMode = AutoCompleteMode.Suggest;
             categoryTxt.AutoCompleteSource = AutoCompleteSource.CustomSource;
@@ -56,8 +56,7 @@ namespace TGAccounting
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
-            this.Dispose();
+
         }
 
         private void dateTxt_ValueChanged(object sender, EventArgs e)
@@ -68,46 +67,24 @@ namespace TGAccounting
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(endTxt.Text))
-            {
-                endTxt.BackColor = Color.Red;
-                return;
-            }
-            if (string.IsNullOrEmpty(categoryTxt.Text))
-            {
-                categoryTxt.BackColor = Color.Red;
-                return;
-            }
-            if (!string.IsNullOrEmpty(existingID))
-            {
 
-                if (MessageBox.Show("YES or No?", "Are you sure you want to update the current existing information  ? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
-                {
-                    Cogs j = new Cogs(existingID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), weekLbl.Text, startLbl.Text, endLbl.Text, categoryTxt.Text, Convert.ToDouble(begTxt.Text), Convert.ToDouble(endTxt.Text), Convert.ToDouble(cogsTxt.Text),month);
-                    DBConnect.Update(j, existingID);
-                    existingID = "";
-                    return;
-                }
-            }
-            existingID = "";
-            string ID = Guid.NewGuid().ToString();
-            Cogs i = new Cogs(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), weekLbl.Text, startLbl.Text, endLbl.Text,categoryTxt.Text, Convert.ToDouble(begTxt.Text), Convert.ToDouble(endTxt.Text), Convert.ToDouble(cogsTxt.Text),month);
-            DBConnect.Insert(i);
-            MessageBox.Show("Information Saved ");
-            categoryTxt.Text = "";
-            endTxt.Text = "";
         }
-       string  existingID = "";
+        string existingID = "";
         private void categoryTxt_SelectedIndexChanged(object sender, EventArgs e)
         {
             int prevWeek = Convert.ToInt32(weekLbl.Text) - 1;
             try
             {
-                 begTxt.Text = Cogs.List("SELECT * from cogs WHERE category = '"+categoryTxt.Text+"'").Where(k=>k.Week.Contains(prevWeek.ToString())).First().EndingInventory.ToString();
+                begTxt.Text = Cogs.List("SELECT * from cogs WHERE category = '" + categoryTxt.Text + "'").Where(k => k.Week == prevWeek).First().EndingInventory.ToString();
             }
             catch
             {
-                  begTxt.Text = "0";
+                begTxt.Text = "0";
+                try
+                {
+                    begTxt.Text = Cogs.List("SELECT * from cogs WHERE category='" + categoryTxt.Text + "' AND week = '" + weekLbl.Text + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().BeginningInventory.ToString();
+                }
+                catch { }
             }
             try
             {
@@ -130,7 +107,7 @@ namespace TGAccounting
             try
             {
 
-                month = Cogs.List("SELECT * from cogs WHERE category='" + categoryTxt.Text + "' AND week = '" + weekLbl.Text + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Month.ToString();
+                month = Cogs.List("SELECT * from cogs WHERE category='" + categoryTxt.Text + "' AND week = '" + weekLbl.Text + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Month;
             }
             catch (Exception y)
             {
@@ -150,23 +127,27 @@ namespace TGAccounting
         private void endTxt_TextChanged(object sender, EventArgs e)
         {
             double purchase = 0;
-            try {
-                 
-             purchase = Inventory.List("SELECT * from inventory WHERE category= '" + categoryTxt.Text + "' AND week = '" + weekLbl.Text + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString()  + "'").Sum(t => t.Amount);
+            try
+            {
+
+                purchase = Inventory.List("SELECT * from inventory WHERE category= '" + categoryTxt.Text + "' AND week = '" + weekLbl.Text + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").Sum(t => t.Amount);
 
             }
             catch
             {
 
-                MessageBox.Show("Please input the purchases for " + categoryTxt.Text );
+                MessageBox.Show("Please input the purchases for " + categoryTxt.Text);
                 return;
             }
-            try {
-               
+            try
+            {
 
-                cogsTxt.Text = (Math.Round((Convert.ToDouble(begTxt.Text) + Math.Round(purchase,2)) -  Convert.ToDouble(endTxt.Text),2)).ToString();
 
-            } catch {
+                cogsTxt.Text = (Math.Round((Convert.ToDouble(begTxt.Text) + Math.Round(purchase, 2)) - Convert.ToDouble(endTxt.Text), 2)).ToString();
+
+            }
+            catch
+            {
 
                 //  MessageBox.Show("Please input the purchases for " + categoryTxt.Text);
                 cogsTxt.BackColor = Color.Red;
@@ -190,6 +171,48 @@ namespace TGAccounting
             {
                 e.Handled = true;
             }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(endTxt.Text))
+            {
+                endTxt.BackColor = Color.Red;
+                return;
+            }
+            if (string.IsNullOrEmpty(categoryTxt.Text))
+            {
+                categoryTxt.BackColor = Color.Red;
+                return;
+            }
+            if (!string.IsNullOrEmpty(existingID))
+            {
+
+                if (MessageBox.Show("YES or No?", "Are you sure you want to update the current existing information  ? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+                    Cogs j = new Cogs(existingID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), Convert.ToInt32(weekLbl.Text), startLbl.Text, endLbl.Text, categoryTxt.Text, Convert.ToDouble(begTxt.Text), Convert.ToDouble(endTxt.Text), Convert.ToDouble(cogsTxt.Text), month);
+                    DBConnect.Update(j, existingID);
+                    existingID = "";
+                    return;
+                }
+                else {
+
+                    return;
+                }
+            }
+            existingID = "";
+            string ID = Guid.NewGuid().ToString();
+            Cogs i = new Cogs(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), Convert.ToInt32(weekLbl.Text), startLbl.Text, endLbl.Text, categoryTxt.Text, Convert.ToDouble(begTxt.Text), Convert.ToDouble(endTxt.Text), Convert.ToDouble(cogsTxt.Text), month);
+            DBConnect.Insert(i);
+            MessageBox.Show("Information Saved ");
+            categoryTxt.Text = "";
+            endTxt.Text = "";
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+            this.Dispose();
         }
     }
 }

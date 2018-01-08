@@ -1059,7 +1059,7 @@
                       <Paragraph>
                         <TextRuns>
                           <TextRun>
-                            <Value>Total Food Purchases</Value>
+                            <Value>Total Purchases</Value>
                             <Style>
                               <FontWeight>Bold</FontWeight>
                             </Style>
@@ -1231,7 +1231,6 @@
                       <Format>C</Format>
                     </Style>
                     <UseValueAsLabel>true</UseValueAsLabel>
-                    <Visible>true</Visible>
                   </ChartDataLabel>
                   <Style />
                   <ChartMarker>

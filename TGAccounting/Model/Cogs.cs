@@ -11,7 +11,7 @@ namespace TGAccounting.Model
     {
         private string id;
         private string date;
-        private string week;
+        private int week;
         private string starting;
         private string ending;
         private string category;
@@ -48,7 +48,7 @@ namespace TGAccounting.Model
             }
         }
 
-        public string Week
+        public int Week
         {
             get
             {
@@ -154,7 +154,7 @@ namespace TGAccounting.Model
 
         public Cogs() { }
 
-        public Cogs(string id, string date, string week, string starting, string ending, string category, double beginningInventory, double endingInventory,double cost,string month)
+        public Cogs(string id, string date, int week, string starting, string ending, string category, double beginningInventory, double endingInventory,double cost,string month)
         {
             this.id = id;
             this.date = date;
@@ -175,7 +175,7 @@ namespace TGAccounting.Model
             SQLiteDataReader Reader = DBConnect.ReadingLite(query);
             while (Reader.Read())
             {
-                Cogs p = new Cogs(Reader["id"].ToString(), Reader["date"].ToString(), Reader["week"].ToString(), Reader["starting"].ToString(), Reader["ending"].ToString(), Reader["category"].ToString(),Convert.ToDouble(Reader["beginningInventory"]), Convert.ToDouble(Reader["endingInventory"].ToString()), Convert.ToDouble(Reader["cost"].ToString()), Reader["month"].ToString());
+                Cogs p = new Cogs(Reader["id"].ToString(), Reader["date"].ToString(),Convert.ToInt32(Convert.ToInt32(Reader["week"])), Reader["starting"].ToString(), Reader["ending"].ToString(), Reader["category"].ToString(),Convert.ToDouble(Reader["beginningInventory"]), Convert.ToDouble(Reader["endingInventory"].ToString()), Convert.ToDouble(Reader["cost"].ToString()), Reader["month"].ToString());
                 s.Add(p);
             }
             Reader.Close();

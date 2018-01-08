@@ -59,43 +59,12 @@ namespace TGAccounting
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(amountTxt.Text))
-            {
-                amountTxt.BackColor = Color.Red;
-                return;
-            }
-            if (string.IsNullOrEmpty(itemTxt.Text))
-            {
-                itemTxt.BackColor = Color.Red;
-                return;
-            }
-            if (!string.IsNullOrEmpty(existingID))
-            {
-
-                if (MessageBox.Show("YES or No?", "Are you sure you want to update the current existing information  ? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
-                {
-                    Equipment j = new Equipment(existingID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), weekLbl.Text, startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text),month);
-                    DBConnect.Update(j, existingID);
-                    existingID = "";
-                    return;
-                }
-
-            }
-            existingID = "";
-
-            string ID = Guid.NewGuid().ToString();
-            Equipment i = new Equipment(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), weekLbl.Text, startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text),month);
-            DBConnect.Insert(i);
-            MessageBox.Show("Information Saved ");
-            itemTxt.Text = "";
-            amountTxt.Text = "";
-            autocomplete();
+           
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
-            this.Dispose();
+            
         }
 
         private void amountTxt_KeyPress(object sender, KeyPressEventArgs e)
@@ -130,7 +99,7 @@ namespace TGAccounting
             try
             {
 
-                month = Equipment.List("SELECT * from equipment WHERE name='" + itemTxt.Text + "' AND week = '" + weekLbl.Text + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Month.ToString();
+                month = Equipment.List("SELECT * from equipment WHERE name='" + itemTxt.Text + "' AND week = '" + weekLbl.Text + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Month;
             }
             catch (Exception y)
             {
@@ -144,6 +113,52 @@ namespace TGAccounting
             {
                 // Helper.Exceptions(y.Message, "on adding inventory auto fill the category list selected item");
             }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(amountTxt.Text))
+            {
+                amountTxt.BackColor = Color.Red;
+                return;
+            }
+            if (string.IsNullOrEmpty(itemTxt.Text))
+            {
+                itemTxt.BackColor = Color.Red;
+                return;
+            }
+            if (!string.IsNullOrEmpty(existingID))
+            {
+
+                if (MessageBox.Show("YES or No?", "Are you sure you want to update the current existing information  ? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+                    Equipment j = new Equipment(existingID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), Convert.ToInt32(weekLbl.Text), startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text), month);
+                    DBConnect.Update(j, existingID);
+                    existingID = "";
+                    return;
+                }
+
+            }
+            existingID = "";
+
+            string ID = Guid.NewGuid().ToString();
+            Equipment i = new Equipment(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), Convert.ToInt32(weekLbl.Text), startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text), month);
+            DBConnect.Insert(i);
+            MessageBox.Show("Information Saved ");
+            itemTxt.Text = "";
+            amountTxt.Text = "";
+            autocomplete();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+            this.Dispose();
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

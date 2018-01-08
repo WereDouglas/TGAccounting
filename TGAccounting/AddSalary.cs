@@ -25,8 +25,7 @@ namespace TGAccounting
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
-            this.Dispose();
+            
         }
         private void autocompleteDepartment()
         {
@@ -61,18 +60,7 @@ namespace TGAccounting
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(annualTxt.Text))
-            {
-                annualTxt.BackColor = Color.Red;
-                return;
-            }
-
-            string ID = Guid.NewGuid().ToString();
-            Salary i = new Salary(ID,staffTxt.Text, departmentCbx.Text, categoryCbx.Text, Convert.ToDouble(annualTxt.Text), Convert.ToDouble(weeklyTxt.Text), Convert.ToDouble(biweeklyTxt.Text), Convert.ToDouble(0), Convert.ToDouble(ourTxt.Text));
-            DBConnect.Insert(i);
-            MessageBox.Show("Information Saved ");
-            annualTxt.Text = "";
-            autocompleteDepartment();
+            
 
         }
         private void staffTxt_Leave(object sender, EventArgs e)
@@ -139,6 +127,33 @@ namespace TGAccounting
             {
                 e.Handled = true;
             }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(annualTxt.Text))
+            {
+                annualTxt.BackColor = Color.Red;
+                return;
+            }
+
+            string ID = Guid.NewGuid().ToString();
+            Salary i = new Salary(ID, staffTxt.Text, departmentCbx.Text, categoryCbx.Text, Convert.ToDouble(annualTxt.Text), Convert.ToDouble(weeklyTxt.Text), Convert.ToDouble(biweeklyTxt.Text), Convert.ToDouble(0), Convert.ToDouble(ourTxt.Text));
+            DBConnect.Insert(i);
+            MessageBox.Show("Information Saved ");
+            annualTxt.Text = "";
+            autocompleteDepartment();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+            this.Dispose();
+        }
+
+        private void AddSalary_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

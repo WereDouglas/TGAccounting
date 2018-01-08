@@ -43,11 +43,11 @@
             this.dateTxt = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.cogsTxt = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,7 +56,7 @@
             this.categoryTxt.FormattingEnabled = true;
             this.categoryTxt.Location = new System.Drawing.Point(148, 158);
             this.categoryTxt.Name = "categoryTxt";
-            this.categoryTxt.Size = new System.Drawing.Size(254, 24);
+            this.categoryTxt.Size = new System.Drawing.Size(254, 26);
             this.categoryTxt.TabIndex = 1;
             this.categoryTxt.SelectedIndexChanged += new System.EventHandler(this.categoryTxt_SelectedIndexChanged);
             // 
@@ -65,7 +65,7 @@
             this.begTxt.Location = new System.Drawing.Point(146, 189);
             this.begTxt.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.begTxt.Name = "begTxt";
-            this.begTxt.Size = new System.Drawing.Size(256, 20);
+            this.begTxt.Size = new System.Drawing.Size(256, 21);
             this.begTxt.TabIndex = 2;
             this.begTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.begTxt_KeyPress);
             // 
@@ -76,7 +76,7 @@
             this.label8.Location = new System.Drawing.Point(23, 193);
             this.label8.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(109, 16);
+            this.label8.Size = new System.Drawing.Size(117, 18);
             this.label8.TabIndex = 23;
             this.label8.Text = "Beginning Inventory";
             // 
@@ -87,7 +87,7 @@
             this.label7.Location = new System.Drawing.Point(23, 161);
             this.label7.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(55, 16);
+            this.label7.Size = new System.Drawing.Size(57, 18);
             this.label7.TabIndex = 22;
             this.label7.Text = "Category";
             // 
@@ -98,7 +98,7 @@
             this.label10.Location = new System.Drawing.Point(23, 221);
             this.label10.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(94, 16);
+            this.label10.Size = new System.Drawing.Size(100, 18);
             this.label10.TabIndex = 20;
             this.label10.Text = "Ending Inventory";
             // 
@@ -107,7 +107,7 @@
             this.endTxt.Location = new System.Drawing.Point(146, 217);
             this.endTxt.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.endTxt.Name = "endTxt";
-            this.endTxt.Size = new System.Drawing.Size(256, 20);
+            this.endTxt.Size = new System.Drawing.Size(256, 21);
             this.endTxt.TabIndex = 3;
             this.endTxt.TextChanged += new System.EventHandler(this.endTxt_TextChanged);
             this.endTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.begTxt_KeyPress);
@@ -117,7 +117,7 @@
             this.endLbl.AutoSize = true;
             this.endLbl.Location = new System.Drawing.Point(148, 113);
             this.endLbl.Name = "endLbl";
-            this.endLbl.Size = new System.Drawing.Size(14, 16);
+            this.endLbl.Size = new System.Drawing.Size(15, 18);
             this.endLbl.TabIndex = 18;
             this.endLbl.Text = "#";
             // 
@@ -126,7 +126,7 @@
             this.startLbl.AutoSize = true;
             this.startLbl.Location = new System.Drawing.Point(148, 87);
             this.startLbl.Name = "startLbl";
-            this.startLbl.Size = new System.Drawing.Size(14, 16);
+            this.startLbl.Size = new System.Drawing.Size(15, 18);
             this.startLbl.TabIndex = 17;
             this.startLbl.Text = "#";
             // 
@@ -135,7 +135,7 @@
             this.weekLbl.AutoSize = true;
             this.weekLbl.Location = new System.Drawing.Point(148, 52);
             this.weekLbl.Name = "weekLbl";
-            this.weekLbl.Size = new System.Drawing.Size(14, 16);
+            this.weekLbl.Size = new System.Drawing.Size(15, 18);
             this.weekLbl.TabIndex = 16;
             this.weekLbl.Text = "#";
             // 
@@ -146,7 +146,7 @@
             this.label6.Location = new System.Drawing.Point(23, 113);
             this.label6.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(41, 16);
+            this.label6.Size = new System.Drawing.Size(44, 18);
             this.label6.TabIndex = 15;
             this.label6.Text = "Ending";
             // 
@@ -157,7 +157,7 @@
             this.label5.Location = new System.Drawing.Point(23, 87);
             this.label5.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(49, 16);
+            this.label5.Size = new System.Drawing.Size(51, 18);
             this.label5.TabIndex = 14;
             this.label5.Text = "Starting";
             // 
@@ -168,7 +168,7 @@
             this.label2.Location = new System.Drawing.Point(23, 56);
             this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 16);
+            this.label2.Size = new System.Drawing.Size(37, 18);
             this.label2.TabIndex = 13;
             this.label2.Text = "Week";
             // 
@@ -176,7 +176,7 @@
             // 
             this.dateTxt.Location = new System.Drawing.Point(148, 19);
             this.dateTxt.Name = "dateTxt";
-            this.dateTxt.Size = new System.Drawing.Size(256, 20);
+            this.dateTxt.Size = new System.Drawing.Size(256, 21);
             this.dateTxt.TabIndex = 0;
             this.dateTxt.ValueChanged += new System.EventHandler(this.dateTxt_ValueChanged);
             // 
@@ -185,47 +185,21 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(23, 23);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 16);
+            this.label4.Size = new System.Drawing.Size(37, 18);
             this.label4.TabIndex = 10;
             this.label4.Text = "Date ";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.label3.Location = new System.Drawing.Point(155, 9);
             this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(101, 16);
+            this.label3.Size = new System.Drawing.Size(171, 24);
             this.label3.TabIndex = 15;
             this.label3.Text = "New Cost of Goods";
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(11, 346);
-            this.button2.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(125, 42);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Cancel";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.MediumSeaGreen;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(319, 346);
-            this.button1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(125, 42);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Save";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel1
             // 
@@ -248,6 +222,7 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.dateTxt);
             this.panel1.Controls.Add(this.label4);
+            this.panel1.Font = new System.Drawing.Font("Trebuchet MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel1.Location = new System.Drawing.Point(11, 35);
             this.panel1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.panel1.Name = "panel1";
@@ -259,7 +234,7 @@
             this.cogsTxt.Location = new System.Drawing.Point(146, 254);
             this.cogsTxt.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.cogsTxt.Name = "cogsTxt";
-            this.cogsTxt.Size = new System.Drawing.Size(256, 20);
+            this.cogsTxt.Size = new System.Drawing.Size(256, 21);
             this.cogsTxt.TabIndex = 4;
             this.cogsTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.begTxt_KeyPress);
             // 
@@ -270,18 +245,50 @@
             this.label1.Location = new System.Drawing.Point(23, 258);
             this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 16);
+            this.label1.Size = new System.Drawing.Size(83, 18);
             this.label1.TabIndex = 30;
             this.label1.Text = "Cost of goods";
+            // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.Color.Transparent;
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Image = global::TGAccounting.Properties.Resources.Close_16;
+            this.button3.Location = new System.Drawing.Point(157, 341);
+            this.button3.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 42);
+            this.button3.TabIndex = 17;
+            this.button3.Text = "Close";
+            this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button4
+            // 
+            this.button4.BackColor = System.Drawing.Color.Transparent;
+            this.button4.FlatAppearance.BorderSize = 0;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Image = global::TGAccounting.Properties.Resources.Save_16__2_;
+            this.button4.Location = new System.Drawing.Point(354, 349);
+            this.button4.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(59, 34);
+            this.button4.TabIndex = 16;
+            this.button4.Text = "Save";
+            this.button4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // AddCogs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(469, 415);
+            this.ClientSize = new System.Drawing.Size(469, 394);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -313,10 +320,10 @@
         private System.Windows.Forms.DateTimePicker dateTxt;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox cogsTxt;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
     }
 }

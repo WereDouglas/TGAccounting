@@ -11,7 +11,7 @@ namespace TGAccounting.Model
     {
         private string id;
         private string date;
-        private string week;
+        private int week;
         private string starting;
         private string ending;
         private string item;
@@ -47,7 +47,7 @@ namespace TGAccounting.Model
             }
         }
 
-        public string Week
+        public int Week
         {
             get
             {
@@ -140,7 +140,7 @@ namespace TGAccounting.Model
 
         public Comp() { }
 
-        public Comp(string id, string date, string week, string starting, string ending, string item, double amount, string category,string month)
+        public Comp(string id, string date, int week, string starting, string ending, string item, double amount, string category,string month)
         {
             this.Id = id;
             this.Date = date;
@@ -159,7 +159,7 @@ namespace TGAccounting.Model
             SQLiteDataReader Reader = DBConnect.ReadingLite(query);
             while (Reader.Read())
             {
-                Comp p = new Comp(Reader["id"].ToString(), Reader["date"].ToString(), Reader["week"].ToString(), Reader["starting"].ToString(), Reader["ending"].ToString(), Reader["item"].ToString(), Convert.ToDouble(Reader["amount"]), Reader["category"].ToString(), Reader["month"].ToString());
+                Comp p = new Comp(Reader["id"].ToString(), Reader["date"].ToString(), Convert.ToInt32(Reader["week"]), Reader["starting"].ToString(), Reader["ending"].ToString(), Reader["item"].ToString(), Convert.ToDouble(Reader["amount"]), Reader["category"].ToString(), Reader["month"].ToString());
                 s.Add(p);
             }
             Reader.Close();

@@ -76,21 +76,7 @@ namespace TGAccounting
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(valTxt.Text))
-            {
-                valTxt.BackColor = Color.Red;
-                return;
-            }
-            if (string.IsNullOrEmpty(itemCbx.Text))
-            {
-                itemCbx.BackColor = Color.Red;
-                return;
-            }
-            string ID = Guid.NewGuid().ToString();
-            Budget i = new Budget(ID, itemCbx.Text,catTxt.Text,groupTxt.Text,pctTxt.Text,Convert.ToDouble(valTxt.Text),DateTime.Now.ToString("dd-MM-yyyy"));
-            DBConnect.Insert(i);
-            MessageBox.Show("Information Saved ");
-            valTxt.Text = "";
+           
 
         }
 
@@ -110,8 +96,7 @@ namespace TGAccounting
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
-            this.Dispose();
+            
         }
 
         private void pctTxt_KeyPress(object sender, KeyPressEventArgs e)
@@ -129,6 +114,31 @@ namespace TGAccounting
             {
                 e.Handled = true;
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+            this.Dispose();
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(valTxt.Text))
+            {
+                valTxt.BackColor = Color.Red;
+                return;
+            }
+            if (string.IsNullOrEmpty(itemCbx.Text))
+            {
+                itemCbx.BackColor = Color.Red;
+                return;
+            }
+            string ID = Guid.NewGuid().ToString();
+            Budget i = new Budget(ID, itemCbx.Text, catTxt.Text, groupTxt.Text, pctTxt.Text, Convert.ToDouble(valTxt.Text), DateTime.Now.ToString("dd-MM-yyyy"));
+            DBConnect.Insert(i);
+            MessageBox.Show("Information Saved ");
+            valTxt.Text = "";
         }
     }
 }

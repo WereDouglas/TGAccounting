@@ -12,17 +12,23 @@ namespace TGAccounting
         public static List<Events> events;
         public static List<string> categories = new List<string>();
         public static List<string> inventoryItems = new List<string>();
+        public static List<string> expenseCategory = new List<string>();
         public static void LoadData()
         {
            // events.Clear();
             events = new List<Events>(Events.List());
-            foreach (Inventory r in Inventory.List("SELECT * from inventory").GroupBy(x => x.Category, (key, group) => group.First()))
+            foreach (var r in Inventory.ListCategory("SELECT DISTINCT category from inventory "))
             {               
-                categories.Add(r.Category);
+                categories.Add(r);
             }
-            foreach (Inventory r in Inventory.List("SELECT * from inventory").GroupBy(x => x.Name, (key, group) => group.First()))
+            foreach (var r in Inventory.ListName("SELECT  DISTINCT name from inventory "))
             {
-                inventoryItems.Add(r.Name);
+                inventoryItems.Add(r);
+            }
+            foreach (Expense r in Expense.List("SELECT * from expense").GroupBy(x => x.Category, (key, group) => group.First()))
+            {
+                
+                expenseCategory.Add(r.Category);
             }
 
         }
