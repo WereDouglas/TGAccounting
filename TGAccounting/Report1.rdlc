@@ -125,10 +125,10 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.17708in</Width>
+              <Width>1.07639in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.11458in</Width>
+              <Width>1.01389in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -654,7 +654,7 @@
                 </SortExpression>
               </SortExpressions>
               <TablixHeader>
-                <Size>2.375in</Size>
+                <Size>2.27431in</Size>
                 <CellContents>
                   <Textbox Name="Item">
                     <CanGrow>true</CanGrow>
@@ -696,7 +696,7 @@
             </TablixMember>
             <TablixMember>
               <TablixHeader>
-                <Size>2.375in</Size>
+                <Size>2.27431in</Size>
                 <CellContents>
                   <Textbox Name="Textbox26">
                     <CanGrow>true</CanGrow>
@@ -736,7 +736,7 @@
             </TablixMember>
             <TablixMember>
               <TablixHeader>
-                <Size>2.375in</Size>
+                <Size>2.27431in</Size>
                 <CellContents>
                   <Textbox Name="Textbox7">
                     <CanGrow>true</CanGrow>
@@ -776,11 +776,12 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
+        <FixedColumnHeaders>true</FixedColumnHeaders>
         <DataSetName>DataSet1</DataSetName>
         <Top>0.07292in</Top>
         <Left>0.13417in</Left>
         <Height>1.5in</Height>
-        <Width>4.66666in</Width>
+        <Width>4.36458in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1086,32 +1087,22 @@
             <ChartMember>
               <Group Name="Chart2_CategoryGroup">
                 <GroupExpressions>
-                  <GroupExpression>=Fields!Week.Value</GroupExpression>
+                  <GroupExpression>=Fields!Month.Value</GroupExpression>
                 </GroupExpressions>
               </Group>
               <SortExpressions>
                 <SortExpression>
-                  <Value>=Fields!Week.Value</Value>
+                  <Value>=Fields!Month.Value</Value>
                 </SortExpression>
               </SortExpressions>
-              <Label>=Fields!Week.Value</Label>
+              <Label>=Fields!Month.Value</Label>
             </ChartMember>
           </ChartMembers>
         </ChartCategoryHierarchy>
         <ChartSeriesHierarchy>
           <ChartMembers>
             <ChartMember>
-              <Group Name="Chart2_SeriesGroup">
-                <GroupExpressions>
-                  <GroupExpression>=Fields!Item.Value</GroupExpression>
-                </GroupExpressions>
-              </Group>
-              <SortExpressions>
-                <SortExpression>
-                  <Value>=Fields!Item.Value</Value>
-                </SortExpression>
-              </SortExpressions>
-              <Label>=Fields!Item.Value</Label>
+              <Label>Amount</Label>
             </ChartMember>
           </ChartMembers>
         </ChartSeriesHierarchy>
@@ -1129,7 +1120,9 @@
                     </Style>
                     <UseValueAsLabel>true</UseValueAsLabel>
                   </ChartDataLabel>
-                  <Style />
+                  <Style>
+                    <Color>Gold</Color>
+                  </Style>
                   <ChartMarker>
                     <Style />
                   </ChartMarker>
@@ -1163,7 +1156,7 @@
                   <FontSize>8pt</FontSize>
                 </Style>
                 <ChartAxisTitle>
-                  <Caption>Week Ending</Caption>
+                  <Caption>Month</Caption>
                   <Style>
                     <FontSize>8pt</FontSize>
                   </Style>
@@ -1332,7 +1325,7 @@
         </ChartLegends>
         <ChartTitles>
           <ChartTitle Name="Default">
-            <Caption>Weekly Sales</Caption>
+            <Caption>Monthly Sales</Caption>
             <Style>
               <BackgroundGradientType>None</BackgroundGradientType>
               <FontWeight>Bold</FontWeight>
@@ -1433,6 +1426,10 @@
         </Field>
         <Field Name="Week">
           <DataField>Week</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Month">
+          <DataField>Month</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>

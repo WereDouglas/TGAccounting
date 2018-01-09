@@ -1029,13 +1029,13 @@ namespace TGAccounting
             cp.Columns.Add("Starting");
             cp.Columns.Add("Ending");
             cp.Columns.Add("Date");
-            cp.Columns.Add("Category");
+            
             cp.Columns.Add("Month");
             cp.Columns.Add("Delete");
             string query = "SELECT * FROM comp WHERE date = '" + Helper.CurrentYear + "'";
             foreach (Comp w in Comp.List(query))
             {
-                cp.Rows.Add(new object[] { w.Id, w.Item, w.Amount, w.Week, w.Starting, w.Ending, w.Date, w.Category,w.Month, "Delete" });
+                cp.Rows.Add(new object[] { w.Id, w.Item, w.Amount, w.Week, w.Starting, w.Ending, w.Date,w.Month, "Delete" });
             }
             comGrid.DataSource = cp;
             comGrid.Columns["id"].Visible = false;

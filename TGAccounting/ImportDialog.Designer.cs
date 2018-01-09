@@ -55,7 +55,8 @@
             "Repairs",
             "Expenses",
             "COGS",
-            "Purchases"});
+            "Purchases",
+            "Complimentary"});
             this.categoryTxt.Location = new System.Drawing.Point(149, 45);
             this.categoryTxt.Name = "categoryTxt";
             this.categoryTxt.Size = new System.Drawing.Size(259, 24);

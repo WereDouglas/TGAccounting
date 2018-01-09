@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddComp));
-            this.categoryTxt = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.amountTxt = new System.Windows.Forms.TextBox();
             this.endLbl = new System.Windows.Forms.Label();
@@ -50,39 +48,20 @@
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // categoryTxt
-            // 
-            this.categoryTxt.FormattingEnabled = true;
-            this.categoryTxt.Location = new System.Drawing.Point(106, 188);
-            this.categoryTxt.Name = "categoryTxt";
-            this.categoryTxt.Size = new System.Drawing.Size(225, 26);
-            this.categoryTxt.TabIndex = 2;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.BackColor = System.Drawing.Color.LightGray;
-            this.label7.Location = new System.Drawing.Point(23, 194);
-            this.label7.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(57, 18);
-            this.label7.TabIndex = 22;
-            this.label7.Text = "Category";
-            // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.BackColor = System.Drawing.Color.LightGray;
-            this.label10.Location = new System.Drawing.Point(5, 231);
+            this.label10.Location = new System.Drawing.Point(23, 187);
             this.label10.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(95, 18);
+            this.label10.Size = new System.Drawing.Size(80, 18);
             this.label10.TabIndex = 20;
-            this.label10.Text = "Amount of sales";
+            this.label10.Text = "Total Amount";
             // 
             // amountTxt
             // 
-            this.amountTxt.Location = new System.Drawing.Point(104, 228);
+            this.amountTxt.Location = new System.Drawing.Point(106, 184);
             this.amountTxt.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.amountTxt.Name = "amountTxt";
             this.amountTxt.Size = new System.Drawing.Size(227, 21);
@@ -182,9 +161,9 @@
             this.label1.Location = new System.Drawing.Point(23, 159);
             this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(71, 18);
+            this.label1.Size = new System.Drawing.Size(70, 18);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Select item";
+            this.label1.Text = "Input name";
             // 
             // label3
             // 
@@ -201,8 +180,6 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.LightGray;
-            this.panel1.Controls.Add(this.categoryTxt);
-            this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.amountTxt);
             this.panel1.Controls.Add(this.endLbl);
@@ -219,7 +196,7 @@
             this.panel1.Location = new System.Drawing.Point(21, 35);
             this.panel1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(358, 303);
+            this.panel1.Size = new System.Drawing.Size(358, 235);
             this.panel1.TabIndex = 14;
             // 
             // button3
@@ -228,7 +205,7 @@
             this.button3.FlatAppearance.BorderSize = 0;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Image = global::TGAccounting.Properties.Resources.Close_16;
-            this.button3.Location = new System.Drawing.Point(127, 342);
+            this.button3.Location = new System.Drawing.Point(127, 274);
             this.button3.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 42);
@@ -244,7 +221,7 @@
             this.button4.FlatAppearance.BorderSize = 0;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Image = global::TGAccounting.Properties.Resources.Save_16__2_;
-            this.button4.Location = new System.Drawing.Point(293, 346);
+            this.button4.Location = new System.Drawing.Point(295, 278);
             this.button4.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(59, 34);
@@ -258,7 +235,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(403, 395);
+            this.ClientSize = new System.Drawing.Size(403, 325);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.label3);
@@ -278,9 +255,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ComboBox categoryTxt;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox amountTxt;
         private System.Windows.Forms.Label endLbl;

@@ -15,8 +15,7 @@ namespace TGAccounting.Model
         private string starting;
         private string ending;
         private string item;
-        private double amount;
-        private string category;
+        private double amount;        
         private string month;
 
         private static List<Comp> s ;
@@ -111,20 +110,7 @@ namespace TGAccounting.Model
                 amount = value;
             }
         }
-
-        public string Category
-        {
-            get
-            {
-                return category;
-            }
-
-            set
-            {
-                category = value;
-            }
-        }
-
+        
         public string Month
         {
             get
@@ -140,7 +126,7 @@ namespace TGAccounting.Model
 
         public Comp() { }
 
-        public Comp(string id, string date, int week, string starting, string ending, string item, double amount, string category,string month)
+        public Comp(string id, string date, int week, string starting, string ending, string item, double amount,string month)
         {
             this.Id = id;
             this.Date = date;
@@ -149,7 +135,8 @@ namespace TGAccounting.Model
             this.Ending = ending;
             this.Item = item;
             this.Amount = amount;
-            this.Category = category;
+            this.Month = month;
+
         }
 
         public static List<Comp> List(string query)
@@ -159,11 +146,23 @@ namespace TGAccounting.Model
             SQLiteDataReader Reader = DBConnect.ReadingLite(query);
             while (Reader.Read())
             {
-                Comp p = new Comp(Reader["id"].ToString(), Reader["date"].ToString(), Convert.ToInt32(Reader["week"]), Reader["starting"].ToString(), Reader["ending"].ToString(), Reader["item"].ToString(), Convert.ToDouble(Reader["amount"]), Reader["category"].ToString(), Reader["month"].ToString());
+                Comp p = new Comp(Reader["id"].ToString(), Reader["date"].ToString(), Convert.ToInt32(Reader["week"]), Reader["starting"].ToString(), Reader["ending"].ToString(), Reader["item"].ToString(), Convert.ToDouble(Reader["amount"]),Reader["month"].ToString());
                 s.Add(p);
             }
             Reader.Close();
 
+            return s;
+
+        }
+        public static List<String> ListName(string query)
+        {
+            List<string> s = new List<String>();
+            SQLiteDataReader Reader = DBConnect.ReadingLite(query);
+            while (Reader.Read())
+            {
+                s.Add(Reader["item"].ToString());
+            }
+            Reader.Close();
             return s;
 
         }

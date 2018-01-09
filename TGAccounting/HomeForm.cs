@@ -648,6 +648,8 @@ namespace TGAccounting
             double totalPayRollYTD = 0;
             double totalCogs = 0;
             double totalCogsYTD = 0;
+            double totalComps = 0;
+            double totalCompsYTD = 0;
             double totalSales = 0;
             double totalSalesYTD = 0;
             double totalTaxes = 0;
@@ -657,52 +659,21 @@ namespace TGAccounting
 
             double totalEquip = 0;
             double totalEquipYTD = 0;
-            foreach (Taxes l in Taxes.List("SELECT * FROM taxes  WHERE week ='" + week + "' AND date= '" + Helper.CurrentYear + "' "))
-            {
-                double sums = Taxes.List("SELECT * FROM taxes  WHERE week ='" + week + "'  AND date= '" + Helper.CurrentYear + "' ").Sum(t => t.Amount);
-                double p1 = Math.Round((l.Amount / sums) * 100, 1);
-                double ytd = Taxes.List("SELECT * FROM taxes  WHERE CAST(week AS INTEGER) <='" + week + "' AND name='" + l.Name + "'  AND date= '" + Helper.CurrentYear + "' ").Sum(t => t.Amount);
-
-                double p2 = Math.Round((l.Amount / sums) * 100, 1);
-                r = new Report(l.Date, l.Week, l.Ending, "Employee Benefits", l.Name, l.Amount, p1, ytd, p2, "PAYROLL", "EXPENSE");
-                reports.Add(r);
-                ending = l.Ending;
-                date = l.Date;
-                totalTaxes = totalTaxes + sums;
-                totalTaxesYTD = totalTaxesYTD + ytd;
-
-                totalPayRoll = totalPayRoll + sums;
-                totalPayRollYTD = totalPayRollYTD + ytd;
-            }
-
-            foreach (Labor l in Labor.List("SELECT * FROM labor  WHERE week ='" + week + "'  AND date= '" + Helper.CurrentYear + "' "))
-            {
-                double sums = Labor.List("SELECT * FROM labor  WHERE week ='" + week + "'  AND date= '" + Helper.CurrentYear + "' ").Sum(t => t.Amount);
-                double p1 = Math.Round((l.Amount / sums) * 100, 1);
-                double ytd = Labor.List("SELECT * FROM labor  WHERE CAST(week AS INTEGER) <='" + week + "' AND item='" + l.Item + "'  AND date= '" + Helper.CurrentYear + "' ").Sum(t => t.Amount);
-                date = l.Date;
-                double p2 = Math.Round((l.Amount / sums) * 100, 1);
-                r = new Report(l.Date, l.Week, l.Ending, "Salaries & Wages", l.Item, l.Amount, p1, ytd, p2, "PAYROLL", "EXPENSE");
-                reports.Add(r);
-
-                totalPayRoll = totalPayRoll + sums;
-                totalPayRollYTD = totalPayRollYTD + ytd;
-            }
-
-            //r = new Report("", week, ending, "TOTAL PAYROLL", "TOTAL PAYROLL",totalPayRoll, p1, ytd, p2);
-            // reports.Add(r);
-
             foreach (Sale s in Sale.List("SELECT * FROM sale  WHERE week ='" + week + "'  AND date= '" + Helper.CurrentYear + "' "))
             {
                 double sums = Sale.List("SELECT * FROM sale  WHERE week ='" + week + "' ").Sum(t => t.Amount);
                 double p1 = Math.Round((s.Amount / sums) * 100, 1);
-                double ytd = Sale.List("SELECT * FROM sale  WHERE CAST(week AS INTEGER) <='" + week + "'  AND item='" + s.Item + "'  AND date= '" + Helper.CurrentYear + "' ").Sum(t => t.Amount);
+                double ytd = Sale.List("SELECT * FROM sale WHERE CAST(week AS INTEGER) <='" + week + "'  AND item='" + s.Item + "'  AND date= '" + Helper.CurrentYear + "' ").Sum(t => t.Amount);
 
-                double p2 = Math.Round((s.Amount / sums) * 100, 1);
-                r = new Report(s.Date, s.Week, s.Ending, "SALES", s.Item, s.Amount, p1, ytd, p2, "SALES", "INCOME");
-                reports.Add(r);
+                
                 totalSales = totalSales + sums;
                 totalSalesYTD = totalSalesYTD + ytd;
+
+                ending = Convert.ToDateTime(s.Ending).ToString("dd-MMM-yy");
+                date = s.Date;
+                double p2 = Math.Round((s.Amount / sums) * 100, 1);
+                r = new Report(s.Date, s.Week, Convert.ToDateTime(s.Ending).ToString("dd-MMM-yy"), "Sales", s.Item, s.Amount, p1, ytd, p2, "Sales", "Income", 1,1);
+                reports.Add(r);
             }
 
             foreach (Cogs s in Cogs.List("SELECT * FROM cogs  WHERE week ='" + week + "'  AND date= '" + Helper.CurrentYear + "' "))
@@ -712,11 +683,79 @@ namespace TGAccounting
                 double ytd = Cogs.List("SELECT * FROM cogs  WHERE CAST(week AS INTEGER) <='" + week + "'  AND category='" + s.Category + "'  AND date= '" + Helper.CurrentYear + "' ").Sum(t => t.Cost);
 
                 double p2 = Math.Round((s.Cost / sums) * 100, 1);
-                r = new Report(s.Date, s.Week, s.Ending, "COST OF GOODS SOLD", s.Category, s.Cost, p1, ytd, p2, "COST OF GOODS SOLD", "COST OF GOODS SOLD");
+                r = new Report(s.Date, s.Week, Convert.ToDateTime(s.Ending).ToString("dd-MMM-yy"), "Cost of goods sold", s.Category, s.Cost, p1, ytd, p2, "Cost of goods", "Cost of goods", 2,1);
                 reports.Add(r);
                 totalCogs = totalCogs + sums;
                 totalCogsYTD = totalCogsYTD + ytd;
             }
+            foreach (Comp s in Comp.List("SELECT * FROM comp  WHERE week ='" + week + "'  AND date= '" + Helper.CurrentYear + "' "))
+            {
+                double sums = Comp.List("SELECT * FROM comp  WHERE week ='" + week + " 'AND item='" + s.Item + "'  AND date= '" + Helper.CurrentYear + "' ").Sum(t => t.Amount);
+                double p1 = Math.Round((s.Amount / sums) * 100, 1);
+                double ytd = Comp.List("SELECT * FROM comp  WHERE CAST(week AS INTEGER) <='" + week + "'  AND item='" + s.Item + "'  AND date= '" + Helper.CurrentYear + "' ").Sum(t => t.Amount);
+
+                double p2 = Math.Round((s.Amount / sums) * 100, 1);
+                r = new Report(s.Date, s.Week, Convert.ToDateTime(s.Ending).ToString("dd-MMM-yy"), "Complimentaries", s.Item, s.Amount, p1, ytd, p2, "Complimentary", "Cost of goods", 2, 2);
+                reports.Add(r);
+                totalComps = totalComps + sums;
+                totalCompsYTD = totalCompsYTD + ytd;
+            }
+
+            /**Computing the Gross profit*/
+
+            double Gross = totalSales - (totalCogs + totalComps);
+            double GrossYTD = totalSalesYTD - (totalCogsYTD + totalCompsYTD);
+
+            double p1Gross = Math.Round((Gross / totalSales) * 100, 1);
+            double p2Gross = Math.Round((GrossYTD / totalSalesYTD) * 100, 1);
+
+            r = new Report(date, Convert.ToInt32(weekTxt.Text), ending, "Gross Profits", "Gross Profit", Gross, p1Gross, GrossYTD, p2Gross, "Gross Profit", "Gross Profit", 3,1);
+            reports.Add(r);
+
+            /**End of Gross ***/
+            foreach (Labor l in Labor.List("SELECT * FROM labor  WHERE week ='" + week + "'  AND date= '" + Helper.CurrentYear + "' "))
+            {
+                double sums = Labor.List("SELECT * FROM labor  WHERE week ='" + week + "'  AND date= '" + Helper.CurrentYear + "' ").Sum(t => t.Amount);
+                double p1 = Math.Round((l.Amount / sums) * 100, 1);
+                double ytd = Labor.List("SELECT * FROM labor  WHERE CAST(week AS INTEGER) <='" + week + "' AND item='" + l.Item + "'  AND date= '" + Helper.CurrentYear + "' ").Sum(t => t.Amount);
+                date = l.Date;
+                double p2 = Math.Round((l.Amount / sums) * 100, 1);
+                r = new Report(l.Date, l.Week, Convert.ToDateTime(l.Ending).ToString("dd-MMM-yy"), "Salaries & Wages", l.Item, l.Amount, p1, ytd, p2, "Payroll", "Expense", 4,1);
+                reports.Add(r);
+
+                totalPayRoll = totalPayRoll + sums;
+                totalPayRollYTD = totalPayRollYTD + ytd;
+            }
+            foreach (Taxes l in Taxes.List("SELECT * FROM taxes  WHERE week ='" + week + "' AND date= '" + Helper.CurrentYear + "' "))
+            {
+                double sums = Taxes.List("SELECT * FROM taxes  WHERE week ='" + week + "'  AND date= '" + Helper.CurrentYear + "' ").Sum(t => t.Amount);
+                double p1 = Math.Round((l.Amount / sums) * 100, 1);
+                double ytd = Taxes.List("SELECT * FROM taxes  WHERE CAST(week AS INTEGER) <='" + week + "' AND name='" + l.Name + "'  AND date= '" + Helper.CurrentYear + "' ").Sum(t => t.Amount);
+
+                double p2 = Math.Round((l.Amount / sums) * 100, 1);
+                r = new Report(l.Date, l.Week,Convert.ToDateTime(l.Ending).ToString("dd-MMM-yy"), "Employee Benefits", l.Name, l.Amount, p1, ytd, p2, "Payroll", "Expense",5,1);
+                reports.Add(r);
+               
+                totalTaxes = totalTaxes + sums;
+                totalTaxesYTD = totalTaxesYTD + ytd;
+
+                totalPayRoll = totalPayRoll + sums;
+                totalPayRollYTD = totalPayRollYTD + ytd;
+            }
+
+            /**Computing the prime costs*/
+            totalCogsYTD = Cogs.List("SELECT * FROM cogs  WHERE CAST(week AS INTEGER) <='" + week + "'  AND date= '" + Helper.CurrentYear + "'").Sum(t => t.Cost);
+            totalCogs = Cogs.List("SELECT * FROM cogs  WHERE CAST(week AS INTEGER) ='" + week + "'  AND date= '" + Helper.CurrentYear + "'").Sum(t => t.Cost);
+
+            double prime = totalCogs + totalPayRoll;
+            double p1Prime = Math.Round((prime / totalSales) * 100, 1);
+            double p2Prime = Math.Round((totalCogsYTD / totalSalesYTD) * 100, 1);
+
+            r = new Report(date, Convert.ToInt32(Convert.ToInt32(weekTxt.Text)), Convert.ToDateTime(ending).ToString("dd-MMM-yy"), "Prime Cost", "Prime Cost", prime, p1Prime, totalSalesYTD, p2Prime, "Prime Cost", "Prime Cost", 6,1);
+            reports.Add(r);
+            /**end of prime costs***/
+
+            /*Controllable Expenses*/
             foreach (Supplies s in Supplies.List("SELECT * FROM supplies  WHERE week ='" + week + "'  AND date= '" + Helper.CurrentYear + "' "))
             {
                 double sums = Supplies.List("SELECT * FROM supplies  WHERE week ='" + week + "' AND date= '" + Helper.CurrentYear + "' ").Sum(t => t.Amount);
@@ -724,19 +763,7 @@ namespace TGAccounting
                 double ytd = Supplies.List("SELECT * FROM supplies  WHERE CAST(week AS INTEGER) <='" + week + "'  AND supplier='" + s.Supplier + "'  AND date= '" + Helper.CurrentYear + "' ").Sum(t => t.Amount);
 
                 double p2 = Math.Round((s.Amount / sums) * 100, 1);
-                r = new Report(s.Date, s.Week, s.Ending, "Supplies", s.Supplier, s.Amount, p1, ytd, p2, "Other Controllable Expenses", "EXPENSE");
-                reports.Add(r);
-                totalExpenses = totalExpenses + sums;
-                totalExpensesYTD = totalExpensesYTD + ytd;
-            }
-            foreach (Expense s in Expense.List("SELECT * FROM expense  WHERE week ='" + week + "' AND date= '" + Helper.CurrentYear + "' "))
-            {
-                double sums = Expense.List("SELECT * FROM expense  WHERE week ='" + week + "' AND date= '" + Helper.CurrentYear + "' ").Sum(t => t.Amount);
-                double p1 = Math.Round((s.Amount / sums) * 100, 1);
-                double ytd = Expense.List("SELECT * FROM expense  WHERE CAST(week AS INTEGER) <='" + week + "'  AND name='" + s.Name + "'  AND date= '" + Helper.CurrentYear + "' ").Sum(t => t.Amount);
-
-                double p2 = Math.Round((s.Amount / sums) * 100, 1);
-                r = new Report(s.Date, s.Week, s.Ending, s.Category, s.Name, s.Amount, p1, ytd, p2, "Other Controllable Expenses", "EXPENSE");
+                r = new Report(s.Date, s.Week,Convert.ToDateTime(s.Ending).ToString("dd-MMM-yy"), "Supplies", s.Supplier, s.Amount, p1, ytd, p2, "Other Controllable Expenses", "Expense",7,1);
                 reports.Add(r);
                 totalExpenses = totalExpenses + sums;
                 totalExpensesYTD = totalExpensesYTD + ytd;
@@ -748,49 +775,23 @@ namespace TGAccounting
                 double ytd = Repair.List("SELECT * FROM repair  WHERE CAST(week AS INTEGER) <='" + week + "'  AND supplier='" + s.Supplier + "'  AND date= '" + Helper.CurrentYear + "' ").Sum(t => t.Amount);
 
                 double p2 = Math.Round((s.Amount / sums) * 100, 1);
-                r = new Report(s.Date, s.Week, s.Ending, "Repair and maintenance", s.Supplier, s.Amount, p1, ytd, p2, "Other Controllable Expenses", "EXPENSE");
+                r = new Report(s.Date, s.Week, Convert.ToDateTime(s.Ending).ToString("dd-MMM-yy"), "Repair and maintenance", s.Supplier, s.Amount, p1, ytd, p2, "Other Controllable Expenses", "Expense", 7,2);
                 reports.Add(r);
                 totalExpenses = totalExpenses + sums;
                 totalExpensesYTD = totalExpensesYTD + ytd;
             }
-            foreach (Equipment s in Equipment.List("SELECT * FROM equipment  WHERE week ='" + week + "' AND date= '" + Helper.CurrentYear + "' "))
+            foreach (Expense s in Expense.List("SELECT * FROM expense  WHERE week ='" + week + "' AND date= '" + Helper.CurrentYear + "' "))
             {
-                double sums = Equipment.List("SELECT * FROM equipment  WHERE week ='" + week + "' AND date= '" + Helper.CurrentYear + "' ").Sum(t => t.Amount);
+                double sums = Expense.List("SELECT * FROM expense  WHERE week ='" + week + "' AND date= '" + Helper.CurrentYear + "' ").Sum(t => t.Amount);
                 double p1 = Math.Round((s.Amount / sums) * 100, 1);
-                double ytd = Equipment.List("SELECT * FROM equipment  WHERE CAST(week AS INTEGER) <='" + week + "'  AND name='" + s.Name + "'  AND date= '" + Helper.CurrentYear + "' ").Sum(t => t.Amount);
+                double ytd = Expense.List("SELECT * FROM expense  WHERE CAST(week AS INTEGER) <='" + week + "'  AND name='" + s.Name + "'  AND date= '" + Helper.CurrentYear + "' ").Sum(t => t.Amount);
 
                 double p2 = Math.Round((s.Amount / sums) * 100, 1);
-                r = new Report(s.Date, s.Week, s.Ending, "Equipment", s.Name, s.Amount, p1, ytd, p2, "Equipment", "EXPENSE");
+                r = new Report(s.Date, s.Week, Convert.ToDateTime(s.Ending).ToString("dd-MMM-yy"), s.Category, s.Name, s.Amount, p1, ytd, p2, "Other Controllable Expenses", "Expense", 7,3);
                 reports.Add(r);
-                totalEquip = totalEquip + sums;
-                totalEquipYTD = totalEquipYTD + ytd;
-
+                totalExpenses = totalExpenses + sums;
+                totalExpensesYTD = totalExpensesYTD + ytd;
             }
-            /**Computing the prime costs*/
-            totalCogsYTD = Cogs.List("SELECT * FROM cogs  WHERE CAST(week AS INTEGER) <='" + week + "'  AND date= '" + Helper.CurrentYear + "'").Sum(t => t.Cost);
-            totalCogs = Cogs.List("SELECT * FROM cogs  WHERE CAST(week AS INTEGER) ='" + week + "'  AND date= '" + Helper.CurrentYear + "'").Sum(t => t.Cost);
-
-            double prime = totalCogs + totalPayRoll;
-            double p1Prime = Math.Round((prime / totalSales) * 100, 1);
-            double p2Prime = Math.Round((totalCogsYTD / totalSalesYTD) * 100, 1);
-
-            r = new Report(date, Convert.ToInt32(Convert.ToInt32(weekTxt.Text)), ending, "PRIME COST", "PRIME COST", prime, p1Prime, totalSalesYTD, p2Prime, "PRIME COST", "PRIME COST");
-            reports.Add(r);
-            /**end of prime costs***/
-
-            /**Computing the Gross profit*/
-
-            double Gross = totalSales - totalCogs;
-            double GrossYTD = totalSalesYTD - totalCogsYTD;
-
-            double p1Gross = Math.Round((Gross / totalSales) * 100, 1);
-            double p2Gross = Math.Round((GrossYTD / totalSalesYTD) * 100, 1);
-
-            r = new Report(date, Convert.ToInt32(weekTxt.Text), ending, "Gross Profits", "Gross Profit", Gross, p1Gross, GrossYTD, p2Gross, "Gross Profit", "Profit");
-            reports.Add(r);
-
-            /**End of Gross ***/
-
             /**Computing Controllable Expenses*/
 
             double ctrl = totalPayRoll + totalExpenses;
@@ -799,7 +800,7 @@ namespace TGAccounting
             double p1Ctrl = Math.Round((prime / totalSales) * 100, 1);
             double p2Ctrl = Math.Round((totalCogsYTD / totalSalesYTD) * 100, 1);
 
-            r = new Report(date, Convert.ToInt32(weekTxt.Text), ending, "Controllable Expenses", "Controllable Expense", ctrl, p1Ctrl, ctrlYTD, p2Ctrl, "Controllable Expenses", "Controllable");
+            r = new Report(date, Convert.ToInt32(weekTxt.Text), ending, "Controllable Expenses", "Controllable Expense", ctrl, p1Ctrl, ctrlYTD, p2Ctrl, "Controllable Expenses", "Controllable",8,1);
             reports.Add(r);
             /**end of  Controllable Expenses***/
 
@@ -809,12 +810,26 @@ namespace TGAccounting
             double p1CtrlProfit = Math.Round((ctrlProfit / totalSales) * 100, 1);
             double p2CtrlProfit = Math.Round((ctrlProfitYTD / totalSalesYTD) * 100, 1);
 
-            r = new Report(date, Convert.ToInt32(weekTxt.Text), ending, "Controllable Profits", "Controllable Profits", ctrlProfit, p1CtrlProfit, ctrlProfitYTD, p2CtrlProfit, "Controllable Profit", "Controllable");
+            r = new Report(date, Convert.ToInt32(weekTxt.Text), Convert.ToDateTime(ending).ToString("dd-MMM-yy"), "Controllable Profits", "Controllable Profits", ctrlProfit, p1CtrlProfit, ctrlProfitYTD, p2CtrlProfit, "Controllable Profit", "Controllable",9,1);
             reports.Add(r);
 
             /*end of controllable profit*/
 
-            /** restaurant profit**/
+
+            foreach (Equipment s in Equipment.List("SELECT * FROM equipment  WHERE week ='" + week + "' AND date= '" + Helper.CurrentYear + "' "))
+            {
+                double sums = Equipment.List("SELECT * FROM equipment  WHERE week ='" + week + "' AND date= '" + Helper.CurrentYear + "' ").Sum(t => t.Amount);
+                double p1 = Math.Round((s.Amount / sums) * 100, 1);
+                double ytd = Equipment.List("SELECT * FROM equipment  WHERE CAST(week AS INTEGER) <='" + week + "'  AND name='" + s.Name + "'  AND date= '" + Helper.CurrentYear + "' ").Sum(t => t.Amount);
+
+                double p2 = Math.Round((s.Amount / sums) * 100, 1);
+                r = new Report(s.Date, s.Week, Convert.ToDateTime(s.Ending).ToString("dd-MMM-yy"), "Equipment & Improvements", s.Name, s.Amount, p1, ytd, p2, "Equipment & Improvements", "Equipment & Improvements", 10,1);
+                reports.Add(r);
+                totalEquip = totalEquip + sums;
+                totalEquipYTD = totalEquipYTD + ytd;
+
+            }
+          
             double occupancyExpense = Expense.List("SELECT * FROM expense  WHERE week ='" + week + "' AND category='Occupancy Expenses'  AND date= '" + Helper.CurrentYear + "' ").Sum(t => t.Amount);
             double occupancyExpenseYTD = Expense.List("SELECT * FROM expense WHERE CAST(week AS INTEGER) ='" + week + "' AND category='Occupancy Expenses'  AND date= '" + Helper.CurrentYear + "' ").Sum(t => t.Amount);
 
@@ -824,7 +839,18 @@ namespace TGAccounting
             double p1RestProfit = Math.Round((restProfit / totalSales) * 100, 1);
             double p2RestProfit = Math.Round((restProfitYTD / totalSalesYTD) * 100, 1);
 
-            r = new Report(date, Convert.ToInt32(weekTxt.Text), ending, "Restaurant Profit", "Restaurant Profit", restProfit, p1RestProfit, restProfitYTD, p2RestProfit, "Restaurant Profits", "Restaurant");
+
+
+            /** Occupancy Expenses**/
+            double p1Occupancy = Math.Round((occupancyExpense / totalSales) * 100, 1);
+            double p2OCCupancy = Math.Round((occupancyExpenseYTD / totalSalesYTD) * 100, 1);
+            r = new Report(date, Convert.ToInt32(weekTxt.Text), Convert.ToDateTime(ending).ToString("dd-MMM-yy"), "Occupancy Expenses", "Occupancy Expenses", occupancyExpense, p1Occupancy, occupancyExpenseYTD, p2RestProfit, "Occupancy Expenses", "Occupancy Expenses", 11,1);
+            reports.Add(r);
+            /*End of occupancy*/
+
+
+            /** restaurant profit**/
+            r = new Report(date, Convert.ToInt32(weekTxt.Text),Convert.ToDateTime(ending).ToString("dd-MMM-yy"), "Restaurant Profit", "Restaurant Profit", restProfit, p1RestProfit, restProfitYTD, p2RestProfit, "Restaurant Profit", "Restaurant Profit", 12,1);
             reports.Add(r);
             /** end restaurant profit**/
 

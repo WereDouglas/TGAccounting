@@ -72,10 +72,11 @@ namespace TGAccounting
                             if (string.IsNullOrEmpty(subcategory.Text))
                             {
                                 subcategory.BackColor = Color.Pink;
-                                MessageBox.Show("Please select the category");
+                                MessageBox.Show("Please select the category !");
                                 return;
                             }
                         }
+                       
                         LoadingWindow.ShowSplashScreen();
                         ReadExcel(filePath, fileExt); //read excel file  
                         LoadingWindow.CloseForm();
@@ -124,6 +125,7 @@ namespace TGAccounting
 
 
         }
+       
         string existingID;
         string begs = "0";
         string ends = "0";
@@ -187,12 +189,28 @@ namespace TGAccounting
                                     string ID = Guid.NewGuid().ToString();
                                     Cogs i = new Cogs(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), h, startWeek.ToString("dd-MM-yyyy"), startWeek.AddDays(7).ToString("dd-MM-yyyy"), subcategory.Text, Convert.ToDouble(begs), Convert.ToDouble(ends), Convert.ToDouble(cogs), startWeek.AddDays(7).ToString("MMMM"));
                                     DBConnect.Insert(i);
-
                                 }
                             }
                             // Console.WriteLine(row[0].ToString() + " " + row[u].ToString() + " Week:" + h  + " Week starting " + startWeek.ToString("dd-MM-yyyy") + " Week ending " + startWeek.AddDays(7).ToString("dd-MM-yyyy"));
                             if (!row[0].ToString().Contains("Total") && !row[0].ToString().Contains("Week") && !row[0].ToString().Contains("Week:"))
                             {
+                                if (categoryTxt.Text.Contains("Complimentary"))
+                                {
+                                    existingID = "";
+                                    try
+                                    {
+                                        existingID = Comp.List("SELECT * from comp WHERE item='" + row[0].ToString().Replace("\"", string.Empty).Replace("'", string.Empty) + "' AND week = '" + h + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Id.ToString();
+                                        string Query = "DELETE from comp WHERE id ='" + existingID + "'";
+                                        DBConnect.save(Query);
+                                    }
+                                    catch
+                                    {
+                                        existingID = "";
+                                    }
+                                    string ID = Guid.NewGuid().ToString();
+                                    Comp i = new Comp(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), h, startWeek.ToString("dd-MM-yyyy"), startWeek.AddDays(7).ToString("dd-MM-yyyy"), row[0].ToString().Replace("\"", string.Empty).Replace("'", string.Empty), Convert.ToDouble(row[u].ToString()), startWeek.AddDays(7).ToString("MMMM"));
+                                    DBConnect.Insert(i);
+                                }
                                 if (categoryTxt.Text.Contains("Purchases"))
                                 {
                                     existingID = "";
@@ -377,6 +395,7 @@ namespace TGAccounting
                 autocompleteExpense();
 
             }
+           
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -427,6 +446,11 @@ namespace TGAccounting
                 if (categoryTxt.Text.Contains("Purchases"))
                 {
                     string Query = "DELETE from inventory WHERE date ='" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "' AND category = '" + subcategory.Text + "'";
+                    DBConnect.save(Query);
+                }
+                if (categoryTxt.Text.Contains("Complimentary"))
+                {
+                    string Query = "DELETE from comp WHERE date ='" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'";
                     DBConnect.save(Query);
                 }
 

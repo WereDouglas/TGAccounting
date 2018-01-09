@@ -20,6 +20,8 @@ namespace TGAccounting.Model
         private double p1;
         private double ytd;
         private double p2;
+        private int order;
+        private int subOrder;
 
         public string Date
         {
@@ -164,9 +166,35 @@ namespace TGAccounting.Model
             }
         }
 
+        public int Order
+        {
+            get
+            {
+                return order;
+            }
+
+            set
+            {
+                order = value;
+            }
+        }
+
+        public int SubOrder
+        {
+            get
+            {
+                return subOrder;
+            }
+
+            set
+            {
+                subOrder = value;
+            }
+        }
+
         public Report() { }
 
-        public Report(string date, int week, string ending, string category, string item, double amount, double p1, double ytd, double p2,string sub,string main)
+        public Report(string date, int week, string ending, string category, string item, double amount, double p1, double ytd, double p2,string sub,string main,int order,int subOrder)
         {
             this.Date = date;
             this.Week = week;
@@ -178,7 +206,9 @@ namespace TGAccounting.Model
             this.Ytd = ytd;
             this.P2 = p2;
             this.Sub = sub;
-            this.Main = main; 
+            this.Main = main;
+            this.Order = order;
+            this.SubOrder = subOrder;
         }
     }
 }

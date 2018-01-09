@@ -163,7 +163,6 @@ namespace TGAccounting
             Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Expense()));
             Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Cogs()));
             Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Events()));
-
             Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Company()));
             Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new User()));
             Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Staff()));

@@ -18,7 +18,7 @@ namespace TGAccounting
         {
             InitializeComponent();
             autocomplete();
-            autocompleteCategory();
+            
             fillUp(Convert.ToDateTime(DateTime.Now.Date));
         }
         string month;
@@ -44,30 +44,16 @@ namespace TGAccounting
         private void autocomplete()
         {
             AutoCompleteStringCollection AutoItem = new AutoCompleteStringCollection();
-            foreach (Comp r in Comp.List("SELECT * from comp").GroupBy(x => x.Item, (key, group) => group.First()))
+            foreach (var r in Global.compNames)
             {
-                AutoItem.Add(r.Item);
+                AutoItem.Add(r);
             }
             itemTxt.AutoCompleteMode = AutoCompleteMode.Suggest;
             itemTxt.AutoCompleteSource = AutoCompleteSource.CustomSource;
             itemTxt.AutoCompleteCustomSource = AutoItem;
 
         }
-        private void autocompleteCategory()
-        {
-            categoryTxt.Items.Clear();
-            AutoCompleteStringCollection AutoItem = new AutoCompleteStringCollection();
-            foreach (Comp r in Comp.List("SELECT * from comp").GroupBy(x => x.Category, (key, group) => group.First()))
-            {
-                AutoItem.Add(r.Category);
-                categoryTxt.Items.Add(r.Category);
-            }
-            categoryTxt.AutoCompleteMode = AutoCompleteMode.Suggest;
-            categoryTxt.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            categoryTxt.AutoCompleteCustomSource = AutoItem;
-
-
-        }
+       
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -103,11 +89,7 @@ namespace TGAccounting
         string existingID = "";
         private void itemTxt_Leave(object sender, EventArgs e)
         {
-            try { categoryTxt.Text = Comp.List("SELECT * from comp WHERE item='" + itemTxt.Text + "'").First().Category; }
-            catch (Exception y)
-            {
-                Helper.Exceptions(y.Message, "on adding Complimentary auto fill the category list selected item");
-            }
+           
             try
             {                
                 amountTxt.Text = Comp.List("SELECT * from comp WHERE item='" + itemTxt.Text + "' AND week = '" + weekLbl.Text + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Amount.ToString();
@@ -152,7 +134,7 @@ namespace TGAccounting
 
                 if (MessageBox.Show("YES or No?", "Are you sure you want to update the current existing information  ? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
-                    Comp j = new Comp(existingID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), Convert.ToInt32(weekLbl.Text), startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text), categoryTxt.Text, month);
+                    Comp j = new Comp(existingID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), Convert.ToInt32(weekLbl.Text), startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text), month);
 
                     DBConnect.Update(j, existingID);
                 }
@@ -160,7 +142,7 @@ namespace TGAccounting
             }
 
             string ID = Guid.NewGuid().ToString();
-            Comp i = new Comp(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), Convert.ToInt32(weekLbl.Text), startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text), categoryTxt.Text, month);
+            Comp i = new Comp(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), Convert.ToInt32(weekLbl.Text), startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text),month);
             DBConnect.Insert(i);
             MessageBox.Show("Information Saved ");
             itemTxt.Text = "";
