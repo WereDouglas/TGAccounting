@@ -15,13 +15,18 @@ namespace TGAccounting
     {
         public AddBudget()
         {
-            InitializeComponent();            
-           
+            InitializeComponent();
+
 
             string current = DateTime.Now.Year.ToString();
             Helper.CurrentYear = current;
             yearTxt.Text = current;
-            autocomplete();
+
+            CategoryCbx.Items.Add("Sale");
+            CategoryCbx.Items.Add("Cost of Goods");
+            CategoryCbx.Items.Add("Complimentaries");
+            CategoryCbx.Items.Add("Expenses");
+
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -32,71 +37,63 @@ namespace TGAccounting
         Dictionary<string, string> Category = new Dictionary<string, string>();
         private void autocomplete()
         {
+            itemTxt.Items.Clear();
             AutoCompleteStringCollection AutoItem = new AutoCompleteStringCollection();
-          
-            foreach (Sale r in Sale.List("SELECT * from sale").GroupBy(x => x.Item, (key, group) => group.First()))
+            if (CategoryCbx.Text.Contains("Sale"))
             {
-                AutoItem.Add(r.Item);
-                if (!Items.ContainsKey(r.Item))
+                foreach (var r in Sale.ListName("SELECT DISTINCT item from sale"))
                 {
-                    Items.Add(r.Item, "SALES");
-                    Category.Add(r.Item, r.Category);
-                    itemCbx.Items.Add(r.Item);
+                    AutoItem.Add(r);
+                   
+                        itemTxt.Items.Add(r);
+                    
                 }
             }
-            foreach (Cogs r in Cogs.List("SELECT * from cogs").GroupBy(x => x.Category, (key, group) => group.First()))
+            if (CategoryCbx.Text.Contains("Cost"))
             {
-                AutoItem.Add(r.Category);
-                if (!Items.ContainsKey(r.Category))
+                foreach (var r in Cogs.ListName("SELECT DISTINCT category from cogs"))
                 {
-                    Items.Add(r.Category, "COST OF GOODS SOLD");
-                    Category.Add(r.Category, "COST OF GOODS SOLD");
-                    itemCbx.Items.Add(r.Category);
+                    AutoItem.Add(r);
+                   
+                        itemTxt.Items.Add(r);
+                   
                 }
             }
-            foreach (Expense r in Expense.List("SELECT * from expense").GroupBy(x => x.Name, (key, group) => group.First()))
+            if (CategoryCbx.Text.Contains("Complimentaries"))
             {
-                AutoItem.Add(r.Name);
-                if (!Items.ContainsKey(r.Name))
+                foreach (var r in Comp.ListName("SELECT DISTINCT item from comp"))
                 {
-                    Items.Add(r.Name, "Expense");
-                    Category.Add(r.Name, r.Category);
-                    itemCbx.Items.Add(r.Name);
+                    AutoItem.Add(r);
+                  
+                        itemTxt.Items.Add(r);
+                  
                 }
             }
+            if (CategoryCbx.Text.Contains("Expenses"))
+            {
+                foreach (var r in Expense.ListName("SELECT DISTINCT name from expense"))
+                {
+                    AutoItem.Add(r);
+                   
+                        itemTxt.Items.Add(r);
+                   
+                }
 
-            itemCbx.AutoCompleteMode = AutoCompleteMode.Suggest;
-            itemCbx.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            itemCbx.AutoCompleteCustomSource = AutoItem;
-
+            }
 
         }
-      
+
         string existingID;
 
         private void button1_Click(object sender, EventArgs e)
         {
-           
 
-        }
 
-        private void itemCbx_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                groupTxt.Text = Items[itemCbx.Text];
-            }
-            catch { }
-            try
-            {
-                catTxt.Text = Category[itemCbx.Text];
-            }
-            catch { }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void pctTxt_KeyPress(object sender, KeyPressEventArgs e)
@@ -124,21 +121,31 @@ namespace TGAccounting
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(valTxt.Text))
+            if (string.IsNullOrEmpty(pctTxt.Text))
             {
-                valTxt.BackColor = Color.Red;
+                pctTxt.BackColor = Color.Red;
                 return;
             }
-            if (string.IsNullOrEmpty(itemCbx.Text))
+            if (string.IsNullOrEmpty(itemTxt.Text))
             {
-                itemCbx.BackColor = Color.Red;
+                itemTxt.BackColor = Color.Red;
                 return;
             }
             string ID = Guid.NewGuid().ToString();
-            Budget i = new Budget(ID, itemCbx.Text, catTxt.Text, groupTxt.Text, pctTxt.Text, Convert.ToDouble(valTxt.Text), DateTime.Now.ToString("dd-MM-yyyy"));
+            Budget i = new Budget(ID, itemTxt.Text, CategoryCbx.Text, CategoryCbx.Text,Convert.ToDouble(pctTxt.Text), 0, yearTxt.Text);
             DBConnect.Insert(i);
             MessageBox.Show("Information Saved ");
-            valTxt.Text = "";
+            pctTxt.Text = "";
+        }
+
+        private void categoryTxt_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CategoryCbx_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            autocomplete();
         }
     }
 }

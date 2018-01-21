@@ -38,7 +38,10 @@ namespace TGAccounting
             {
                 splashForm.Invoke(new CloseDelegate(LoadingWindow.CloseFormInternal));
             }
-            catch { }
+            catch {
+
+               
+            }
         }
 
         static private void CloseFormInternal()

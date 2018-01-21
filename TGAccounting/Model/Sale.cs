@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace TGAccounting.Model
 {
-   public class Sale
+    public class Sale
     {
+      
         private string id;
         private string date;
         private int week;
@@ -18,7 +19,7 @@ namespace TGAccounting.Model
         private double amount;
         private string category;
         private string month;
-        private static List<Sale> s ;
+        private static List<Sale> s;
         public string Date
         {
             get
@@ -137,7 +138,7 @@ namespace TGAccounting.Model
         }
 
         public Sale() { }
-        public Sale(string id,string date, int week, string starting, string ending, string item, double amount,string category,string month)
+        public Sale(string id, string date, int week, string starting, string ending, string item, double amount, string category, string month)
         {
             this.Id = id;
             this.Date = date;
@@ -150,17 +151,29 @@ namespace TGAccounting.Model
             this.Month = month;
         }
         public static List<Sale> List(string query)
-        {           
-             s = new List<Sale>();
+        {
+            s = new List<Sale>();
 
             SQLiteDataReader Reader = DBConnect.ReadingLite(query);
             while (Reader.Read())
             {
-                Sale p = new Sale(Reader["id"].ToString(), Reader["date"].ToString(), Convert.ToInt32(Reader["week"]), Reader["starting"].ToString(),Convert.ToDateTime( Reader["ending"]).ToString("dd-MMM-yy"), Reader["item"].ToString(),Convert.ToDouble(Reader["amount"]), Reader["category"].ToString(),Reader["month"].ToString());
+                Sale p = new Sale(Reader["id"].ToString(), Reader["date"].ToString(), Convert.ToInt32(Reader["week"]), Reader["starting"].ToString(), Convert.ToDateTime(Reader["ending"]).ToString("dd-MMM-yy"), Reader["item"].ToString(), Convert.ToDouble(Reader["amount"]), Reader["category"].ToString(), Reader["month"].ToString());
                 s.Add(p);
             }
             Reader.Close();
 
+            return s;
+
+        }
+        public static List<String> ListName(string query)
+        {
+            List<string> s = new List<String>();
+            SQLiteDataReader Reader = DBConnect.ReadingLite(query);
+            while (Reader.Read())
+            {
+                s.Add(Reader["item"].ToString());
+            }
+            Reader.Close();
             return s;
 
         }

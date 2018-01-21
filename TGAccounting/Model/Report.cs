@@ -22,6 +22,12 @@ namespace TGAccounting.Model
         private double p2;
         private int order;
         private int subOrder;
+        private double budget;
+        private double budgetPerc;
+        private double difference;
+        private double differencePerc;
+
+
 
         public string Date
         {
@@ -192,23 +198,79 @@ namespace TGAccounting.Model
             }
         }
 
+        public double Budget
+        {
+            get
+            {
+                return budget;
+            }
+
+            set
+            {
+                budget = value;
+            }
+        }
+
+        public double BudgetPerc
+        {
+            get
+            {
+                return budgetPerc;
+            }
+
+            set
+            {
+                budgetPerc = value;
+            }
+        }
+
+        public double Difference
+        {
+            get
+            {
+                return difference;
+            }
+
+            set
+            {
+                difference = value;
+            }
+        }
+
+        public double DifferencePerc
+        {
+            get
+            {
+                return differencePerc;
+            }
+
+            set
+            {
+                differencePerc = value;
+            }
+        }
+
         public Report() { }
 
-        public Report(string date, int week, string ending, string category, string item, double amount, double p1, double ytd, double p2,string sub,string main,int order,int subOrder)
+        public Report(string date, int week, string ending, string category, string sub, string main, string item, double amount, double p1, double ytd, double p2, int order, int subOrder, double budget, double budgetPerc, double difference, double differencePerc)
         {
-            this.Date = date;
-            this.Week = week;
-            this.Ending = ending;
-            this.Category = category;
-            this.Item = item;
-            this.Amount = amount;
-            this.P1 = p1;
-            this.Ytd = ytd;
-            this.P2 = p2;
-            this.Sub = sub;
-            this.Main = main;
-            this.Order = order;
-            this.SubOrder = subOrder;
+            this.date = date;
+            this.week = week;
+            this.ending = ending;
+            this.category = category;
+            this.sub = sub;
+            this.main = main;
+            this.item = item;
+            this.amount = amount;
+            this.p1 = p1;
+            this.ytd = ytd;
+            this.p2 = p2;
+            this.order = order;
+            this.subOrder = subOrder;
+            this.budget = budget;
+            this.budgetPerc = budgetPerc;
+            this.difference = difference;
+            this.differencePerc = differencePerc;
         }
     }
 }

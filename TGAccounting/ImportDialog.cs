@@ -150,7 +150,7 @@ namespace TGAccounting
                 for (int u = 1; u < 53; u++)
                 {
                     Console.WriteLine("NEW WEEK :" + h);
-                    DateTime startWeek = Helper.FirstDateOfWeek(Convert.ToInt32(Helper.CurrentYear), h - 1, CultureInfo.CurrentCulture);
+                    DateTime startWeek = Helper.FirstDateOfWeek(Convert.ToInt32(Helper.CurrentYear), h - 1);
                     foreach (DataRow row in dtexcel.Rows)
                     {
                         //MessageBox.Show();
@@ -225,7 +225,7 @@ namespace TGAccounting
                                         existingID = "";
                                     }
                                     string ID = Guid.NewGuid().ToString();
-                                    Inventory i = new Inventory(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), h, startWeek.ToString("dd-MM-yyyy"), startWeek.AddDays(7).ToString("dd-MM-yyyy"), row[0].ToString().Replace("\"", string.Empty).Replace("'", string.Empty), subcategory.Text, Convert.ToDouble(row[u].ToString()), 0, 0, 0, startWeek.AddDays(7).ToString("MMMM"));
+                                    Inventory i = new Inventory(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), h, startWeek.ToString("dd-MM-yyyy"), startWeek.AddDays(7).ToString("dd-MM-yyyy"), row[0].ToString().Replace("\"", string.Empty).Replace("'", string.Empty), subcategory.Text, Convert.ToDouble(row[u].ToString()), 0, 0, 0, startWeek.AddDays(7).ToString("MMMM"),startWeek.AddDays(7).ToString("dd-MM-yyyy"));
                                     DBConnect.Insert(i);
                                 }
                                 if (categoryTxt.Text.Contains("Sales"))

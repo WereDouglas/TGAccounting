@@ -48,8 +48,6 @@
             this.InventoryGrid = new System.Windows.Forms.DataGridView();
             this.tabExpense = new System.Windows.Forms.TabPage();
             this.expenseGrid = new System.Windows.Forms.DataGridView();
-            this.tabPL = new System.Windows.Forms.TabPage();
-            this.profitGrid = new System.Windows.Forms.DataGridView();
             this.tabCogs = new System.Windows.Forms.TabPage();
             this.costGrid = new System.Windows.Forms.DataGridView();
             this.tabStaff = new System.Windows.Forms.TabPage();
@@ -62,7 +60,10 @@
             this.ExceptionGrid = new System.Windows.Forms.DataGridView();
             this.tabLog = new System.Windows.Forms.TabPage();
             this.logGrid = new System.Windows.Forms.DataGridView();
+            this.tabBudget = new System.Windows.Forms.TabPage();
+            this.budgetGrid = new System.Windows.Forms.DataGridView();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.monthCbx = new System.Windows.Forms.ComboBox();
             this.button20 = new System.Windows.Forms.Button();
             this.globalYrTxt = new System.Windows.Forms.TextBox();
             this.supGrid.SuspendLayout();
@@ -84,8 +85,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.InventoryGrid)).BeginInit();
             this.tabExpense.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.expenseGrid)).BeginInit();
-            this.tabPL.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.profitGrid)).BeginInit();
             this.tabCogs.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.costGrid)).BeginInit();
             this.tabStaff.SuspendLayout();
@@ -98,6 +97,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.ExceptionGrid)).BeginInit();
             this.tabLog.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logGrid)).BeginInit();
+            this.tabBudget.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.budgetGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
@@ -115,13 +116,13 @@
             this.supGrid.Controls.Add(this.tabEq);
             this.supGrid.Controls.Add(this.tabInventory);
             this.supGrid.Controls.Add(this.tabExpense);
-            this.supGrid.Controls.Add(this.tabPL);
             this.supGrid.Controls.Add(this.tabCogs);
             this.supGrid.Controls.Add(this.tabStaff);
             this.supGrid.Controls.Add(this.tabUser);
             this.supGrid.Controls.Add(this.tabComp);
             this.supGrid.Controls.Add(this.tabException);
             this.supGrid.Controls.Add(this.tabLog);
+            this.supGrid.Controls.Add(this.tabBudget);
             this.supGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.supGrid.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.supGrid.Location = new System.Drawing.Point(0, 0);
@@ -156,6 +157,7 @@
             this.saleGrid.Name = "saleGrid";
             this.saleGrid.Size = new System.Drawing.Size(1230, 590);
             this.saleGrid.TabIndex = 5;
+            this.saleGrid.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.saleGrid_CellBeginEdit);
             this.saleGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.saleGrid_CellClick);
             this.saleGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.saleGrid_CellEndEdit);
             // 
@@ -166,7 +168,7 @@
             this.laborTab.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.laborTab.Name = "laborTab";
             this.laborTab.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.laborTab.Size = new System.Drawing.Size(1107, 598);
+            this.laborTab.Size = new System.Drawing.Size(1236, 598);
             this.laborTab.TabIndex = 1;
             this.laborTab.Text = "Labor";
             this.laborTab.UseVisualStyleBackColor = true;
@@ -180,7 +182,7 @@
             this.laborGrid.Location = new System.Drawing.Point(3, 4);
             this.laborGrid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.laborGrid.Name = "laborGrid";
-            this.laborGrid.Size = new System.Drawing.Size(1101, 590);
+            this.laborGrid.Size = new System.Drawing.Size(1230, 590);
             this.laborGrid.TabIndex = 5;
             this.laborGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.laborGrid_CellClick);
             this.laborGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.laborGrid_CellEndEdit);
@@ -191,7 +193,7 @@
             this.tabTax.Location = new System.Drawing.Point(4, 25);
             this.tabTax.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabTax.Name = "tabTax";
-            this.tabTax.Size = new System.Drawing.Size(1107, 598);
+            this.tabTax.Size = new System.Drawing.Size(1236, 598);
             this.tabTax.TabIndex = 2;
             this.tabTax.Text = "PayrollTaxes";
             this.tabTax.UseVisualStyleBackColor = true;
@@ -205,7 +207,7 @@
             this.taxGrid.Location = new System.Drawing.Point(0, 0);
             this.taxGrid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.taxGrid.Name = "taxGrid";
-            this.taxGrid.Size = new System.Drawing.Size(1107, 598);
+            this.taxGrid.Size = new System.Drawing.Size(1236, 598);
             this.taxGrid.TabIndex = 5;
             this.taxGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.taxGrid_CellClick);
             this.taxGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.taxGrid_CellEndEdit);
@@ -216,7 +218,7 @@
             this.tabSal.Location = new System.Drawing.Point(4, 25);
             this.tabSal.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabSal.Name = "tabSal";
-            this.tabSal.Size = new System.Drawing.Size(1107, 598);
+            this.tabSal.Size = new System.Drawing.Size(1236, 598);
             this.tabSal.TabIndex = 3;
             this.tabSal.Text = "Salaries  && Insurance";
             this.tabSal.UseVisualStyleBackColor = true;
@@ -230,7 +232,7 @@
             this.salGrid.Location = new System.Drawing.Point(0, 0);
             this.salGrid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.salGrid.Name = "salGrid";
-            this.salGrid.Size = new System.Drawing.Size(1107, 598);
+            this.salGrid.Size = new System.Drawing.Size(1236, 598);
             this.salGrid.TabIndex = 5;
             this.salGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.salGrid_CellClick);
             this.salGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.salGrid_CellEndEdit);
@@ -241,7 +243,7 @@
             this.tabSupply.Location = new System.Drawing.Point(4, 25);
             this.tabSupply.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabSupply.Name = "tabSupply";
-            this.tabSupply.Size = new System.Drawing.Size(1107, 598);
+            this.tabSupply.Size = new System.Drawing.Size(1236, 598);
             this.tabSupply.TabIndex = 4;
             this.tabSupply.Text = "Supplies";
             this.tabSupply.UseVisualStyleBackColor = true;
@@ -255,7 +257,7 @@
             this.supData.Location = new System.Drawing.Point(0, 0);
             this.supData.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.supData.Name = "supData";
-            this.supData.Size = new System.Drawing.Size(1107, 598);
+            this.supData.Size = new System.Drawing.Size(1236, 598);
             this.supData.TabIndex = 5;
             this.supData.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.supData_CellClick);
             this.supData.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.supData_CellEndEdit);
@@ -266,7 +268,7 @@
             this.tabRm.Location = new System.Drawing.Point(4, 25);
             this.tabRm.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabRm.Name = "tabRm";
-            this.tabRm.Size = new System.Drawing.Size(1107, 598);
+            this.tabRm.Size = new System.Drawing.Size(1236, 598);
             this.tabRm.TabIndex = 5;
             this.tabRm.Text = "Repair && Maintenance";
             this.tabRm.UseVisualStyleBackColor = true;
@@ -280,7 +282,7 @@
             this.repGrid.Location = new System.Drawing.Point(0, 0);
             this.repGrid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.repGrid.Name = "repGrid";
-            this.repGrid.Size = new System.Drawing.Size(1107, 598);
+            this.repGrid.Size = new System.Drawing.Size(1236, 598);
             this.repGrid.TabIndex = 5;
             this.repGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.repGrid_CellClick);
             this.repGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.repGrid_CellEndEdit);
@@ -291,7 +293,7 @@
             this.tabEq.Location = new System.Drawing.Point(4, 25);
             this.tabEq.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabEq.Name = "tabEq";
-            this.tabEq.Size = new System.Drawing.Size(1107, 598);
+            this.tabEq.Size = new System.Drawing.Size(1236, 598);
             this.tabEq.TabIndex = 6;
             this.tabEq.Text = "Equipment";
             this.tabEq.UseVisualStyleBackColor = true;
@@ -305,7 +307,7 @@
             this.equipGrid.Location = new System.Drawing.Point(0, 0);
             this.equipGrid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.equipGrid.Name = "equipGrid";
-            this.equipGrid.Size = new System.Drawing.Size(1107, 598);
+            this.equipGrid.Size = new System.Drawing.Size(1236, 598);
             this.equipGrid.TabIndex = 5;
             this.equipGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.equipGrid_CellClick);
             this.equipGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.equipGrid_CellEndEdit);
@@ -315,7 +317,7 @@
             this.tabInventory.Controls.Add(this.InventoryGrid);
             this.tabInventory.Location = new System.Drawing.Point(4, 25);
             this.tabInventory.Name = "tabInventory";
-            this.tabInventory.Size = new System.Drawing.Size(1107, 598);
+            this.tabInventory.Size = new System.Drawing.Size(1236, 598);
             this.tabInventory.TabIndex = 11;
             this.tabInventory.Text = "Inventory purchases";
             this.tabInventory.UseVisualStyleBackColor = true;
@@ -329,7 +331,7 @@
             this.InventoryGrid.Location = new System.Drawing.Point(0, 0);
             this.InventoryGrid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.InventoryGrid.Name = "InventoryGrid";
-            this.InventoryGrid.Size = new System.Drawing.Size(1107, 598);
+            this.InventoryGrid.Size = new System.Drawing.Size(1236, 598);
             this.InventoryGrid.TabIndex = 5;
             this.InventoryGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.InventoryGrid_CellClick);
             this.InventoryGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.InventoryGrid_CellEndEdit);
@@ -340,7 +342,7 @@
             this.tabExpense.Location = new System.Drawing.Point(4, 25);
             this.tabExpense.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabExpense.Name = "tabExpense";
-            this.tabExpense.Size = new System.Drawing.Size(1107, 598);
+            this.tabExpense.Size = new System.Drawing.Size(1236, 598);
             this.tabExpense.TabIndex = 7;
             this.tabExpense.Text = "Expenses";
             this.tabExpense.UseVisualStyleBackColor = true;
@@ -354,41 +356,17 @@
             this.expenseGrid.Location = new System.Drawing.Point(0, 0);
             this.expenseGrid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.expenseGrid.Name = "expenseGrid";
-            this.expenseGrid.Size = new System.Drawing.Size(1107, 598);
+            this.expenseGrid.Size = new System.Drawing.Size(1236, 598);
             this.expenseGrid.TabIndex = 5;
             this.expenseGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.expenseGrid_CellClick);
             this.expenseGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.expenseGrid_CellEndEdit);
-            // 
-            // tabPL
-            // 
-            this.tabPL.Controls.Add(this.profitGrid);
-            this.tabPL.Location = new System.Drawing.Point(4, 25);
-            this.tabPL.Name = "tabPL";
-            this.tabPL.Size = new System.Drawing.Size(1107, 598);
-            this.tabPL.TabIndex = 13;
-            this.tabPL.Text = "Profit && Loss";
-            this.tabPL.UseVisualStyleBackColor = true;
-            // 
-            // profitGrid
-            // 
-            this.profitGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.profitGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.profitGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.profitGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.profitGrid.Location = new System.Drawing.Point(0, 0);
-            this.profitGrid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.profitGrid.Name = "profitGrid";
-            this.profitGrid.Size = new System.Drawing.Size(1107, 598);
-            this.profitGrid.TabIndex = 5;
-            this.profitGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.profitGrid_CellClick);
-            this.profitGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.profitGrid_CellEndEdit);
             // 
             // tabCogs
             // 
             this.tabCogs.Controls.Add(this.costGrid);
             this.tabCogs.Location = new System.Drawing.Point(4, 25);
             this.tabCogs.Name = "tabCogs";
-            this.tabCogs.Size = new System.Drawing.Size(1107, 598);
+            this.tabCogs.Size = new System.Drawing.Size(1236, 598);
             this.tabCogs.TabIndex = 14;
             this.tabCogs.Text = "Cost of Goods";
             this.tabCogs.UseVisualStyleBackColor = true;
@@ -402,8 +380,9 @@
             this.costGrid.Location = new System.Drawing.Point(0, 0);
             this.costGrid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.costGrid.Name = "costGrid";
-            this.costGrid.Size = new System.Drawing.Size(1107, 598);
+            this.costGrid.Size = new System.Drawing.Size(1236, 598);
             this.costGrid.TabIndex = 5;
+            this.costGrid.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.costGrid_CellBeginEdit);
             this.costGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.costGrid_CellClick);
             this.costGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.costGrid_CellEndEdit);
             // 
@@ -412,7 +391,7 @@
             this.tabStaff.Controls.Add(this.staffGrid);
             this.tabStaff.Location = new System.Drawing.Point(4, 25);
             this.tabStaff.Name = "tabStaff";
-            this.tabStaff.Size = new System.Drawing.Size(1107, 598);
+            this.tabStaff.Size = new System.Drawing.Size(1236, 598);
             this.tabStaff.TabIndex = 15;
             this.tabStaff.Text = "Staff";
             this.tabStaff.UseVisualStyleBackColor = true;
@@ -426,7 +405,7 @@
             this.staffGrid.Location = new System.Drawing.Point(0, 0);
             this.staffGrid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.staffGrid.Name = "staffGrid";
-            this.staffGrid.Size = new System.Drawing.Size(1107, 598);
+            this.staffGrid.Size = new System.Drawing.Size(1236, 598);
             this.staffGrid.TabIndex = 6;
             this.staffGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.staffGrid_CellClick);
             this.staffGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.staffGrid_CellEndEdit);
@@ -436,7 +415,7 @@
             this.tabUser.Controls.Add(this.userGrid);
             this.tabUser.Location = new System.Drawing.Point(4, 25);
             this.tabUser.Name = "tabUser";
-            this.tabUser.Size = new System.Drawing.Size(1107, 598);
+            this.tabUser.Size = new System.Drawing.Size(1236, 598);
             this.tabUser.TabIndex = 16;
             this.tabUser.Text = "Users";
             this.tabUser.UseVisualStyleBackColor = true;
@@ -450,7 +429,7 @@
             this.userGrid.Location = new System.Drawing.Point(0, 0);
             this.userGrid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userGrid.Name = "userGrid";
-            this.userGrid.Size = new System.Drawing.Size(1107, 598);
+            this.userGrid.Size = new System.Drawing.Size(1236, 598);
             this.userGrid.TabIndex = 7;
             this.userGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.userGrid_CellClick);
             this.userGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.userGrid_CellEndEdit);
@@ -460,7 +439,7 @@
             this.tabComp.Controls.Add(this.comGrid);
             this.tabComp.Location = new System.Drawing.Point(4, 25);
             this.tabComp.Name = "tabComp";
-            this.tabComp.Size = new System.Drawing.Size(1107, 598);
+            this.tabComp.Size = new System.Drawing.Size(1236, 598);
             this.tabComp.TabIndex = 19;
             this.tabComp.Text = "Complimentaries";
             this.tabComp.UseVisualStyleBackColor = true;
@@ -474,16 +453,18 @@
             this.comGrid.Location = new System.Drawing.Point(0, 0);
             this.comGrid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.comGrid.Name = "comGrid";
-            this.comGrid.Size = new System.Drawing.Size(1107, 598);
+            this.comGrid.Size = new System.Drawing.Size(1236, 598);
             this.comGrid.TabIndex = 8;
+            this.comGrid.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.comGrid_CellBeginEdit);
             this.comGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.comGrid_CellClick);
+            this.comGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.comGrid_CellEndEdit);
             // 
             // tabException
             // 
             this.tabException.Controls.Add(this.ExceptionGrid);
             this.tabException.Location = new System.Drawing.Point(4, 25);
             this.tabException.Name = "tabException";
-            this.tabException.Size = new System.Drawing.Size(1107, 598);
+            this.tabException.Size = new System.Drawing.Size(1236, 598);
             this.tabException.TabIndex = 17;
             this.tabException.Text = "Exceptions";
             this.tabException.UseVisualStyleBackColor = true;
@@ -497,7 +478,7 @@
             this.ExceptionGrid.Location = new System.Drawing.Point(0, 0);
             this.ExceptionGrid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ExceptionGrid.Name = "ExceptionGrid";
-            this.ExceptionGrid.Size = new System.Drawing.Size(1107, 598);
+            this.ExceptionGrid.Size = new System.Drawing.Size(1236, 598);
             this.ExceptionGrid.TabIndex = 7;
             this.ExceptionGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ExceptionGrid_CellClick);
             // 
@@ -506,7 +487,7 @@
             this.tabLog.Controls.Add(this.logGrid);
             this.tabLog.Location = new System.Drawing.Point(4, 25);
             this.tabLog.Name = "tabLog";
-            this.tabLog.Size = new System.Drawing.Size(1107, 598);
+            this.tabLog.Size = new System.Drawing.Size(1236, 598);
             this.tabLog.TabIndex = 18;
             this.tabLog.Text = "Logs";
             this.tabLog.UseVisualStyleBackColor = true;
@@ -520,9 +501,33 @@
             this.logGrid.Location = new System.Drawing.Point(0, 0);
             this.logGrid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.logGrid.Name = "logGrid";
-            this.logGrid.Size = new System.Drawing.Size(1107, 598);
+            this.logGrid.Size = new System.Drawing.Size(1236, 598);
             this.logGrid.TabIndex = 7;
             this.logGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.logGrid_CellClick);
+            // 
+            // tabBudget
+            // 
+            this.tabBudget.Controls.Add(this.budgetGrid);
+            this.tabBudget.Location = new System.Drawing.Point(4, 25);
+            this.tabBudget.Name = "tabBudget";
+            this.tabBudget.Size = new System.Drawing.Size(1236, 598);
+            this.tabBudget.TabIndex = 20;
+            this.tabBudget.Text = "Budget";
+            this.tabBudget.UseVisualStyleBackColor = true;
+            // 
+            // budgetGrid
+            // 
+            this.budgetGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.budgetGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.budgetGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.budgetGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.budgetGrid.Location = new System.Drawing.Point(0, 0);
+            this.budgetGrid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.budgetGrid.Name = "budgetGrid";
+            this.budgetGrid.Size = new System.Drawing.Size(1236, 598);
+            this.budgetGrid.TabIndex = 8;
+            this.budgetGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.budgetGrid_CellClick);
+            this.budgetGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.budgetGrid_CellEndEdit);
             // 
             // splitContainer2
             // 
@@ -533,6 +538,7 @@
             // 
             // splitContainer2.Panel1
             // 
+            this.splitContainer2.Panel1.Controls.Add(this.monthCbx);
             this.splitContainer2.Panel1.Controls.Add(this.button20);
             this.splitContainer2.Panel1.Controls.Add(this.globalYrTxt);
             // 
@@ -542,6 +548,27 @@
             this.splitContainer2.Size = new System.Drawing.Size(1244, 665);
             this.splitContainer2.SplitterDistance = 34;
             this.splitContainer2.TabIndex = 0;
+            // 
+            // monthCbx
+            // 
+            this.monthCbx.FormattingEnabled = true;
+            this.monthCbx.Items.AddRange(new object[] {
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"});
+            this.monthCbx.Location = new System.Drawing.Point(468, 4);
+            this.monthCbx.Name = "monthCbx";
+            this.monthCbx.Size = new System.Drawing.Size(173, 24);
+            this.monthCbx.TabIndex = 2;
             // 
             // button20
             // 
@@ -592,8 +619,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.InventoryGrid)).EndInit();
             this.tabExpense.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.expenseGrid)).EndInit();
-            this.tabPL.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.profitGrid)).EndInit();
             this.tabCogs.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.costGrid)).EndInit();
             this.tabStaff.ResumeLayout(false);
@@ -606,6 +631,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.ExceptionGrid)).EndInit();
             this.tabLog.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.logGrid)).EndInit();
+            this.tabBudget.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.budgetGrid)).EndInit();
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel1.PerformLayout();
             this.splitContainer2.Panel2.ResumeLayout(false);
@@ -627,7 +654,6 @@
         private System.Windows.Forms.TabPage tabEq;
         private System.Windows.Forms.TabPage tabInventory;
         private System.Windows.Forms.TabPage tabExpense;
-        private System.Windows.Forms.TabPage tabPL;
         private System.Windows.Forms.TabPage tabCogs;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.DataGridView saleGrid;
@@ -639,7 +665,6 @@
         private System.Windows.Forms.DataGridView equipGrid;
         private System.Windows.Forms.DataGridView InventoryGrid;
         private System.Windows.Forms.DataGridView expenseGrid;
-        private System.Windows.Forms.DataGridView profitGrid;
         private System.Windows.Forms.DataGridView costGrid;
         private System.Windows.Forms.TabPage tabStaff;
         private System.Windows.Forms.DataGridView staffGrid;
@@ -653,5 +678,8 @@
         private System.Windows.Forms.TextBox globalYrTxt;
         private System.Windows.Forms.TabPage tabComp;
         private System.Windows.Forms.DataGridView comGrid;
+        private System.Windows.Forms.TabPage tabBudget;
+        private System.Windows.Forms.DataGridView budgetGrid;
+        private System.Windows.Forms.ComboBox monthCbx;
     }
 }

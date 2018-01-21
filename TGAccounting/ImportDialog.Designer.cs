@@ -97,7 +97,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Trebuchet MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label3.Location = new System.Drawing.Point(185, 21);
+            this.label3.Location = new System.Drawing.Point(178, 9);
             this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(122, 27);
@@ -115,10 +115,10 @@
             this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.dateTxt);
             this.panel1.Controls.Add(this.label4);
-            this.panel1.Location = new System.Drawing.Point(14, 52);
+            this.panel1.Location = new System.Drawing.Point(14, 40);
             this.panel1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(436, 154);
+            this.panel1.Size = new System.Drawing.Size(436, 156);
             this.panel1.TabIndex = 19;
             // 
             // label1

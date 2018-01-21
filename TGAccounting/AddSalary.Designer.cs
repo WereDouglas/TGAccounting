@@ -259,7 +259,7 @@
             this.button4.FlatAppearance.BorderSize = 0;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Image = global::TGAccounting.Properties.Resources.Save_16__2_;
-            this.button4.Location = new System.Drawing.Point(325, 316);
+            this.button4.Location = new System.Drawing.Point(323, 316);
             this.button4.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(59, 34);

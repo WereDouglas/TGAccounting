@@ -27,14 +27,11 @@ namespace TGAccounting
         private void fillUp(DateTime d)
         {
             month = d.ToString("MMMM");
+            int year = Convert.ToInt32(d.ToString("yyyy"));
             int week = Helper.GetIso8601WeekOfYear(d);
             weekLbl.Text = week.ToString();
-            string mylast = startLbl.Text = Helper.FirstDateOfWeek(d.Year, Convert.ToInt32(week), CultureInfo.CurrentCulture).Date.ToString("yyyy-MM-dd");
-            string myStart = Convert.ToDateTime(startLbl.Text).AddDays(7).Date.ToString("dd-MM-yyyy");
-
-            endLbl.Text = mylast;
-            startLbl.Text = Convert.ToDateTime(mylast).AddDays(-7).Date.ToString("dd-MM-yyyy");
-
+            startLbl.Text = Helper.FirstDateOfWeek(year, week).Date.ToString("dd-MM-yyyy");
+            endLbl.Text = Convert.ToDateTime(startLbl.Text).AddDays(+6).Date.ToString("dd-MM-yyyy");
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -88,21 +85,24 @@ namespace TGAccounting
 
                 if (MessageBox.Show("YES or No?", "Are you sure you want to update the current existing information  ? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
-                    Inventory j = new Inventory(existingID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), Convert.ToInt32(weekLbl.Text), startLbl.Text, endLbl.Text, itemTxt.Text, categoryTxt.Text, Convert.ToDouble(amountTxt.Text), 0, 0, 0, month);
+                    Inventory j = new Inventory(existingID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), Convert.ToInt32(weekLbl.Text), startLbl.Text, endLbl.Text, itemTxt.Text, categoryTxt.Text, Convert.ToDouble(amountTxt.Text), 0, 0, 0, month, Convert.ToDateTime(dateTxt.Text).ToString("dd-MM-yyyy"));
 
                     DBConnect.Update(j, existingID);
                 }
                 return;
             }
+            else
+            {
 
-            string ID = Guid.NewGuid().ToString();
-            Inventory i = new Inventory(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), Convert.ToInt32(weekLbl.Text), startLbl.Text, endLbl.Text, itemTxt.Text, categoryTxt.Text, Convert.ToDouble(amountTxt.Text), 0, 0, 0, month);
-            DBConnect.Insert(i);
-            MessageBox.Show("Information Saved ");
-            itemTxt.Text = "";
-            amountTxt.Text = "";
-            autocompleteCategory();
-            autocomplete();
+                string ID = Guid.NewGuid().ToString();
+                Inventory i = new Inventory(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), Convert.ToInt32(weekLbl.Text), startLbl.Text, endLbl.Text, itemTxt.Text, categoryTxt.Text, Convert.ToDouble(amountTxt.Text), 0, 0, 0, month, Convert.ToDateTime(dateTxt.Text).ToString("dd-MM-yyyy"));
+                DBConnect.Insert(i);
+                MessageBox.Show("Information Saved ");
+                itemTxt.Text = "";
+                amountTxt.Text = "";
+                autocompleteCategory();
+                autocomplete();
+            }
 
 
         }
@@ -120,13 +120,12 @@ namespace TGAccounting
             try { categoryTxt.Text = Inventory.List("SELECT * from inventory WHERE name='" + itemTxt.Text + "'").First().Category; }
             catch (Exception y)
             {
-                Helper.Exceptions(y.Message, "on adding inventory auto fill the category list selected item");
+              //  Helper.Exceptions(y.Message, "on adding inventory auto fill the category list selected item");
             }
 
             try
             {
-
-                amountTxt.Text = Inventory.List("SELECT * from inventory WHERE name='" + itemTxt.Text + "' AND week = '" + weekLbl.Text + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Amount.ToString();
+                amountTxt.Text = Inventory.List("SELECT * from inventory WHERE name='" + itemTxt.Text + "' AND week = '" + weekLbl.Text + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "' dop = '" + Convert.ToDateTime(dateTxt.Text).ToString("dd-MM-yyyy") + "'").First().Amount.ToString();
             }
             catch (Exception y)
             {
@@ -134,7 +133,6 @@ namespace TGAccounting
             }
             try
             {
-
                 month = Inventory.List("SELECT * from inventory WHERE name='" + itemTxt.Text + "' AND week = '" + weekLbl.Text + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Month;
             }
             catch (Exception y)
@@ -143,7 +141,7 @@ namespace TGAccounting
             }
             try
             {
-                existingID = Inventory.List("SELECT * from inventory WHERE name='" + itemTxt.Text + "' AND week = '" + weekLbl.Text + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Id.ToString();
+                existingID = Inventory.List("SELECT * from inventory WHERE name='" + itemTxt.Text + "' AND week = '" + weekLbl.Text + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "' AND dop = '" + Convert.ToDateTime(dateTxt.Text).ToString("dd-MM-yyyy") + "'").First().Id.ToString();
             }
             catch { }
 
@@ -229,7 +227,7 @@ namespace TGAccounting
                 for (int u = 1; u < 60; u++)
                 {
                     Console.WriteLine("NEW WEEK :" + h);
-                    DateTime startWeek = Helper.FirstDateOfWeek(Convert.ToInt32(Helper.CurrentYear), h - 1, CultureInfo.CurrentCulture);
+                    DateTime startWeek = Helper.FirstDateOfWeek(Convert.ToInt32(Helper.CurrentYear), h - 1);
                     foreach (DataRow row in dtexcel.Rows)
                     {
                         try
@@ -255,10 +253,10 @@ namespace TGAccounting
                                     }
 
                                     string ID = Guid.NewGuid().ToString();
-                                    Inventory i = new Inventory(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), h, startWeek.ToString("dd-MM-yyyy"), startWeek.AddDays(7).ToString("dd-MM-yyyy"), row[0].ToString().Replace("\"", string.Empty).Replace("'", string.Empty), categoryTxt.Text, Convert.ToDouble(row[u].ToString()), 0, 0, 0, startWeek.AddDays(7).ToString("MMMM"));
+                                    Inventory i = new Inventory(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), h, startWeek.ToString("dd-MM-yyyy"), startWeek.AddDays(7).ToString("dd-MM-yyyy"), row[0].ToString().Replace("\"", string.Empty).Replace("'", string.Empty), categoryTxt.Text, Convert.ToDouble(row[u].ToString()), 0, 0, 0, startWeek.AddDays(7).ToString("MMMM"), Convert.ToDateTime(dateTxt.Text).ToString("dd-MM-yyyy"));
                                     DBConnect.Insert(i);
                                     Console.WriteLine("INSERT: " + row[0].ToString() + " " + row[u].ToString().Replace("'", @"\'") + " Week:" + h + " Week starting " + startWeek.ToString("dd-MM-yyyy") + " Week ending " + startWeek.AddDays(7).ToString("dd-MM-yyyy"));
-
+                                    
                                 }
 
                             }

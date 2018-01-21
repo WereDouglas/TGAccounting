@@ -33,7 +33,6 @@ C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.CompanyProfile.resources
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.DataForm.resources
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.EventDialog.resources
-C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.Form1.resources
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.HomeForm.resources
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.ImportDialog.resources
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.LoadingWindow.resources
@@ -46,3 +45,4 @@ C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.exe
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.pdb
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.csprojResolveAssemblyReference.cache
+C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.EditName.resources

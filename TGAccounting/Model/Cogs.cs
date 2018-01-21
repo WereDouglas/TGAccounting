@@ -181,6 +181,17 @@ namespace TGAccounting.Model
             Reader.Close();
 
             return s;
+        }
+        public static List<String> ListName(string query)
+        {
+            List<string> s = new List<String>();
+            SQLiteDataReader Reader = DBConnect.ReadingLite(query);
+            while (Reader.Read())
+            {
+                s.Add(Reader["category"].ToString());
+            }
+            Reader.Close();
+            return s;
 
         }
     }

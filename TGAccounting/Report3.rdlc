@@ -182,7 +182,7 @@
                       <rd:DefaultName>Amount</rd:DefaultName>
                       <Style>
                         <Border>
-                          <Style>None</Style>
+                          <Style>Dotted</Style>
                         </Border>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -203,6 +203,7 @@
                             <TextRun>
                               <Value>=Sum(Fields!Amount.Value)</Value>
                               <Style>
+                                <FontWeight>ExtraBold</FontWeight>
                                 <Format>C</Format>
                               </Style>
                             </TextRun>
@@ -215,8 +216,9 @@
                       <rd:DefaultName>Amount</rd:DefaultName>
                       <Style>
                         <Border>
-                          <Style>None</Style>
+                          <Style>Dotted</Style>
                         </Border>
+                        <BackgroundColor>LightBlue</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -442,7 +444,9 @@
                             <TextRuns>
                               <TextRun>
                                 <Value>=Fields!Ending.Value</Value>
-                                <Style />
+                                <Style>
+                                  <FontWeight>ExtraBold</FontWeight>
+                                </Style>
                               </TextRun>
                             </TextRuns>
                             <Style>
@@ -563,6 +567,7 @@
                   </TablixHeader>
                 </TablixMember>
               </TablixMembers>
+              <FixedData>true</FixedData>
             </TablixMember>
           </TablixMembers>
         </TablixColumnHierarchy>
@@ -636,7 +641,7 @@
                     <rd:DefaultName>Name</rd:DefaultName>
                     <Style>
                       <Border>
-                        <Style>None</Style>
+                        <Style>Dotted</Style>
                       </Border>
                       <PaddingLeft>2pt</PaddingLeft>
                       <PaddingRight>2pt</PaddingRight>
@@ -726,13 +731,13 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>0.26042in</Top>
-        <Left>0.60417in</Left>
+        <Top>0.14584in</Top>
+        <Left>0.16667in</Left>
         <Height>1.5in</Height>
         <Width>4.71875in</Width>
         <Style>
           <Border>
-            <Style>None</Style>
+            <Style>Dotted</Style>
           </Border>
         </Style>
       </Tablix>

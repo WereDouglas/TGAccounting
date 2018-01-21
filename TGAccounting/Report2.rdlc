@@ -210,6 +210,7 @@
                             <TextRun>
                               <Value>=Sum(Fields!Amount.Value)</Value>
                               <Style>
+                                <FontWeight>ExtraBold</FontWeight>
                                 <Format>C</Format>
                               </Style>
                             </TextRun>
@@ -225,6 +226,7 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>LightBlue</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -581,7 +583,9 @@
                             <TextRuns>
                               <TextRun>
                                 <Value>=Fields!Week.Value</Value>
-                                <Style />
+                                <Style>
+                                  <FontWeight>ExtraBold</FontWeight>
+                                </Style>
                               </TextRun>
                             </TextRuns>
                             <Style>
@@ -627,7 +631,9 @@
                                 <TextRuns>
                                   <TextRun>
                                     <Value>=Fields!Ending.Value</Value>
-                                    <Style />
+                                    <Style>
+                                      <FontWeight>ExtraBold</FontWeight>
+                                    </Style>
                                   </TextRun>
                                 </TextRuns>
                                 <Style>
@@ -779,7 +785,9 @@
                                 <TextRuns>
                                   <TextRun>
                                     <Value>Total</Value>
-                                    <Style />
+                                    <Style>
+                                      <FontWeight>ExtraBold</FontWeight>
+                                    </Style>
                                   </TextRun>
                                 </TextRuns>
                                 <Style>
@@ -843,6 +851,7 @@
                   </TablixMembers>
                 </TablixMember>
               </TablixMembers>
+              <FixedData>true</FixedData>
             </TablixMember>
           </TablixMembers>
         </TablixColumnHierarchy>

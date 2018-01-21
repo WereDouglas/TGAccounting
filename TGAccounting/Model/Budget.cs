@@ -14,7 +14,7 @@ namespace TGAccounting.Model
         private string date;
         private string category;
         private string grouping;
-        private string pct;       
+        private double pct;       
         private double groupValue;       
 
 
@@ -72,7 +72,7 @@ namespace TGAccounting.Model
             }
         }
 
-        public string Pct
+        public double Pct
         {
             get
             {
@@ -113,7 +113,7 @@ namespace TGAccounting.Model
 
         public Budget() { }
 
-        public Budget(string id, string item, string category, string grouping, string pct, double groupValue, string date)
+        public Budget(string id, string item, string category, string grouping, double pct, double groupValue, string date)
         {
             this.Id = id;
             this.Item = item;
@@ -131,7 +131,7 @@ namespace TGAccounting.Model
             while (Reader.Read())
             {
                
-               Budget p = new Budget(Reader["id"].ToString(), Reader["item"].ToString(), Reader["category"].ToString(),Reader["grouping"].ToString(), Reader["pct"].ToString(),Convert.ToDouble(Reader["groupValue"]), Reader["date"].ToString());
+               Budget p = new Budget(Reader["id"].ToString(), Reader["item"].ToString(), Reader["category"].ToString(),Reader["grouping"].ToString(), Convert.ToDouble(Reader["pct"]),Convert.ToDouble(Reader["groupValue"]), Reader["date"].ToString());
                 s.Add(p);
             }
             Reader.Close();

@@ -208,6 +208,7 @@
                             <TextRun>
                               <Value>=Sum(Fields!Cost.Value)</Value>
                               <Style>
+                                <FontWeight>ExtraBold</FontWeight>
                                 <Format>C</Format>
                               </Style>
                             </TextRun>
@@ -455,7 +456,9 @@
                                 <TextRuns>
                                   <TextRun>
                                     <Value>=Fields!Ending.Value</Value>
-                                    <Style />
+                                    <Style>
+                                      <FontWeight>ExtraBold</FontWeight>
+                                    </Style>
                                   </TextRun>
                                 </TextRuns>
                                 <Style>
@@ -534,7 +537,9 @@
                             <TextRuns>
                               <TextRun>
                                 <Value>Total</Value>
-                                <Style />
+                                <Style>
+                                  <FontWeight>ExtraBold</FontWeight>
+                                </Style>
                               </TextRun>
                             </TextRuns>
                             <Style>
@@ -559,6 +564,7 @@
                   </TablixHeader>
                 </TablixMember>
               </TablixMembers>
+              <FixedData>true</FixedData>
             </TablixMember>
           </TablixMembers>
         </TablixColumnHierarchy>

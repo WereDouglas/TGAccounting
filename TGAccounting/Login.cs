@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TGAccounting.Model;
@@ -20,6 +22,16 @@ namespace TGAccounting
             createSqlliteDB();
             newInstallation();
             autocomplete();
+            InitializeCulture();
+        }
+        protected  void InitializeCulture()
+        {
+            CultureInfo CI = new CultureInfo("en-Gb");
+            CI.DateTimeFormat.ShortDatePattern = "dd-MM-yyyy";
+
+            Thread.CurrentThread.CurrentCulture = CI;
+            Thread.CurrentThread.CurrentUICulture = CI;
+          //  base.InitializeCulture();
         }
         private void newInstallation()
         {

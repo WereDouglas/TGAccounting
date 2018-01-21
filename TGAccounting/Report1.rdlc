@@ -183,6 +183,7 @@
                               <Value>=Sum(Fields!Amount.Value)</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
+                                <FontWeight>ExtraBold</FontWeight>
                                 <Format>c</Format>
                                 <Color>#4d4d4d</Color>
                               </Style>
@@ -199,6 +200,7 @@
                           <Color>#e5e5e5</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>LightBlue</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -635,8 +637,10 @@
                       </TablixHeader>
                     </TablixMember>
                   </TablixMembers>
+                  <FixedData>true</FixedData>
                 </TablixMember>
               </TablixMembers>
+              <FixedData>true</FixedData>
             </TablixMember>
           </TablixMembers>
         </TablixColumnHierarchy>
@@ -781,7 +785,7 @@
         <Top>0.07292in</Top>
         <Left>0.13417in</Left>
         <Height>1.5in</Height>
-        <Width>4.36458in</Width>
+        <Width>4.36459in</Width>
         <Style>
           <Border>
             <Style>None</Style>

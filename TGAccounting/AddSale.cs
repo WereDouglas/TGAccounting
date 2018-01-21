@@ -27,22 +27,12 @@ namespace TGAccounting
         private void fillUp(DateTime d)
         {
             month = d.ToString("MMMM");
+            int year =  Convert.ToInt32(d.ToString("yyyy"));
             monthLbl.Text = month;
             int week = Helper.GetIso8601WeekOfYear(d);
             weekLbl.Text = week.ToString();
-            startLbl.Text = Helper.GetFirstDayOfWeek(d, CultureInfo.CurrentCulture).Date.ToString("dd-MM-yyyy");
-
-            string mylast = startLbl.Text;
-            string myStart = Convert.ToDateTime(startLbl.Text).AddDays(-7).Date.ToString("dd-MM-yyyy");
-
-            startLbl.Text = Convert.ToDateTime(startLbl.Text).AddDays(-7).Date.ToString("dd-MM-yyyy");
-
-
-            endLbl.Text = Helper.GetFirstDayOfWeek(d, CultureInfo.CurrentCulture).Date.ToString("dd-MM-yyyy");
-            // startLbl.Text = Convert.ToDateTime(mylast).AddDays(-7).Date.ToString("dd-MM-yyyy");
-
-
-
+            startLbl.Text = Helper.FirstDateOfWeek(year, week).Date.ToString("dd-MM-yyyy");         
+            endLbl.Text = Convert.ToDateTime(startLbl.Text).AddDays(+6).Date.ToString("dd-MM-yyyy");
         }
         private void autocomplete()
         {
@@ -165,10 +155,13 @@ namespace TGAccounting
 
                 if (MessageBox.Show("YES or No?", "Are you sure you want to update the current existing information  ? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
-                    Sale j = new Sale(existingID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), Convert.ToInt32(weekLbl.Text), startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text), categoryTxt.Text, month);
+                    Sale j = new Sale(existingID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), Convert.ToInt32(weekLbl.Text),startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text), categoryTxt.Text, month);
 
                     DBConnect.Update(j, existingID);
                     existingID = "";
+                    return;
+                }
+                else {
                     return;
                 }
 

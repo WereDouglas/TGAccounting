@@ -56,7 +56,7 @@
             this.itemTxt.Location = new System.Drawing.Point(148, 155);
             this.itemTxt.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.itemTxt.Name = "itemTxt";
-            this.itemTxt.Size = new System.Drawing.Size(280, 21);
+            this.itemTxt.Size = new System.Drawing.Size(221, 21);
             this.itemTxt.TabIndex = 1;
             this.itemTxt.Leave += new System.EventHandler(this.itemTxt_Leave);
             // 
@@ -106,14 +106,14 @@
             this.panel1.Location = new System.Drawing.Point(14, 35);
             this.panel1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(446, 325);
+            this.panel1.Size = new System.Drawing.Size(389, 267);
             this.panel1.TabIndex = 10;
             // 
             // monthLbl
             // 
             this.monthLbl.AutoSize = true;
             this.monthLbl.BackColor = System.Drawing.Color.LightGray;
-            this.monthLbl.Location = new System.Drawing.Point(148, 255);
+            this.monthLbl.Location = new System.Drawing.Point(308, 56);
             this.monthLbl.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.monthLbl.Name = "monthLbl";
             this.monthLbl.Size = new System.Drawing.Size(15, 18);
@@ -124,7 +124,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.Color.LightGray;
-            this.label8.Location = new System.Drawing.Point(23, 255);
+            this.label8.Location = new System.Drawing.Point(254, 56);
             this.label8.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(44, 18);
@@ -136,7 +136,7 @@
             this.categoryTxt.FormattingEnabled = true;
             this.categoryTxt.Location = new System.Drawing.Point(148, 188);
             this.categoryTxt.Name = "categoryTxt";
-            this.categoryTxt.Size = new System.Drawing.Size(278, 26);
+            this.categoryTxt.Size = new System.Drawing.Size(219, 26);
             this.categoryTxt.TabIndex = 2;
             // 
             // label7
@@ -166,7 +166,7 @@
             this.amountTxt.Location = new System.Drawing.Point(148, 221);
             this.amountTxt.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.amountTxt.Name = "amountTxt";
-            this.amountTxt.Size = new System.Drawing.Size(280, 21);
+            this.amountTxt.Size = new System.Drawing.Size(221, 21);
             this.amountTxt.TabIndex = 3;
             this.amountTxt.TextChanged += new System.EventHandler(this.amountTxt_TextChanged);
             this.amountTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.amountTxt_KeyPress);
@@ -235,7 +235,7 @@
             // 
             this.dateTxt.Location = new System.Drawing.Point(148, 19);
             this.dateTxt.Name = "dateTxt";
-            this.dateTxt.Size = new System.Drawing.Size(280, 21);
+            this.dateTxt.Size = new System.Drawing.Size(221, 21);
             this.dateTxt.TabIndex = 0;
             this.dateTxt.ValueChanged += new System.EventHandler(this.dateTxt_ValueChanged);
             // 
@@ -254,7 +254,7 @@
             this.button3.FlatAppearance.BorderSize = 0;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Image = global::TGAccounting.Properties.Resources.Close_16;
-            this.button3.Location = new System.Drawing.Point(162, 364);
+            this.button3.Location = new System.Drawing.Point(162, 310);
             this.button3.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(91, 42);
@@ -270,7 +270,7 @@
             this.button4.FlatAppearance.BorderSize = 0;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Image = global::TGAccounting.Properties.Resources.Save_16__2_;
-            this.button4.Location = new System.Drawing.Point(351, 364);
+            this.button4.Location = new System.Drawing.Point(312, 310);
             this.button4.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(91, 42);
@@ -284,7 +284,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(480, 423);
+            this.ClientSize = new System.Drawing.Size(425, 363);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.label3);

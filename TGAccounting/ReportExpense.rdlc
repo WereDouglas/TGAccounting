@@ -263,6 +263,7 @@
                             <TextRun>
                               <Value>=Sum(Fields!Amount.Value)</Value>
                               <Style>
+                                <FontWeight>ExtraBold</FontWeight>
                                 <Format>C</Format>
                               </Style>
                             </TextRun>
@@ -278,6 +279,7 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>LightBlue</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -337,6 +339,7 @@
                             <TextRun>
                               <Value>=Sum(Fields!Amount.Value)</Value>
                               <Style>
+                                <FontWeight>ExtraBold</FontWeight>
                                 <Format>C</Format>
                               </Style>
                             </TextRun>
@@ -835,6 +838,7 @@
                   </TablixMembers>
                 </TablixMember>
               </TablixMembers>
+              <FixedData>true</FixedData>
             </TablixMember>
           </TablixMembers>
         </TablixColumnHierarchy>
@@ -1198,6 +1202,8 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSetExpense</DataSetName>
+        <Top>0.32292in</Top>
+        <Left>0.55208in</Left>
         <Height>2.01042in</Height>
         <Width>5.44791in</Width>
         <Style>

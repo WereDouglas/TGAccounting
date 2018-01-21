@@ -12,17 +12,18 @@ namespace TGAccounting
 {
   public static class Helper
     {
+        public static CultureInfo cultureinfo =   CultureInfo.CurrentCulture;
         public static string UserID;
         public static string CompanyID;
         public static string UserName;
         public static string UserImage;
         public static string CurrentYear;
-        public static DateTime FirstDateOfWeek(int year, int weekOfYear, System.Globalization.CultureInfo ci)
+        public static DateTime FirstDateOfWeek(int year, int weekOfYear)
         {
             DateTime jan1 = new DateTime(year, 1, 1);
-            int daysOffset = (int)ci.DateTimeFormat.FirstDayOfWeek - (int)jan1.DayOfWeek;
+            int daysOffset = (int) CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek - (int)jan1.DayOfWeek;
             DateTime firstWeekDay = jan1.AddDays(daysOffset);
-            int firstWeek = ci.Calendar.GetWeekOfYear(jan1, ci.DateTimeFormat.CalendarWeekRule, ci.DateTimeFormat.FirstDayOfWeek);
+            int firstWeek = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(jan1, CultureInfo.CurrentCulture.DateTimeFormat.CalendarWeekRule, CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek);
             if ((firstWeek <= 1 || firstWeek >= 52) && daysOffset >= -3)
             {
                 weekOfYear -= 1;
@@ -32,13 +33,12 @@ namespace TGAccounting
 
            // var firstDayWeek = ci.Calendar.GetWeekOfYear( d, CalendarWeekRule.FirstDay,   DayOfWeek.Monday);
         }
-        public static DateTime GetFirstDayOfWeek(DateTime dayInWeek, CultureInfo cultureInfo)
+        public static DateTime GetFirstDayOfWeek(DateTime dayInWeek)
         {
-            DayOfWeek firstDay = cultureInfo.DateTimeFormat.FirstDayOfWeek;
+            DayOfWeek firstDay = CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek;
             DateTime firstDayInWeek = dayInWeek.Date;
             while (firstDayInWeek.DayOfWeek != firstDay)
-                firstDayInWeek = firstDayInWeek.AddDays(-1);
-
+                firstDayInWeek = firstDayInWeek.AddDays(1);
             return firstDayInWeek;
         }
 

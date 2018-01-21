@@ -25,21 +25,12 @@ namespace TGAccounting
         private void fillUp(DateTime d)
         {
             month = d.ToString("MMMM");
+            int year = Convert.ToInt32(d.ToString("yyyy"));
+
             int week = Helper.GetIso8601WeekOfYear(d);
             weekLbl.Text = week.ToString();
-            startLbl.Text = Helper.GetFirstDayOfWeek(d, CultureInfo.CurrentCulture).Date.ToString("dd-MM-yyyy");
-
-            string mylast = startLbl.Text;
-            string myStart = Convert.ToDateTime(startLbl.Text).AddDays(-7).Date.ToString("dd-MM-yyyy");
-
-            startLbl.Text = Convert.ToDateTime(startLbl.Text).AddDays(-7).Date.ToString("dd-MM-yyyy");
-
-
-            endLbl.Text = Helper.GetFirstDayOfWeek(d, CultureInfo.CurrentCulture).Date.ToString("dd-MM-yyyy");
-            // startLbl.Text = Convert.ToDateTime(mylast).AddDays(-7).Date.ToString("dd-MM-yyyy");
-
-
-
+            startLbl.Text = Helper.FirstDateOfWeek(year, week).Date.ToString("dd-MM-yyyy");
+            endLbl.Text = Convert.ToDateTime(startLbl.Text).AddDays(+6).Date.ToString("dd-MM-yyyy");
         }
         private void autocomplete()
         {
@@ -162,9 +153,9 @@ namespace TGAccounting
                     Expense j = new Expense(existingID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), Convert.ToInt32(weekLbl.Text), startLbl.Text, endLbl.Text, itemTxt.Text, categoryTxt.Text, Convert.ToDouble(amountTxt.Text), month);
                     DBConnect.Update(j, existingID);
                     existingID = "";
-                    return;
+                   
                 }
-
+                return;
             }
             existingID = "";
 

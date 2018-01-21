@@ -78,9 +78,9 @@
             this.label3.Location = new System.Drawing.Point(138, 1);
             this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(127, 24);
+            this.label3.Size = new System.Drawing.Size(128, 24);
             this.label3.TabIndex = 15;
-            this.label3.Text = "Add inventory";
+            this.label3.Text = "New Purchase";
             // 
             // panel1
             // 
@@ -129,7 +129,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.BackColor = System.Drawing.Color.LightGray;
-            this.label10.Location = new System.Drawing.Point(22, 214);
+            this.label10.Location = new System.Drawing.Point(27, 215);
             this.label10.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(125, 18);
@@ -138,10 +138,10 @@
             // 
             // amountTxt
             // 
-            this.amountTxt.Location = new System.Drawing.Point(149, 212);
+            this.amountTxt.Location = new System.Drawing.Point(151, 215);
             this.amountTxt.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.amountTxt.Name = "amountTxt";
-            this.amountTxt.Size = new System.Drawing.Size(221, 21);
+            this.amountTxt.Size = new System.Drawing.Size(217, 21);
             this.amountTxt.TabIndex = 3;
             this.amountTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.amountTxt_KeyPress);
             // 
@@ -230,7 +230,7 @@
             this.button4.ForeColor = System.Drawing.Color.Red;
             this.button4.Image = global::TGAccounting.Properties.Resources.Document_Delete_01_24;
             this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button4.Location = new System.Drawing.Point(239, 300);
+            this.button4.Location = new System.Drawing.Point(17, 300);
             this.button4.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(69, 34);
@@ -246,7 +246,7 @@
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Image = global::TGAccounting.Properties.Resources.Close_16;
-            this.button2.Location = new System.Drawing.Point(160, 299);
+            this.button2.Location = new System.Drawing.Point(166, 300);
             this.button2.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(69, 34);
@@ -262,7 +262,7 @@
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Image = global::TGAccounting.Properties.Resources.Save_16__2_;
-            this.button1.Location = new System.Drawing.Point(335, 300);
+            this.button1.Location = new System.Drawing.Point(316, 299);
             this.button1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(69, 34);
