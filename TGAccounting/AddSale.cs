@@ -20,7 +20,7 @@ namespace TGAccounting
         {
             InitializeComponent();
             autocomplete();
-            autocompleteCategory();
+           // autocompleteCategory();
             fillUp(Convert.ToDateTime(DateTime.Now.Date));
         }
         string month;
@@ -46,21 +46,7 @@ namespace TGAccounting
             itemTxt.AutoCompleteCustomSource = AutoItem;
 
         }
-        private void autocompleteCategory()
-        {
-            categoryTxt.Items.Clear();
-            AutoCompleteStringCollection AutoItem = new AutoCompleteStringCollection();
-            foreach (Sale r in Sale.List("SELECT * from sale").GroupBy(x => x.Category, (key, group) => group.First()))
-            {
-                AutoItem.Add(r.Category);
-                categoryTxt.Items.Add(r.Category);
-            }
-            categoryTxt.AutoCompleteMode = AutoCompleteMode.Suggest;
-            categoryTxt.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            categoryTxt.AutoCompleteCustomSource = AutoItem;
-
-
-        }
+      
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -77,6 +63,7 @@ namespace TGAccounting
         private void dateTxt_ValueChanged(object sender, EventArgs e)
         {
             fillUp(Convert.ToDateTime(dateTxt.Text));
+            itemTxt_Leave(null,null);
         }
 
         private void amountTxt_TextChanged(object sender, EventArgs e)
@@ -103,14 +90,7 @@ namespace TGAccounting
         string existingID = "";
         private void itemTxt_Leave(object sender, EventArgs e)
         {
-            try
-            {
-                categoryTxt.Text = Sale.List("SELECT * from sale WHERE item='" + itemTxt.Text + "'").First().Category;
-            }
-            catch (Exception y)
-            {
-                Helper.Exceptions(y.Message, "on adding sale auto fill the category list selected item");
-            }
+            existingID = "";
             try
             {
                 amountTxt.Text = Sale.List("SELECT * from sale WHERE item='" + itemTxt.Text + "' AND week = '" + weekLbl.Text + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Amount.ToString();
@@ -155,7 +135,7 @@ namespace TGAccounting
 
                 if (MessageBox.Show("YES or No?", "Are you sure you want to update the current existing information  ? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
-                    Sale j = new Sale(existingID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), Convert.ToInt32(weekLbl.Text),startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text), categoryTxt.Text, month);
+                    Sale j = new Sale(existingID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), Convert.ToInt32(weekLbl.Text),startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text), itemTxt.Text, month);
 
                     DBConnect.Update(j, existingID);
                     existingID = "";
@@ -168,7 +148,7 @@ namespace TGAccounting
             }
             existingID = "";
             string ID = Guid.NewGuid().ToString();
-            Sale i = new Sale(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), Convert.ToInt32(weekLbl.Text), startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text), categoryTxt.Text, month);
+            Sale i = new Sale(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), Convert.ToInt32(weekLbl.Text), startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text), itemTxt.Text, month);
             DBConnect.Insert(i);
             MessageBox.Show("Information Saved ");
             itemTxt.Text = "";

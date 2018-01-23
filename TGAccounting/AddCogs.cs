@@ -55,6 +55,7 @@ namespace TGAccounting
         {
             fillUp(Convert.ToDateTime(dateTxt.Text));
             categoryTxt_SelectedIndexChanged(null, null);
+           
         }
 
         private void button1_Click(object sender, EventArgs e)

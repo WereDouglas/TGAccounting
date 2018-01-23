@@ -147,12 +147,8 @@ namespace TGAccounting
                     LoadSales();
                     break;
                 case "tabTax":
-
                     LoadTax(pStart, pEnd);
-                    break;
-                case "tabSal":
-                    LoadSalary(pStart, pEnd);
-                    break;
+                    break;              
                 case "tabSupply":
                     LoadSupplies(pStart, pEnd);
                     break;
@@ -206,7 +202,8 @@ namespace TGAccounting
             {
                 MessageBox.Show("The week must be an integer");
             }
-            if (!string.IsNullOrEmpty(oldName)) {
+            if (!string.IsNullOrEmpty(oldName) && oldName != saleGrid.Rows[e.RowIndex].Cells["item"].Value.ToString())
+            {
 
                 if (MessageBox.Show("YES or No?", "Update all names from "+oldName+" to "+ saleGrid.Rows[e.RowIndex].Cells["item"].Value.ToString(), MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
@@ -219,7 +216,7 @@ namespace TGAccounting
                         MessageBox.Show("Information updated ");
                         oldName = "";
                     }
-                    LoadSales();
+                   
                 }
             }
 
@@ -234,7 +231,11 @@ namespace TGAccounting
                 Helper.Exceptions(c.Message, "Editing Sales grid");
                 MessageBox.Show("You have an invalid entry !");
             }
-            
+            try
+            {
+                LoadSales();
+            }
+            catch { }
         }
         string oldName = "";
         private void saleGrid_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
@@ -300,28 +301,7 @@ namespace TGAccounting
 
         }
 
-        private void salGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            if (!Helper.validateDouble(salGrid.Rows[e.RowIndex].Cells["annual"].Value.ToString()))
-            {
-                MessageBox.Show("Invalid amount");
-            }
-
-
-
-            try
-            {
-                Salary _c = new Salary(salGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), salGrid.Rows[e.RowIndex].Cells["staff"].Value.ToString(), salGrid.Rows[e.RowIndex].Cells["department"].Value.ToString(), salGrid.Rows[e.RowIndex].Cells["category"].Value.ToString(), Convert.ToDouble(salGrid.Rows[e.RowIndex].Cells["annual"].Value.ToString()), Convert.ToDouble(salGrid.Rows[e.RowIndex].Cells["weekly"].Value), Convert.ToDouble(salGrid.Rows[e.RowIndex].Cells["biweekly"].Value), Convert.ToDouble(salGrid.Rows[e.RowIndex].Cells["monthly"].Value), Convert.ToDouble(salGrid.Rows[e.RowIndex].Cells["our"].Value));
-                DBConnect.Update(_c, salGrid.Rows[e.RowIndex].Cells["id"].Value.ToString());
-            }
-            catch (Exception c)
-            {
-                Helper.Exceptions(c.Message, "Editing salary grid");
-                MessageBox.Show("You have an invalid entry !");
-            }
-
-        }
-
+     
         private void supData_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             if (!Helper.validateDouble(supData.Rows[e.RowIndex].Cells["amount"].Value.ToString()))
@@ -543,21 +523,6 @@ namespace TGAccounting
 
                     MessageBox.Show("Information deleted");
                     LoadTax(pStart, pEnd);
-                }
-            }
-        }
-
-        private void salGrid_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == salGrid.Columns["delete"].Index && e.RowIndex >= 0)
-            {
-                if (MessageBox.Show("YES or NO?", "Are you sure you want to delete? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
-                {
-                    string Query = "DELETE from salary WHERE id ='" + salGrid.Rows[e.RowIndex].Cells["id"].Value.ToString() + "'";
-                    DBConnect.save(Query);
-
-                    MessageBox.Show("Information deleted");
-                    LoadSalary(pStart, pEnd);
                 }
             }
         }
@@ -809,7 +774,7 @@ namespace TGAccounting
                 MessageBox.Show("Please input a name ");
                 return;
             }
-            if (!string.IsNullOrEmpty(oldName))
+            if (!string.IsNullOrEmpty(oldName) && oldName != comGrid.Rows[e.RowIndex].Cells["item"].Value.ToString())
             {
 
                 if (MessageBox.Show("YES or No?", "Update all names from " + oldName + " to " + comGrid.Rows[e.RowIndex].Cells["item"].Value.ToString(), MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
@@ -824,14 +789,14 @@ namespace TGAccounting
                         MessageBox.Show("Information updated ");
                         oldName = "";
                     }
-                    LoadComps();
-                }
+                    
+                }               
+                
             }
-
             string ID = comGrid.Rows[e.RowIndex].Cells["id"].Value.ToString();
             Comp _c = new Comp(comGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), comGrid.Rows[e.RowIndex].Cells["year"].Value.ToString(), Convert.ToInt32(comGrid.Rows[e.RowIndex].Cells["week"].Value), comGrid.Rows[e.RowIndex].Cells["starting"].Value.ToString(), comGrid.Rows[e.RowIndex].Cells["ending"].Value.ToString(), comGrid.Rows[e.RowIndex].Cells["item"].Value.ToString(), Convert.ToDouble(comGrid.Rows[e.RowIndex].Cells["amount"].Value.ToString()), comGrid.Rows[e.RowIndex].Cells["month"].Value.ToString());
             DBConnect.Update(_c, ID);
-
+            LoadComps();
         }
 
         private void costGrid_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
@@ -862,6 +827,7 @@ namespace TGAccounting
 
         private void LoadSales()
         {
+            saleGrid.DataSource = null;
             sdt = new DataTable();
             sdt.Columns.Add("id", typeof(string));
             sdt.Columns.Add("Item", typeof(string));
@@ -911,6 +877,7 @@ namespace TGAccounting
         /*Labor section**/
         private void LoadLabor(DateTime start, DateTime end)
         {
+            laborGrid.DataSource = null;
             ldt = new DataTable();
             ldt.Columns.Add("id", typeof(string));
             ldt.Columns.Add("Name", typeof(string));
@@ -933,6 +900,7 @@ namespace TGAccounting
         }
         private void LoadTax(DateTime start, DateTime end)
         {
+            taxGrid.DataSource = null;
             tdt = new DataTable();
             tdt.Columns.Add("id", typeof(string));
             tdt.Columns.Add("Name", typeof(string));
@@ -953,31 +921,9 @@ namespace TGAccounting
             taxGrid.Columns["Delete"].DefaultCellStyle.BackColor = Color.Orange;
             // saleGrid.Columns["Delete"].Width = 50;
         }
-        private void LoadSalary(DateTime start, DateTime end)
-        {
-            saldt = new DataTable();
-            saldt.Columns.Add("id", typeof(string));
-            saldt.Columns.Add("Staff", typeof(string));
-            saldt.Columns.Add("Department", typeof(string));
-            saldt.Columns.Add("Category");
-            saldt.Columns.Add("Annual");
-            saldt.Columns.Add("weekly");
-            saldt.Columns.Add("Biweekly");
-            saldt.Columns.Add("Our pay");
-
-            saldt.Columns.Add("Delete");
-            string query = "SELECT * FROM salary WHERE date = '" + Helper.CurrentYear + "'";
-            foreach (Salary w in Salary.List())
-            {
-                saldt.Rows.Add(new object[] { w.Id, w.Staff, w.Department, w.Category, w.Annual, w.Weekly, w.Biweekly, w.Our, "Delete" });
-            }
-            salGrid.DataSource = saldt;
-            salGrid.Columns["id"].Visible = false;
-            salGrid.Columns["Delete"].DefaultCellStyle.BackColor = Color.Red;
-            // saleGrid.Columns["Delete"].Width = 50;
-        }
         private void LoadSupplies(DateTime start, DateTime end)
         {
+            supData.DataSource = null;
             supdt = new DataTable();
             supdt.Columns.Add("id", typeof(string));
             supdt.Columns.Add("Name", typeof(string));
@@ -1000,6 +946,7 @@ namespace TGAccounting
         }
         private void LoadRepair(DateTime start, DateTime end)
         {
+            repGrid.DataSource = null;
             rmdt = new DataTable();
             rmdt.Columns.Add("id", typeof(string));
             rmdt.Columns.Add("Name", typeof(string));
@@ -1022,6 +969,7 @@ namespace TGAccounting
         }
         private void LoadEquipment(DateTime start, DateTime end)
         {
+            equipGrid.DataSource = null;
             eqdt = new DataTable();
             eqdt.Columns.Add("id", typeof(string));
             eqdt.Columns.Add("Name", typeof(string));
@@ -1044,6 +992,7 @@ namespace TGAccounting
         }
         private void LoadInventory(DateTime start, DateTime end)
         {
+            InventoryGrid.DataSource = null;
             invdt = new DataTable();
             invdt.Columns.Add("id", typeof(string));
             invdt.Columns.Add("Name", typeof(string));
@@ -1068,6 +1017,7 @@ namespace TGAccounting
         }
         private void LoadExpense(DateTime start, DateTime end)
         {
+            expenseGrid.DataSource = null;
             expdt = new DataTable();
             expdt.Columns.Add("id", typeof(string));
             expdt.Columns.Add("Name", typeof(string));
@@ -1090,6 +1040,7 @@ namespace TGAccounting
         }
         private void LoadCogs()
         {
+            costGrid.DataSource = null;
             costdt = new DataTable();
             costdt.Columns.Add("id", typeof(string));
             costdt.Columns.Add("Category", typeof(string));
@@ -1130,6 +1081,7 @@ namespace TGAccounting
         }
         private void LoadLogs(DateTime start, DateTime end)
         {
+            logGrid.DataSource = null;
             lg = new DataTable();
             lg.Columns.Add("id", typeof(string));
             lg.Columns.Add("User", typeof(string));
@@ -1148,6 +1100,7 @@ namespace TGAccounting
         }
         private void LoadBudgets(DateTime start, DateTime end)
         {
+            budgetGrid.DataSource = null;
             bg = new DataTable();
             bg.Columns.Add("id", typeof(string));
             bg.Columns.Add("Category", typeof(string));
@@ -1167,6 +1120,7 @@ namespace TGAccounting
         }
         private void LoadComps()
         {
+            comGrid.DataSource= null;
             cp = new DataTable();
             cp.Columns.Add("id", typeof(string));
             cp.Columns.Add("Item", typeof(string));

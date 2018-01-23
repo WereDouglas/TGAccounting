@@ -314,7 +314,9 @@
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\DataSources\ReportRepair.rdlc" />
+    <EmbeddedResource Include="Properties\DataSources\ReportRepair.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -326,19 +328,33 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Report1.rdlc" />
-    <EmbeddedResource Include="Report2.rdlc" />
-    <EmbeddedResource Include="Report3.rdlc" />
+    <EmbeddedResource Include="Report2.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report3.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report4.rdlc" />
     <EmbeddedResource Include="ReportChartSales.rdlc" />
-    <EmbeddedResource Include="ReportCogs.rdlc" />
-    <EmbeddedResource Include="ReportEquipment.rdlc" />
-    <EmbeddedResource Include="ReportExpense.rdlc" />
+    <EmbeddedResource Include="ReportCogs.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportEquipment.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportExpense.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportGraph.rdlc" />
-    <EmbeddedResource Include="ReportInventory.rdlc" />
+    <EmbeddedResource Include="ReportInventory.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportPL.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="ReportSupply.rdlc" />
+    <EmbeddedResource Include="ReportSupply.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="StaffPayments.resx">
       <DependentUpon>StaffPayments.cs</DependentUpon>
     </EmbeddedResource>

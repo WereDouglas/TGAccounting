@@ -36,8 +36,6 @@
             this.laborGrid = new System.Windows.Forms.DataGridView();
             this.tabTax = new System.Windows.Forms.TabPage();
             this.taxGrid = new System.Windows.Forms.DataGridView();
-            this.tabSal = new System.Windows.Forms.TabPage();
-            this.salGrid = new System.Windows.Forms.DataGridView();
             this.tabSupply = new System.Windows.Forms.TabPage();
             this.supData = new System.Windows.Forms.DataGridView();
             this.tabRm = new System.Windows.Forms.TabPage();
@@ -73,8 +71,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.laborGrid)).BeginInit();
             this.tabTax.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.taxGrid)).BeginInit();
-            this.tabSal.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.salGrid)).BeginInit();
             this.tabSupply.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.supData)).BeginInit();
             this.tabRm.SuspendLayout();
@@ -110,7 +106,6 @@
             this.supGrid.Controls.Add(this.saleTab);
             this.supGrid.Controls.Add(this.laborTab);
             this.supGrid.Controls.Add(this.tabTax);
-            this.supGrid.Controls.Add(this.tabSal);
             this.supGrid.Controls.Add(this.tabSupply);
             this.supGrid.Controls.Add(this.tabRm);
             this.supGrid.Controls.Add(this.tabEq);
@@ -211,31 +206,6 @@
             this.taxGrid.TabIndex = 5;
             this.taxGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.taxGrid_CellClick);
             this.taxGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.taxGrid_CellEndEdit);
-            // 
-            // tabSal
-            // 
-            this.tabSal.Controls.Add(this.salGrid);
-            this.tabSal.Location = new System.Drawing.Point(4, 25);
-            this.tabSal.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabSal.Name = "tabSal";
-            this.tabSal.Size = new System.Drawing.Size(1236, 598);
-            this.tabSal.TabIndex = 3;
-            this.tabSal.Text = "Salaries  && Insurance";
-            this.tabSal.UseVisualStyleBackColor = true;
-            // 
-            // salGrid
-            // 
-            this.salGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.salGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.salGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.salGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.salGrid.Location = new System.Drawing.Point(0, 0);
-            this.salGrid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.salGrid.Name = "salGrid";
-            this.salGrid.Size = new System.Drawing.Size(1236, 598);
-            this.salGrid.TabIndex = 5;
-            this.salGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.salGrid_CellClick);
-            this.salGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.salGrid_CellEndEdit);
             // 
             // tabSupply
             // 
@@ -607,8 +577,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.laborGrid)).EndInit();
             this.tabTax.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.taxGrid)).EndInit();
-            this.tabSal.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.salGrid)).EndInit();
             this.tabSupply.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.supData)).EndInit();
             this.tabRm.ResumeLayout(false);
@@ -648,7 +616,6 @@
         private System.Windows.Forms.TabPage saleTab;
         private System.Windows.Forms.TabPage laborTab;
         private System.Windows.Forms.TabPage tabTax;
-        private System.Windows.Forms.TabPage tabSal;
         private System.Windows.Forms.TabPage tabSupply;
         private System.Windows.Forms.TabPage tabRm;
         private System.Windows.Forms.TabPage tabEq;
@@ -659,7 +626,6 @@
         private System.Windows.Forms.DataGridView saleGrid;
         private System.Windows.Forms.DataGridView laborGrid;
         private System.Windows.Forms.DataGridView taxGrid;
-        private System.Windows.Forms.DataGridView salGrid;
         private System.Windows.Forms.DataGridView supData;
         private System.Windows.Forms.DataGridView repGrid;
         private System.Windows.Forms.DataGridView equipGrid;

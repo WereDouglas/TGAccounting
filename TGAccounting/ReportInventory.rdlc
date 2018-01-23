@@ -1823,15 +1823,15 @@
             <ChartMember>
               <Group Name="Chart1_CategoryGroup">
                 <GroupExpressions>
-                  <GroupExpression>=Fields!Week.Value</GroupExpression>
+                  <GroupExpression>=Fields!Month.Value</GroupExpression>
                 </GroupExpressions>
               </Group>
               <SortExpressions>
                 <SortExpression>
-                  <Value>=Fields!Week.Value</Value>
+                  <Value>=Month(CDATE(Fields!Month.Value+ ", 01, 2018"))</Value>
                 </SortExpression>
               </SortExpressions>
-              <Label>=Fields!Week.Value</Label>
+              <Label>=Fields!Month.Value</Label>
             </ChartMember>
           </ChartMembers>
         </ChartCategoryHierarchy>
@@ -1890,11 +1890,12 @@
                   <FontSize>8pt</FontSize>
                 </Style>
                 <ChartAxisTitle>
-                  <Caption>Week</Caption>
+                  <Caption>Month</Caption>
                   <Style>
                     <FontSize>8pt</FontSize>
                   </Style>
                 </ChartAxisTitle>
+                <Interval>=1</Interval>
                 <ChartMajorGridLines>
                   <Enabled>False</Enabled>
                   <Style>
@@ -2043,6 +2044,9 @@
               <BackgroundGradientType>None</BackgroundGradientType>
               <FontSize>8pt</FontSize>
             </Style>
+            <Position>BottomLeft</Position>
+            <DockToChartArea>Default</DockToChartArea>
+            <DockOutsideChartArea>true</DockOutsideChartArea>
             <ChartLegendTitle>
               <Caption />
               <Style>
@@ -2184,6 +2188,7 @@
                     <FontSize>8pt</FontSize>
                   </Style>
                 </ChartAxisTitle>
+                <Interval>=1</Interval>
                 <ChartMajorGridLines>
                   <Enabled>False</Enabled>
                   <Style>
@@ -2372,7 +2377,7 @@
           </Style>
         </ChartNoDataMessage>
         <DataSetName>DataSetInventory</DataSetName>
-        <Top>2.93625in</Top>
+        <Top>3.31125in</Top>
         <Left>0.29041in</Left>
         <Height>2.21875in</Height>
         <Width>9.0625in</Width>
@@ -2461,6 +2466,10 @@
         </Field>
         <Field Name="Dop">
           <DataField>Dop</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Month">
+          <DataField>Month</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>

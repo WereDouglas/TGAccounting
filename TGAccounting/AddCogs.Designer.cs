@@ -174,8 +174,7 @@
             // 
             // dateTxt
             // 
-            this.dateTxt.CustomFormat = "dd-MM-yyyy";
-            this.dateTxt.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTxt.CustomFormat = "";
             this.dateTxt.Location = new System.Drawing.Point(148, 19);
             this.dateTxt.Name = "dateTxt";
             this.dateTxt.Size = new System.Drawing.Size(256, 21);

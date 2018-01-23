@@ -163,7 +163,7 @@ namespace TGAccounting.Model
             SQLiteDataReader Reader = DBConnect.ReadingLite(query);
             while (Reader.Read())
             {
-                Expense p = new Expense(Reader["id"].ToString(), Reader["date"].ToString(), Convert.ToInt32(Reader["week"]), Reader["starting"].ToString(), Convert.ToDateTime(Reader["ending"]).ToString("dd-MMMM-yy"), Reader["name"].ToString(), Reader["category"].ToString(), Convert.ToDouble(Reader["amount"]), Reader["month"].ToString());
+                Expense p = new Expense(Reader["id"].ToString(), Reader["date"].ToString(), Convert.ToInt32(Reader["week"]), Reader["starting"].ToString(), Convert.ToDateTime(Reader["ending"]).ToString("dd-MMM-yy"), Reader["name"].ToString(), Reader["category"].ToString(), Convert.ToDouble(Reader["amount"]), Reader["month"].ToString());
                 s.Add(p);
             }
             Reader.Close();
