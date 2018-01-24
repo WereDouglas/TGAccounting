@@ -141,6 +141,7 @@ namespace TGAccounting
                 Helper.UserName = _userList.First().Name;
                 Helper.Log(Helper.UserName,"Log in ");
                 Helper.CompanyID = Company.List().First().Id;
+                Helper.UserLevel = Convert.ToInt32( _userList.First().Level);
 
                 HomeForm frm = new HomeForm();
                 frm.Show();
@@ -183,6 +184,7 @@ namespace TGAccounting
             Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Exceptions()));
             Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Budget()));
             Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Comp()));
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Annual()));
 
         }
 

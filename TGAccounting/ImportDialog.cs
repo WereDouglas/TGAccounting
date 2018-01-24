@@ -99,7 +99,7 @@ namespace TGAccounting
         {
             subcategory.Items.Clear();
             AutoCompleteStringCollection AutoItem = new AutoCompleteStringCollection();
-            foreach (var r in Global.categories)
+            foreach (var r in Inventory.ListCategory("SELECT DISTINCT category from inventory "))
             {
                 AutoItem.Add(r);
                 subcategory.Items.Add(r);
@@ -114,7 +114,7 @@ namespace TGAccounting
         {
             subcategory.Items.Clear();
             AutoCompleteStringCollection AutoItem = new AutoCompleteStringCollection();
-            foreach (var r in Global.expenseCategory)
+            foreach (var r in Expense.ListCategory("SELECT DISTINCT category from expense"))
             {
                 AutoItem.Add(r);
                 subcategory.Items.Add(r);

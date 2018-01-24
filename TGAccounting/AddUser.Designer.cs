@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddUser));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.pass2Txt = new System.Windows.Forms.TextBox();
             this.passTxt = new System.Windows.Forms.TextBox();
@@ -43,8 +45,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.contactTxt = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.levelCbx = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgCapture)).BeginInit();
             this.SuspendLayout();
@@ -52,6 +55,9 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.levelCbx);
+            this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.button6);
             this.groupBox2.Controls.Add(this.button7);
             this.groupBox2.Controls.Add(this.button3);
@@ -76,6 +82,38 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "User details";
             // 
+            // button6
+            // 
+            this.button6.BackColor = System.Drawing.Color.Transparent;
+            this.button6.FlatAppearance.BorderSize = 0;
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.Image = global::TGAccounting.Properties.Resources.Close_16;
+            this.button6.Location = new System.Drawing.Point(59, 443);
+            this.button6.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 42);
+            this.button6.TabIndex = 186;
+            this.button6.Text = "Close";
+            this.button6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button7
+            // 
+            this.button7.BackColor = System.Drawing.Color.Transparent;
+            this.button7.FlatAppearance.BorderSize = 0;
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button7.Image = global::TGAccounting.Properties.Resources.Save_16__2_;
+            this.button7.Location = new System.Drawing.Point(290, 447);
+            this.button7.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(59, 34);
+            this.button7.TabIndex = 185;
+            this.button7.Text = "Save";
+            this.button7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
             // button3
             // 
             this.button3.BackColor = System.Drawing.Color.Transparent;
@@ -83,7 +121,7 @@
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.ForeColor = System.Drawing.Color.Maroon;
-            this.button3.Location = new System.Drawing.Point(119, 344);
+            this.button3.Location = new System.Drawing.Point(119, 409);
             this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(214, 32);
@@ -230,37 +268,36 @@
             this.label12.TabIndex = 7;
             this.label12.Text = "Phone number";
             // 
-            // button6
+            // label1
             // 
-            this.button6.BackColor = System.Drawing.Color.Transparent;
-            this.button6.FlatAppearance.BorderSize = 0;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Image = global::TGAccounting.Properties.Resources.Close_16;
-            this.button6.Location = new System.Drawing.Point(59, 443);
-            this.button6.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 42);
-            this.button6.TabIndex = 186;
-            this.button6.Text = "Close";
-            this.button6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button6.UseVisualStyleBackColor = false;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 388);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(34, 16);
+            this.label1.TabIndex = 187;
+            this.label1.Text = "Level";
             // 
-            // button7
+            // levelCbx
             // 
-            this.button7.BackColor = System.Drawing.Color.Transparent;
-            this.button7.FlatAppearance.BorderSize = 0;
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Image = global::TGAccounting.Properties.Resources.Save_16__2_;
-            this.button7.Location = new System.Drawing.Point(290, 447);
-            this.button7.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(59, 34);
-            this.button7.TabIndex = 185;
-            this.button7.Text = "Save";
-            this.button7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button7.UseVisualStyleBackColor = false;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.levelCbx.FormattingEnabled = true;
+            this.levelCbx.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3"});
+            this.levelCbx.Location = new System.Drawing.Point(119, 380);
+            this.levelCbx.Name = "levelCbx";
+            this.levelCbx.Size = new System.Drawing.Size(230, 24);
+            this.levelCbx.TabIndex = 188;
+            // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(116, 318);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(217, 59);
+            this.label2.TabIndex = 189;
+            this.label2.Text = "Level 1 (View only) Level 2 (view,create ,update) Level 3 (Create,update,delete,v" +
+    "iew)";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // AddUser
             // 
@@ -300,5 +337,8 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox levelCbx;
+        private System.Windows.Forms.Label label2;
     }
 }

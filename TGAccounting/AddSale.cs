@@ -135,24 +135,42 @@ namespace TGAccounting
 
                 if (MessageBox.Show("YES or No?", "Are you sure you want to update the current existing information  ? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
-                    Sale j = new Sale(existingID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), Convert.ToInt32(weekLbl.Text),startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text), itemTxt.Text, month);
+                    Sale j = new Sale(existingID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), Convert.ToInt32(weekLbl.Text), startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text), itemTxt.Text, month);
 
                     DBConnect.Update(j, existingID);
                     existingID = "";
                     return;
                 }
-                else {
+                else
+                {
                     return;
                 }
 
             }
-            existingID = "";
-            string ID = Guid.NewGuid().ToString();
-            Sale i = new Sale(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), Convert.ToInt32(weekLbl.Text), startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text), itemTxt.Text, month);
-            DBConnect.Insert(i);
-            MessageBox.Show("Information Saved ");
-            itemTxt.Text = "";
-            amountTxt.Text = "";
+            else
+            {
+                string test = "";
+                try
+                {
+                    test = Sale.List("SELECT * from sale WHERE item='" + itemTxt.Text + "' AND week = '" + weekLbl.Text + "' AND date = '" + Convert.ToDateTime(dateTxt.Text).Year.ToString() + "'").First().Amount.ToString();
+                }
+                catch (Exception y)
+                {
+                    // Helper.Exceptions(y.Message, "on adding inventory auto fill the category list selected item");
+                }
+                if (!string.IsNullOrEmpty(test))
+                {
+                    MessageBox.Show("Value seems to be inserted already");
+                    return;
+                }
+                existingID = "";
+                string ID = Guid.NewGuid().ToString();
+                Sale i = new Sale(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), Convert.ToInt32(weekLbl.Text), startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text), itemTxt.Text, month);
+                DBConnect.Insert(i);
+                MessageBox.Show("Information Saved ");
+                itemTxt.Text = "";
+                amountTxt.Text = "";
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)

@@ -19,7 +19,7 @@ namespace TGAccounting
         public User _user = new User();
         public static List<User> _userList = new List<User> { };
         public static DataTable table = new DataTable();
-        DataTable t, s, ex, lg, cp, bg;
+        DataTable t, s, ex, lg, cp, bg,pr;
         public DataForm()
         {
             InitializeComponent();
@@ -37,6 +37,7 @@ namespace TGAccounting
             t.Columns.Add("Delete");
             t.Columns.Add("image");//17
             t.Columns.Add("Password");//17
+            t.Columns.Add("Level");//17
 
             Bitmap b = new Bitmap(50, 50);
             using (Graphics g = Graphics.FromImage(b))
@@ -45,7 +46,7 @@ namespace TGAccounting
             }
             foreach (User u in User.List())
             {
-                t.Rows.Add(new object[] { b, u.Id, u.Name, u.Contact, "View", "Delete", u.Image, u.Password });
+                t.Rows.Add(new object[] { b, u.Id, u.Name, u.Contact, "View", "Delete", u.Image, u.Password,u.Level });
             }
             userGrid.DataSource = t;
             ThreadPool.QueueUserWorkItem(delegate
@@ -187,6 +188,9 @@ namespace TGAccounting
                 case "tabBudget":
                     LoadBudgets(pStart, pEnd);
                     break;
+                case "tabProjection":
+                    LoadProjection();
+                    break;
             }
         }
        
@@ -204,7 +208,11 @@ namespace TGAccounting
             }
             if (!string.IsNullOrEmpty(oldName) && oldName != saleGrid.Rows[e.RowIndex].Cells["item"].Value.ToString())
             {
-
+                if (Helper.UserLevel < 2)
+                {
+                    MessageBox.Show("Please verify user level action denied !");
+                    return;
+                }
                 if (MessageBox.Show("YES or No?", "Update all names from "+oldName+" to "+ saleGrid.Rows[e.RowIndex].Cells["item"].Value.ToString(), MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
                     if (!string.IsNullOrEmpty(saleGrid.Rows[e.RowIndex].Cells["item"].Value.ToString()) )
@@ -258,7 +266,11 @@ namespace TGAccounting
             {
                 MessageBox.Show("The week must be an integer");
             }
-
+            if (Helper.UserLevel < 3)
+            {
+                MessageBox.Show("Please verify user level action denied !");
+                return;
+            }
 
             try
             {
@@ -285,7 +297,11 @@ namespace TGAccounting
             {
                 MessageBox.Show("The week must be an integer");
             }
-
+            if (Helper.UserLevel < 3)
+            {
+                MessageBox.Show("Please verify user level action denied !");
+                return;
+            }
 
             try
             {
@@ -313,7 +329,11 @@ namespace TGAccounting
             {
                 MessageBox.Show("The week must be an integer");
             }
-
+            if (Helper.UserLevel < 3)
+            {
+                MessageBox.Show("Please verify user level action denied !");
+                return;
+            }
 
             try
             {
@@ -330,6 +350,11 @@ namespace TGAccounting
 
         private void repGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            if (Helper.UserLevel < 3)
+            {
+                MessageBox.Show("Please verify user level action denied !");
+                return;
+            }
             if (!Helper.validateDouble(repGrid.Rows[e.RowIndex].Cells["amount"].Value.ToString()))
             {
                 MessageBox.Show("Invalid amount");
@@ -354,6 +379,11 @@ namespace TGAccounting
 
         private void equipGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            if (Helper.UserLevel < 3)
+            {
+                MessageBox.Show("Please verify user level action denied !");
+                return;
+            }
             if (!Helper.validateDouble(equipGrid.Rows[e.RowIndex].Cells["amount"].Value.ToString()))
             {
                 MessageBox.Show("Invalid amount");
@@ -378,6 +408,11 @@ namespace TGAccounting
 
         private void InventoryGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            if (Helper.UserLevel < 3)
+            {
+                MessageBox.Show("Please verify user level action denied !");
+                return;
+            }
             if (!Helper.validateDouble(InventoryGrid.Rows[e.RowIndex].Cells["amount"].Value.ToString()))
             {
                 MessageBox.Show("Invalid amount");
@@ -402,6 +437,11 @@ namespace TGAccounting
 
         private void expenseGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            if (Helper.UserLevel < 3)
+            {
+                MessageBox.Show("Please verify user level action denied !");
+                return;
+            }
             if (!Helper.validateDouble(expenseGrid.Rows[e.RowIndex].Cells["amount"].Value.ToString()))
             {
                 MessageBox.Show("Invalid amount");
@@ -451,6 +491,11 @@ namespace TGAccounting
             {
                 MessageBox.Show("Invalid value");
             }
+            if (Helper.UserLevel < 3)
+            {
+                MessageBox.Show("Please verify user level action denied !");
+                return;
+            }
             if (!string.IsNullOrEmpty(oldName))
             {
 
@@ -486,8 +531,14 @@ namespace TGAccounting
         {
             if (e.ColumnIndex == costGrid.Columns["delete"].Index && e.RowIndex >= 0)
             {
+                if (Helper.UserLevel < 3)
+                {
+                    MessageBox.Show("Please verify user level action denied !");
+                    return;
+                }
                 if (MessageBox.Show("YES or NO?", "Are you sure you want to delete? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
+
                     string Query = "DELETE from cogs WHERE id ='" + costGrid.Rows[e.RowIndex].Cells["id"].Value.ToString() + "'";
                     DBConnect.save(Query);
 
@@ -501,6 +552,11 @@ namespace TGAccounting
         {
             if (e.ColumnIndex == laborGrid.Columns["delete"].Index && e.RowIndex >= 0)
             {
+                if (Helper.UserLevel < 3)
+                {
+                    MessageBox.Show("Please verify user level action denied !");
+                    return;
+                }
                 if (MessageBox.Show("YES or NO?", "Are you sure you want to delete? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
                     string Query = "DELETE from labor WHERE id ='" + laborGrid.Rows[e.RowIndex].Cells["id"].Value.ToString() + "'";
@@ -516,6 +572,11 @@ namespace TGAccounting
         {
             if (e.ColumnIndex == taxGrid.Columns["delete"].Index && e.RowIndex >= 0)
             {
+                if (Helper.UserLevel < 3)
+                {
+                    MessageBox.Show("Please verify user level action denied !");
+                    return;
+                }
                 if (MessageBox.Show("YES or NO?", "Are you sure you want to delete? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
                     string Query = "DELETE from taxes WHERE id ='" + taxGrid.Rows[e.RowIndex].Cells["id"].Value.ToString() + "'";
@@ -531,6 +592,11 @@ namespace TGAccounting
         {
             if (e.ColumnIndex == supData.Columns["delete"].Index && e.RowIndex >= 0)
             {
+                if (Helper.UserLevel < 3)
+                {
+                    MessageBox.Show("Please verify user level action denied !");
+                    return;
+                }
                 if (MessageBox.Show("YES or NO?", "Are you sure you want to delete? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
                     string Query = "DELETE from supplies WHERE id ='" + supData.Rows[e.RowIndex].Cells["id"].Value.ToString() + "'";
@@ -546,6 +612,11 @@ namespace TGAccounting
         {
             if (e.ColumnIndex == repGrid.Columns["delete"].Index && e.RowIndex >= 0)
             {
+                if (Helper.UserLevel < 3)
+                {
+                    MessageBox.Show("Please verify user level action denied !");
+                    return;
+                }
                 if (MessageBox.Show("YES or NO?", "Are you sure you want to delete? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
                     string Query = "DELETE from repair WHERE id ='" + repGrid.Rows[e.RowIndex].Cells["id"].Value.ToString() + "'";
@@ -561,6 +632,11 @@ namespace TGAccounting
         {
             if (e.ColumnIndex == equipGrid.Columns["delete"].Index && e.RowIndex >= 0)
             {
+                if (Helper.UserLevel < 3)
+                {
+                    MessageBox.Show("Please verify user level action denied !");
+                    return;
+                }
                 if (MessageBox.Show("YES or NO?", "Are you sure you want to delete? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
                     string Query = "DELETE from equipment WHERE id ='" + equipGrid.Rows[e.RowIndex].Cells["id"].Value.ToString() + "'";
@@ -591,6 +667,11 @@ namespace TGAccounting
         {
             if (e.ColumnIndex == expenseGrid.Columns["delete"].Index && e.RowIndex >= 0)
             {
+                if (Helper.UserLevel < 3)
+                {
+                    MessageBox.Show("Please verify user level action denied !");
+                    return;
+                }
                 if (MessageBox.Show("YES or NO?", "Are you sure you want to delete? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
                     string Query = "DELETE from expense WHERE id ='" + expenseGrid.Rows[e.RowIndex].Cells["id"].Value.ToString() + "'";
@@ -609,8 +690,14 @@ namespace TGAccounting
 
         private void userGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+           
             if (e.ColumnIndex == userGrid.Columns["Delete"].Index && e.RowIndex >= 0)
             {
+                if (Helper.UserLevel < 3)
+                {
+                    MessageBox.Show("Please verify user level action denied !");
+                    return;
+                }
                 if (MessageBox.Show("YES or No?", "Are you sure you want to delete ? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
                     string Query = "DELETE from user WHERE id ='" + userGrid.Rows[e.RowIndex].Cells["id"].Value.ToString() + "'";
@@ -639,13 +726,17 @@ namespace TGAccounting
 
         private void userGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            if (Helper.UserLevel<2) {
+                MessageBox.Show("Please verify user level action denied !");
+                return;
+            }
             if (String.IsNullOrEmpty(userGrid.Rows[e.RowIndex].Cells["Name"].Value.ToString()))
             {
                 MessageBox.Show("Please input a name ");
                 return;
             }
             string ID = userGrid.Rows[e.RowIndex].Cells["id"].Value.ToString();
-            User _c = new User(ID, userGrid.Rows[e.RowIndex].Cells["name"].Value.ToString(), userGrid.Rows[e.RowIndex].Cells["contact"].Value.ToString(), userGrid.Rows[e.RowIndex].Cells["password"].Value.ToString(), userGrid.Rows[e.RowIndex].Cells["image"].Value.ToString());
+            User _c = new User(ID, userGrid.Rows[e.RowIndex].Cells["name"].Value.ToString(), userGrid.Rows[e.RowIndex].Cells["contact"].Value.ToString(), userGrid.Rows[e.RowIndex].Cells["password"].Value.ToString(), userGrid.Rows[e.RowIndex].Cells["image"].Value.ToString(),Convert.ToInt32(userGrid.Rows[e.RowIndex].Cells["level"].Value));
             DBConnect.Update(_c, ID);
 
         }
@@ -696,6 +787,11 @@ namespace TGAccounting
             {
                 if (MessageBox.Show("YES or No?", "Are you sure you want to delete ? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
+                    if (Helper.UserLevel < 3)
+                    {
+                        MessageBox.Show("Please verify user level action denied !");
+                        return;
+                    }
                     string Query = "DELETE from exceptions WHERE id ='" + ExceptionGrid.Rows[e.RowIndex].Cells["id"].Value.ToString() + "'";
                     DBConnect.save(Query);
                     MessageBox.Show("Information deleted");
@@ -708,6 +804,11 @@ namespace TGAccounting
         {
             if (e.ColumnIndex == logGrid.Columns["Delete"].Index && e.RowIndex >= 0)
             {
+                if (Helper.UserLevel < 3)
+                {
+                    MessageBox.Show("Please verify user level action denied !");
+                    return;
+                }
                 if (MessageBox.Show("YES or No?", "Are you sure you want to delete ? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
                     string Query = "DELETE from logs WHERE id ='" + logGrid.Rows[e.RowIndex].Cells["id"].Value.ToString() + "'";
@@ -734,6 +835,11 @@ namespace TGAccounting
             {
                 if (MessageBox.Show("YES or No?", "Are you sure you want to delete ? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
+                    if (Helper.UserLevel < 3)
+                    {
+                        MessageBox.Show("Please verify user level action denied !");
+                        return;
+                    }
                     string Query = "DELETE from comp WHERE id ='" + comGrid.Rows[e.RowIndex].Cells["id"].Value.ToString() + "'";
                     DBConnect.save(Query);
                     MessageBox.Show("Information deleted");
@@ -748,6 +854,11 @@ namespace TGAccounting
             {
                 if (MessageBox.Show("YES or No?", "Are you sure you want to delete ? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
+                    if (Helper.UserLevel < 3)
+                    {
+                        MessageBox.Show("Please verify user level action denied !");
+                        return;
+                    }
                     string Query = "DELETE from budget WHERE id ='" + budgetGrid.Rows[e.RowIndex].Cells["id"].Value.ToString() + "'";
                     DBConnect.save(Query);
                     MessageBox.Show("Information deleted");
@@ -760,6 +871,11 @@ namespace TGAccounting
             if (String.IsNullOrEmpty(budgetGrid.Rows[e.RowIndex].Cells["Item"].Value.ToString()))
             {
                 MessageBox.Show("Please input a name ");
+                return;
+            }
+            if (Helper.UserLevel < 3)
+            {
+                MessageBox.Show("Please verify user level action denied !");
                 return;
             }
             string ID = budgetGrid.Rows[e.RowIndex].Cells["id"].Value.ToString();
@@ -776,6 +892,11 @@ namespace TGAccounting
             }
             if (!string.IsNullOrEmpty(oldName) && oldName != comGrid.Rows[e.RowIndex].Cells["item"].Value.ToString())
             {
+                if (Helper.UserLevel < 3)
+                {
+                    MessageBox.Show("Please verify user level action denied !");
+                    return;
+                }
 
                 if (MessageBox.Show("YES or No?", "Update all names from " + oldName + " to " + comGrid.Rows[e.RowIndex].Cells["item"].Value.ToString(), MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
@@ -805,6 +926,43 @@ namespace TGAccounting
             {
                 oldName = costGrid.Rows[e.RowIndex].Cells["category"].Value.ToString();
             }
+        }
+
+        private void dataProjection_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == dataProjection.Columns["delete"].Index && e.RowIndex >= 0)
+            {
+                if (Helper.UserLevel < 3)
+                {
+                    MessageBox.Show("Please verify user level action denied !");
+                    return;
+                }
+                if (MessageBox.Show("YES or NO?", "Are you sure you want to delete? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+                    string Query = "DELETE from annual WHERE id ='" + dataProjection.Rows[e.RowIndex].Cells["id"].Value.ToString() + "'";
+                    DBConnect.save(Query);
+
+                    MessageBox.Show("Information deleted");
+                    LoadProjection();
+                }
+            }
+        }
+
+        private void dataProjection_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (String.IsNullOrEmpty(dataProjection.Rows[e.RowIndex].Cells["Year"].Value.ToString()))
+            {
+                MessageBox.Show("Please input a name ");
+                return;
+            }
+            if (Helper.UserLevel < 3)
+            {
+                MessageBox.Show("Please verify user level action denied !");
+                return;
+            }
+            string ID = dataProjection.Rows[e.RowIndex].Cells["id"].Value.ToString();
+            Annual _c = new Annual(ID, dataProjection.Rows[e.RowIndex].Cells["year"].Value.ToString(),Convert.ToDouble(dataProjection.Rows[e.RowIndex].Cells["annuals"].Value), Convert.ToDouble(dataProjection.Rows[e.RowIndex].Cells["weekly"].Value));
+            DBConnect.Update(_c, ID);
         }
 
         private void comGrid_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
@@ -853,6 +1011,11 @@ namespace TGAccounting
         {
             if (e.ColumnIndex == saleGrid.Columns["delete"].Index && e.RowIndex >= 0)
             {
+                if (Helper.UserLevel < 3)
+                {
+                    MessageBox.Show("Please verify user level action denied !");
+                    return;
+                }
                 if (MessageBox.Show("YES or NO?", "Are you sure you want to delete? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
                     string Query = "DELETE from sale WHERE id ='" + saleGrid.Rows[e.RowIndex].Cells["id"].Value.ToString() + "'";
@@ -1116,6 +1279,26 @@ namespace TGAccounting
             budgetGrid.DataSource = bg;
             budgetGrid.Columns["id"].Visible = false;
             budgetGrid.Columns["Delete"].DefaultCellStyle.BackColor = Color.Red;
+
+        }
+        private void LoadProjection()
+        {
+            dataProjection.DataSource = null;
+            pr = new DataTable();
+            pr.Columns.Add("id", typeof(string));
+            pr.Columns.Add("Year", typeof(string));
+            pr.Columns.Add("Annuals");
+            pr.Columns.Add("Weekly");
+
+            pr.Columns.Add("Delete");
+            string query = "SELECT * FROM annual";
+            foreach (Annual w in Annual.List(query))
+            {
+                pr.Rows.Add(new object[] { w.Id, w.Year, w.Annuals, w.Weekly,"Delete" });
+            }
+            dataProjection.DataSource = pr;
+            dataProjection.Columns["id"].Visible = false;
+            dataProjection.Columns["Delete"].DefaultCellStyle.BackColor = Color.Red;
 
         }
         private void LoadComps()

@@ -30,18 +30,18 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HomeForm));
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource26 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource27 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource28 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource29 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource30 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource31 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource32 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource33 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource34 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource35 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource36 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource25 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource14 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource15 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource16 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource17 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource18 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource19 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource20 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource21 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource13 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource22 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource23 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource24 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.button8 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -100,9 +100,18 @@
             this.reportViewer5 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.tabComp = new System.Windows.Forms.TabPage();
             this.reportViewer6 = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.tabChart = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.button21 = new System.Windows.Forms.Button();
+            this.maxWeeksTxt = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.reportViewer7 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.tabCalendar = new System.Windows.Forms.TabPage();
             this.calendar1 = new WindowsFormsCalendar.Calendar();
             this.monthView1 = new WindowsFormsCalendar.MonthView();
+            this.button22 = new System.Windows.Forms.Button();
+            this.projectionWeeklyTxt = new System.Windows.Forms.TextBox();
             this.SaleBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.LaborBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.TaxesBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -112,14 +121,11 @@
             this.ExpenseBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.ReportBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.CogsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.ProfitBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.SalaryBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tabChart = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.button21 = new System.Windows.Forms.Button();
-            this.maxWeeksTxt = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.reportViewer7 = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.projectAnnualTxt = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -144,6 +150,9 @@
             this.panel3.SuspendLayout();
             this.tabCogs.SuspendLayout();
             this.tabComp.SuspendLayout();
+            this.tabChart.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.tabCalendar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SaleBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LaborBindingSource)).BeginInit();
@@ -154,10 +163,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.ExpenseBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ReportBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CogsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ProfitBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SalaryBindingSource)).BeginInit();
-            this.tabChart.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -171,6 +178,7 @@
             // 
             this.splitContainer1.Panel1.AutoScroll = true;
             this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.splitContainer1.Panel1.Controls.Add(this.button22);
             this.splitContainer1.Panel1.Controls.Add(this.button8);
             this.splitContainer1.Panel1.Controls.Add(this.button4);
             this.splitContainer1.Panel1.Controls.Add(this.button3);
@@ -531,7 +539,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(12, 502);
+            this.label5.Location = new System.Drawing.Point(12, 507);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(37, 18);
             this.label5.TabIndex = 8;
@@ -656,9 +664,9 @@
             // 
             this.reportViewer1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            reportDataSource26.Name = "DataSet1";
-            reportDataSource26.Value = this.SaleBindingSource;
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource26);
+            reportDataSource14.Name = "DataSet1";
+            reportDataSource14.Value = this.SaleBindingSource;
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource14);
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "TGAccounting.Report1.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(3, 4);
             this.reportViewer1.Name = "reportViewer1";
@@ -681,9 +689,9 @@
             // 
             this.reportViewer2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.reportViewer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            reportDataSource27.Name = "DataSet2";
-            reportDataSource27.Value = this.LaborBindingSource;
-            this.reportViewer2.LocalReport.DataSources.Add(reportDataSource27);
+            reportDataSource15.Name = "DataSet2";
+            reportDataSource15.Value = this.LaborBindingSource;
+            this.reportViewer2.LocalReport.DataSources.Add(reportDataSource15);
             this.reportViewer2.LocalReport.ReportEmbeddedResource = "TGAccounting.Report2.rdlc";
             this.reportViewer2.Location = new System.Drawing.Point(3, 4);
             this.reportViewer2.Name = "reportViewer2";
@@ -705,9 +713,9 @@
             // 
             this.reportViewer3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.reportViewer3.Dock = System.Windows.Forms.DockStyle.Fill;
-            reportDataSource28.Name = "DataSet1";
-            reportDataSource28.Value = this.TaxesBindingSource;
-            this.reportViewer3.LocalReport.DataSources.Add(reportDataSource28);
+            reportDataSource16.Name = "DataSet1";
+            reportDataSource16.Value = this.TaxesBindingSource;
+            this.reportViewer3.LocalReport.DataSources.Add(reportDataSource16);
             this.reportViewer3.LocalReport.ReportEmbeddedResource = "TGAccounting.Report3.rdlc";
             this.reportViewer3.Location = new System.Drawing.Point(0, 0);
             this.reportViewer3.Name = "reportViewer3";
@@ -729,9 +737,9 @@
             // 
             this.reportViewerSupply.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.reportViewerSupply.Dock = System.Windows.Forms.DockStyle.Fill;
-            reportDataSource29.Name = "DataSetSupply";
-            reportDataSource29.Value = this.SuppliesBindingSource;
-            this.reportViewerSupply.LocalReport.DataSources.Add(reportDataSource29);
+            reportDataSource17.Name = "DataSetSupply";
+            reportDataSource17.Value = this.SuppliesBindingSource;
+            this.reportViewerSupply.LocalReport.DataSources.Add(reportDataSource17);
             this.reportViewerSupply.LocalReport.ReportEmbeddedResource = "TGAccounting.ReportSupply.rdlc";
             this.reportViewerSupply.Location = new System.Drawing.Point(0, 0);
             this.reportViewerSupply.Name = "reportViewerSupply";
@@ -753,9 +761,9 @@
             // 
             this.reportViewerRm.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.reportViewerRm.Dock = System.Windows.Forms.DockStyle.Fill;
-            reportDataSource30.Name = "DataSet1";
-            reportDataSource30.Value = this.SuppliesBindingSource;
-            this.reportViewerRm.LocalReport.DataSources.Add(reportDataSource30);
+            reportDataSource18.Name = "DataSet1";
+            reportDataSource18.Value = this.SuppliesBindingSource;
+            this.reportViewerRm.LocalReport.DataSources.Add(reportDataSource18);
             this.reportViewerRm.LocalReport.ReportEmbeddedResource = "TGAccounting.Properties.DataSources.ReportRepair.rdlc";
             this.reportViewerRm.Location = new System.Drawing.Point(0, 0);
             this.reportViewerRm.Name = "reportViewerRm";
@@ -777,9 +785,9 @@
             // 
             this.reportViewerEquipment.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.reportViewerEquipment.Dock = System.Windows.Forms.DockStyle.Fill;
-            reportDataSource31.Name = "DataSetEquipment";
-            reportDataSource31.Value = this.EquipmentBindingSource;
-            this.reportViewerEquipment.LocalReport.DataSources.Add(reportDataSource31);
+            reportDataSource19.Name = "DataSetEquipment";
+            reportDataSource19.Value = this.EquipmentBindingSource;
+            this.reportViewerEquipment.LocalReport.DataSources.Add(reportDataSource19);
             this.reportViewerEquipment.LocalReport.ReportEmbeddedResource = "TGAccounting.ReportEquipment.rdlc";
             this.reportViewerEquipment.Location = new System.Drawing.Point(0, 0);
             this.reportViewerEquipment.Name = "reportViewerEquipment";
@@ -855,9 +863,9 @@
             // 
             this.reportViewerInventory.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.reportViewerInventory.Dock = System.Windows.Forms.DockStyle.Fill;
-            reportDataSource32.Name = "DataSetInventory";
-            reportDataSource32.Value = this.InventoryBindingSource;
-            this.reportViewerInventory.LocalReport.DataSources.Add(reportDataSource32);
+            reportDataSource20.Name = "DataSetInventory";
+            reportDataSource20.Value = this.InventoryBindingSource;
+            this.reportViewerInventory.LocalReport.DataSources.Add(reportDataSource20);
             this.reportViewerInventory.LocalReport.ReportEmbeddedResource = "TGAccounting.ReportInventory.rdlc";
             this.reportViewerInventory.Location = new System.Drawing.Point(0, 0);
             this.reportViewerInventory.Name = "reportViewerInventory";
@@ -880,9 +888,9 @@
             // 
             this.reportViewerExpense.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.reportViewerExpense.Dock = System.Windows.Forms.DockStyle.Fill;
-            reportDataSource33.Name = "DataSetExpense";
-            reportDataSource33.Value = this.ExpenseBindingSource;
-            this.reportViewerExpense.LocalReport.DataSources.Add(reportDataSource33);
+            reportDataSource21.Name = "DataSetExpense";
+            reportDataSource21.Value = this.ExpenseBindingSource;
+            this.reportViewerExpense.LocalReport.DataSources.Add(reportDataSource21);
             this.reportViewerExpense.LocalReport.ReportEmbeddedResource = "TGAccounting.ReportExpense.rdlc";
             this.reportViewerExpense.Location = new System.Drawing.Point(0, 0);
             this.reportViewerExpense.Name = "reportViewerExpense";
@@ -916,12 +924,16 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.label8);
+            this.panel3.Controls.Add(this.projectAnnualTxt);
+            this.panel3.Controls.Add(this.label4);
+            this.panel3.Controls.Add(this.projectionWeeklyTxt);
             this.panel3.Controls.Add(this.button15);
             this.panel3.Controls.Add(this.weekTxt);
             this.panel3.Controls.Add(this.label7);
             this.panel3.Location = new System.Drawing.Point(3, 3);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(887, 28);
+            this.panel3.Size = new System.Drawing.Size(1109, 28);
             this.panel3.TabIndex = 0;
             // 
             // button15
@@ -956,9 +968,9 @@
             this.reportViewer4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.reportViewer4.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.reportViewer4.Dock = System.Windows.Forms.DockStyle.Fill;
-            reportDataSource34.Name = "DataSetPL";
-            reportDataSource34.Value = this.ReportBindingSource;
-            this.reportViewer4.LocalReport.DataSources.Add(reportDataSource34);
+            reportDataSource13.Name = "DataSetPL";
+            reportDataSource13.Value = this.ReportBindingSource;
+            this.reportViewer4.LocalReport.DataSources.Add(reportDataSource13);
             this.reportViewer4.LocalReport.ReportEmbeddedResource = "TGAccounting.ReportPL.rdlc";
             this.reportViewer4.Location = new System.Drawing.Point(3, 45);
             this.reportViewer4.Name = "reportViewer4";
@@ -979,9 +991,9 @@
             // 
             this.reportViewer5.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.reportViewer5.Dock = System.Windows.Forms.DockStyle.Fill;
-            reportDataSource35.Name = "DataSetCogs";
-            reportDataSource35.Value = this.CogsBindingSource;
-            this.reportViewer5.LocalReport.DataSources.Add(reportDataSource35);
+            reportDataSource22.Name = "DataSetCogs";
+            reportDataSource22.Value = this.CogsBindingSource;
+            this.reportViewer5.LocalReport.DataSources.Add(reportDataSource22);
             this.reportViewer5.LocalReport.ReportEmbeddedResource = "TGAccounting.ReportCogs.rdlc";
             this.reportViewer5.Location = new System.Drawing.Point(0, 0);
             this.reportViewer5.Name = "reportViewer5";
@@ -1003,14 +1015,90 @@
             // 
             this.reportViewer6.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.reportViewer6.Dock = System.Windows.Forms.DockStyle.Fill;
-            reportDataSource36.Name = "DataSet1";
-            reportDataSource36.Value = this.SaleBindingSource;
-            this.reportViewer6.LocalReport.DataSources.Add(reportDataSource36);
+            reportDataSource23.Name = "DataSet1";
+            reportDataSource23.Value = this.SaleBindingSource;
+            this.reportViewer6.LocalReport.DataSources.Add(reportDataSource23);
             this.reportViewer6.LocalReport.ReportEmbeddedResource = "TGAccounting.Report1.rdlc";
             this.reportViewer6.Location = new System.Drawing.Point(0, 0);
             this.reportViewer6.Name = "reportViewer6";
             this.reportViewer6.Size = new System.Drawing.Size(1120, 650);
             this.reportViewer6.TabIndex = 2;
+            // 
+            // tabChart
+            // 
+            this.tabChart.Controls.Add(this.tableLayoutPanel1);
+            this.tabChart.Location = new System.Drawing.Point(4, 25);
+            this.tabChart.Name = "tabChart";
+            this.tabChart.Size = new System.Drawing.Size(1120, 650);
+            this.tabChart.TabIndex = 16;
+            this.tabChart.Text = "Trends Chart";
+            this.tabChart.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.reportViewer7, 0, 1);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.846154F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 94.15385F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1120, 650);
+            this.tableLayoutPanel1.TabIndex = 1;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.button21);
+            this.panel1.Controls.Add(this.maxWeeksTxt);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1109, 28);
+            this.panel1.TabIndex = 0;
+            // 
+            // button21
+            // 
+            this.button21.Location = new System.Drawing.Point(257, 3);
+            this.button21.Name = "button21";
+            this.button21.Size = new System.Drawing.Size(75, 23);
+            this.button21.TabIndex = 4;
+            this.button21.Text = "Generate";
+            this.button21.UseVisualStyleBackColor = true;
+            this.button21.Click += new System.EventHandler(this.button21_Click_1);
+            // 
+            // maxWeeksTxt
+            // 
+            this.maxWeeksTxt.Location = new System.Drawing.Point(126, 5);
+            this.maxWeeksTxt.Name = "maxWeeksTxt";
+            this.maxWeeksTxt.Size = new System.Drawing.Size(125, 20);
+            this.maxWeeksTxt.TabIndex = 1;
+            this.maxWeeksTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.weekTxt_KeyPress);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(2, 6);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(118, 16);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Max number of weeks ";
+            // 
+            // reportViewer7
+            // 
+            this.reportViewer7.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.reportViewer7.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.reportViewer7.Dock = System.Windows.Forms.DockStyle.Fill;
+            reportDataSource24.Name = "DataSetProfit";
+            reportDataSource24.Value = this.ProfitBindingSource;
+            this.reportViewer7.LocalReport.DataSources.Add(reportDataSource24);
+            this.reportViewer7.LocalReport.ReportEmbeddedResource = "TGAccounting.Report5.rdlc";
+            this.reportViewer7.Location = new System.Drawing.Point(3, 41);
+            this.reportViewer7.Name = "reportViewer7";
+            this.reportViewer7.Size = new System.Drawing.Size(1114, 606);
+            this.reportViewer7.TabIndex = 1;
             // 
             // tabCalendar
             // 
@@ -1071,6 +1159,32 @@
             this.monthView1.Text = "monthView1";
             this.monthView1.TodayBorderColor = System.Drawing.Color.Maroon;
             // 
+            // button22
+            // 
+            this.button22.BackColor = System.Drawing.Color.Transparent;
+            this.button22.FlatAppearance.BorderSize = 0;
+            this.button22.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button22.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button22.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.button22.Image = global::TGAccounting.Properties.Resources.Payment_01_16;
+            this.button22.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button22.Location = new System.Drawing.Point(10, 489);
+            this.button22.Name = "button22";
+            this.button22.Size = new System.Drawing.Size(145, 25);
+            this.button22.TabIndex = 27;
+            this.button22.Text = "Projections";
+            this.button22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button22.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button22.UseVisualStyleBackColor = false;
+            this.button22.Click += new System.EventHandler(this.button22_Click);
+            // 
+            // projectionWeeklyTxt
+            // 
+            this.projectionWeeklyTxt.Location = new System.Drawing.Point(525, 5);
+            this.projectionWeeklyTxt.Name = "projectionWeeklyTxt";
+            this.projectionWeeklyTxt.Size = new System.Drawing.Size(186, 20);
+            this.projectionWeeklyTxt.TabIndex = 5;
+            // 
             // SaleBindingSource
             // 
             this.SaleBindingSource.DataSource = typeof(TGAccounting.Model.Sale);
@@ -1107,85 +1221,38 @@
             // 
             this.CogsBindingSource.DataSource = typeof(TGAccounting.Model.Cogs);
             // 
+            // ProfitBindingSource
+            // 
+            this.ProfitBindingSource.DataSource = typeof(TGAccounting.Model.Profit);
+            // 
             // SalaryBindingSource
             // 
             this.SalaryBindingSource.DataSource = typeof(TGAccounting.Model.Salary);
             // 
-            // tabChart
+            // label4
             // 
-            this.tabChart.Controls.Add(this.tableLayoutPanel1);
-            this.tabChart.Location = new System.Drawing.Point(4, 25);
-            this.tabChart.Name = "tabChart";
-            this.tabChart.Size = new System.Drawing.Size(1120, 650);
-            this.tabChart.TabIndex = 16;
-            this.tabChart.Text = "Trends Chart";
-            this.tabChart.UseVisualStyleBackColor = true;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(420, 5);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(99, 16);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Weekly projection";
             // 
-            // tableLayoutPanel1
+            // label8
             // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.reportViewer7, 0, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.846154F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 94.15385F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1120, 650);
-            this.tableLayoutPanel1.TabIndex = 1;
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(726, 7);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(96, 16);
+            this.label8.TabIndex = 8;
+            this.label8.Text = "Annual projection";
             // 
-            // panel1
+            // projectAnnualTxt
             // 
-            this.panel1.Controls.Add(this.button21);
-            this.panel1.Controls.Add(this.maxWeeksTxt);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Location = new System.Drawing.Point(3, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(887, 28);
-            this.panel1.TabIndex = 0;
-            // 
-            // button21
-            // 
-            this.button21.Location = new System.Drawing.Point(322, 2);
-            this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(75, 23);
-            this.button21.TabIndex = 4;
-            this.button21.Text = "Generate";
-            this.button21.UseVisualStyleBackColor = true;
-            this.button21.Click += new System.EventHandler(this.button21_Click_1);
-            // 
-            // maxWeeksTxt
-            // 
-            this.maxWeeksTxt.Location = new System.Drawing.Point(191, 4);
-            this.maxWeeksTxt.Name = "maxWeeksTxt";
-            this.maxWeeksTxt.Size = new System.Drawing.Size(125, 20);
-            this.maxWeeksTxt.TabIndex = 1;
-            this.maxWeeksTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.weekTxt_KeyPress);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(67, 5);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(118, 16);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Max number of weeks ";
-            // 
-            // reportViewer7
-            // 
-            this.reportViewer7.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.reportViewer7.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.reportViewer7.Dock = System.Windows.Forms.DockStyle.Fill;
-            reportDataSource25.Name = "DataSetPL";
-            reportDataSource25.Value = this.ReportBindingSource;
-            this.reportViewer7.LocalReport.DataSources.Add(reportDataSource25);
-            this.reportViewer7.LocalReport.ReportEmbeddedResource = "TGAccounting.ReportPL.rdlc";
-            this.reportViewer7.Location = new System.Drawing.Point(3, 40);
-            this.reportViewer7.Name = "reportViewer7";
-            this.reportViewer7.Size = new System.Drawing.Size(1114, 607);
-            this.reportViewer7.TabIndex = 1;
+            this.projectAnnualTxt.Location = new System.Drawing.Point(828, 5);
+            this.projectAnnualTxt.Name = "projectAnnualTxt";
+            this.projectAnnualTxt.Size = new System.Drawing.Size(186, 20);
+            this.projectAnnualTxt.TabIndex = 7;
             // 
             // HomeForm
             // 
@@ -1230,6 +1297,10 @@
             this.panel3.PerformLayout();
             this.tabCogs.ResumeLayout(false);
             this.tabComp.ResumeLayout(false);
+            this.tabChart.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.tabCalendar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.SaleBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LaborBindingSource)).EndInit();
@@ -1240,11 +1311,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.ExpenseBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ReportBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CogsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ProfitBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SalaryBindingSource)).EndInit();
-            this.tabChart.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1328,5 +1396,11 @@
         private System.Windows.Forms.TextBox maxWeeksTxt;
         private System.Windows.Forms.Label label3;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer7;
+        private System.Windows.Forms.BindingSource ProfitBindingSource;
+        private System.Windows.Forms.Button button22;
+        private System.Windows.Forms.TextBox projectionWeeklyTxt;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox projectAnnualTxt;
     }
 }

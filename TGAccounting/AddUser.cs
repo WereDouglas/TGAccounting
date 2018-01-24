@@ -96,10 +96,8 @@ namespace TGAccounting
             string fullimage = Helper.ImageToBase64(stream);
             if (!String.IsNullOrEmpty(UserID))
             {
-
-                User _user = new User(UserID, nameTxt.Text, contactTxt.Text, Helper.MD5Hash(pass2Txt.Text), fullimage);
-                DBConnect.Update(_user, UserID);
-              
+                User _user = new User(UserID, nameTxt.Text, contactTxt.Text, Helper.MD5Hash(pass2Txt.Text), fullimage,Convert.ToInt32(levelCbx.Text));
+                DBConnect.Update(_user, UserID);              
                 MessageBox.Show("Information Updated");
                 this.DialogResult = DialogResult.OK;
                 this.Dispose();
@@ -135,9 +133,19 @@ namespace TGAccounting
 
         private void button7_Click(object sender, EventArgs e)
         {
+            if (Helper.UserLevel < 3)
+            {
+                MessageBox.Show("Please verify user level action denied !");
+                return;
+            }
             if (nameTxt.Text == "")
             {
                 nameTxt.BackColor = Color.Red;
+                return;
+            }
+            if (levelCbx.Text == "")
+            {
+                levelCbx.BackColor = Color.Red;
                 return;
             }
             if (contactTxt.Text == "")
@@ -162,7 +170,7 @@ namespace TGAccounting
             MemoryStream stream = Helper.ImageToStream(imgCapture.Image, System.Drawing.Imaging.ImageFormat.Jpeg);
             string fullimage = Helper.ImageToBase64(stream);
             string id = Guid.NewGuid().ToString();
-            User _user = new User(id, nameTxt.Text, contactTxt.Text, Helper.MD5Hash(pass2Txt.Text), fullimage);
+            User _user = new User(id, nameTxt.Text, contactTxt.Text, Helper.MD5Hash(pass2Txt.Text), fullimage,Convert.ToInt32(levelCbx.Text));
             if (DBConnect.Insert(_user) != "")
             {
                 MessageBox.Show("Information Saved");
@@ -175,6 +183,11 @@ namespace TGAccounting
         {
             this.DialogResult = DialogResult.OK;
             this.Dispose();
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

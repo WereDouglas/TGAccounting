@@ -14,6 +14,7 @@ namespace TGAccounting.Model
         private string contact;
         private string password;
         private string image;
+        private int level;
 
         public string Id
         {
@@ -80,26 +81,44 @@ namespace TGAccounting.Model
             }
         }
 
+        public int Level
+        {
+            get
+            {
+                return level;
+            }
+
+            set
+            {
+                level = value;
+            }
+        }
+
         public User() { }
 
-        public User(string id, string name, string contact, string password, string image)
+        public User(string id, string name, string contact, string password, string image,int level)
         {
             this.Id = id;
             this.Name = name;
             this.Contact = contact;
             this.Password = password;
             this.Image = image;
+            this.Level = level;
         }
 
         public static List<User> List()
         {
             string SQL = "SELECT * FROM user";
             List<User> cats = new List<User>();
-           
+               int level = 0;
                 SQLiteDataReader Reader = DBConnect.ReadingLite(SQL);
                 while (Reader.Read())
                 {
-                    User p = new User(Reader["id"].ToString(), Reader["name"].ToString(), Reader["contact"].ToString(), Reader["password"].ToString(), Reader["image"].ToString());
+                try {
+
+                    level = Convert.ToInt32(Reader["level"].ToString());
+                } catch { }
+                    User p = new User(Reader["id"].ToString(), Reader["name"].ToString(), Reader["contact"].ToString(), Reader["password"].ToString(), Reader["image"].ToString(),level);
                     cats.Add(p);
                 }
                 Reader.Close();

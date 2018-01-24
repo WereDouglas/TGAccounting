@@ -64,6 +64,8 @@
             this.monthCbx = new System.Windows.Forms.ComboBox();
             this.button20 = new System.Windows.Forms.Button();
             this.globalYrTxt = new System.Windows.Forms.TextBox();
+            this.tabProjection = new System.Windows.Forms.TabPage();
+            this.dataProjection = new System.Windows.Forms.DataGridView();
             this.supGrid.SuspendLayout();
             this.saleTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.saleGrid)).BeginInit();
@@ -99,6 +101,8 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.tabProjection.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataProjection)).BeginInit();
             this.SuspendLayout();
             // 
             // supGrid
@@ -118,6 +122,7 @@
             this.supGrid.Controls.Add(this.tabException);
             this.supGrid.Controls.Add(this.tabLog);
             this.supGrid.Controls.Add(this.tabBudget);
+            this.supGrid.Controls.Add(this.tabProjection);
             this.supGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.supGrid.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.supGrid.Location = new System.Drawing.Point(0, 0);
@@ -558,6 +563,30 @@
             this.globalYrTxt.TabIndex = 0;
             this.globalYrTxt.Leave += new System.EventHandler(this.globalYrTxt_Leave);
             // 
+            // tabProjection
+            // 
+            this.tabProjection.Controls.Add(this.dataProjection);
+            this.tabProjection.Location = new System.Drawing.Point(4, 25);
+            this.tabProjection.Name = "tabProjection";
+            this.tabProjection.Size = new System.Drawing.Size(1236, 598);
+            this.tabProjection.TabIndex = 21;
+            this.tabProjection.Text = "Projected budgets";
+            this.tabProjection.UseVisualStyleBackColor = true;
+            // 
+            // dataProjection
+            // 
+            this.dataProjection.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataProjection.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataProjection.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataProjection.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataProjection.Location = new System.Drawing.Point(0, 0);
+            this.dataProjection.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dataProjection.Name = "dataProjection";
+            this.dataProjection.Size = new System.Drawing.Size(1236, 598);
+            this.dataProjection.TabIndex = 9;
+            this.dataProjection.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataProjection_CellClick);
+            this.dataProjection.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataProjection_CellEndEdit);
+            // 
             // DataForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 16F);
@@ -606,6 +635,8 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.tabProjection.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataProjection)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -647,5 +678,7 @@
         private System.Windows.Forms.TabPage tabBudget;
         private System.Windows.Forms.DataGridView budgetGrid;
         private System.Windows.Forms.ComboBox monthCbx;
+        private System.Windows.Forms.TabPage tabProjection;
+        private System.Windows.Forms.DataGridView dataProjection;
     }
 }

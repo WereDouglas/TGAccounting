@@ -157,6 +157,12 @@
     <Compile Include="AddUser.Designer.cs">
       <DependentUpon>AddUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="AnnualDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AnnualDialog.Designer.cs">
+      <DependentUpon>AnnualDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="ChartForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -215,10 +221,12 @@
     <Compile Include="Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\Annual.cs" />
     <Compile Include="Model\Budget.cs" />
     <Compile Include="Model\Comp.cs" />
     <Compile Include="Model\Logs.cs" />
     <Compile Include="Model\Exceptions.cs" />
+    <Compile Include="Model\Profit.cs" />
     <Compile Include="Model\Salary.cs" />
     <Compile Include="Model\Graphs.cs" />
     <Compile Include="Model\Staff.cs" />
@@ -287,6 +295,9 @@
     <EmbeddedResource Include="AddUser.resx">
       <DependentUpon>AddUser.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AnnualDialog.resx">
+      <DependentUpon>AnnualDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ChartForm.resx">
       <DependentUpon>ChartForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -335,6 +346,8 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Report4.rdlc" />
+    <EmbeddedResource Include="Report5.rdlc" />
+    <EmbeddedResource Include="ReportAnnual.rdlc" />
     <EmbeddedResource Include="ReportChartSales.rdlc" />
     <EmbeddedResource Include="ReportCogs.rdlc">
       <SubType>Designer</SubType>
@@ -367,6 +380,7 @@
     <None Include="Properties\DataSources\TGAccounting.Model.Inventory.datasource" />
     <None Include="Properties\DataSources\TGAccounting.Model.Items.datasource" />
     <None Include="Properties\DataSources\TGAccounting.Model.Labor.datasource" />
+    <None Include="Properties\DataSources\TGAccounting.Model.Profit.datasource" />
     <None Include="Properties\DataSources\TGAccounting.Model.Repair1.datasource" />
     <None Include="Properties\DataSources\TGAccounting.Model.Report.datasource" />
     <None Include="Properties\DataSources\TGAccounting.Model.Salary.datasource" />

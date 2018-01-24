@@ -1964,6 +1964,7 @@
               <ChartAxis Name="Primary">
                 <Style>
                   <FontSize>8pt</FontSize>
+                  <Format>C</Format>
                 </Style>
                 <ChartAxisTitle>
                   <Caption>Amount</Caption>
@@ -2183,7 +2184,7 @@
                   <FontSize>8pt</FontSize>
                 </Style>
                 <ChartAxisTitle>
-                  <Caption>Axis Title</Caption>
+                  <Caption>Week</Caption>
                   <Style>
                     <FontSize>8pt</FontSize>
                   </Style>
@@ -2257,9 +2258,10 @@
               <ChartAxis Name="Primary">
                 <Style>
                   <FontSize>8pt</FontSize>
+                  <Format>C</Format>
                 </Style>
                 <ChartAxisTitle>
-                  <Caption>Axis Title</Caption>
+                  <Caption>Amount</Caption>
                   <Style>
                     <FontSize>8pt</FontSize>
                   </Style>
@@ -2351,7 +2353,7 @@
         </ChartLegends>
         <ChartTitles>
           <ChartTitle Name="Default">
-            <Caption>Chart Title</Caption>
+            <Caption>Weekly</Caption>
             <Style>
               <BackgroundGradientType>None</BackgroundGradientType>
               <FontWeight>Bold</FontWeight>

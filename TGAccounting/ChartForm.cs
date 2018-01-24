@@ -30,41 +30,13 @@ namespace TGAccounting
             string tab = current.Name.ToString();
             switch (tab)
             {
-                case "laborTab":
-                    string query = "SELECT * FROM labor WHERE date= '" + Helper.CurrentYear + "'";
-                    this.LaborBindingSource.DataSource = Labor.List(query);
-                    reportViewer2.RefreshReport();
-                    break;
-
+              
                 case "saleTab":
                     string query2 = "SELECT * FROM sale ";
                     this.SaleBindingSource.DataSource = Sale.List(query2);
                     reportViewer1.RefreshReport();
                     break;
-                case "tabSalary":
-                    string query10 = "SELECT * FROM salary WHERE date= '" + Helper.CurrentYear + "'";
-                    this.SalaryBindingSource.DataSource = Salary.List();
-                    reportViewerSalary.RefreshReport();
-                    break;
-                case "tabTax":
-                    string query3 = "SELECT * FROM taxes WHERE date= '" + Helper.CurrentYear + "'";
-                    this.TaxesBindingSource.DataSource = Taxes.List(query3);
-                    reportViewer3.RefreshReport();
-                    break;
-                case "tabSupply":
-                    string query4 = "SELECT * FROM supplies WHERE date= '" + Helper.CurrentYear + "'";
-                    this.SuppliesBindingSource.DataSource = Supplies.List(query4);
-                    reportViewerSupply.RefreshReport();
-                    break;
-                case "tabEq":
-                    string query5 = "SELECT * FROM equipment WHERE date= '" + Helper.CurrentYear + "'";
-                    this.EquipmentBindingSource.DataSource = Equipment.List(query5);
-                    reportViewerEquipment.RefreshReport();
-                    break;
-                case "tabRm":
-                    string query6 = "SELECT * FROM repair WHERE date= '" + Helper.CurrentYear + "'";
-                    this.SuppliesBindingSource.DataSource = Repair.List(query6);
-                    reportViewerRm.RefreshReport();
+             
                     break;
                 case "tabInventory":
                     autocompleteCategory();
@@ -78,22 +50,7 @@ namespace TGAccounting
                     this.ExpenseBindingSource.DataSource = Expense.List(query8);
                     reportViewerExpense.RefreshReport();
                     break;
-                case "tabCogs":
-                    //autocompleteCateg();
-                    string query9 = "SELECT * FROM cogs ";
-                    this.CogsBindingSource.DataSource = Cogs.List(query9);
-                    reportViewer5.RefreshReport();
-                    break;
-                case "tabCalendar":
-                    //autocompleteCateg();
-                   
-                    break;
-                case "tabComp":
-                    //autocompleteCateg();
-                    string query19 = "SELECT * FROM comp";
-                    this.SaleBindingSource.DataSource = Comp.List(query19);
-                    reportViewer6.RefreshReport();
-                    break;
+              
 
             }
 
@@ -102,16 +59,61 @@ namespace TGAccounting
         {
             categoryCbx.Items.Clear();
             AutoCompleteStringCollection AutoItem = new AutoCompleteStringCollection();
-            foreach (Inventory r in Inventory.List("SELECT * from inventory").GroupBy(x => x.Category, (key, group) => group.First()))
+            foreach (var r in Inventory.ListCategory("SELECT DISTINCT category from inventory "))
             {
-                AutoItem.Add(r.Category);
-                categoryCbx.Items.Add(r.Category);
+                AutoItem.Add(r);
+                categoryCbx.Items.Add(r);
             }
             categoryCbx.AutoCompleteMode = AutoCompleteMode.Suggest;
             categoryCbx.AutoCompleteSource = AutoCompleteSource.CustomSource;
             categoryCbx.AutoCompleteCustomSource = AutoItem;
 
 
+        }
+        List<Profit> pr = new List<Profit>();
+        private void button21_Click(object sender, EventArgs e)
+        {
+            reportViewer7.RefreshReport();
+            Profit r = new Profit();
+            int week = Convert.ToInt32(Convert.ToInt32(maxWeeksTxt.Text));
+            string year = Helper.CurrentYear;
+            string date = "";
+            pr = new List<Profit>();
+            double totalPayRoll = 0;
+            double totalCogs = 0;
+            double totalComps = 0;
+            double totalSales = 0;
+            double totalTaxes = 0;
+            double totalEquip = 0;
+            
+            for (int x = 1; x <= week; x++)
+            {
+                DateTime startWeek = Helper.FirstDateOfWeek(Convert.ToInt32(Helper.CurrentYear), x - 1);
+                string ending = startWeek.AddDays(7).ToString("dd-MM-yyyy");
+                string month = startWeek.AddDays(7).ToString("MMMM");
+                totalSales = Sale.List("SELECT * FROM sale  WHERE week ='" + x + "'  AND date= '" + Helper.CurrentYear + "'").Sum(t => t.Amount);
+                totalCogs = Cogs.List("SELECT * FROM cogs  WHERE week ='" + x + "'  AND date= '" + Helper.CurrentYear + "' ").Sum(t => t.Cost);
+                totalComps = Comp.List("SELECT * FROM comp  WHERE week ='" + x + "'  AND date= '" + Helper.CurrentYear + "'").Sum(t => t.Amount);
+                double Gross = totalSales - (totalCogs + totalComps);
+                double totalLabor = Labor.List("SELECT * FROM labor  WHERE week ='" + x + "'  AND date= '" + Helper.CurrentYear + "' ").Sum(t => t.Amount);
+                totalTaxes = Taxes.List("SELECT * FROM taxes  WHERE week ='" + x + "'   AND date= '" + Helper.CurrentYear + "' ").Sum(t => t.Amount);
+                totalPayRoll = totalTaxes + totalLabor;
+                double prime = totalCogs + totalComps + totalPayRoll;
+                double totalSupplies = Supplies.List("SELECT * FROM supplies  WHERE week ='" + x + "' AND date= '" + Helper.CurrentYear + "' ").Sum(t => t.Amount);
+                double totalRepair = Repair.List("SELECT * FROM repair  WHERE week ='" + x + "' AND date= '" + Helper.CurrentYear + "' ").Sum(t => t.Amount);
+                double totalVariable = Expense.List("SELECT * FROM expense  WHERE week ='" + x + "' AND date= '" + Helper.CurrentYear + "' AND category<>'Occupancy Expenses'").Sum(t => t.Amount);
+                double ctrl = totalPayRoll + totalVariable + totalSupplies + totalRepair;
+                double ctrlProfit = Gross - ctrl;
+                double occupancyExpense = Expense.List("SELECT * FROM expense  WHERE week ='" + x + "' AND category='Occupancy Expenses'  AND date= '" + Helper.CurrentYear + "' ").Sum(t => t.Amount);
+                totalEquip = Equipment.List("SELECT * FROM equipment  WHERE week ='" + x + "' AND date= '" + Helper.CurrentYear + "' ").Sum(t => t.Amount);
+                double restProfit = ctrlProfit - occupancyExpense - totalEquip;
+
+                r = new Profit(Helper.CurrentYear, month, x, Convert.ToDateTime(ending).ToString("dd-MMM-yy"), totalSales, totalCogs, totalComps, Gross, totalPayRoll, prime, totalVariable, totalSupplies, totalRepair, ctrl, ctrlProfit, occupancyExpense, totalEquip, restProfit);
+                pr.Add(r);
+
+            }
+            this.ProfitBindingSource.DataSource = pr;
+            reportViewer7.RefreshReport();
         }
     }
 }
