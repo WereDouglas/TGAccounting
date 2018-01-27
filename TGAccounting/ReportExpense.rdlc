@@ -1179,7 +1179,7 @@
                   <FontSize>8pt</FontSize>
                 </Style>
                 <ChartAxisTitle>
-                  <Caption>Month</Caption>
+                  <Caption>Months</Caption>
                   <Style>
                     <FontSize>8pt</FontSize>
                   </Style>
@@ -1377,7 +1377,7 @@
           </Style>
         </ChartNoDataMessage>
         <DataSetName>DataSetExpense</DataSetName>
-        <Top>2.4675in</Top>
+        <Top>2.65278in</Top>
         <Left>0.125in</Left>
         <Height>2.78125in</Height>
         <Width>9.89583in</Width>

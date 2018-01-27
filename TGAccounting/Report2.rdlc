@@ -1149,7 +1149,7 @@
                   <FontSize>8pt</FontSize>
                 </Style>
                 <ChartAxisTitle>
-                  <Caption>Week</Caption>
+                  <Caption>Weeks</Caption>
                   <Style>
                     <FontSize>8pt</FontSize>
                   </Style>

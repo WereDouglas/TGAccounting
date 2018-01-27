@@ -21,7 +21,7 @@ namespace TGAccounting
         private void ChartForm_Load(object sender, EventArgs e)
         {
 
-            this.reportViewer1.RefreshReport();
+            //this.reportViewer1.RefreshReport();
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -30,14 +30,8 @@ namespace TGAccounting
             string tab = current.Name.ToString();
             switch (tab)
             {
-              
-                case "saleTab":
-                    string query2 = "SELECT * FROM sale ";
-                    this.SaleBindingSource.DataSource = Sale.List(query2);
-                    reportViewer1.RefreshReport();
-                    break;
-             
-                    break;
+                            
+                    
                 case "tabInventory":
                     autocompleteCategory();
                     //string query7 = "SELECT * FROM inventory WHERE ";
@@ -48,7 +42,7 @@ namespace TGAccounting
                     //autocompleteCateg();
                     string query8 = "SELECT * FROM expense WHERE date = '" + Helper.CurrentYear + "'";
                     this.ExpenseBindingSource.DataSource = Expense.List(query8);
-                    reportViewerExpense.RefreshReport();
+                  //  reportViewerExpense.RefreshReport();
                     break;
               
 
@@ -57,16 +51,16 @@ namespace TGAccounting
         }
         private void autocompleteCategory()
         {
-            categoryCbx.Items.Clear();
-            AutoCompleteStringCollection AutoItem = new AutoCompleteStringCollection();
-            foreach (var r in Inventory.ListCategory("SELECT DISTINCT category from inventory "))
-            {
-                AutoItem.Add(r);
-                categoryCbx.Items.Add(r);
-            }
-            categoryCbx.AutoCompleteMode = AutoCompleteMode.Suggest;
-            categoryCbx.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            categoryCbx.AutoCompleteCustomSource = AutoItem;
+            //categoryCbx.Items.Clear();
+            //AutoCompleteStringCollection AutoItem = new AutoCompleteStringCollection();
+            //foreach (var r in Inventory.ListCategory("SELECT DISTINCT category from inventory "))
+            //{
+            //    AutoItem.Add(r);
+            //    categoryCbx.Items.Add(r);
+            //}
+            //categoryCbx.AutoCompleteMode = AutoCompleteMode.Suggest;
+            //categoryCbx.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            //categoryCbx.AutoCompleteCustomSource = AutoItem;
 
 
         }

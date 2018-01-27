@@ -2046,7 +2046,7 @@
         </TablixRowHierarchy>
         <DataSetName>DataSetProfit</DataSetName>
         <Height>1.25in</Height>
-        <Width>17.01042in</Width>
+        <Width>17.01043in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2921,7 +2921,7 @@
         </ChartLegends>
         <ChartTitles>
           <ChartTitle Name="Default">
-            <Caption>Chart Title</Caption>
+            <Caption />
             <Style>
               <BackgroundGradientType>None</BackgroundGradientType>
               <FontWeight>Bold</FontWeight>
@@ -2965,7 +2965,7 @@
     <Height>8.31125in</Height>
     <Style />
   </Body>
-  <Width>17.01042in</Width>
+  <Width>17.01043in</Width>
   <Page>
     <LeftMargin>1in</LeftMargin>
     <RightMargin>1in</RightMargin>

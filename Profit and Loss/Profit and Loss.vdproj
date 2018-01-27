@@ -160,6 +160,12 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_44264370C8791375536FB0DBA5E6E073"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_3546FFB6238B4D379C174B3E082CC70D"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -173,12 +179,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_B8E026CE8C4948108C0C0EF2F767B19E"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_44264370C8791375536FB0DBA5E6E073"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -274,6 +274,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.5"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.5 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.5"
+                    }
+                }
             }
         }
     }
@@ -795,7 +803,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Profit and Loss"
         "ProductCode" = "8:{4F51F831-1B0C-4BE4-A120-72475C838245}"
-        "PackageCode" = "8:{2AB9F30B-1144-47CC-8B30-615397657D6F}"
+        "PackageCode" = "8:{342F04FF-7D7C-4C6E-A138-9A41D3D9BD7E}"
         "UpgradeCode" = "8:{6DE21704-6729-41F6-82C9-C0E18D93E3A1}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

@@ -135,7 +135,7 @@ namespace TGAccounting
         {
             if (Helper.UserLevel < 3)
             {
-                MessageBox.Show("Please verify user level action denied !");
+                MessageBox.Show("Access Denied !");
                 return;
             }
             if (nameTxt.Text == "")

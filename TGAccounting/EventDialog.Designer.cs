@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label10 = new System.Windows.Forms.Label();
-            this.costTxt = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
@@ -46,23 +44,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(37, 264);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(31, 16);
-            this.label10.TabIndex = 216;
-            this.label10.Text = "Cost";
-            // 
-            // costTxt
-            // 
-            this.costTxt.Location = new System.Drawing.Point(116, 256);
-            this.costTxt.Name = "costTxt";
-            this.costTxt.Size = new System.Drawing.Size(181, 20);
-            this.costTxt.TabIndex = 7;
-            this.costTxt.Text = "0";
             // 
             // button1
             // 
@@ -260,8 +241,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(344, 354);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.costTxt);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.button5);
@@ -288,8 +267,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox costTxt;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button button5;

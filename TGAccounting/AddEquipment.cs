@@ -18,7 +18,14 @@ namespace TGAccounting
         {
             InitializeComponent();
             autocomplete();
-            fillUp(Convert.ToDateTime(DateTime.Now.Date));
+            if (!string.IsNullOrEmpty(Helper.CurrentStarting) && !string.IsNullOrEmpty(Helper.CurrentEnding))
+            {
+                session();
+            }
+            else
+            {
+                fillUp(Convert.ToDateTime(DateTime.Now.Date));
+            }
         }
         string month;
         private void fillUp(DateTime d)
@@ -105,7 +112,12 @@ namespace TGAccounting
                 // Helper.Exceptions(y.Message, "on adding inventory auto fill the category list selected item");
             }
         }
-
+        private void session()
+        {
+            weekLbl.Text = Helper.CurrentWeek.ToString();
+            startLbl.Text = Helper.CurrentStarting;
+            endLbl.Text = Helper.CurrentEnding;
+        }
         private void button4_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(amountTxt.Text))

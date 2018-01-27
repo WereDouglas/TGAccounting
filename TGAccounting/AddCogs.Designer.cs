@@ -115,7 +115,7 @@
             // endLbl
             // 
             this.endLbl.AutoSize = true;
-            this.endLbl.Location = new System.Drawing.Point(148, 113);
+            this.endLbl.Location = new System.Drawing.Point(148, 122);
             this.endLbl.Name = "endLbl";
             this.endLbl.Size = new System.Drawing.Size(15, 18);
             this.endLbl.TabIndex = 18;
@@ -143,7 +143,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.LightGray;
-            this.label6.Location = new System.Drawing.Point(23, 113);
+            this.label6.Location = new System.Drawing.Point(23, 122);
             this.label6.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(44, 18);
@@ -195,7 +195,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label3.Location = new System.Drawing.Point(155, 9);
+            this.label3.Location = new System.Drawing.Point(153, 7);
             this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(171, 24);
@@ -227,7 +227,7 @@
             this.panel1.Location = new System.Drawing.Point(11, 35);
             this.panel1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(433, 298);
+            this.panel1.Size = new System.Drawing.Size(425, 298);
             this.panel1.TabIndex = 14;
             // 
             // cogsTxt
@@ -256,7 +256,7 @@
             this.button3.FlatAppearance.BorderSize = 0;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Image = global::TGAccounting.Properties.Resources.Close_16;
-            this.button3.Location = new System.Drawing.Point(157, 341);
+            this.button3.Location = new System.Drawing.Point(11, 339);
             this.button3.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 42);
@@ -286,7 +286,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(469, 394);
+            this.ClientSize = new System.Drawing.Size(461, 386);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.label3);

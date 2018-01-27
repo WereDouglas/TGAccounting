@@ -1890,7 +1890,7 @@
                   <FontSize>8pt</FontSize>
                 </Style>
                 <ChartAxisTitle>
-                  <Caption>Month</Caption>
+                  <Caption>Months</Caption>
                   <Style>
                     <FontSize>8pt</FontSize>
                   </Style>
@@ -2184,7 +2184,7 @@
                   <FontSize>8pt</FontSize>
                 </Style>
                 <ChartAxisTitle>
-                  <Caption>Week</Caption>
+                  <Caption>Weeks</Caption>
                   <Style>
                     <FontSize>8pt</FontSize>
                   </Style>

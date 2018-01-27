@@ -129,7 +129,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.BackColor = System.Drawing.Color.LightGray;
-            this.label10.Location = new System.Drawing.Point(27, 215);
+            this.label10.Location = new System.Drawing.Point(16, 215);
             this.label10.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(125, 18);
@@ -138,10 +138,10 @@
             // 
             // amountTxt
             // 
-            this.amountTxt.Location = new System.Drawing.Point(151, 215);
+            this.amountTxt.Location = new System.Drawing.Point(149, 215);
             this.amountTxt.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.amountTxt.Name = "amountTxt";
-            this.amountTxt.Size = new System.Drawing.Size(217, 21);
+            this.amountTxt.Size = new System.Drawing.Size(219, 21);
             this.amountTxt.TabIndex = 3;
             this.amountTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.amountTxt_KeyPress);
             // 

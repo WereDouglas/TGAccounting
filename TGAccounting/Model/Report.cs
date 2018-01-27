@@ -17,8 +17,9 @@ namespace TGAccounting.Model
         private string main;
         private string item;         
         private double amount;
-        private double p1;
+        private double p1;        
         private double weeklyBudget;
+        private double weeklyDiff;
         private double ytd;
         private double p2;
         private int order;
@@ -264,9 +265,22 @@ namespace TGAccounting.Model
             }
         }
 
+        public double WeeklyDiff
+        {
+            get
+            {
+                return weeklyDiff;
+            }
+
+            set
+            {
+                weeklyDiff = value;
+            }
+        }
+
         public Report() { }
 
-        public Report(string date, int week, string ending, string category, string sub, string main, string item, double amount, double p1, double weeklyBudget, double ytd, double p2, int order, int subOrder, double budget, double budgetPerc, double difference, double differencePerc)
+        public Report(string date, int week, string ending, string category, string sub, string main, string item, double amount, double p1, double weeklyBudget, double weeklyDiff, double ytd, double p2, int order, int subOrder, double budget, double budgetPerc, double difference, double differencePerc)
         {
             this.date = date;
             this.week = week;
@@ -286,6 +300,7 @@ namespace TGAccounting.Model
             this.difference = difference;
             this.differencePerc = differencePerc;
             this.weeklyBudget = weeklyBudget;
+            this.weeklyDiff = weeklyDiff;
         }
     }
 }

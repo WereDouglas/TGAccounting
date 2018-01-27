@@ -44,7 +44,7 @@ namespace TGAccounting
                 priority = priorityCbx.Text;
             }
            
-            Events _event = new Events(ID, Helper.CleanString(this.detailsTxt.Text), start, end, "", "", DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss"), "", "due","", Convert.ToDateTime(this.openedDate.Text).ToString("yyyy-MM-dd"), "", priority, DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss"), "f", "", "", "", "", costTxt.Text, "");
+            Events _event = new Events(ID, Helper.CleanString(this.detailsTxt.Text), start, end, "", "", DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss"), "", "due","", Convert.ToDateTime(this.openedDate.Text).ToString("yyyy-MM-dd"), "", priority, DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss"), "f", "", "", "", "","0", "");
             DBConnect.Insert(_event);
            
             MessageBox.Show("Information saved" + start + " to" + end);

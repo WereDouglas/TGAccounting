@@ -46,4 +46,3 @@ C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.pdb
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.EditName.resources
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.AnnualDialog.resources
-C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\TGAccounting\TGAccounting\obj\Debug\TGAccounting.csprojResolveAssemblyReference.cache

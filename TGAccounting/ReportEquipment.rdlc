@@ -816,7 +816,7 @@
                   <Format>C</Format>
                 </Style>
                 <ChartAxisTitle>
-                  <Caption>Month</Caption>
+                  <Caption>Months</Caption>
                   <Style>
                     <FontSize>8pt</FontSize>
                   </Style>
@@ -987,7 +987,7 @@
         </ChartLegends>
         <ChartTitles>
           <ChartTitle Name="Default">
-            <Caption>Chart Title</Caption>
+            <Caption>Monthly</Caption>
             <Style>
               <BackgroundGradientType>None</BackgroundGradientType>
               <FontWeight>Bold</FontWeight>

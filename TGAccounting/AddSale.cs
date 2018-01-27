@@ -20,8 +20,22 @@ namespace TGAccounting
         {
             InitializeComponent();
             autocomplete();
-           // autocompleteCategory();
-            fillUp(Convert.ToDateTime(DateTime.Now.Date));
+            // autocompleteCategory();
+            // fillUp(Convert.ToDateTime(DateTime.Now.Date));
+            if (!string.IsNullOrEmpty(Helper.CurrentStarting) && !string.IsNullOrEmpty(Helper.CurrentEnding))
+            {
+                session();
+            }
+            else {
+                fillUp(Convert.ToDateTime(DateTime.Now.Date));
+            }
+            
+        }
+        private void session()
+        {            
+            weekLbl.Text = Helper.CurrentWeek.ToString();
+            startLbl.Text = Helper.CurrentStarting;
+            endLbl.Text = Helper.CurrentEnding;          
         }
         string month;
         private void fillUp(DateTime d)
@@ -33,6 +47,9 @@ namespace TGAccounting
             weekLbl.Text = week.ToString();
             startLbl.Text = Helper.FirstDateOfWeek(year, week).Date.ToString("dd-MM-yyyy");         
             endLbl.Text = Convert.ToDateTime(startLbl.Text).AddDays(+6).Date.ToString("dd-MM-yyyy");
+            Helper.CurrentWeek = week;
+            Helper.CurrentStarting = startLbl.Text;
+            Helper.CurrentEnding = endLbl.Text;
         }
         private void autocomplete()
         {
@@ -163,6 +180,9 @@ namespace TGAccounting
                     MessageBox.Show("Value seems to be inserted already");
                     return;
                 }
+                Helper.CurrentWeek = Convert.ToInt32(weekLbl.Text);
+                Helper.CurrentStarting = startLbl.Text;
+                Helper.CurrentEnding = endLbl.Text;
                 existingID = "";
                 string ID = Guid.NewGuid().ToString();
                 Sale i = new Sale(ID, Convert.ToDateTime(dateTxt.Text).Year.ToString(), Convert.ToInt32(weekLbl.Text), startLbl.Text, endLbl.Text, itemTxt.Text, Convert.ToDouble(amountTxt.Text), itemTxt.Text, month);

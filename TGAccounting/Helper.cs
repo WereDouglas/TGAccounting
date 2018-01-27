@@ -19,6 +19,9 @@ namespace TGAccounting
         public static string UserImage;
         public static string CurrentYear;
         public static int UserLevel;
+        public static int CurrentWeek;
+        public static string CurrentEnding;
+        public static string CurrentStarting;
         public static DateTime FirstDateOfWeek(int year, int weekOfYear)
         {
             DateTime jan1 = new DateTime(year, 1, 1);

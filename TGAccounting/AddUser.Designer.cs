@@ -30,6 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddUser));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.levelCbx = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -45,9 +48,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.contactTxt = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.levelCbx = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgCapture)).BeginInit();
             this.SuspendLayout();
@@ -81,6 +81,36 @@
             this.groupBox2.TabIndex = 124;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "User details";
+            // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(119, 318);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(230, 19);
+            this.label2.TabIndex = 189;
+            this.label2.Text = "Level 1 (R) Level 2 (RW) Level 3 (RWX)";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // levelCbx
+            // 
+            this.levelCbx.FormattingEnabled = true;
+            this.levelCbx.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3"});
+            this.levelCbx.Location = new System.Drawing.Point(119, 380);
+            this.levelCbx.Name = "levelCbx";
+            this.levelCbx.Size = new System.Drawing.Size(230, 24);
+            this.levelCbx.TabIndex = 188;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 388);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(34, 16);
+            this.label1.TabIndex = 187;
+            this.label1.Text = "Level";
             // 
             // button6
             // 
@@ -267,37 +297,6 @@
             this.label12.Size = new System.Drawing.Size(77, 16);
             this.label12.TabIndex = 7;
             this.label12.Text = "Phone number";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 388);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(34, 16);
-            this.label1.TabIndex = 187;
-            this.label1.Text = "Level";
-            // 
-            // levelCbx
-            // 
-            this.levelCbx.FormattingEnabled = true;
-            this.levelCbx.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3"});
-            this.levelCbx.Location = new System.Drawing.Point(119, 380);
-            this.levelCbx.Name = "levelCbx";
-            this.levelCbx.Size = new System.Drawing.Size(230, 24);
-            this.levelCbx.TabIndex = 188;
-            // 
-            // label2
-            // 
-            this.label2.Location = new System.Drawing.Point(116, 318);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(217, 59);
-            this.label2.TabIndex = 189;
-            this.label2.Text = "Level 1 (View only) Level 2 (view,create ,update) Level 3 (Create,update,delete,v" +
-    "iew)";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // AddUser
             // 

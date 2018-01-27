@@ -19,7 +19,14 @@ namespace TGAccounting
             InitializeComponent();
             autocompleteCategory();
             autocomplete();
-            fillUp(Convert.ToDateTime(DateTime.Now.Date));
+            if (!string.IsNullOrEmpty(Helper.CurrentStarting) && !string.IsNullOrEmpty(Helper.CurrentEnding))
+            {
+                session();
+            }
+            else
+            {
+                fillUp(Convert.ToDateTime(DateTime.Now.Date));
+            }
         }
         string month;
         private void fillUp(DateTime d)
@@ -31,6 +38,12 @@ namespace TGAccounting
             weekLbl.Text = week.ToString();
             startLbl.Text = Helper.FirstDateOfWeek(year, week).Date.ToString("dd-MM-yyyy");
             endLbl.Text = Convert.ToDateTime(startLbl.Text).AddDays(+6).Date.ToString("dd-MM-yyyy");
+        }
+        private void session()
+        {
+            weekLbl.Text = Helper.CurrentWeek.ToString();
+            startLbl.Text = Helper.CurrentStarting;
+            endLbl.Text = Helper.CurrentEnding;
         }
         private void autocomplete()
         {

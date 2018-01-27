@@ -210,7 +210,7 @@ namespace TGAccounting
             {
                 if (Helper.UserLevel < 2)
                 {
-                    MessageBox.Show("Please verify user level action denied !");
+                    MessageBox.Show("Access Denied !");
                     return;
                 }
                 if (MessageBox.Show("YES or No?", "Update all names from "+oldName+" to "+ saleGrid.Rows[e.RowIndex].Cells["item"].Value.ToString(), MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
@@ -268,7 +268,7 @@ namespace TGAccounting
             }
             if (Helper.UserLevel < 3)
             {
-                MessageBox.Show("Please verify user level action denied !");
+                MessageBox.Show("Access Denied !");
                 return;
             }
 
@@ -299,7 +299,7 @@ namespace TGAccounting
             }
             if (Helper.UserLevel < 3)
             {
-                MessageBox.Show("Please verify user level action denied !");
+                MessageBox.Show("Access Denied !");
                 return;
             }
 
@@ -331,7 +331,7 @@ namespace TGAccounting
             }
             if (Helper.UserLevel < 3)
             {
-                MessageBox.Show("Please verify user level action denied !");
+                MessageBox.Show("Access Denied !");
                 return;
             }
 
@@ -352,7 +352,7 @@ namespace TGAccounting
         {
             if (Helper.UserLevel < 3)
             {
-                MessageBox.Show("Please verify user level action denied !");
+                MessageBox.Show("Access Denied !");
                 return;
             }
             if (!Helper.validateDouble(repGrid.Rows[e.RowIndex].Cells["amount"].Value.ToString()))
@@ -381,7 +381,7 @@ namespace TGAccounting
         {
             if (Helper.UserLevel < 3)
             {
-                MessageBox.Show("Please verify user level action denied !");
+                MessageBox.Show("Access Denied !");
                 return;
             }
             if (!Helper.validateDouble(equipGrid.Rows[e.RowIndex].Cells["amount"].Value.ToString()))
@@ -410,7 +410,7 @@ namespace TGAccounting
         {
             if (Helper.UserLevel < 3)
             {
-                MessageBox.Show("Please verify user level action denied !");
+                MessageBox.Show("Access Denied !");
                 return;
             }
             if (!Helper.validateDouble(InventoryGrid.Rows[e.RowIndex].Cells["amount"].Value.ToString()))
@@ -439,7 +439,7 @@ namespace TGAccounting
         {
             if (Helper.UserLevel < 3)
             {
-                MessageBox.Show("Please verify user level action denied !");
+                MessageBox.Show("Access Denied !");
                 return;
             }
             if (!Helper.validateDouble(expenseGrid.Rows[e.RowIndex].Cells["amount"].Value.ToString()))
@@ -493,7 +493,7 @@ namespace TGAccounting
             }
             if (Helper.UserLevel < 3)
             {
-                MessageBox.Show("Please verify user level action denied !");
+                MessageBox.Show("Access Denied !");
                 return;
             }
             if (!string.IsNullOrEmpty(oldName))
@@ -533,7 +533,7 @@ namespace TGAccounting
             {
                 if (Helper.UserLevel < 3)
                 {
-                    MessageBox.Show("Please verify user level action denied !");
+                    MessageBox.Show("Access Denied !");
                     return;
                 }
                 if (MessageBox.Show("YES or NO?", "Are you sure you want to delete? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
@@ -554,7 +554,7 @@ namespace TGAccounting
             {
                 if (Helper.UserLevel < 3)
                 {
-                    MessageBox.Show("Please verify user level action denied !");
+                    MessageBox.Show("Access Denied !");
                     return;
                 }
                 if (MessageBox.Show("YES or NO?", "Are you sure you want to delete? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
@@ -574,7 +574,7 @@ namespace TGAccounting
             {
                 if (Helper.UserLevel < 3)
                 {
-                    MessageBox.Show("Please verify user level action denied !");
+                    MessageBox.Show("Access Denied !");
                     return;
                 }
                 if (MessageBox.Show("YES or NO?", "Are you sure you want to delete? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
@@ -594,7 +594,7 @@ namespace TGAccounting
             {
                 if (Helper.UserLevel < 3)
                 {
-                    MessageBox.Show("Please verify user level action denied !");
+                    MessageBox.Show("Access Denied !");
                     return;
                 }
                 if (MessageBox.Show("YES or NO?", "Are you sure you want to delete? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
@@ -614,7 +614,7 @@ namespace TGAccounting
             {
                 if (Helper.UserLevel < 3)
                 {
-                    MessageBox.Show("Please verify user level action denied !");
+                    MessageBox.Show("Access Denied !");
                     return;
                 }
                 if (MessageBox.Show("YES or NO?", "Are you sure you want to delete? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
@@ -634,7 +634,7 @@ namespace TGAccounting
             {
                 if (Helper.UserLevel < 3)
                 {
-                    MessageBox.Show("Please verify user level action denied !");
+                    MessageBox.Show("Access Denied !");
                     return;
                 }
                 if (MessageBox.Show("YES or NO?", "Are you sure you want to delete? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
@@ -669,7 +669,7 @@ namespace TGAccounting
             {
                 if (Helper.UserLevel < 3)
                 {
-                    MessageBox.Show("Please verify user level action denied !");
+                    MessageBox.Show("Access Denied !");
                     return;
                 }
                 if (MessageBox.Show("YES or NO?", "Are you sure you want to delete? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
@@ -695,7 +695,7 @@ namespace TGAccounting
             {
                 if (Helper.UserLevel < 3)
                 {
-                    MessageBox.Show("Please verify user level action denied !");
+                    MessageBox.Show("Access Denied !");
                     return;
                 }
                 if (MessageBox.Show("YES or No?", "Are you sure you want to delete ? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
@@ -727,7 +727,7 @@ namespace TGAccounting
         private void userGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             if (Helper.UserLevel<2) {
-                MessageBox.Show("Please verify user level action denied !");
+                MessageBox.Show("Access Denied !");
                 return;
             }
             if (String.IsNullOrEmpty(userGrid.Rows[e.RowIndex].Cells["Name"].Value.ToString()))
@@ -789,7 +789,7 @@ namespace TGAccounting
                 {
                     if (Helper.UserLevel < 3)
                     {
-                        MessageBox.Show("Please verify user level action denied !");
+                        MessageBox.Show("Access Denied !");
                         return;
                     }
                     string Query = "DELETE from exceptions WHERE id ='" + ExceptionGrid.Rows[e.RowIndex].Cells["id"].Value.ToString() + "'";
@@ -806,7 +806,7 @@ namespace TGAccounting
             {
                 if (Helper.UserLevel < 3)
                 {
-                    MessageBox.Show("Please verify user level action denied !");
+                    MessageBox.Show("Access Denied !");
                     return;
                 }
                 if (MessageBox.Show("YES or No?", "Are you sure you want to delete ? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
@@ -837,7 +837,7 @@ namespace TGAccounting
                 {
                     if (Helper.UserLevel < 3)
                     {
-                        MessageBox.Show("Please verify user level action denied !");
+                        MessageBox.Show("Access Denied !");
                         return;
                     }
                     string Query = "DELETE from comp WHERE id ='" + comGrid.Rows[e.RowIndex].Cells["id"].Value.ToString() + "'";
@@ -856,7 +856,7 @@ namespace TGAccounting
                 {
                     if (Helper.UserLevel < 3)
                     {
-                        MessageBox.Show("Please verify user level action denied !");
+                        MessageBox.Show("Access Denied !");
                         return;
                     }
                     string Query = "DELETE from budget WHERE id ='" + budgetGrid.Rows[e.RowIndex].Cells["id"].Value.ToString() + "'";
@@ -875,7 +875,7 @@ namespace TGAccounting
             }
             if (Helper.UserLevel < 3)
             {
-                MessageBox.Show("Please verify user level action denied !");
+                MessageBox.Show("Access Denied !");
                 return;
             }
             string ID = budgetGrid.Rows[e.RowIndex].Cells["id"].Value.ToString();
@@ -894,7 +894,7 @@ namespace TGAccounting
             {
                 if (Helper.UserLevel < 3)
                 {
-                    MessageBox.Show("Please verify user level action denied !");
+                    MessageBox.Show("Access Denied !");
                     return;
                 }
 
@@ -934,7 +934,7 @@ namespace TGAccounting
             {
                 if (Helper.UserLevel < 3)
                 {
-                    MessageBox.Show("Please verify user level action denied !");
+                    MessageBox.Show("Access Denied !");
                     return;
                 }
                 if (MessageBox.Show("YES or NO?", "Are you sure you want to delete? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
@@ -957,7 +957,7 @@ namespace TGAccounting
             }
             if (Helper.UserLevel < 3)
             {
-                MessageBox.Show("Please verify user level action denied !");
+                MessageBox.Show("Access Denied !");
                 return;
             }
             string ID = dataProjection.Rows[e.RowIndex].Cells["id"].Value.ToString();
@@ -1013,7 +1013,7 @@ namespace TGAccounting
             {
                 if (Helper.UserLevel < 3)
                 {
-                    MessageBox.Show("Please verify user level action denied !");
+                    MessageBox.Show("Access Denied !");
                     return;
                 }
                 if (MessageBox.Show("YES or NO?", "Are you sure you want to delete? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)

@@ -679,7 +679,7 @@
           <TablixMembers>
             <TablixMember>
               <TablixHeader>
-                <Size>2.27083in</Size>
+                <Size>1.95833in</Size>
                 <CellContents>
                   <Textbox Name="Textbox19">
                     <CanGrow>true</CanGrow>
@@ -725,7 +725,7 @@
                 </SortExpression>
               </SortExpressions>
               <TablixHeader>
-                <Size>2.27083in</Size>
+                <Size>1.95833in</Size>
                 <CellContents>
                   <Textbox Name="Supplier">
                     <CanGrow>true</CanGrow>
@@ -765,7 +765,7 @@
             </TablixMember>
             <TablixMember>
               <TablixHeader>
-                <Size>2.27083in</Size>
+                <Size>1.95833in</Size>
                 <CellContents>
                   <Textbox Name="Textbox21">
                     <CanGrow>true</CanGrow>
@@ -801,7 +801,7 @@
             </TablixMember>
             <TablixMember>
               <TablixHeader>
-                <Size>2.27083in</Size>
+                <Size>1.95833in</Size>
                 <CellContents>
                   <Textbox Name="Textbox7">
                     <CanGrow>true</CanGrow>
@@ -842,7 +842,7 @@
         </TablixRowHierarchy>
         <DataSetName>DataSetSupply</DataSetName>
         <Height>1.75in</Height>
-        <Width>4.27083in</Width>
+        <Width>3.95833in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -921,7 +921,7 @@
                   <FontSize>8pt</FontSize>
                 </Style>
                 <ChartAxisTitle>
-                  <Caption>Week</Caption>
+                  <Caption>Weeks</Caption>
                   <Style>
                     <FontSize>8pt</FontSize>
                   </Style>
@@ -1092,7 +1092,7 @@
         </ChartLegends>
         <ChartTitles>
           <ChartTitle Name="Default">
-            <Caption>Chart Title</Caption>
+            <Caption>Weekly</Caption>
             <Style>
               <BackgroundGradientType>None</BackgroundGradientType>
               <FontWeight>Bold</FontWeight>

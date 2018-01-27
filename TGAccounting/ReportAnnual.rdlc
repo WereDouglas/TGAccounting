@@ -2820,7 +2820,6 @@
                           <PaddingBottom>2pt</PaddingBottom>
                         </Style>
                       </Textbox>
-                      <rd:Selected>true</rd:Selected>
                     </CellContents>
                   </TablixHeader>
                   <TablixMembers>
@@ -3082,7 +3081,7 @@
                   <FontSize>8pt</FontSize>
                 </Style>
                 <ChartAxisTitle>
-                  <Caption>Monthly</Caption>
+                  <Caption>Months</Caption>
                   <Style>
                     <FontSize>8pt</FontSize>
                   </Style>
